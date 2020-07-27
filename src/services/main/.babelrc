@@ -1,0 +1,18 @@
+{
+  "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "useBuiltIns": "entry",
+          "corejs": "3"
+        }
+      ],
+      "@babel/preset-typescript",
+      "@babel/preset-react",
+      "mobx"
+  ],
+  "plugins": [
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    ["@babel/plugin-proposal-class-properties", { "loose": true }]
+  ]
+}
