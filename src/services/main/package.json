@@ -4,16 +4,21 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "koa": "2.13.0",
     "normalize.css": "8.0.1",
     "qiankun": "2.0.16",
     "react": "16.13.1",
     "react-dom": "16.13.1"
   },
   "devDependencies": {
+    "@types/koa": "2.11.3",
+    "@types/koa-mount": "4.0.0",
+    "@types/node": "14.0.27",
     "eslint": "7.5.0",
     "eslint-config-prettier": "6.11.0",
     "eslint-plugin-prettier": "3.1.4",
     "eslint-plugin-react": "7.20.4",
+    "koa-mount": "4.0.0",
     "postcss-loader": "3.0.0",
     "postcss-preset-env": "6.7.0",
     "prettier": "2.0.5",

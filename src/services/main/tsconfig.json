@@ -1,3 +1,22 @@
 {
-  "extends": "../../../tsconfig.json"
+  "compilerOptions": {
+      "esModuleInterop": true,
+      "module": "CommonJS",
+      "noImplicitReturns": true,
+      "allowSyntheticDefaultImports": true,
+      "noImplicitThis": true,
+      "strictNullChecks": true,
+      "strictPropertyInitialization": true,
+      "moduleResolution": "node",
+      "skipLibCheck": true,
+      "lib": ["es2018"],
+      "jsx": "react",
+      "baseUrl": ".",
+      "experimentalDecorators": true,
+      "noImplicitAny": false,
+      "typeRoots": [
+          "./node_modules/@types",
+          "./src/@types"
+      ]
+  }
 }

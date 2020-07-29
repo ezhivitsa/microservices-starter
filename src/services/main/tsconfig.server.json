@@ -9,6 +9,7 @@
   },
   "include": [
       "./src/server/",
-      "./src/common/"
+      "./src/common/",
+      "./src/@types/"
   ]
 }
