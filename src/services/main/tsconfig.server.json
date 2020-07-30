@@ -5,7 +5,8 @@
       "sourceMap": true,
       "target": "ES2018",
       "lib": ["es2018"],
-      "outDir": "./out"
+      "outDir": "./out",
+      "module": "esnext"
   },
   "include": [
       "./src/server/",

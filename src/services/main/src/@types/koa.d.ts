@@ -8,6 +8,7 @@ import {Config} from '../server/configs/types';
 declare module 'koa' {
     export interface AppKoaState {
         config: Config;
+        startTime: number;
     }
 
     export interface AppKoaContext {}
