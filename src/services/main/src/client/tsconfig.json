@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+      "target": "ESNext",
+      "lib": ["esnext", "dom"],
+      "resolveJsonModule": true,
+      "noEmit": true,
+      "baseUrl": "./",
+      "paths": {
+          // local aliases
+          "common/*": ["../common/*"]
+      }
+  }
+}

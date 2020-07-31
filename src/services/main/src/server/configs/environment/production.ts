@@ -15,5 +15,6 @@ export const production: Config = {
   ],
   featureFlagsDefault: [],
   buildPath: 'out/assets',
-  enableHotLoader: false
+  enableHotLoader: false,
+  requestIdHeader: 'x-request-id'
 };

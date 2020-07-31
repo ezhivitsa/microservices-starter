@@ -12,4 +12,5 @@ export interface Config {
   readonly featureFlagsDefault: FeatureFlag[];
   readonly buildPath: string;
   readonly enableHotLoader: boolean;
+  readonly requestIdHeader: string;
 }
