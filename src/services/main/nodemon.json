@@ -1,0 +1,12 @@
+{
+  "exec": "ts-node --files --project tsconfig.server.json --pretty src/server/boot.ts",
+  "watch": [
+    "src/server/",
+    "src/common/",
+    "src/@types/"
+  ],
+  "ext": "ts,tsx",
+  "env": {
+    "NODE_OPTIONS": "--inspect"
+  }
+}

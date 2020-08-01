@@ -1,7 +1,7 @@
-import {Config} from '../types';
+import { Config } from '../types';
 
-import {production} from './production';
+import { production } from './production';
 
 export const staging: Config = {
-    ...production
+  ...production,
 };

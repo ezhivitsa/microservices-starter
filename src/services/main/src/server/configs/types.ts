@@ -1,4 +1,4 @@
-import {FeatureFlag} from '../../common/feature-flags';
+import { FeatureFlag } from '../../common/feature-flags';
 
 export interface LoggerConfig {
   format: 'local' | 'cloud';
@@ -11,6 +11,7 @@ export interface Config {
   readonly featureFlagsSupported: FeatureFlag[];
   readonly featureFlagsDefault: FeatureFlag[];
   readonly buildPath: string;
+  readonly staticUrl: string;
   readonly enableHotLoader: boolean;
   readonly requestIdHeader: string;
 }

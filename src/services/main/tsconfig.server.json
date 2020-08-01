@@ -1,16 +1,15 @@
 {
   "extends": "./tsconfig",
   "compilerOptions": {
-      "allowJs": true,
-      "sourceMap": true,
-      "target": "ES2018",
-      "lib": ["es2018"],
-      "outDir": "./out",
-      "module": "esnext"
+    "sourceMap": true,
+    "target": "ES2018",
+    "lib": ["es2018"],
+    "outDir": "./out",
+    "module": "CommonJS"
   },
   "include": [
-      "./src/server/",
-      "./src/common/",
-      "./src/@types/"
+    "./src/server/",
+    "./src/common/",
+    "./src/@types/"
   ]
 }

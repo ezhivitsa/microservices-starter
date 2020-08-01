@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.server",
+  "compilerOptions": {
+      "sourceMap": false
+  },
+  "exclude": [
+      "**/*.test.ts",
+      "**/*.spec.ts"
+  ]
+}

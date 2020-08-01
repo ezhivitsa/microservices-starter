@@ -1,20 +1,21 @@
-import {FeatureFlag} from '../../../common/feature-flags';
+import { FeatureFlag } from '../../../common/feature-flags';
 
-import {DEFAULT_PORT} from '../utils';
+import { version } from '../../lib/app-version';
 
-import {Config} from '../types';
+import { DEFAULT_PORT } from '../utils';
+
+import { Config } from '../types';
 
 export const production: Config = {
   port: DEFAULT_PORT,
+  buildPath: 'out/assets',
+  staticUrl: `//microservices-starter.net/main/${version}`,
   logger: {
     level: 'info',
-    format: 'cloud'
+    format: 'cloud',
   },
-  featureFlagsSupported: [
-    FeatureFlag.Debug
-  ],
+  featureFlagsSupported: [FeatureFlag.Debug],
   featureFlagsDefault: [],
-  buildPath: 'out/assets',
   enableHotLoader: false,
-  requestIdHeader: 'x-request-id'
+  requestIdHeader: 'x-request-id',
 };

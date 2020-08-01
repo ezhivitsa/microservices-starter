@@ -1,17 +1,16 @@
-import {FeatureFlag} from '../../../common/feature-flags';
+import { FeatureFlag } from '../../../common/feature-flags';
 
-import {Config} from '../types';
+import { Config } from '../types';
 
-import {staging} from './staging';
+import { staging } from './staging';
 
 export const development: Config = {
   ...staging,
+  staticUrl: '',
   logger: {
     ...staging.logger,
-    format: 'local'
+    format: 'local',
   },
-  featureFlagsDefault: [
-    FeatureFlag.Debug
-  ],
-  enableHotLoader: true
+  featureFlagsDefault: [FeatureFlag.Debug],
+  enableHotLoader: true,
 };
