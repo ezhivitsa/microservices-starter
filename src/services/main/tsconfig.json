@@ -2,22 +2,20 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "module": "CommonJS",
-    "noImplicitReturns": true,
-    "allowSyntheticDefaultImports": true,
-    "noImplicitThis": true,
-    "strictNullChecks": true,
-    "strictPropertyInitialization": true,
-    "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node",
-    "skipLibCheck": true,
-    "lib": ["es2018"],
+    "moduleResolution": "Node",
+    "target": "ES2018",
+    "lib": ["ES2018"],
     "jsx": "react",
-    "baseUrl": ".",
-    "experimentalDecorators": true,
-    "noImplicitAny": false,
-    "typeRoots": [
-      "./node_modules/@types",
-      "./src/@types"
-    ]
-  }
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": false,
+    "baseUrl": "./src",
+    "outDir": "./dist"
+  },
+  "include": [
+    "./src/client",
+    "./src/common"
+  ],
+  "exclude": ["node_modules"]
 }

@@ -16,8 +16,32 @@ export const prepareAssetsMiddleware = async (): Promise<AppMiddleware> => {
 
     return koaWebpack({
       config: webpackConfig,
+      hotClient: {
+        host: 'localhost',
+        // post: 8081,
+      },
     });
   }
 
   return mount(publicPath, serve(resolve(config.buildPath)));
 };
+
+// export const prepareAssetsMiddleware = (): AppMiddleware[] => {
+//   if (config.enableHotLoader) {
+//     // For development puprposes require() is used, becase webpack* modules
+//     // are not available in the production environemnt
+
+//     /* eslint-disable @typescript-eslint/no-require-imports */
+//     /* eslint-disable @typescript-eslint/no-var-requires */
+//     const webpack = require('webpack');
+//     const webpackDevMiddleware = require('webpack-dev-middleware');
+//     const webpackHotMiddleware = require('webpack-hot-middleware');
+//     const webpackConfig = require('../../../webpack.config');
+//     /* eslint-enable */
+
+//     const webpackCompiler = webpack(webpackConfig);
+//     return [webpackDevMiddleware(webpackCompiler, { publicPath }), webpackHotMiddleware(webpackCompiler)];
+//   }
+
+//   return [mount(publicPath, serve(resolve(config.buildPath)))];
+// };

@@ -24,8 +24,6 @@ export const indexPageMiddleware: AppMiddleware = (ctx: AppContext): void => {
 
   const html = createElement(IndexPage, props);
 
-  ctx.headers = {
-    'content-type': 'text/html; charset=utf-8',
-  };
+  ctx.set('content-type', 'text/html; charset=utf-8');
   ctx.body = `<!doctype html>${renderToString(html)}`;
 };

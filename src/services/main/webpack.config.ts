@@ -2,10 +2,11 @@ import path from 'path';
 import webpack from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 import { config, ENV } from './src/server/lib/config';
 
-const isDevBuild = ENV === 'development';
+const isDevBuild = true; //ENV === 'development';
 const { buildPath, staticUrl } = config;
 
 const clientPath = path.resolve(__dirname, 'src/client');
@@ -15,8 +16,8 @@ const webpackConfig: webpack.Configuration = {
   mode: isDevBuild ? 'development' : 'production',
   target: 'web',
   entry: () => {
-    const boot = path.resolve(clientPath, 'boot.tsx');
-    return isDevBuild ? ['webpack-hot-middleware/client?path=/__webpack_hmr&reload=true', boot] : boot;
+    const boot = path.resolve(clientPath, 'boot.ts');
+    return [boot];
   },
   output: {
     path: path.resolve(buildPath),
@@ -30,9 +31,10 @@ const webpackConfig: webpack.Configuration = {
       common: path.resolve(__dirname, './src/common'),
       // External aliases
       // packages: path.resolve(__dirname, '../../packages'),
+      'react-dom': isDevBuild ? '@hot-loader/react-dom' : 'react-dom',
     },
     modules: [clientPath, localNodeModulesPath, path.resolve(__dirname, '../../node_modules')],
-    extensions: ['.ts', '.tsx'],
+    extensions: ['.ts', '.tsx', '.js'],
   },
   optimization: {
     minimize: !isDevBuild,
@@ -43,14 +45,13 @@ const webpackConfig: webpack.Configuration = {
     rules: [
       {
         test: /\.tsx?$/,
-        use: [
-          {
-            loader: 'ts-loader',
-            options: {
-              exclude: /node_modules/,
-            },
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            sourceMap: isDevBuild,
           },
-        ],
+        },
       },
       {
         test: /\.pcss$/,
@@ -91,6 +92,14 @@ const webpackConfig: webpack.Configuration = {
     ],
   },
   plugins: [
+    new ForkTsCheckerWebpackPlugin({
+      typescript: {
+        diagnosticOptions: {
+          semantic: true,
+          syntactic: true,
+        },
+      },
+    }),
     new CopyPlugin({
       patterns: [
         {
@@ -99,9 +108,7 @@ const webpackConfig: webpack.Configuration = {
         },
       ],
     }),
-    ...(isDevBuild
-      ? [new webpack.HotModuleReplacementPlugin()]
-      : [new MiniCssExtractPlugin({ filename: 'app.style.css' })]),
+    ...(isDevBuild ? [] : [new MiniCssExtractPlugin({ filename: 'app.style.css' })]),
   ],
 };
 

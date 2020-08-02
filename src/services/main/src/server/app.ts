@@ -23,15 +23,20 @@ const app = new Koa<AppKoaState, AppKoaContext>();
 router.get(/^((?!\.).)*$/, indexPageMiddleware);
 
 export async function initApp(): Promise<Koa<AppKoaState, AppKoaContext>> {
-  const assetsMiddleware = await prepareAssetsMiddleware();
+  const assetsMiddlewares = await prepareAssetsMiddleware();
 
   app
     .use(configMiddleware)
     .use(errorsMiddleware)
     .use(mount('/ping', pingMiddleware))
     .use(startTimeMiddleware)
-    .use(helmet())
-    .use(assetsMiddleware)
+    .use(helmet());
+
+  [assetsMiddlewares].forEach((middleware) => {
+    app.use(middleware);
+  });
+
+  app
     .use(loggerInitMiddleware)
     .use(
       cors({

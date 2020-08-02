@@ -16,9 +16,12 @@ deps:
 # -------------------------------------
 # dev targets
 # -------------------------------------
+# .PHONY: dev
+# dev:
+# 	npx nodemon --config ./nodemon.json
 .PHONY: dev
 dev:
-	npx nodemon --config ./nodemon.json
+	npx ts-node --files --project tsconfig.server.json --pretty src/server/boot.ts
 
 # -------------------------------------
 # validation targets

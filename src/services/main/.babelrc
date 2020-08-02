@@ -1,18 +1,23 @@
 {
   "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "useBuiltIns": "entry",
-          "corejs": "3"
-        }
-      ],
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "entry",
+        "corejs": "3"
+      }
+    ],
+    [
       "@babel/preset-typescript",
-      "@babel/preset-react",
-      "mobx"
+      {
+        "onlyRemoveTypeImports": true
+      }
+    ],
+    "@babel/preset-react"
   ],
   "plugins": [
     ["@babel/plugin-proposal-decorators", { "legacy": true }],
-    ["@babel/plugin-proposal-class-properties", { "loose": true }]
+    ["@babel/plugin-proposal-class-properties", { "loose": true }],
+    "react-hot-loader/babel"
   ]
 }
