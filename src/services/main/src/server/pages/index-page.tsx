@@ -16,6 +16,7 @@ export function IndexPage(props: IndexPageProps): ReactElement<IndexPageProps> {
         <title>Microservices starter</title>
         <meta name="viewport" content="width=device-width,minimum-scale=1.0" />
         <link rel="icon" type="image/png" href={`${props.staticUrl}/${props.buildPath}/public/favicon.png`} />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,500,600&display=swap" rel="stylesheet" />
       </head>
 
       <body>

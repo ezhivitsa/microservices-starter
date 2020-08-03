@@ -1,4 +1,6 @@
-NODE_MODULES_BIN := node_modules/.bin
+include dev.env
+-include dev-local.env
+export
 
 GIT_CHECK_STAGED := $(shell git diff --name-only --cached)
 
@@ -16,12 +18,15 @@ deps:
 # -------------------------------------
 # dev targets
 # -------------------------------------
-# .PHONY: dev
-# dev:
-# 	npx nodemon --config ./nodemon.json
 .PHONY: dev
 dev:
-	npx ts-node --files --project tsconfig.server.json --pretty src/server/boot.ts
+	npx nodemon \
+		--config ./nodemon.json \
+		--legacy-watch \
+		-- \
+			--inspect=$(NODE_INSPECTOR_HOST):$(NODE_INSPECTOR_PORT) \
+			--require ts-node/register \
+		-- src/server/boot.ts
 
 # -------------------------------------
 # validation targets

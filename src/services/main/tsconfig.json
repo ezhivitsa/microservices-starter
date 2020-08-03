@@ -9,9 +9,13 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "allowSyntheticDefaultImports": true,
-    "strict": false,
+    "strict": true,
     "baseUrl": "./src",
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "typeRoots": [
+      "./src/@types/*",
+      "./node_modules/@types/*"
+    ]
   },
   "include": [
     "./src/client",

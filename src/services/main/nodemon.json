@@ -1,5 +1,5 @@
 {
-  "exec": "ts-node --files --project tsconfig.server.json --pretty src/server/boot.ts",
+  "exec": "node",
   "watch": [
     "src/server/",
     "src/common/",
@@ -7,6 +7,8 @@
   ],
   "ext": "ts,tsx",
   "env": {
-    "NODE_OPTIONS": "--inspect"
+    "TS_NODE_PRETTY": true,
+    "TS_NODE_FILES": true,
+    "TS_NODE_PROJECT": "tsconfig.server.json"
   }
 }

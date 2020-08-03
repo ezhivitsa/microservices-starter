@@ -1,8 +1,12 @@
 import { registerMicroApps, runAfterFirstMounted, setDefaultMountApp, start, initGlobalState } from 'qiankun';
 
-console.log('arq');
+import { CONTENT_ELEMENT_ID } from 'constants/app.constants';
 
-const aaa = 1;
-const bbb = '1';
-
-console.log(aaa - bbb);
+registerMicroApps([
+  {
+    name: 'dashboard',
+    entry: '//localhost:8081',
+    container: `#${CONTENT_ELEMENT_ID}`,
+    activeRule: '/dashboard',
+  },
+]);

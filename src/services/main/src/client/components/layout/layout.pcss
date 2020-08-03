@@ -1,0 +1,21 @@
+@import 'global.pcss';
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(50px 100px) auto;
+  grid-template-areas: 
+    "header header"
+    "menu content";
+
+  &__header {
+    grid-area: header;
+  }
+
+  &__menu {
+    grid-area: menu;
+  }
+
+  &__content {
+    grid-area: content;
+  }
+}
