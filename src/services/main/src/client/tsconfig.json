@@ -8,7 +8,8 @@
     "baseUrl": "./",
     "paths": {
       // local aliases
-      "common/*": ["../common/*"]
+      "common/*": ["../common/*"],
+      "packages/*": ["../../../../packages/*"]
     },
     "typeRoots": [
       "./@types/*"

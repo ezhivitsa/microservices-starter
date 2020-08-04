@@ -10,7 +10,6 @@ const isDevBuild = true; //ENV === 'development';
 const { buildPath, staticUrl } = config;
 
 const clientPath = path.resolve(__dirname, 'src/client');
-const localNodeModulesPath = path.resolve(__dirname, 'node_modules');
 
 const webpackConfig: webpack.Configuration = {
   mode: isDevBuild ? 'development' : 'production',
@@ -30,10 +29,10 @@ const webpackConfig: webpack.Configuration = {
       // local aliases
       common: path.resolve(__dirname, './src/common'),
       // External aliases
-      // packages: path.resolve(__dirname, '../../packages'),
+      packages: path.resolve(__dirname, '../../packages'),
       'react-dom': isDevBuild ? '@hot-loader/react-dom' : 'react-dom',
     },
-    modules: [clientPath, localNodeModulesPath, path.resolve(__dirname, '../../node_modules')],
+    modules: [clientPath, path.resolve(__dirname, '../../../node_modules')],
     extensions: ['.ts', '.tsx', '.js'],
   },
   optimization: {
@@ -94,6 +93,7 @@ const webpackConfig: webpack.Configuration = {
   plugins: [
     new ForkTsCheckerWebpackPlugin({
       typescript: {
+        configFile: './src/client/tsconfig.json',
         diagnosticOptions: {
           semantic: true,
           syntactic: true,

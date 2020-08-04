@@ -10,16 +10,10 @@
     "skipDefaultLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
-    "baseUrl": "./src",
-    "outDir": "./dist",
+    "baseUrl": "./",
     "typeRoots": [
-      "./src/@types/*",
+      "./@types/*",
       "../../../node_modules/@types/*"
     ]
-  },
-  "include": [
-    "./src/client",
-    "./src/common"
-  ],
-  "exclude": ["node_modules"]
+  }
 }
