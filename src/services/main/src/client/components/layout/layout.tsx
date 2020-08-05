@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 
-import { Spinner } from 'packages-ui/spinner';
+import { Spinner } from '@packages/ui/spinner';
 
 import { CONTENT_ELEMENT_ID } from 'constants/app.constants';
 

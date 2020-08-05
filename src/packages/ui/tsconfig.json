@@ -4,7 +4,7 @@
     "module": "CommonJS",
     "moduleResolution": "Node",
     "target": "ES2018",
-    "lib": ["ES2018"],
+    "lib": ["ES2018", "DOM"],
     "jsx": "react",
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,

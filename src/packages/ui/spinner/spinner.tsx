@@ -1,4 +1,4 @@
-import React, {ReactElement} from 'react';
+import React, { ReactElement } from 'react';
 import classnames from 'classnames';
 
 import styles from './spinner.pcss';
@@ -12,7 +12,7 @@ interface Props {
   mode: SpinnerMode;
 }
 
-export function Spinner({size}: Props): ReactElement {
+export function Spinner({ size }: Props): ReactElement {
   return (
     <div className={classnames(styles.spinner, styles[`_size_${size}`])}>
       <div className={styles.spinner_loader}>
@@ -22,10 +22,10 @@ export function Spinner({size}: Props): ReactElement {
         <div className={styles.spinner_loaderElement} />
       </div>
     </div>
-  )
+  );
 }
 
 Spinner.defaultProps = {
   size: 'm',
-  mode: 'default'
+  mode: 'default',
 };

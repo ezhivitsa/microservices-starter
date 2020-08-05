@@ -10,6 +10,7 @@ const isDevBuild = true; //ENV === 'development';
 const { buildPath, staticUrl } = config;
 
 const clientPath = path.resolve(__dirname, 'src/client');
+const localNodeModulesPath = path.resolve(__dirname, 'node_modules');
 
 const webpackConfig: webpack.Configuration = {
   mode: isDevBuild ? 'development' : 'production',
@@ -32,7 +33,7 @@ const webpackConfig: webpack.Configuration = {
       packages: path.resolve(__dirname, '../../packages'),
       'react-dom': isDevBuild ? '@hot-loader/react-dom' : 'react-dom',
     },
-    modules: [clientPath, path.resolve(__dirname, '../../../node_modules')],
+    modules: [clientPath, localNodeModulesPath, path.resolve(__dirname, '../../../node_modules')],
     extensions: ['.ts', '.tsx', '.js'],
   },
   optimization: {
