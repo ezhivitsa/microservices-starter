@@ -1,5 +1,1 @@
-node_modules/
-dev-local.env
 out/
-.stylelintcache
-.eslintcache

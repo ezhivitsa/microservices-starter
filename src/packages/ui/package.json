@@ -2,15 +2,14 @@
   "name": "@packages/ui",
   "version": "1.0.0",
   "dependencies": {
-    "@packages/eslint-config": "1.0.0",
-    "@packages/prettier-config": "1.0.0",
     "classnames": "^2.2.6",
+    "normalize.css": "8.0.1",
     "react": "^16.13.1"
   },
   "devDependencies": {
+    "@packages/eslint-config": "1.0.0",
+    "@packages/stylelint-config": "1.0.0",
     "@types/classnames": "^2.2.3",
-    "stylelint": "false13.6.1",
-    "stylelint-config-prettier": "false8.0.2",
-    "stylelint-config-standard": "false20.0.0"
+    "typescript": "3.9.7"
   }
 }

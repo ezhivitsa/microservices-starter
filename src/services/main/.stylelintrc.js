@@ -1,6 +1,3 @@
 module.exports = {
-  "extends": [
-    "stylelint-config-standard",
-    "stylelint-config-prettier"
-  ]
+  extends: "@packages/stylelint-config"
 };
