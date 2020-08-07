@@ -1,2 +1,2 @@
-export { ENV } from './environment';
+export { ENV, isDevelopment } from './environment';
 export { config } from './config';

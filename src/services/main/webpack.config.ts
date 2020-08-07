@@ -4,16 +4,15 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
-import { config, ENV } from './src/server/lib/config';
+import { config, isDevelopment } from './src/server/lib/config';
 
-const isDevBuild = true; //ENV === 'development';
 const { buildPath, staticUrl } = config;
 
 const clientPath = path.resolve(__dirname, 'src/client');
 const localNodeModulesPath = path.resolve(__dirname, 'node_modules');
 
 const webpackConfig: webpack.Configuration = {
-  mode: isDevBuild ? 'development' : 'production',
+  mode: isDevelopment ? 'development' : 'production',
   target: 'web',
   entry: () => {
     const boot = path.resolve(clientPath, 'boot.ts');
@@ -24,22 +23,22 @@ const webpackConfig: webpack.Configuration = {
     filename: 'app.bundle.js',
     publicPath: `${staticUrl}/${buildPath}/`,
   },
-  devtool: isDevBuild ? 'source-map' : false,
+  devtool: isDevelopment ? 'source-map' : false,
   resolve: {
     alias: {
       // local aliases
       common: path.resolve(__dirname, './src/common'),
       // External aliases
-      packages: path.resolve(__dirname, '../../packages'),
-      'react-dom': isDevBuild ? '@hot-loader/react-dom' : 'react-dom',
+      '@packages': path.resolve(__dirname, '../../packages'),
+      'react-dom': isDevelopment ? '@hot-loader/react-dom' : 'react-dom',
     },
     modules: [clientPath, localNodeModulesPath, path.resolve(__dirname, '../../../node_modules')],
     extensions: ['.ts', '.tsx', '.js'],
   },
   optimization: {
-    minimize: !isDevBuild,
-    namedModules: isDevBuild,
-    namedChunks: isDevBuild,
+    minimize: !isDevelopment,
+    namedModules: isDevelopment,
+    namedChunks: isDevelopment,
   },
   module: {
     rules: [
@@ -49,31 +48,34 @@ const webpackConfig: webpack.Configuration = {
         use: {
           loader: 'babel-loader',
           options: {
-            sourceMap: isDevBuild,
+            sourceMap: isDevelopment,
           },
         },
       },
       {
         test: /\.pcss$/,
         use: [
-          isDevBuild
+          isDevelopment
             ? {
                 loader: 'style-loader',
-                options: {
-                  sourceMap: isDevBuild,
-                },
               }
             : MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
-              sourceMap: isDevBuild,
+              sourceMap: isDevelopment,
+              modules: {
+                mode: 'local',
+                localIdentName: '[local]--[hash:base64:5]',
+                localIdentContext: path.resolve(__dirname, 'src/client'),
+                exportLocalsConvention: 'dashesOnly',
+              },
             },
           },
           {
             loader: 'postcss-loader',
             options: {
-              sourceMap: isDevBuild,
+              sourceMap: isDevelopment,
             },
           },
         ],
@@ -109,7 +111,7 @@ const webpackConfig: webpack.Configuration = {
         },
       ],
     }),
-    ...(isDevBuild ? [] : [new MiniCssExtractPlugin({ filename: 'app.style.css' })]),
+    ...(isDevelopment ? [] : [new MiniCssExtractPlugin({ filename: 'app.style.css' })]),
   ],
 };
 

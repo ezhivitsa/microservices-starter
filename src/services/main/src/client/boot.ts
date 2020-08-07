@@ -2,6 +2,10 @@ import { registerMicroApps, runAfterFirstMounted, setDefaultMountApp, start, ini
 
 import { CONTENT_ELEMENT_ID } from 'constants/app.constants';
 
+import { renderLayout } from './components/layout';
+
+renderLayout({ isContentLoading: true });
+
 registerMicroApps([
   {
     name: 'dashboard',

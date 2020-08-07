@@ -4,8 +4,15 @@ const postcssNested = require('postcss-nested');
 
 const cssnano = require('cssnano');
 
-const packagesUiImportPath = '@packages/ui/styles';
+const packagesUiImportPath = '../../packages/ui/styles';
 
+/**
+ * Get postcss configuration
+ * @param {Object} options
+ * @param {boolean} importPathFromPackagesUi - add path to import styles from "packages/ui/styles"
+ * @param {string[]} importPaths - additional paths to import styles
+ * @returns {Object} postcss config
+ */
 module.exports = ({
   importPathFromPackagesUi,
   importPaths

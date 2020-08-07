@@ -15,7 +15,7 @@ const configsMap: Record<Environment, Config> = {
 function getConfig(env: Environment): [Environment, Config] {
   const config = configsMap[env];
   if (!config) {
-    return ['development', configsMap.development];
+    return [Environment.development, configsMap.development];
   }
 
   return [env, config];
