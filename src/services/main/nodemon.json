@@ -2,13 +2,12 @@
   "exec": "node",
   "watch": [
     "src/server/",
-    "src/common/",
-    "src/@types/"
+    "src/common/"
   ],
   "ext": "ts,tsx",
   "env": {
     "TS_NODE_PRETTY": true,
     "TS_NODE_FILES": true,
-    "TS_NODE_PROJECT": "tsconfig.server.json"
+    "TS_NODE_PROJECT": "./src/server/tsconfig.json"
   }
 }

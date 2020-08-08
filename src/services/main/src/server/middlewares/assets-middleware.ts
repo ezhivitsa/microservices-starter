@@ -5,7 +5,7 @@ import koaWebpack from 'koa-webpack';
 import mount from 'koa-mount';
 import serve from 'koa-static';
 
-import { config } from '../lib/config';
+import { config } from 'lib/config';
 
 const publicPath = join('/', config.buildPath);
 

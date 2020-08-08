@@ -4,3 +4,5 @@ yarn-error.log
 dev-local.env
 .stylelintcache
 .eslintcache
+dist/
+out/

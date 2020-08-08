@@ -10,7 +10,8 @@
     "skipDefaultLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
-    "baseUrl": "./",
+    "baseUrl": "./src",
+    "outDir": "dist",
     "typeRoots": [
       "./@types/*",
       "../../../node_modules/@types/*"

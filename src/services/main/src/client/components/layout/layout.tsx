@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import ReactDOM from 'react-dom';
 
-// import { Spinner } from '@packages/ui/spinner';
+import { Spinner } from '@packages/ui/spinner';
 
 import { CONTENT_ELEMENT_ID } from 'constants/app.constants';
 
@@ -12,7 +12,6 @@ interface Props {
 }
 
 export function Layout({ isContentLoading }: Props): ReactElement {
-  console.log(styles.layout);
   return (
     <div className={styles.layout}>
       <div className={styles.layout__header} />

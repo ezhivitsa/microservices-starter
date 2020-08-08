@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 
-import { isDevelopment } from '../lib/config';
+import { isDevelopment } from 'lib/config';
 
 import { ConfigView } from './components/config-view';
 

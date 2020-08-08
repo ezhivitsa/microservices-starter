@@ -2,9 +2,9 @@ import { AppMiddleware, AppContext } from 'koa';
 import { createElement } from 'react';
 import { renderToString } from 'react-dom/server';
 
-import { SerializableClientConfig } from '../../common/general-types';
+import { SerializableClientConfig } from 'common/general-types';
 
-import { IndexPage, IndexPageProps } from '../pages/index-page';
+import { IndexPage, IndexPageProps } from 'pages/index-page';
 
 export const indexPageMiddleware: AppMiddleware = (ctx: AppContext): void => {
   const {

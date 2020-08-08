@@ -1,6 +1,6 @@
 import { AppMiddleware, AppContext, Next } from 'koa';
 
-import { logger } from '../lib/logger';
+import { logger } from 'lib/logger';
 
 export const loggerInitMiddleware: AppMiddleware = (ctx: AppContext, next: Next): void => {
   ctx.state.logger = logger.child({

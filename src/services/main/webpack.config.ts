@@ -29,11 +29,11 @@ const webpackConfig: webpack.Configuration = {
       // local aliases
       common: path.resolve(__dirname, './src/common'),
       // External aliases
-      '@packages': path.resolve(__dirname, '../../packages'),
+      '@packages/ui': path.resolve(__dirname, '../../packages/ui/src'),
       'react-dom': isDevelopment ? '@hot-loader/react-dom' : 'react-dom',
     },
     modules: [clientPath, localNodeModulesPath, path.resolve(__dirname, '../../../node_modules')],
-    extensions: ['.ts', '.tsx', '.js'],
+    extensions: ['.ts', '.tsx', '.js', 'jsx'],
   },
   optimization: {
     minimize: !isDevelopment,
@@ -45,6 +45,7 @@ const webpackConfig: webpack.Configuration = {
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
+        include: [clientPath, path.resolve(__dirname, '../../packages/ui/src')],
         use: {
           loader: 'babel-loader',
           options: {

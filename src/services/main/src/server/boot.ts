@@ -1,6 +1,12 @@
+import moduleAlias from 'module-alias';
+
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import https from 'https';
+
+moduleAlias.addPath(__dirname);
+moduleAlias.addAlias('common', join(__dirname + '../common'));
+moduleAlias();
 
 import { config } from './lib/config';
 import { logger } from './lib/logger';
