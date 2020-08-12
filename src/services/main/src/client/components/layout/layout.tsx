@@ -19,8 +19,7 @@ export function Layout({ isContentLoading }: Props): ReactElement {
       <div className={styles.layout__content}>
         <div id={CONTENT_ELEMENT_ID} />
 
-        {/* {isContentLoading && <Spinner />} */}
-        {isContentLoading && <div>Loading1</div>}
+        {isContentLoading && <Spinner mode="page" />}
       </div>
     </div>
   );
@@ -28,6 +27,5 @@ export function Layout({ isContentLoading }: Props): ReactElement {
 
 export function renderLayout({ isContentLoading }: Props): void {
   const container = document.getElementById('root');
-  console.log(container);
   ReactDOM.render(<Layout isContentLoading={isContentLoading} />, container);
 }

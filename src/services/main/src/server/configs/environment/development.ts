@@ -13,4 +13,8 @@ export const development: Config = {
   },
   featureFlagsDefault: [FeatureFlag.Debug],
   enableHotLoader: true,
+  frontUpstreams: {
+    dashboard: `http://localhost:8081`,
+    calendar: 'http://localhost:8082',
+  },
 };

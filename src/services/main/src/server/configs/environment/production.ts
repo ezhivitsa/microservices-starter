@@ -9,7 +9,7 @@ import { Config } from '../types';
 export const production: Config = {
   port: DEFAULT_PORT,
   buildPath: 'out/assets',
-  staticUrl: `//microservices-starter.net/main/${version}`,
+  staticUrl: `//microservices-starter.com/main/${version}`,
   logger: {
     level: 'info',
     format: 'cloud',
@@ -18,4 +18,8 @@ export const production: Config = {
   featureFlagsDefault: [],
   enableHotLoader: false,
   requestIdHeader: 'x-request-id',
+  frontUpstreams: {
+    dashboard: `https://microservices-starter.com/dashboard`,
+    calendar: 'https://microservices-starter.com/calendar',
+  },
 };

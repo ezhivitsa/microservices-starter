@@ -1,6 +1,7 @@
 import { createLogger as winstonCreateLogger, transports, Logger, LoggerOptions } from 'winston';
 
 import { localFormat, cloudFormat } from './formats';
+import * as utils from './utils';
 import { LoggerConfig } from './types';
 
 export function createLogger(loggerConfig: LoggerConfig): Logger {
@@ -27,3 +28,5 @@ export function createLogger(loggerConfig: LoggerConfig): Logger {
     ],
   });
 }
+
+export { utils };

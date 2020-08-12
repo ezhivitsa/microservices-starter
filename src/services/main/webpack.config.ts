@@ -32,7 +32,12 @@ const webpackConfig: webpack.Configuration = {
       '@packages/ui': path.resolve(__dirname, '../../packages/ui/src'),
       'react-dom': isDevelopment ? '@hot-loader/react-dom' : 'react-dom',
     },
-    modules: [clientPath, localNodeModulesPath, path.resolve(__dirname, '../../../node_modules')],
+    modules: [
+      clientPath,
+      localNodeModulesPath,
+      path.resolve(__dirname, '../../../node_modules'),
+      path.resolve(__dirname, '../../packages'),
+    ],
     extensions: ['.ts', '.tsx', '.js', 'jsx'],
   },
   optimization: {
@@ -45,11 +50,12 @@ const webpackConfig: webpack.Configuration = {
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
-        include: [clientPath, path.resolve(__dirname, '../../packages/ui/src')],
+        // include: [clientPath, path.resolve(__dirname, '../../packages/ui/src')],
         use: {
           loader: 'babel-loader',
           options: {
             sourceMap: isDevelopment,
+            rootMode: 'upward',
           },
         },
       },
@@ -77,6 +83,9 @@ const webpackConfig: webpack.Configuration = {
             loader: 'postcss-loader',
             options: {
               sourceMap: isDevelopment,
+              config: {
+                path: __dirname,
+              },
             },
           },
         ],

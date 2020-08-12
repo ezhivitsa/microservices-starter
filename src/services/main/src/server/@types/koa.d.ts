@@ -1,9 +1,9 @@
 import { Middleware, ParameterizedContext } from 'koa';
 import { Logger } from 'winston';
 
-import { Config } from '../server/configs/types';
+import { Config } from '../configs/types';
 
-import { FeatureFlag } from '../common/feature-flags';
+import { FeatureFlag } from '../../common/feature-flags';
 
 declare module 'koa' {
   export interface AppKoaState {

@@ -1,4 +1,5 @@
-import { FeatureFlag } from '../../common/feature-flags';
+import { FeatureFlag } from 'common/feature-flags';
+import { FrontUpstreamsConfig } from 'common/general-types';
 
 export interface LoggerConfig {
   format: 'local' | 'cloud';
@@ -14,4 +15,5 @@ export interface Config {
   readonly staticUrl: string;
   readonly enableHotLoader: boolean;
   readonly requestIdHeader: string;
+  readonly frontUpstreams: FrontUpstreamsConfig;
 }

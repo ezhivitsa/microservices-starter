@@ -1,38 +1,47 @@
+@import 'variables.pcss';
+
 .spinner {
+  &._mode_page {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   &__loader {
     display: inline-block;
     position: relative;
-    width: 80px;
-    height: 80px;
+    width: var(--grid42);
+    height: var(--grid8);
   }
   
   &__loader-element {
     position: absolute;
-    top: 33px;
-    width: 13px;
-    height: 13px;
+    top: var(--grid2);
+    width: var(--grid4);
+    height: var(--grid4);
     border-radius: 50%;
-    background: #ccc;
+    background: var(--color-grey-400);
     animation-timing-function: cubic-bezier(0, 1, 1, 0);
   }
 
   &__loader-element:nth-child(1) {
-    left: 8px;
+    left: var(--grid3);
     animation: lds-ellipsis1 0.6s infinite;
   }
 
   &__loader-element:nth-child(2) {
-    left: 8px;
+    left: var(--grid3);
     animation: lds-ellipsis2 0.6s infinite;
   }
 
   &__loader-element:nth-child(3) {
-    left: 32px;
+    left: var(--grid9);
     animation: lds-ellipsis2 0.6s infinite;
   }
 
   &__loader-element:nth-child(4) {
-    left: 56px;
+    left: var(--grid16);
     animation: lds-ellipsis3 0.6s infinite;
   }
 

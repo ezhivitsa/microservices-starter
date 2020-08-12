@@ -13,6 +13,7 @@ import {
   prepareAssetsMiddleware,
   errorsMiddleware,
   loggerInitMiddleware,
+  logRequestMiddleware,
   featureFlagsMiddleware,
   indexPageMiddleware,
 } from './middlewares';
@@ -38,6 +39,7 @@ export async function initApp(): Promise<Koa<AppKoaState, AppKoaContext>> {
 
   app
     .use(loggerInitMiddleware)
+    .use(logRequestMiddleware)
     .use(
       cors({
         allowMethods: 'GET, POST, PUT, PATCH, DELETE, OPTIONS',

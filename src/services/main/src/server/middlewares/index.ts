@@ -6,3 +6,4 @@ export { startTimeMiddleware } from './start-time-middleware';
 export { loggerInitMiddleware } from './logger-init-middleware';
 export { featureFlagsMiddleware } from './feature-flags-middleware';
 export { indexPageMiddleware } from './index-page-middleware';
+export { logRequestMiddleware } from './log-request-middleware';

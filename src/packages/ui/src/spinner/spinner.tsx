@@ -12,14 +12,14 @@ interface Props {
   mode: SpinnerMode;
 }
 
-export function Spinner({ size }: Props): ReactElement {
+export function Spinner({ size, mode }: Props): ReactElement {
   return (
-    <div className={classnames(styles.spinner, styles[`_size_${size}`])}>
-      <div className={styles.spinner_loader}>
-        <div className={styles.spinner_loaderElement} />
-        <div className={styles.spinner_loaderElement} />
-        <div className={styles.spinner_loaderElement} />
-        <div className={styles.spinner_loaderElement} />
+    <div className={classnames(styles.spinner, styles[`_size_${size}`], styles[`_mode_${mode}`])}>
+      <div className={styles.spinner__loader}>
+        <div className={styles.spinner__loaderElement} />
+        <div className={styles.spinner__loaderElement} />
+        <div className={styles.spinner__loaderElement} />
+        <div className={styles.spinner__loaderElement} />
       </div>
     </div>
   );

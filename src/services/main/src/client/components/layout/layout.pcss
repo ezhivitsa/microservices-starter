@@ -1,18 +1,23 @@
 @import 'reset.pcss';
+@import 'variables.pcss';
 
 .layout {
   display: grid;
   grid-template-columns: minmax(100px, 200px) auto;
+  grid-template-rows: var(--grid40) auto;
   grid-template-areas: 
     "header header"
     "menu content";
+  min-height: 100vh;
 
   &__header {
     grid-area: header;
+    background: var(--color-blue-50);
   }
 
   &__menu {
     grid-area: menu;
+    background: var(--color-grey-50);
   }
 
   &__content {
