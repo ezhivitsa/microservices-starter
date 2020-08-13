@@ -4,12 +4,12 @@ import helmet from 'koa-helmet';
 import cors from '@koa/cors';
 import Router from '@koa/router';
 
+import { middlewares } from '@packages/server';
+
 import { config } from './lib/config';
 
 import {
   configMiddleware,
-  pingMiddleware,
-  startTimeMiddleware,
   prepareAssetsMiddleware,
   errorsMiddleware,
   loggerInitMiddleware,
@@ -29,15 +29,10 @@ export async function initApp(): Promise<Koa<AppKoaState, AppKoaContext>> {
   app
     .use(configMiddleware)
     .use(errorsMiddleware)
-    .use(mount('/ping', pingMiddleware))
-    .use(startTimeMiddleware)
-    .use(helmet());
-
-  [assetsMiddlewares].forEach((middleware) => {
-    app.use(middleware);
-  });
-
-  app
+    .use(mount('/ping', middlewares.pingMiddleware))
+    .use(middlewares.startTimeMiddleware)
+    .use(helmet())
+    .use(assetsMiddlewares)
     .use(loggerInitMiddleware)
     .use(logRequestMiddleware)
     .use(

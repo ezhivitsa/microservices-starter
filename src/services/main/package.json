@@ -30,6 +30,7 @@
     "@babel/preset-typescript": "7.10.4",
     "@hot-loader/react-dom": "16.13.0",
     "@packages/eslint-config": "1.0.0",
+    "@packages/server": "1.0.0",
     "@packages/stylelint-config": "1.0.0",
     "@packages/postcss-config": "1.0.0",
     "@types/copy-webpack-plugin": "6.0.0",

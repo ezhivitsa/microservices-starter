@@ -1,21 +1,4 @@
-import { AppMiddleware, AppContext, Next } from 'koa';
 import { Logger } from 'winston';
-
-import { QueryParam } from '../../common/query-param';
-
-export const featureFlagsMiddleware: AppMiddleware = (ctx: AppContext, next: Next): void => {
-  const queryFeatures = ctx.query[QueryParam.FEATURES];
-  const { config, logger } = ctx.state;
-
-  ctx.state.featureFlagsSet = parseFeatureFlagsSetFromFeatures(
-    queryFeatures?.toString(),
-    config.featureFlagsDefault,
-    config.featureFlagsSupported,
-    logger,
-  );
-
-  next();
-};
 
 /**
  * Parse features from query parameters.
@@ -27,7 +10,7 @@ export const featureFlagsMiddleware: AppMiddleware = (ctx: AppContext, next: Nex
  * @param featureFlagsDefault
  * @param logger
  */
-function parseFeatureFlagsSetFromFeatures<F extends string>(
+export function parseFeatureFlagsSetFromFeatures<F extends string>(
   queryFeatures = '',
   featureFlagsDefault: F[],
   featureFlagsSupported: F[],
