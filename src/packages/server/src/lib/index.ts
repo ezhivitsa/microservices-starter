@@ -1,1 +1,1 @@
-export {parseFeatureFlagsSetFromFeatures} from './feature-flags';
+export { parseFeatureFlagsSetFromFeatures } from './feature-flags';

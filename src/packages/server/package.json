@@ -13,6 +13,7 @@
     "@packages/logger": "1.0.0"
   },
   "devDependencies": {
+    "@packages/eslint-config": "1.0.0",
     "@types/koa": "2.11.3",
     "@types/node": "14.0.27",
     "winston": "3.3.3",

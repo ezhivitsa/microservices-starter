@@ -5,6 +5,7 @@ declare module 'koa' {
   export interface AppKoaState {
     startTime: number;
     logger: Logger;
+    featureFlagsSet: Set<string>;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-interface

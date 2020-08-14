@@ -12,8 +12,6 @@ import {
   configMiddleware,
   prepareAssetsMiddleware,
   errorsMiddleware,
-  loggerInitMiddleware,
-  logRequestMiddleware,
   featureFlagsMiddleware,
   indexPageMiddleware,
 } from './middlewares';
@@ -25,6 +23,7 @@ router.get(/^((?!\.).)*$/, indexPageMiddleware);
 
 export async function initApp(): Promise<Koa<AppKoaState, AppKoaContext>> {
   const assetsMiddlewares = await prepareAssetsMiddleware();
+  const loggerInitMiddleware = middlewares.prepareLoggerInitMiddleware(config.logger);
 
   app
     .use(configMiddleware)
@@ -34,7 +33,7 @@ export async function initApp(): Promise<Koa<AppKoaState, AppKoaContext>> {
     .use(helmet())
     .use(assetsMiddlewares)
     .use(loggerInitMiddleware)
-    .use(logRequestMiddleware)
+    .use(middlewares.logRequestMiddleware)
     .use(
       cors({
         allowMethods: 'GET, POST, PUT, PATCH, DELETE, OPTIONS',
