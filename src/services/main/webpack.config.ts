@@ -50,7 +50,6 @@ const webpackConfig: webpack.Configuration = {
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
-        // include: [clientPath, path.resolve(__dirname, '../../packages/ui/src')],
         use: {
           loader: 'babel-loader',
           options: {
