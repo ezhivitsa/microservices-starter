@@ -70,11 +70,11 @@ validate: lint compile-dry test
 # release targets
 # -------------------------------------
 .PHONY: build
-build: clean build-server build-client
+build: build-server build-client
 
 .PHONY: build-server
 build-server:
-	npx tsc -p tsconfig.server.production.json
+	npx tsc -p ./server/tsconfig.server.production.json
 
 .PHONY: build-client
 build-client:

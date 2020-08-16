@@ -5,7 +5,7 @@ import { join } from 'path';
 import https from 'https';
 
 moduleAlias.addPath(__dirname);
-moduleAlias.addAlias('common', join(__dirname + '../common'));
+moduleAlias.addAlias('common', join(__dirname, '../common'));
 moduleAlias();
 
 import { config } from './lib/config';
