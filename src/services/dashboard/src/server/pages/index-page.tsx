@@ -15,9 +15,8 @@ export function IndexPage(props: IndexPageProps): ReactElement<IndexPageProps> {
     <html>
       <head>
         <meta charSet="utf-8" />
-        <title>Microservices starter</title>
+        <title>Dashboard</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <link rel="icon" type="image/png" href={`${props.staticUrl}/${props.buildPath}/public/favicon.png`} />
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,500,600&display=swap" rel="stylesheet" />
         {!isDevelopment && <link rel="stylesheet" href={`${props.staticUrl}/${props.buildPath}/app.style.css`} />}
       </head>

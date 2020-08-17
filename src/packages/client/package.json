@@ -1,0 +1,8 @@
+{
+  "name": "@packages/client",
+  "version": "1.0.0",
+  "devDependencies": {
+    "@packages/eslint-config": "1.0.0",
+    "typescript": "3.9.7"
+  }
+}

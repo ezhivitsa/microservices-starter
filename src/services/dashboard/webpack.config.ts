@@ -15,7 +15,7 @@ const webpackConfig: webpack.Configuration = {
   mode: isDevelopment ? 'development' : 'production',
   target: 'web',
   entry: () => {
-    const boot = path.resolve(clientPath, 'boot.ts');
+    const boot = path.resolve(clientPath, 'boot.tsx');
     return [boot];
   },
   output: {
@@ -30,6 +30,7 @@ const webpackConfig: webpack.Configuration = {
       common: path.resolve(__dirname, './src/common'),
       // External aliases
       '@packages/ui': path.resolve(__dirname, '../../packages/ui/src'),
+      '@packages/client': path.resolve(__dirname, '../../packages/client/src'),
       'react-dom': isDevelopment ? '@hot-loader/react-dom' : 'react-dom',
     },
     modules: [
