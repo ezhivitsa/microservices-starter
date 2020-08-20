@@ -1,1 +1,1 @@
-export { WeatherStore } from './weather-store';
+export { DashboardStore } from './dashboard-store';

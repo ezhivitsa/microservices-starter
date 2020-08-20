@@ -9,11 +9,12 @@ import { IndexPage, IndexPageProps } from 'pages/index-page';
 export const indexPageMiddleware: AppMiddleware = (ctx: AppContext): void => {
   const {
     featureFlagsSet,
-    config: { staticUrl, buildPath },
+    config: { staticUrl, buildPath, appBasePath },
   } = ctx.state;
 
   const clientConfig: SerializableClientConfig = {
     featureFlagsArray: Array.from(featureFlagsSet),
+    appBasePath,
   };
 
   const props: IndexPageProps = {

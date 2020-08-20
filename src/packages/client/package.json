@@ -10,11 +10,11 @@
     "prepare": "npm run build"
   },
   "dependencies": {
-    "qs": "6.9.4"
+    "axios": "0.19.2"
   },
   "devDependencies": {
     "@packages/eslint-config": "1.0.0",
-    "@types/qs": "6.9.4",
+    "@types/axios": "0.14.0",
     "typescript": "3.9.7"
   }
 }

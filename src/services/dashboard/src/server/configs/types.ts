@@ -14,4 +14,5 @@ export interface Config {
   readonly staticUrl: string;
   readonly enableHotLoader: boolean;
   readonly requestIdHeader: string;
+  readonly appBasePath: string;
 }

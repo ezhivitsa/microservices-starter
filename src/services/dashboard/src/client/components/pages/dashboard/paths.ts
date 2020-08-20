@@ -1,1 +1,1 @@
-export const dashboardPath = '/dashboard';
+export const dashboardPath = '/';

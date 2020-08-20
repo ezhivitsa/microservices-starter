@@ -10,6 +10,7 @@ export const production: Config = {
   port: DEFAULT_PORT,
   buildPath: 'out/assets',
   staticUrl: `//microservices-starter.com/dashboard/${version}`,
+  appBasePath: '/dashboard',
   logger: {
     level: 'info',
     format: 'cloud',

@@ -1,1 +1,1 @@
-export { WeatherStoreContext, WeatherStoreProvider, useWeatherStore } from './weather-provider';
+export { DashboardStoreContext, DashboardStoreProvider, useDashboardStore } from './dashboard-provider';

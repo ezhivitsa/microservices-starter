@@ -1,7 +1,6 @@
 import path from 'path';
 import webpack from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import CopyPlugin from 'copy-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 import { config, isDevelopment } from './src/server/lib/config';
@@ -30,7 +29,6 @@ const webpackConfig: webpack.Configuration = {
       common: path.resolve(__dirname, './src/common'),
       // External aliases
       '@packages/ui': path.resolve(__dirname, '../../packages/ui/src'),
-      '@packages/client': path.resolve(__dirname, '../../packages/client/src'),
       'react-dom': isDevelopment ? '@hot-loader/react-dom' : 'react-dom',
     },
     modules: [
@@ -112,14 +110,6 @@ const webpackConfig: webpack.Configuration = {
           syntactic: true,
         },
       },
-    }),
-    new CopyPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, 'resources/public'),
-          to: path.resolve(buildPath, 'public'),
-        },
-      ],
     }),
     ...(isDevelopment ? [] : [new MiniCssExtractPlugin({ filename: 'app.style.css' })]),
   ],

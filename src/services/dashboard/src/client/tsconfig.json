@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "esModuleInterop": true,
+    "esModuleInterop": false,
     "module": "CommonJS",
     "moduleResolution": "Node",
     "target": "ESNext",
@@ -19,8 +19,7 @@
     "paths": {
       // local aliases
       "common/*": ["../common/*"],
-      "@packages/ui/*": ["../../../../packages/ui/src/*"],
-      "@packages/client/*": ["../../../../packages/client/src/*"]
+      "@packages/ui/*": ["../../../../packages/ui/src/*"]
     },
     "typeRoots": [
       "./@types/*"

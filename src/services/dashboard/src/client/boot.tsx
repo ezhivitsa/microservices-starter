@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 
-import { onWindowLoad } from '@packages/client/lib';
+import { lib } from '@packages/client';
 
 import { App } from './app';
 
-onWindowLoad(() => {
-  return ReactDom.hydrate(<App />, window.document.getElementById('root'));
+lib.onWindowLoad(() => {
+  return ReactDom.render(<App />, window.document.getElementById('root'));
 });

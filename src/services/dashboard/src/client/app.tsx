@@ -1,9 +1,25 @@
-import React, { ReactElement } from 'react';
-import { Router } from 'react-router-dom';
+import React, { ReactElement, StrictMode } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import { WeatherStoreProvider } from 'providers';
-import { WeatherStore } from 'stores';
+import { config } from 'lib/config';
+
+import { DashboardStoreProvider } from 'providers';
+import { DashboardStore } from 'stores';
+
+import { dashboardPathTemplate } from 'components/pages/path-templates';
+
+import { DashboardPage } from 'components/pages';
 
 export function App(): ReactElement {
-  return <Router></Router>;
+  return (
+    <StrictMode>
+      <DashboardStoreProvider value={new DashboardStore()}>
+        <BrowserRouter basename={config.appBasePath}>
+          <Switch>
+            <Route path={dashboardPathTemplate} component={DashboardPage} />
+          </Switch>
+        </BrowserRouter>
+      </DashboardStoreProvider>
+    </StrictMode>
+  );
 }
