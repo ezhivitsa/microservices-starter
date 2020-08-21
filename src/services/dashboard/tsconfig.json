@@ -5,6 +5,7 @@
     "moduleResolution": "Node",
     "target": "ES2018",
     "lib": ["ES2018"],
+    "resolveJsonModule": true,
     "jsx": "react",
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,

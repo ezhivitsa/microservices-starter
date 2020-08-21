@@ -5,7 +5,12 @@ import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 import { config, isDevelopment } from './src/server/lib/config';
 
+import pkg from './package.json';
+
 const { buildPath, staticUrl } = config;
+
+const name = pkg.name.replace('@services/', '');
+console.log(name);
 
 const clientPath = path.resolve(__dirname, 'src/client');
 const localNodeModulesPath = path.resolve(__dirname, 'node_modules');
@@ -21,6 +26,10 @@ const webpackConfig: webpack.Configuration = {
     path: path.resolve(buildPath),
     filename: 'app.bundle.js',
     publicPath: `${staticUrl}/${buildPath}/`,
+
+    library: `${name}_[name]`,
+    libraryTarget: 'umd',
+    jsonpFunction: `webpackJsonp_${name}`,
   },
   devtool: isDevelopment ? 'source-map' : false,
   resolve: {

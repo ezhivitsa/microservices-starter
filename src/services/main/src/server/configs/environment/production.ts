@@ -22,4 +22,8 @@ export const production: Config = {
     dashboard: `https://microservices-starter.com/dashboard`,
     calendar: 'https://microservices-starter.com/calendar',
   },
+  frontUpstreamRules: {
+    dashboard: '/dashboard',
+    calendar: '/calendar',
+  },
 };

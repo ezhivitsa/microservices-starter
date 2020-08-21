@@ -31,9 +31,6 @@ export async function initApp(): Promise<Koa<AppKoaState, AppKoaContext>> {
     .use(mount('/ping', middlewares.pingMiddleware))
     .use(middlewares.startTimeMiddleware)
     .use(helmet())
-    .use(assetsMiddlewares)
-    .use(loggerInitMiddleware)
-    .use(middlewares.logRequestMiddleware)
     .use(
       cors({
         allowMethods: 'GET, POST, PUT, PATCH, DELETE, OPTIONS',
@@ -42,6 +39,9 @@ export async function initApp(): Promise<Koa<AppKoaState, AppKoaContext>> {
         maxAge: 2592000, // 1 month
       }),
     )
+    .use(assetsMiddlewares)
+    .use(loggerInitMiddleware)
+    .use(middlewares.logRequestMiddleware)
     .use(featureFlagsMiddleware)
     .use(router.routes());
 

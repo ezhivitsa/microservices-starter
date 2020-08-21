@@ -16,4 +16,5 @@ export interface Config {
   readonly enableHotLoader: boolean;
   readonly requestIdHeader: string;
   readonly frontUpstreams: FrontUpstreamsConfig;
+  readonly frontUpstreamRules: FrontUpstreamsConfig;
 }

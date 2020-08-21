@@ -22,7 +22,7 @@ export function IndexPage(props: IndexPageProps): ReactElement<IndexPageProps> {
       </head>
 
       <body>
-        <div id="root" />
+        <div id="dashboard-root" />
 
         <script defer src={`${props.staticUrl}/${props.buildPath}/app.bundle.js`} />
         <ConfigView content={props.clientConfig} />
