@@ -7,7 +7,7 @@ export function prepareFeatureFlagsMiddleware<F extends string>(
   featureFlagsDefault: F[],
   featureFlagsSupported: F[],
 ): AppMiddleware {
-  return (ctx: AppContext, next: Next): void => {
+  return async (ctx: AppContext, next: Next): Promise<void> => {
     const queryFeatures = ctx.query[queryParam];
     const { logger } = ctx.state;
 
@@ -18,6 +18,6 @@ export function prepareFeatureFlagsMiddleware<F extends string>(
       logger,
     );
 
-    next();
+    await next();
   };
 }

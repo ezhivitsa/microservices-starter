@@ -29,11 +29,11 @@ export async function initApp(): Promise<Koa<AppKoaState, AppKoaContext>> {
     .use(configMiddleware)
     .use(errorsMiddleware)
     .use(mount('/ping', middlewares.pingMiddleware))
-    .use(middlewares.startTimeMiddleware)
+    // .use(middlewares.startTimeMiddleware)
     .use(helmet())
     .use(assetsMiddlewares)
     .use(loggerInitMiddleware)
-    .use(middlewares.logRequestMiddleware)
+    // .use(middlewares.logRequestMiddleware)
     .use(
       cors({
         allowMethods: 'GET, POST, PUT, PATCH, DELETE, OPTIONS',

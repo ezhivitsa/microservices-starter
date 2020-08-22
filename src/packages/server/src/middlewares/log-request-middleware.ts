@@ -4,7 +4,7 @@ import { utils } from '@packages/logger';
 
 const LOG_DATA_LIMIT = 1024 * 6; // 8Kb
 
-export function logRequestMiddleware(ctx: AppContext, next: Next): void {
+export async function logRequestMiddleware(ctx: AppContext, next: Next): Promise<void> {
   const { response, request, res, req } = ctx;
 
   res.on('finish', () => {
@@ -39,5 +39,5 @@ export function logRequestMiddleware(ctx: AppContext, next: Next): void {
     }
   });
 
-  next();
+  await next();
 }

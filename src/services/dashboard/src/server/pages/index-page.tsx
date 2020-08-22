@@ -18,13 +18,13 @@ export function IndexPage(props: IndexPageProps): ReactElement<IndexPageProps> {
         <title>Dashboard</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,500,600&display=swap" rel="stylesheet" />
-        {!isDevelopment && <link rel="stylesheet" href={`${props.staticUrl}/${props.buildPath}/app.style.css`} />}
+        {!isDevelopment && <link rel="stylesheet" href={`${props.staticUrl}/${props.buildPath}/dashboard.style.css`} />}
       </head>
 
       <body>
         <div id="dashboard-root" />
 
-        <script defer src={`${props.staticUrl}/${props.buildPath}/app.bundle.js`} />
+        <script defer src={`${props.staticUrl}/${props.buildPath}/dashboard.bundle.js`} />
         <ConfigView content={props.clientConfig} />
       </body>
     </html>

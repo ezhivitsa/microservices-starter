@@ -991,6 +991,32 @@
     enabled "2.0.x"
     kuler "^2.0.0"
 
+"@fortawesome/fontawesome-common-types@^0.2.30":
+  version "0.2.30"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-0.2.30.tgz#2f1cc5b46bd76723be41d0013a8450c9ba92b777"
+  integrity sha512-TsRwpTuKwFNiPhk1UfKgw7zNPeV5RhNp2Uw3pws+9gDAkPGKrtjR1y2lI3SYn7+YzyfuNknflpBA1LRKjt7hMg==
+
+"@fortawesome/fontawesome-svg-core@1.2.30":
+  version "1.2.30"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-svg-core/-/fontawesome-svg-core-1.2.30.tgz#f56dc6791861fe5d1af04fb8abddb94658c576db"
+  integrity sha512-E3sAXATKCSVnT17HYmZjjbcmwihrNOCkoU7dVMlasrcwiJAHxSKeZ+4WN5O+ElgO/FaYgJmASl8p9N7/B/RttA==
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "^0.2.30"
+
+"@fortawesome/free-solid-svg-icons@5.14.0":
+  version "5.14.0"
+  resolved "https://registry.yarnpkg.com/@fortawesome/free-solid-svg-icons/-/free-solid-svg-icons-5.14.0.tgz#970453f5e8c4915ad57856c3a0252ac63f6fec18"
+  integrity sha512-M933RDM8cecaKMWDSk3FRYdnzWGW7kBBlGNGfvqLVwcwhUPNj9gcw+xZMrqBdRqxnSXdl3zWzTCNNGEtFUq67Q==
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "^0.2.30"
+
+"@fortawesome/react-fontawesome@0.1.11":
+  version "0.1.11"
+  resolved "https://registry.yarnpkg.com/@fortawesome/react-fontawesome/-/react-fontawesome-0.1.11.tgz#c1a95a2bdb6a18fa97b355a563832e248bf6ef4a"
+  integrity sha512-sClfojasRifQKI0OPqTy8Ln8iIhnxR/Pv/hukBhWnBz9kQRmqi6JSH3nghlhAY7SUeIIM7B5/D2G8WjX0iepVg==
+  dependencies:
+    prop-types "^15.7.2"
+
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"
@@ -4500,7 +4526,7 @@ import-from@^2.1.0:
   dependencies:
     resolve-from "^3.0.0"
 
-import-html-entry@^1.7.0:
+import-html-entry@^1.8.1:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/import-html-entry/-/import-html-entry-1.8.1.tgz#d5ff7946aa6a1cfac3964d888eb0fbdbb9ca92f5"
   integrity sha512-xbAWugrBVdDyAKEnIV0TyLTA3SZkf1u7SUNaM4+5zy4Ss+wthoFzA0kd2Wj2spHmVO/LxhVT3SZF8PUNPG+EFg==
@@ -7093,13 +7119,13 @@ q@^1.1.2:
   resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
   integrity sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc=
 
-qiankun@2.0.20:
-  version "2.0.20"
-  resolved "https://registry.yarnpkg.com/qiankun/-/qiankun-2.0.20.tgz#df4ed9a1989b8b2a5c7a7c7aaabd20ab253e437d"
-  integrity sha512-UDMsJ/XkAW4eeyB1xjQZ6An5rYYGEyKVHNedPz5hGM7AtW/HH50Vq860ItpchRyG8V27227AjCLB//+HzPBIkg==
+qiankun@2.0.21:
+  version "2.0.21"
+  resolved "https://registry.yarnpkg.com/qiankun/-/qiankun-2.0.21.tgz#6292195f4fb4c72c9d83a419f0e3609e55c60b26"
+  integrity sha512-TrwbeFB5xgXbibpkZGwFiTzSmq0Tb2H6SqENwLlKwLK5jfedGPPwaCctKUmpA08K4CtaTVLsJNkOHdQJFMw+tA==
   dependencies:
     "@babel/runtime" "^7.10.5"
-    import-html-entry "^1.7.0"
+    import-html-entry "^1.8.1"
     lodash "^4.17.11"
     single-spa "^5.3.1"
     tslib "^1.10.0"

@@ -10,11 +10,11 @@ interface LoggerConfig {
 export function prepareLoggerInitMiddleware(loggerConfig: LoggerConfig): AppMiddleware {
   const logger = createLogger(loggerConfig);
 
-  return (ctx: AppContext, next: Next): void => {
+  return async (ctx: AppContext, next: Next): Promise<void> => {
     ctx.state.logger = logger.child({
       hostname: ctx.hostname,
     });
 
-    next();
+    await next();
   };
 }

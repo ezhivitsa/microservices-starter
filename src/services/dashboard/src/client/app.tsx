@@ -10,6 +10,8 @@ import { dashboardPathTemplate } from 'components/pages/path-templates';
 
 import { DashboardPage } from 'components/pages';
 
+import './app.pcss';
+
 export function App(): ReactElement {
   return (
     <StrictMode>

@@ -1,7 +1,7 @@
 import { AppMiddleware, AppContext, Next } from 'koa';
 
-export const startTimeMiddleware: AppMiddleware = (ctx: AppContext, next: Next): void => {
+export const startTimeMiddleware: AppMiddleware = async (ctx: AppContext, next: Next): Promise<void> => {
   ctx.state.startTime = Date.now();
 
-  next();
+  await next();
 };

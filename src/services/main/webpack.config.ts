@@ -20,7 +20,7 @@ const webpackConfig: webpack.Configuration = {
   },
   output: {
     path: path.resolve(buildPath),
-    filename: 'app.bundle.js',
+    filename: 'main.bundle.js',
     publicPath: `${staticUrl}/${buildPath}/`,
   },
   devtool: isDevelopment ? 'source-map' : false,
@@ -120,7 +120,7 @@ const webpackConfig: webpack.Configuration = {
         },
       ],
     }),
-    ...(isDevelopment ? [] : [new MiniCssExtractPlugin({ filename: 'app.style.css' })]),
+    ...(isDevelopment ? [] : [new MiniCssExtractPlugin({ filename: 'main.style.css' })]),
   ],
 };
 

@@ -10,7 +10,6 @@ import pkg from './package.json';
 const { buildPath, staticUrl } = config;
 
 const name = pkg.name.replace('@services/', '');
-console.log(name);
 
 const clientPath = path.resolve(__dirname, 'src/client');
 const localNodeModulesPath = path.resolve(__dirname, 'node_modules');
@@ -24,7 +23,7 @@ const webpackConfig: webpack.Configuration = {
   },
   output: {
     path: path.resolve(buildPath),
-    filename: 'app.bundle.js',
+    filename: `${name}.bundle.js`,
     publicPath: `${staticUrl}/${buildPath}/`,
 
     library: `${name}_[name]`,
@@ -120,7 +119,7 @@ const webpackConfig: webpack.Configuration = {
         },
       },
     }),
-    ...(isDevelopment ? [] : [new MiniCssExtractPlugin({ filename: 'app.style.css' })]),
+    ...(isDevelopment ? [] : [new MiniCssExtractPlugin({ filename: `${name}.style.css` })]),
   ],
 };
 

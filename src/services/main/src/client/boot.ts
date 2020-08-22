@@ -30,4 +30,8 @@ registerMicroApps([
 
 setDefaultMountApp(config.frontUpstreamRules.dashboard);
 
-start();
+start({
+  sandbox: {
+    strictStyleIsolation: true,
+  },
+});
