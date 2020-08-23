@@ -30,7 +30,7 @@ export async function initApp(): Promise<Koa<AppKoaState, AppKoaContext>> {
     .use(errorsMiddleware)
     .use(mount('/ping', middlewares.pingMiddleware))
     .use(middlewares.startTimeMiddleware)
-    // .use(helmet())
+    .use(helmet())
     .use(
       cors({
         allowMethods: 'GET, POST, PUT, PATCH, DELETE, OPTIONS',

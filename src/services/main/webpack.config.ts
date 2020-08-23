@@ -14,10 +14,7 @@ const localNodeModulesPath = path.resolve(__dirname, 'node_modules');
 const webpackConfig: webpack.Configuration = {
   mode: isDevelopment ? 'development' : 'production',
   target: 'web',
-  entry: () => {
-    const boot = path.resolve(clientPath, 'boot.ts');
-    return [boot];
-  },
+  entry: ['react-hot-loader/patch', path.resolve(clientPath, 'boot.ts')],
   output: {
     path: path.resolve(buildPath),
     filename: 'main.bundle.js',

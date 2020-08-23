@@ -5,5 +5,11 @@ interface Props {
 }
 
 export function ConfigView(props: Props): ReactElement<Props> {
-  return <script type="application/json" className="config-view" dangerouslySetInnerHTML={{ __html: props.content }} />;
+  return (
+    <script
+      type="application/json"
+      className="dashboard-config-view"
+      dangerouslySetInnerHTML={{ __html: props.content }}
+    />
+  );
 }

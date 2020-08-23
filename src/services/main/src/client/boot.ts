@@ -19,19 +19,19 @@ registerMicroApps([
     loader,
     activeRule: config.frontUpstreamRules.dashboard,
   },
-  {
-    name: 'calendar',
-    entry: config.frontUpstreams.calendar,
-    container: `#${CONTENT_ELEMENT_ID}`,
-    loader,
-    activeRule: config.frontUpstreamRules.calendar,
-  },
+  // {
+  //   name: 'calendar',
+  //   entry: config.frontUpstreams.calendar,
+  //   container: `#${CONTENT_ELEMENT_ID}`,
+  //   loader,
+  //   activeRule: config.frontUpstreamRules.calendar,
+  // },
 ]);
 
 setDefaultMountApp(config.frontUpstreamRules.dashboard);
 
 start({
-  sandbox: {
-    strictStyleIsolation: true,
-  },
+  // sandbox: {
+  //   strictStyleIsolation: true,
+  // },
 });

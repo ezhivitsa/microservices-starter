@@ -3,17 +3,33 @@
 .dashboard-card {
   box-shadow: 0 1px 4px 0 var(--color-grey-400);
   border-radius: var(--border-radius-300);
-  width: 220px;
-  background-color: var(--color-white);
+  max-width: 220px;
+  width: 100%;
   padding: var(--grid4);
   box-sizing: border-box;
+
+  &._color_green {
+    background-color: var(--color-green-50);
+  }
+
+  &._color_blue {
+    background-color: var(--color-light-blue-50);
+  }
+
+  &._color_purple {
+    background-color: var(--color-deep-purple-50);
+  }
+
+  &._color_orange {
+    background-color: var(--color-orange-50);
+  }
 
   &__header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding-bottom: var(--grid4);
-    border-bottom: 1px solid var(--color-grey-200);
+    border-bottom: 1px solid var(--color-grey-400);
   }
 
   &__data {

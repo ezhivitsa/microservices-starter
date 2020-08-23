@@ -5,14 +5,10 @@ import { lib } from '@packages/client';
 
 import { App } from './app';
 
+import { setContainer, getRootElement } from './container';
+
 interface MountProps {
   container?: Element;
-}
-
-function getContainer(container?: Element): Element {
-  return container
-    ? (container.querySelector('#dashboard-root') as Element)
-    : (document.getElementById('dashboard-root') as Element);
 }
 
 export async function bootstrap(): Promise<void> {
@@ -21,13 +17,13 @@ export async function bootstrap(): Promise<void> {
 
 export async function mount(props: MountProps = {}): Promise<void> {
   const { container } = props;
+  setContainer(container);
 
-  ReactDom.render(<App />, getContainer(container));
+  ReactDom.render(<App />, getRootElement());
 }
 
-export async function unmount(props: MountProps = {}): Promise<void> {
-  const { container } = props;
-  ReactDom.unmountComponentAtNode(getContainer(container));
+export async function unmount(): Promise<void> {
+  ReactDom.unmountComponentAtNode(getRootElement());
 }
 
 if (!lib.isQiankum()) {

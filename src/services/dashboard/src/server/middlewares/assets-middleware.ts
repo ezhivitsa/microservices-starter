@@ -8,6 +8,7 @@ import serve from 'koa-static';
 import { config } from 'lib/config';
 
 const publicPath = join('/', config.buildPath);
+const port = process.env.HRM_PORT ? Number(process.env.HRM_PORT) : 8180;
 
 export const prepareAssetsMiddleware = async (): Promise<AppMiddleware> => {
   if (config.enableHotLoader) {
@@ -17,6 +18,7 @@ export const prepareAssetsMiddleware = async (): Promise<AppMiddleware> => {
     return koaWebpack({
       config: webpackConfig,
       hotClient: {
+        port,
         host: 'localhost',
       },
     });

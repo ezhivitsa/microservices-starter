@@ -1,6 +1,6 @@
 import { SerializableClientConfig, ClientConfig } from 'common/general-types';
 
-const node = window.document.getElementsByClassName('config-view')[0];
+const node = document.querySelector('.dashboard-config-view');
 
 if (!node || !node.textContent) {
   throw new Error('Config node is empty');

@@ -1,1 +1,1 @@
-export { ColorType, DashboardCard } from './dashboard-card';
+export { CardColor, DashboardCard } from './dashboard-card';

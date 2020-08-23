@@ -6,7 +6,7 @@ import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './dashboard-card.pcss';
 
-export enum ColorType {
+export enum CardColor {
   Purple = 'purple',
   Green = 'green',
   Blue = 'blue',
@@ -20,7 +20,7 @@ interface Props {
   title: string;
   footerIcon: IconDefinition;
   footerContent: string;
-  iconColor: ColorType;
+  iconColor: CardColor;
 }
 
 export function DashboardCard({
@@ -33,7 +33,7 @@ export function DashboardCard({
   footerContent,
 }: Props): ReactElement {
   return (
-    <div className={classnames(styles.dashboardCard, className)}>
+    <div className={classnames(styles.dashboardCard, styles[`_color_${iconColor}`], className)}>
       <div className={styles.dashboardCard__header}>
         <div className={classnames(styles.dashboardCard__icon, styles[`_color_${iconColor}`])}>
           <FontAwesomeIcon icon={icon} />

@@ -17,16 +17,13 @@ const localNodeModulesPath = path.resolve(__dirname, 'node_modules');
 const webpackConfig: webpack.Configuration = {
   mode: isDevelopment ? 'development' : 'production',
   target: 'web',
-  entry: () => {
-    const boot = path.resolve(clientPath, 'boot.tsx');
-    return [boot];
-  },
+  entry: ['react-hot-loader/patch', path.resolve(clientPath, 'boot.tsx')],
   output: {
     path: path.resolve(buildPath),
     filename: `${name}.bundle.js`,
     publicPath: `${staticUrl}/${buildPath}/`,
 
-    library: `${name}_[name]`,
+    library: name,
     libraryTarget: 'umd',
     jsonpFunction: `webpackJsonp_${name}`,
   },
