@@ -1,14 +1,13 @@
-import React, { ReactElement } from 'react';
-import { hot } from 'react-hot-loader/root';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-import { Layout } from './components/layout';
+import { Layout } from 'components/layout';
 
 interface Props {
-  isLoading: boolean;
+  isContentLoading: boolean;
 }
 
-function AppComponent({ isLoading }: Props): ReactElement {
-  return <Layout isContentLoading={isLoading} />;
+export function renderApp({ isContentLoading }: Props): void {
+  const container = document.getElementById('root');
+  ReactDOM.render(<Layout isContentLoading={isContentLoading} />, container);
 }
-
-export const App = hot(AppComponent);

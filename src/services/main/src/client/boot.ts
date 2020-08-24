@@ -4,13 +4,12 @@ import { CONTENT_ELEMENT_ID } from 'constants/app.constants';
 
 import { config } from 'lib/config';
 
-import { renderLayout } from './components/layout';
+import { renderApp } from './app';
 
-renderLayout({ isContentLoading: true });
+renderApp({ isContentLoading: true });
 
-const loader = (isContentLoading: boolean): void => renderLayout({ isContentLoading });
+const loader = (isContentLoading: boolean): void => renderApp({ isContentLoading });
 
-console.log(config.frontUpstreams.dashboard);
 registerMicroApps([
   {
     name: 'dashboard',
@@ -30,8 +29,4 @@ registerMicroApps([
 
 setDefaultMountApp(config.frontUpstreamRules.dashboard);
 
-start({
-  // sandbox: {
-  //   strictStyleIsolation: true,
-  // },
-});
+start();
