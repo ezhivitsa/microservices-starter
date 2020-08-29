@@ -14,14 +14,15 @@ const prettyMeta = format((info, opts: PrettyFormatMetaOpts) => {
   delete strippedInfo[LEVEL];
   delete strippedInfo[SPLAT];
   if (Object.keys(strippedInfo).length > 0) {
-    info[MESSAGE] = inspect(strippedInfo, false, opts.depth || null, opts.colorize);
+    Object.assign(info, { [MESSAGE]: inspect(strippedInfo, false, opts.depth || null, opts.colorize) });
   }
   return info;
 });
 
 const padEssentials = format((info) => {
   const essentials = `${info.level}: [${info.timestamp}] ${info.message}`;
-  info[MESSAGE] = info[MESSAGE] ? `${essentials} -- ${info[MESSAGE]}` : essentials;
+  Object.assign(info, { [MESSAGE]: info[MESSAGE as any] ? `${essentials} -- ${info[MESSAGE as any]}` : essentials });
+
   return info;
 });
 

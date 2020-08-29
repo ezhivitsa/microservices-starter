@@ -9,19 +9,18 @@ import { IndexPage, IndexPageProps } from 'pages/index-page';
 export const indexPageMiddleware: AppMiddleware = (ctx: AppContext): void => {
   const {
     featureFlagsSet,
-    config: { staticUrl, buildPath, frontUpstreams, frontUpstreamRules },
+    config: { staticUrl, buildPath, frontUpstreams },
   } = ctx.state;
 
   const clientConfig: SerializableClientConfig = {
     featureFlagsArray: Array.from(featureFlagsSet),
     frontUpstreams,
-    frontUpstreamRules,
   };
 
   const props: IndexPageProps = {
     staticUrl,
     buildPath,
-    clientConfig: JSON.stringify(clientConfig),
+    clientConfig,
   };
 
   const html = createElement(IndexPage, props);

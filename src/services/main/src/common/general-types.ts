@@ -1,14 +1,20 @@
 import { FeatureFlag } from './feature-flags';
 
-export interface FrontUpstreamsConfig {
-  readonly dashboard: string;
-  readonly calendar: string;
+export enum FrontApplication {
+  Dashboard = 'dashboard',
 }
+
+export interface FrontUpstream {
+  name: string;
+  url: string;
+  rule: string;
+}
+
+export type FrontUpstreamsConfig = Record<Readonly<FrontApplication>, FrontUpstream>;
 
 export interface SerializableClientConfig {
   readonly featureFlagsArray: FeatureFlag[];
   readonly frontUpstreams: FrontUpstreamsConfig;
-  readonly frontUpstreamRules: FrontUpstreamsConfig;
 }
 
 export interface ClientConfig extends SerializableClientConfig {

@@ -19,11 +19,10 @@ export const production: Config = {
   enableHotLoader: false,
   requestIdHeader: 'x-request-id',
   frontUpstreams: {
-    dashboard: `https://microservices-starter.com/dashboard`,
-    calendar: 'https://microservices-starter.com/calendar',
-  },
-  frontUpstreamRules: {
-    dashboard: '/dashboard',
-    calendar: '/calendar',
+    dashboard: {
+      name: '@services/dashboard',
+      url: 'https://microservices-starter.com/dashboard',
+      rule: '/dashboard',
+    },
   },
 };

@@ -10,11 +10,10 @@
     "prepare": "npm run build"
   },
   "dependencies": {
-    "axios": "0.19.2"
+    "axios": "0.20.0"
   },
   "devDependencies": {
     "@packages/eslint-config": "1.0.0",
-    "@types/axios": "0.14.0",
-    "typescript": "3.9.7"
+    "typescript": "4.0.2"
   }
 }

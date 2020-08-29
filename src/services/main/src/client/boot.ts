@@ -1,32 +1,19 @@
-import { registerMicroApps, setDefaultMountApp, start } from 'qiankun';
+// import { registerApplication, start } from 'single-spa';
 
-import { CONTENT_ELEMENT_ID } from 'constants/app.constants';
+// registerApplication({
+//   name: '@single-spa/welcome',
+//   app: () => System.import('https://unpkg.com/single-spa-welcome/dist/single-spa-welcome.js'),
+//   activeWhen: ['/'],
+// });
 
-import { config } from 'lib/config';
+// // registerApplication({
+// //   name: "@services/navbar",
+// //   app: () => System.import("@services/navbar"),
+// //   activeWhen: ["/"]
+// // });
 
-import { renderApp } from './app';
+// start({
+//   urlRerouteOnly: true,
+// });
 
-renderApp({ isContentLoading: true });
-
-const loader = (isContentLoading: boolean): void => renderApp({ isContentLoading });
-
-registerMicroApps([
-  {
-    name: 'dashboard',
-    entry: config.frontUpstreams.dashboard,
-    container: `#${CONTENT_ELEMENT_ID}`,
-    loader,
-    activeRule: config.frontUpstreamRules.dashboard,
-  },
-  // {
-  //   name: 'calendar',
-  //   entry: config.frontUpstreams.calendar,
-  //   container: `#${CONTENT_ELEMENT_ID}`,
-  //   loader,
-  //   activeRule: config.frontUpstreamRules.calendar,
-  // },
-]);
-
-setDefaultMountApp(config.frontUpstreamRules.dashboard);
-
-start();
+console.log('hello');

@@ -15,7 +15,8 @@
   "devDependencies": {
     "@packages/eslint-config": "1.0.0",
     "@packages/stylelint-config": "1.0.0",
-    "@types/classnames": "^2.2.3",
-    "typescript": "3.9.7"
+    "@types/classnames": "^2.2.10",
+    "@types/react": "16.9.48",
+    "typescript": "4.0.2"
   }
 }
