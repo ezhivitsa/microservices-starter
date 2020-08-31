@@ -9,7 +9,7 @@ import { IndexPage, IndexPageProps } from 'pages/index-page';
 export const indexPageMiddleware: AppMiddleware = (ctx: AppContext): void => {
   const {
     featureFlagsSet,
-    config: { staticUrl, buildPath, frontUpstreams },
+    config: { staticUrl, systemjsUrl, buildPath, frontUpstreams },
   } = ctx.state;
 
   const clientConfig: SerializableClientConfig = {
@@ -19,6 +19,7 @@ export const indexPageMiddleware: AppMiddleware = (ctx: AppContext): void => {
 
   const props: IndexPageProps = {
     staticUrl,
+    systemjsUrl,
     buildPath,
     clientConfig,
   };

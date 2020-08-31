@@ -1,19 +1,15 @@
-// import { registerApplication, start } from 'single-spa';
+import { registerApplication, start } from 'single-spa';
 
-// registerApplication({
-//   name: '@single-spa/welcome',
-//   app: () => System.import('https://unpkg.com/single-spa-welcome/dist/single-spa-welcome.js'),
-//   activeWhen: ['/'],
-// });
+import { config } from 'lib/config';
 
-// // registerApplication({
-// //   name: "@services/navbar",
-// //   app: () => System.import("@services/navbar"),
-// //   activeWhen: ["/"]
-// // });
+const { dashboard } = config.frontUpstreams;
 
-// start({
-//   urlRerouteOnly: true,
-// });
+registerApplication({
+  name: dashboard.name,
+  app: () => window.System.import(dashboard.name),
+  activeWhen: [dashboard.rule],
+});
 
-console.log('hello');
+start({
+  urlRerouteOnly: true,
+});

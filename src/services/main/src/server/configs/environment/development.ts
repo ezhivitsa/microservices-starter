@@ -7,6 +7,7 @@ import { staging } from './staging';
 export const development: Config = {
   ...staging,
   staticUrl: '',
+  systemjsUrl: 'https://cdn.jsdelivr.net/npm/systemjs@6.5.0/dist',
   logger: {
     ...staging.logger,
     format: 'local',
@@ -15,8 +16,13 @@ export const development: Config = {
   enableHotLoader: true,
   frontUpstreams: {
     dashboard: {
-      ...staging.frontUpstreams.dashboard,
-      url: 'http://localhost:8081',
+      name: '@services/dashboard',
+      url: 'https://unpkg.com/single-spa-welcome/dist/single-spa-welcome.js',
+      rule: '/',
     },
+    // dashboard: {
+    //   ...staging.frontUpstreams.dashboard,
+    //   url: 'http://localhost:8081',
+    // },
   },
 };

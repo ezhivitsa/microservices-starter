@@ -13,6 +13,7 @@ export interface Config {
   readonly featureFlagsDefault: FeatureFlag[];
   readonly buildPath: string;
   readonly staticUrl: string;
+  readonly systemjsUrl: string;
   readonly enableHotLoader: boolean;
   readonly requestIdHeader: string;
   readonly frontUpstreams: FrontUpstreamsConfig;

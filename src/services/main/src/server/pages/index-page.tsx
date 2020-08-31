@@ -2,18 +2,22 @@ import React, { ReactElement } from 'react';
 
 import { SerializableClientConfig } from 'common/general-types';
 
-import { isDevelopment } from 'lib/config';
-
 import { ConfigView } from './components/config-view';
 import { ImportMap } from './components/import-map';
 
 export interface IndexPageProps {
   staticUrl: string;
+  systemjsUrl: string;
   buildPath: string;
   clientConfig: SerializableClientConfig;
 }
 
-export function IndexPage(props: IndexPageProps): ReactElement<IndexPageProps> {
+export function IndexPage({
+  staticUrl,
+  systemjsUrl,
+  buildPath,
+  clientConfig,
+}: IndexPageProps): ReactElement<IndexPageProps> {
   return (
     <html>
       <head>
@@ -24,18 +28,21 @@ export function IndexPage(props: IndexPageProps): ReactElement<IndexPageProps> {
 
         <title>Microservices starter</title>
 
-        <link rel="icon" type="image/png" href={`${props.staticUrl}/${props.buildPath}/public/favicon.png`} />
+        <link rel="icon" type="image/png" href={`${staticUrl}/${buildPath}/public/favicon.png`} />
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,500,600&display=swap" rel="stylesheet" />
-        {!isDevelopment && <link rel="stylesheet" href={`${props.staticUrl}/${props.buildPath}/main.style.css`} />}
+
+        <script src={`${systemjsUrl}/system.min.js`} />
+        {/* <script src={`${systemjsUrl}/extras/amd.min.js`} />
+        <script src={`${systemjsUrl}/extras/named-exports.min.js`} /> */}
       </head>
 
       <body>
-        <ImportMap config={props.clientConfig} />
+        <ImportMap config={clientConfig} />
 
         <div id="root" />
 
-        <script defer src={`${props.staticUrl}/${props.buildPath}/main.bundle.js`} />
-        <ConfigView config={props.clientConfig} />
+        <script defer src={`${staticUrl}/${buildPath}/main.bundle.js`} />
+        <ConfigView config={clientConfig} />
       </body>
     </html>
   );

@@ -1,15 +1,19 @@
-import { FeatureFlag } from '../../../common/feature-flags';
+import { FeatureFlag } from 'common/feature-flags';
+import { FrontApplication } from 'common/general-types';
 
-import { version } from '../../lib/app-version';
+import { version, dashboardVersion } from 'lib/app-version';
 
 import { DEFAULT_PORT } from '../utils';
 
 import { Config } from '../types';
 
+const staticUrl = '//microservices-starter-static.com';
+
 export const production: Config = {
   port: DEFAULT_PORT,
   buildPath: 'out/assets',
-  staticUrl: `//microservices-starter.com/main/${version}`,
+  staticUrl: `${staticUrl}/s3/main/${version}`,
+  systemjsUrl: `${staticUrl}/assets/systemjs/dist`,
   logger: {
     level: 'info',
     format: 'cloud',
@@ -21,7 +25,7 @@ export const production: Config = {
   frontUpstreams: {
     dashboard: {
       name: '@services/dashboard',
-      url: 'https://microservices-starter.com/dashboard',
+      url: `${staticUrl}/s3/dashboard/${dashboardVersion}/bundle.js`,
       rule: '/dashboard',
     },
   },

@@ -1,3 +1,7 @@
 import { lib } from '@packages/server';
 
-export const version = lib.getAddVersion();
+import { FrontApplication } from 'common/general-types';
+
+export const version = lib.getAppVersion();
+
+export const dashboardVersion = lib.getUpstreamVersion(FrontApplication.Dashboard);

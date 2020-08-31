@@ -1,5 +1,8 @@
 {
   "registry": {
     "tag": "0.0.1"
+  },
+  "upstreams": {
+    "dashboard": "0.0.1"
   }
 }

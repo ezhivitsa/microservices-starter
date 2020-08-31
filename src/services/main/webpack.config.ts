@@ -18,7 +18,7 @@ const localNodeModulesPath = path.resolve(__dirname, 'node_modules');
 const webpackConfig: webpack.Configuration = {
   mode: isDevelopment ? 'development' : 'production',
   target: 'web',
-  entry: ['react-hot-loader/patch', path.resolve(clientPath, 'boot.ts')],
+  entry: [path.resolve(clientPath, 'boot.ts')],
   output: {
     path: path.resolve(buildPath),
     filename: 'main.bundle.js',
@@ -127,9 +127,6 @@ const webpackConfig: webpack.Configuration = {
       ],
     }),
     ...(isDevelopment ? [] : [new MiniCssExtractPlugin({ filename: 'main.style.css' })]),
-    new webpack.ProvidePlugin({
-      SystemJS: [path.resolve(__dirname, '../../../node_modules/systemjs/dist/s.js'), 'System'],
-    }),
   ],
 };
 
