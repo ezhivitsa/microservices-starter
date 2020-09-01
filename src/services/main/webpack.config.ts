@@ -18,7 +18,7 @@ const localNodeModulesPath = path.resolve(__dirname, 'node_modules');
 const webpackConfig: webpack.Configuration = {
   mode: isDevelopment ? 'development' : 'production',
   target: 'web',
-  entry: [path.resolve(clientPath, 'boot.ts')],
+  entry: [path.resolve(clientPath, 'boot.tsx')],
   output: {
     path: path.resolve(buildPath),
     filename: 'main.bundle.js',
