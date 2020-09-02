@@ -37,9 +37,16 @@ lint-style:
 .PHONY: lint
 lint: lint-code lint-style
 
-.PHONY: compile-dry
+.PHONY: compile-dry-client
 compile-dry-client:
-	npx tsc -p tsconfig.json --noEmit
+	npx tsc -p src/client/tsconfig.json --noEmit
+
+.PHONY: compile-dry-server
+compile-dry-server:
+	npx tsc -p src/server/tsconfig.json --noEmit
+
+.PHONY: compile-dry
+compile-dry: compile-dry-client compile-dry-server
 
 .PHONY: test-common
 test-common:
@@ -64,6 +71,10 @@ validate: lint compile-dry test
 # -------------------------------------
 .PHONY: build
 build: build-server build-client
+
+.PHONY: build-server
+build-server:
+	npx tsc -p ./server/tsconfig.server.production.json
 
 .PHONY: build-client
 build-client:

@@ -1,27 +1,21 @@
 {
   "compilerOptions": {
-    "esModuleInterop": false,
+    "esModuleInterop": true,
     "module": "CommonJS",
     "moduleResolution": "Node",
-    "target": "ESNext",
-    "lib": ["esnext", "dom"],
+    "target": "ES2018",
+    "lib": ["ES2018"],
     "resolveJsonModule": true,
-    "noEmit": true,
-    "baseUrl": "./",
     "jsx": "react",
-
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "outDir": "./dist",
-
-    "paths": {
-      // local aliases
-      "@packages/ui/*": ["../../packages/ui/src/*"]
-    },
     "typeRoots": [
-      "./@types/*"
+      "node_modules/@types/*",
+      "../../../node_modules/@types/*"
     ]
-  }
+  },
+  "exclude": ["node_modules"]
 }

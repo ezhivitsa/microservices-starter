@@ -20,24 +20,6 @@ export function IndexPage({
   buildPath,
   clientConfig,
 }: IndexPageProps): ReactElement<IndexPageProps> {
-  function renderRoutes(): ReactNode[] {
-    return Object.values(clientConfig.frontUpstreams).map(
-      (upstream): ReactNode => {
-        return (
-          <>
-            {/* @ts-ignore */}
-            <route path={upstream.rule}>
-              {/* @ts-ignore */}
-              <application name={upstream.name} />
-              {/* @ts-ignore */}
-            </route>
-            {/* @ts-ignore */}
-          </>
-        );
-      },
-    );
-  }
-
   return (
     <html>
       <head>
@@ -55,14 +37,6 @@ export function IndexPage({
         <script src={`${systemjsUrl}/system.min.js`} />
         {/* <script src={`${systemjsUrl}/extras/amd.min.js`} />
         <script src={`${systemjsUrl}/extras/named-exports.min.js`} /> */}
-
-        <template id="single-spa-layout">
-          {/* @ts-ignore */}
-          <single-spa-router containerEl="#content-viewport">
-            {renderRoutes()}
-            {/* @ts-ignore */}
-          </single-spa-router>
-        </template>
       </head>
 
       <body>
