@@ -1,42 +1,31 @@
 import path from 'path';
-import webpack from 'webpack';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import CopyPlugin from 'copy-webpack-plugin';
+
+import { Configuration } from 'webpack';
+import { Configuration as DevConfiguration } from 'webpack-dev-server';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-import { config, isDevelopment } from './src/server/lib/config';
+const clientPath = './src';
+const localNodeModulesPath = './node_modules';
 
-import pkg from './package.json';
+const isDevelopment = Boolean(process.env.LOCAL);
 
-const { buildPath, staticUrl } = config;
-
-const name = pkg.name.replace('@services/', '');
-
-const clientPath = path.resolve(__dirname, 'src/client');
-const localNodeModulesPath = path.resolve(__dirname, 'node_modules');
-
-const webpackConfig: webpack.Configuration = {
+const webpackConfig: Configuration & DevConfiguration = {
   mode: isDevelopment ? 'development' : 'production',
   target: 'web',
-  entry: [path.resolve(clientPath, 'boot.tsx')],
+  entry: ['react-hot-loader/patch', path.resolve(clientPath, 'boot.tsx')],
   output: {
-    path: path.resolve(buildPath),
-    filename: 'main.bundle.js',
-    publicPath: `${staticUrl}/${buildPath}/`,
+    filename: 'bundle.js',
 
-    library: name,
-    libraryTarget: 'umd',
+    libraryTarget: 'system',
     jsonpFunction: `webpackJsonp_${name}`,
   },
   devtool: isDevelopment ? 'source-map' : false,
   resolve: {
     alias: {
-      // local aliases
-      common: path.resolve(__dirname, './src/common'),
       // External aliases
       '@packages/ui': path.resolve(__dirname, '../../packages/ui/src'),
       'react-dom': isDevelopment ? '@hot-loader/react-dom' : 'react-dom',
-      systemjs: path.resolve(__dirname, '../../../node_modules/systemjs/dist/s.js'),
     },
     modules: [
       clientPath,
@@ -50,6 +39,9 @@ const webpackConfig: webpack.Configuration = {
     minimize: !isDevelopment,
     namedModules: isDevelopment,
     namedChunks: isDevelopment,
+  },
+  devServer: {
+    hot: isDevelopment,
   },
   module: {
     rules: [
@@ -123,15 +115,7 @@ const webpackConfig: webpack.Configuration = {
         },
       },
     }),
-    new CopyPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, 'resources/public'),
-          to: path.resolve(buildPath, 'public'),
-        },
-      ],
-    }),
-    ...(isDevelopment ? [] : [new MiniCssExtractPlugin({ filename: 'main.style.css' })]),
+    ...(isDevelopment ? [] : [new MiniCssExtractPlugin({ filename: `${name}.style.css` })]),
   ],
 };
 

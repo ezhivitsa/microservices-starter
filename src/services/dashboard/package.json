@@ -11,7 +11,8 @@
     "path-to-regexp": "3.2.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-router-dom": "5.2.0"
+    "react-router-dom": "5.2.0",
+    "single-spa-react": "3.0.1"
   },
   "devDependencies": {
     "@babel/core": "7.11.1",
@@ -30,6 +31,7 @@
     "@types/react-dom": "16.9.8",
     "@types/react-router-dom": "5.1.5",
     "@types/systemjs": "6.1.0",
+    "@types/webpack-dev-server": "3.11.0",
     "babel-loader": "8.1.0",
     "babel-preset-mobx": "2.0.0",
     "css-loader": "4.2.1",

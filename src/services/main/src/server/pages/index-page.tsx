@@ -33,10 +33,6 @@ export function IndexPage({
         <link rel="icon" type="image/png" href={`${staticUrl}/${buildPath}/public/favicon.png`} />
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,500,600&display=swap" rel="stylesheet" />
         {!isDevelopment && <link rel="stylesheet" href={`${staticUrl}/${buildPath}/main.style.css`} />}
-
-        <script src={`${systemjsUrl}/system.min.js`} />
-        {/* <script src={`${systemjsUrl}/extras/amd.min.js`} />
-        <script src={`${systemjsUrl}/extras/named-exports.min.js`} /> */}
       </head>
 
       <body>

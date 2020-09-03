@@ -21,7 +21,7 @@
       "@packages/ui/*": ["../../packages/ui/src/*"]
     },
     "typeRoots": [
-      "./@types/*"
+      "./@types"
     ]
   }
 }

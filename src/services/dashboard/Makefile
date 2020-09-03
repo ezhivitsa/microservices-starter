@@ -9,13 +9,8 @@ GIT_CHECK_STAGED := $(shell git diff --name-only --cached)
 # -------------------------------------
 .PHONY: dev
 dev:
-	npx nodemon \
-		--config ./nodemon.json \
-		--legacy-watch \
-		-- \
-			--inspect=$(NODE_INSPECTOR_HOST):$(NODE_INSPECTOR_PORT) \
-			--require ts-node/register \
-		-- src/server/boot.ts
+	LOCAL=1 \
+	npx webpack-dev-server
 
 # -------------------------------------
 # validation targets
