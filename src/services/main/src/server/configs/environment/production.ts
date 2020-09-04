@@ -1,5 +1,4 @@
-import { FeatureFlag } from 'common/feature-flags';
-import { FrontApplication } from 'common/general-types';
+import { Types } from '@packages/common';
 
 import { version, dashboardVersion } from 'lib/app-version';
 
@@ -13,12 +12,11 @@ export const production: Config = {
   port: DEFAULT_PORT,
   buildPath: 'out/assets',
   staticUrl: `${staticUrl}/s3/main/${version}`,
-  systemjsUrl: `${staticUrl}/assets/systemjs/dist`,
   logger: {
     level: 'info',
     format: 'cloud',
   },
-  featureFlagsSupported: [FeatureFlag.Debug],
+  featureFlagsSupported: [Types.FeatureFlag.Debug],
   featureFlagsDefault: [],
   enableHotLoader: false,
   requestIdHeader: 'x-request-id',

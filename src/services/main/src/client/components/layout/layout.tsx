@@ -4,7 +4,7 @@ import { hot } from 'react-hot-loader/root';
 
 import { Spinner } from '@packages/ui/spinner';
 
-import { config } from 'lib/config';
+import { lib } from '@packages/client';
 
 import { CONTENT_ELEMENT_ID } from 'constants/app.constants';
 
@@ -21,7 +21,7 @@ interface NavigationLink {
   text: string;
 }
 
-const { dashboard } = config.frontUpstreams;
+const { dashboard } = lib.config.frontUpstreams;
 
 const navigationLinks: NavigationLink[] = [
   {

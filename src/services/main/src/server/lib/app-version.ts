@@ -1,7 +1,6 @@
 import { lib } from '@packages/server';
-
-import { FrontApplication } from 'common/general-types';
+import { Types } from '@packages/common';
 
 export const version = lib.getAppVersion();
 
-export const dashboardVersion = lib.getUpstreamVersion(FrontApplication.Dashboard);
+export const dashboardVersion = lib.getUpstreamVersion(Types.FrontApplication.Dashboard);

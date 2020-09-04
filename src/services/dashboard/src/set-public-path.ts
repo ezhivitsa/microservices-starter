@@ -1,3 +1,5 @@
 import { setPublicPath } from 'systemjs-webpack-interop';
 
-setPublicPath('@services/dashboard');
+import { lib } from '@packages/client';
+
+setPublicPath(lib.config.frontUpstreams.dashboard.name);

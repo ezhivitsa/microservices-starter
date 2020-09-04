@@ -1,9 +1,9 @@
 import React, { ReactElement } from 'react';
 
-import { SerializableClientConfig } from 'common/general-types';
+import { Types } from '@packages/common';
 
 interface Props {
-  config: SerializableClientConfig;
+  config: Types.SerializableClientConfig;
 }
 
 export function ImportMap({ config }: Props): ReactElement {

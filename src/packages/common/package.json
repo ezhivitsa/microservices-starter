@@ -1,5 +1,5 @@
 {
-  "name": "@packages/client",
+  "name": "@packages/common",
   "version": "1.0.0",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -8,10 +8,6 @@
     "build:watch": "tsc --watch",
     "install": "npm run build",
     "prepare": "npm run build"
-  },
-  "dependencies": {
-    "@packages/common": "1.0.0",
-    "axios": "0.20.0"
   },
   "devDependencies": {
     "@packages/eslint-config": "1.0.0",

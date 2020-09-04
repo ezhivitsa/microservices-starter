@@ -1,6 +1,6 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactElement } from 'react';
 
-import { SerializableClientConfig } from 'common/general-types';
+import { Types } from '@packages/common';
 
 import { isDevelopment } from 'lib/config';
 
@@ -9,17 +9,11 @@ import { ImportMap } from './components/import-map';
 
 export interface IndexPageProps {
   staticUrl: string;
-  systemjsUrl: string;
   buildPath: string;
-  clientConfig: SerializableClientConfig;
+  clientConfig: Types.SerializableClientConfig;
 }
 
-export function IndexPage({
-  staticUrl,
-  systemjsUrl,
-  buildPath,
-  clientConfig,
-}: IndexPageProps): ReactElement<IndexPageProps> {
+export function IndexPage({ staticUrl, buildPath, clientConfig }: IndexPageProps): ReactElement<IndexPageProps> {
   return (
     <html>
       <head>

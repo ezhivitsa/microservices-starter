@@ -2,24 +2,23 @@ import { AppMiddleware, AppContext } from 'koa';
 import { createElement } from 'react';
 import { renderToString } from 'react-dom/server';
 
-import { SerializableClientConfig } from 'common/general-types';
+import { Types } from '@packages/common';
 
 import { IndexPage, IndexPageProps } from 'pages/index-page';
 
 export const indexPageMiddleware: AppMiddleware = (ctx: AppContext): void => {
   const {
     featureFlagsSet,
-    config: { staticUrl, systemjsUrl, buildPath, frontUpstreams },
+    config: { staticUrl, buildPath, frontUpstreams },
   } = ctx.state;
 
-  const clientConfig: SerializableClientConfig = {
+  const clientConfig: Types.SerializableClientConfig = {
     featureFlagsArray: Array.from(featureFlagsSet),
     frontUpstreams,
   };
 
   const props: IndexPageProps = {
     staticUrl,
-    systemjsUrl,
     buildPath,
     clientConfig,
   };
