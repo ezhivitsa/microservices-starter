@@ -1,22 +1,24 @@
-import path from 'path';
+/* eslint-disable @typescript-eslint/no-var-requires */
+const path = require('path');
 
-import { Configuration } from 'webpack';
-import { Configuration as DevConfiguration } from 'webpack-dev-server';
-import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+const pkg = require('./package.json');
+
+const name = pkg.name.replace('@services/', '');
 const clientPath = './src';
 const localNodeModulesPath = './node_modules';
 
 const isDevelopment = Boolean(process.env.LOCAL);
+const port = process.env.NODEJS_PORT ? Number(process.env.NODEJS_PORT) : 8080;
 
-const webpackConfig: Configuration & DevConfiguration = {
+const webpackConfig = {
   mode: isDevelopment ? 'development' : 'production',
   target: 'web',
-  entry: ['react-hot-loader/patch', path.resolve(clientPath, 'boot.tsx')],
+  entry: [path.resolve(clientPath, 'boot.ts')],
   output: {
     filename: 'bundle.js',
-
     libraryTarget: 'system',
     jsonpFunction: `webpackJsonp_${name}`,
   },
@@ -42,6 +44,11 @@ const webpackConfig: Configuration & DevConfiguration = {
   },
   devServer: {
     hot: isDevelopment,
+    port,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+    },
   },
   module: {
     rules: [
@@ -108,14 +115,14 @@ const webpackConfig: Configuration & DevConfiguration = {
   plugins: [
     new ForkTsCheckerWebpackPlugin({
       typescript: {
-        configFile: './src/client/tsconfig.json',
+        configFile: './tsconfig.json',
         diagnosticOptions: {
           semantic: true,
           syntactic: true,
         },
       },
     }),
-    ...(isDevelopment ? [] : [new MiniCssExtractPlugin({ filename: `${name}.style.css` })]),
+    ...(isDevelopment ? [] : [new MiniCssExtractPlugin({ filename: 'style.css' })]),
   ],
 };
 

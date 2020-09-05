@@ -23,7 +23,8 @@ export const production: Config = {
   frontUpstreams: {
     dashboard: {
       name: '@services/dashboard',
-      url: `${staticUrl}/s3/dashboard/${dashboardVersion}/bundle.js`,
+      jsUrl: `${staticUrl}/s3/dashboard/${dashboardVersion}/bundle.js`,
+      cssUrl: `${staticUrl}/s3/dashboard/${dashboardVersion}/style.css`,
       rule: '/dashboard',
     },
   },

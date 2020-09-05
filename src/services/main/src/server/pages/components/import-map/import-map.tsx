@@ -9,7 +9,7 @@ interface Props {
 export function ImportMap({ config }: Props): ReactElement {
   const imports: Record<string, string> = Object.values(config.frontUpstreams).reduce<Record<string, string>>(
     (result, upstream) => {
-      result[upstream.name] = upstream.url;
+      result[upstream.name] = upstream.jsUrl;
       return result;
     },
     {},

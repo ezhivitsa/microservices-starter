@@ -25,8 +25,12 @@ const { dashboard } = lib.config.frontUpstreams;
 
 const navigationLinks: NavigationLink[] = [
   {
-    to: dashboard.url,
+    to: dashboard.rule,
     text: menu.dashboard,
+  },
+  {
+    to: '/',
+    text: menu.calendar,
   },
 ];
 

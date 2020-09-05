@@ -6,7 +6,8 @@ export enum FrontApplication {
 
 export interface FrontUpstream {
   name: string;
-  url: string;
+  jsUrl: string;
+  cssUrl?: string;
   rule: string;
 }
 

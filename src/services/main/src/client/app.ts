@@ -23,7 +23,9 @@ const routes = constructRoutes({
 
 const applications = constructApplications({
   routes,
-  loadApp: ({ name }) => window.System.import(name),
+  loadApp: (config) => {
+    return window.System.import(config.name);
+  },
 });
 
 const layoutEngine = constructLayoutEngine({

@@ -58,8 +58,5 @@ validate: lint compile-dry test
 # release targets
 # -------------------------------------
 .PHONY: build
-build: build-server build-client
-
-.PHONY: build-client
-build-client:
+build:
 	NODE_ENV=production npx webpack

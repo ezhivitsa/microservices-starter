@@ -1,6 +1,7 @@
 const postcssImport = require('postcss-import');
 const postcssPresetEnv = require('postcss-preset-env');
 const postcssNested = require('postcss-nested');
+const cssVariables = require('postcss-css-variables');
 
 const cssnano = require('cssnano');
 
@@ -25,11 +26,12 @@ module.exports = ({
       ]
     }),
     postcssNested,
+    cssVariables(),
     postcssPresetEnv({
       stage: 2,
       feature: {
-        'nesting-rules': true,
-        'custom-media-queries': true
+        'custom-media-queries': true,
+        'custom-properties': false
       }
     }),
     cssnano()

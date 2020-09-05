@@ -16,7 +16,8 @@ export const development: Config = {
   frontUpstreams: {
     dashboard: {
       ...staging.frontUpstreams.dashboard,
-      url: 'http://localhost:8081/bundle.js',
+      jsUrl: 'http://localhost:8081/bundle.js',
+      cssUrl: undefined,
     },
   },
 };
