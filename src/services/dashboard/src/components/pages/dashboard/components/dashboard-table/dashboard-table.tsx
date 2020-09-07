@@ -65,37 +65,6 @@ export function DashboardTable({
           },
         )}
       </div>
-
-      {/* <table
-        className={classnames(styles.dashboardTable__table, styles[`_color_${color}`])}
-        cellPadding="0"
-        cellSpacing="0"
-      >
-        <thead>
-          <tr>
-            {columns.map(
-              (column: string): ReactNode => (
-                <td key={column}>{column}</td>
-              ),
-            )}
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map(
-            (row: Array<string>): ReactNode => {
-              return (
-                <tr key={row[keyIndex]}>
-                  {row.map(
-                    (value: string, index: number): ReactNode => (
-                      <td key={`${row[keyIndex]}_${columns[index]}`}>{value}</td>
-                    ),
-                  )}
-                </tr>
-              );
-            },
-          )}
-        </tbody>
-      </table> */}
     </div>
   );
 }

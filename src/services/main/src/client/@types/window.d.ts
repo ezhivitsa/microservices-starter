@@ -8,4 +8,8 @@ declare global {
   interface Window {
     System: SystemType;
   }
+
+  interface Document {
+    adoptedStyleSheets: CSSStyleSheet[];
+  }
 }

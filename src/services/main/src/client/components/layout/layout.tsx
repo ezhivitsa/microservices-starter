@@ -51,11 +51,7 @@ function LayoutComponent(): ReactElement {
       <div className={styles.layout}>
         <div className={styles.layout__header} />
         <div className={styles.layout__menu}>{renderNavigation()}</div>
-        <div className={styles.layout__content}>
-          <div id={CONTENT_ELEMENT_ID} />
-
-          {/* {isContentLoading && <Spinner mode="page" />} */}
-        </div>
+        <div id={CONTENT_ELEMENT_ID} className={styles.layout__content} />
       </div>
     </BrowserRouter>
   );

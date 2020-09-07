@@ -18,7 +18,7 @@ const localNodeModulesPath = path.resolve(__dirname, 'node_modules');
 const webpackConfig: webpack.Configuration = {
   mode: isDevelopment ? 'development' : 'production',
   target: 'web',
-  entry: [path.resolve(clientPath, 'boot.tsx')],
+  entry: ['construct-style-sheets-polyfill', path.resolve(clientPath, 'boot.tsx')],
   output: {
     path: path.resolve(buildPath),
     filename: 'main.bundle.js',
@@ -36,7 +36,7 @@ const webpackConfig: webpack.Configuration = {
       // External aliases
       '@packages/ui': path.resolve(__dirname, '../../packages/ui/src'),
       'react-dom': isDevelopment ? '@hot-loader/react-dom' : 'react-dom',
-      systemjs: path.resolve(__dirname, '../../../node_modules/systemjs/dist/s.js'),
+      systemjs: path.resolve(__dirname, '../../../node_modules/systemjs/dist/system.js'),
     },
     modules: [
       clientPath,

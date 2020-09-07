@@ -19,6 +19,7 @@
     "react-router-dom": "5.2.0",
     "single-spa": "5.5.5",
     "single-spa-layout": "1.0.0-beta.6",
+    "single-spa-react": "3.0.1",
     "systemjs": "6.5.1"
   },
   "devDependencies": {
@@ -50,6 +51,7 @@
     "@types/systemjs": "6.1.0",
     "@types/webpack-env": "1.15.2",
     "babel-loader": "8.1.0",
+    "construct-style-sheets-polyfill": "2.4.0",
     "copy-webpack-plugin": "6.1.0",
     "css-loader": "4.2.2",
     "file-loader": "6.1.0",

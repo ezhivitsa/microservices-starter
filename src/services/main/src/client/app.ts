@@ -5,9 +5,13 @@ import { lib } from '@packages/client';
 
 import { CONTENT_ELEMENT_ID } from 'constants/app.constants';
 
+import { loadingLifecycles } from 'components/loading';
+
+const { frontUpstreams } = lib.config;
+
 const routes = constructRoutes({
   containerEl: `#${CONTENT_ELEMENT_ID}`,
-  routes: Object.values(lib.config.frontUpstreams).map((upstream) => {
+  routes: Object.values(frontUpstreams).map((upstream) => {
     return {
       type: 'route',
       path: upstream.rule,
@@ -15,6 +19,7 @@ const routes = constructRoutes({
         {
           type: 'application',
           name: upstream.name,
+          loader: loadingLifecycles,
         },
       ],
     };
@@ -23,8 +28,16 @@ const routes = constructRoutes({
 
 const applications = constructApplications({
   routes,
-  loadApp: (config) => {
-    return window.System.import(config.name);
+  loadApp: async ({ name }) => {
+    const cssUrl = Object.values(frontUpstreams).find((upstream) => upstream.name === name)?.cssUrl;
+
+    if (cssUrl) {
+      const module = await System.import(cssUrl);
+      const styleSheet: CSSStyleSheet = module.default;
+
+      document.adoptedStyleSheets = [...document.adoptedStyleSheets, styleSheet];
+    }
+    return System.import(name);
   },
 });
 
