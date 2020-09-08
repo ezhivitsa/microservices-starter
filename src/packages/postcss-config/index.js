@@ -5,7 +5,7 @@ const cssVariables = require('postcss-css-variables');
 
 const cssnano = require('cssnano');
 
-const packagesUiImportPath = '../../packages/ui/src/styles';
+const packagesUiImportPath = '../../../node_modules/@packages/ui/dist/styles';
 
 /**
  * Get postcss configuration

@@ -10,6 +10,8 @@
     "skipDefaultLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
+    "sourceMap": true,
+    "declaration": true,
     "baseUrl": "./src",
     "outDir": "dist",
     "typeRoots": [

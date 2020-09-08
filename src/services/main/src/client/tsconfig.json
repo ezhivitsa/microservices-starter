@@ -18,8 +18,7 @@
 
     "paths": {
       // local aliases
-      "common/*": ["../common/*"],
-      "@packages/ui/*": ["../../../../packages/ui/src/*"]
+      "common/*": ["../common/*"]
     },
     "typeRoots": [
       "./@types"

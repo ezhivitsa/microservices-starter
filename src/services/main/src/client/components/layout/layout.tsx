@@ -2,8 +2,6 @@ import React, { ReactElement, ReactNode } from 'react';
 import { BrowserRouter, NavLink } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
 
-import { Spinner } from '@packages/ui/spinner';
-
 import { lib } from '@packages/client';
 
 import { CONTENT_ELEMENT_ID } from 'constants/app.constants';
@@ -11,10 +9,6 @@ import { CONTENT_ELEMENT_ID } from 'constants/app.constants';
 import { menu } from 'texts';
 
 import styles from './layout.pcss';
-
-interface Props {
-  isContentLoading: boolean;
-}
 
 interface NavigationLink {
   to: string;
@@ -34,7 +28,6 @@ const navigationLinks: NavigationLink[] = [
   },
 ];
 
-// function LayoutComponent({ isContentLoading }: Props): ReactElement {
 function LayoutComponent(): ReactElement {
   function renderNavigation(): ReactNode[] {
     return navigationLinks.map((link) => {

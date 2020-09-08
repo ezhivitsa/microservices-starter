@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 import ReactDOM from 'react-dom';
 import singleSpaReact from 'single-spa-react';
 
-import { Spinner } from '@packages/ui/spinner';
+import { Spinner } from '@packages/ui';
 
 function PageLoading(): ReactElement {
   return <Spinner mode="page" />;
