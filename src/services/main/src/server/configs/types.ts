@@ -7,6 +7,7 @@ export interface LoggerConfig {
 
 export interface Config {
   readonly port: number;
+  readonly useHttps: boolean;
   readonly logger: Readonly<LoggerConfig>;
   readonly featureFlagsSupported: Types.FeatureFlag[];
   readonly featureFlagsDefault: Types.FeatureFlag[];

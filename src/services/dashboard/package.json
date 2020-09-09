@@ -8,6 +8,7 @@
     "@fortawesome/react-fontawesome": "0.1.11",
     "@packages/client": "1.0.0",
     "@packages/ui": "1.0.0",
+    "classnames": "2.2.6",
     "mobx": "5.15.6",
     "mobx-react-lite": "2.2.1",
     "path-to-regexp": "3.2.0",

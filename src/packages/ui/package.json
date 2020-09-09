@@ -12,17 +12,21 @@
     "prepare": "npm run build"
   },
   "dependencies": {
-    "classnames": "^2.2.6",
-    "normalize.css": "8.0.1",
-    "react": "^16.13.1"
+    "normalize.css": "8.0.1"
   },
   "devDependencies": {
     "@packages/eslint-config": "1.0.0",
     "@packages/stylelint-config": "1.0.0",
     "@types/classnames": "^2.2.10",
     "@types/react": "16.9.49",
+    "classnames": "2.2.6",
     "cpy-cli": "3.1.1",
     "del-cli": "3.0.1",
+    "react": "16.13.1",
     "typescript": "4.0.2"
+  },
+  "peerDependencies": {
+    "classnames": "^2.2.6",
+    "react": "^16.13.1"
   }
 }

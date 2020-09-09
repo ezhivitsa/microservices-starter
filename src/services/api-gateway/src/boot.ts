@@ -13,12 +13,14 @@ import { logger } from './lib/logger';
 
 import { initApp } from './app';
 
-const { port, useHttps } = config;
+const { HTTPS } = process.env;
+
+const port = config.port;
 
 async function boot(): Promise<void> {
   const app = await initApp();
 
-  if (useHttps) {
+  if (HTTPS) {
     const options = {
       key: readFileSync(join(__dirname, '../../.ssl', 'ssl.key')),
       cert: readFileSync(join(__dirname, '../../.ssl', 'ssl.crt')),

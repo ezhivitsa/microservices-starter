@@ -2,7 +2,7 @@ import { Types } from '@packages/common';
 
 import { version, dashboardVersion } from 'lib/app-version';
 
-import { DEFAULT_PORT } from '../utils';
+import { DEFAULT_PORT, HTTPS } from '../utils';
 
 import { Config } from '../types';
 
@@ -10,6 +10,7 @@ const staticUrl = '//microservices-starter-static.com';
 
 export const production: Config = {
   port: DEFAULT_PORT,
+  useHttps: HTTPS,
   buildPath: 'out/assets',
   staticUrl: `${staticUrl}/s3/main/${version}`,
   logger: {

@@ -9,6 +9,7 @@
     "@packages/common": "1.0.0",
     "@packages/logger": "1.0.0",
     "@packages/ui": "1.0.0",
+    "classnames": "2.2.6",
     "koa": "2.13.0",
     "koa-helmet": "5.2.0",
     "koa-mount": "4.0.0",
