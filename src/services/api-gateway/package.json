@@ -7,6 +7,7 @@
     "@packages/logger": "1.0.0",
     "koa": "2.13.0",
     "koa-helmet": "5.2.0",
+    "koa-mount": "4.0.0",
     "module-alias": "2.2.2"
   },
   "devDependencies": {
@@ -14,6 +15,7 @@
     "@packages/server": "1.0.0",
     "@types/koa": "2.11.4",
     "@types/koa-helmet": "5.2.0",
+    "@types/koa-mount": "4.0.0",
     "@types/koa__cors": "3.0.1",
     "@types/koa__router": "8.0.2",
     "@types/module-alias": "2.0.0",
