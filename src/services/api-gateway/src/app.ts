@@ -9,7 +9,7 @@ import { middlewares } from '@packages/server';
 import { config } from './lib/config';
 
 import { configMiddleware, errorsMiddleware } from './middlewares';
-import {} from './routes';
+import { router } from './routes';
 
 const router = new Router();
 const app = new Koa<AppKoaState, AppKoaContext>();
@@ -33,8 +33,7 @@ export function initApp(): Koa<AppKoaState, AppKoaContext> {
         maxAge: 2592000, // 1 month
       }),
     )
-    .use(mount('/api'));
-  // .use(router.routes());
+    .use(mount('/api', router.routes()));
 
   return app;
 }

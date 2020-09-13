@@ -1,0 +1,7 @@
+{
+  "moduleFileExtensions": ["js", "json", "ts"],
+  "moduleDirectories": ["@types", "node_modules"],
+  "testMatch": ["<rootDir>/src/**/*.(test|spec).(js|ts)?(x)"],
+  "preset": "ts-jest",
+  "testEnvironment": "node"
+}
