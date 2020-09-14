@@ -4,9 +4,9 @@ import { validate } from './joi';
 
 describe('joi validator', () => {
   it('should apply args partially', () => {
-    const schema = {
+    const schema = Joi.object({
       email: Joi.string(),
-    };
+    });
     const validationResult = validate(schema, {
       email: 'test@test.com',
     });

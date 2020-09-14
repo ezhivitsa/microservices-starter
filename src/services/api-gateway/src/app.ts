@@ -3,6 +3,7 @@ import mount from 'koa-mount';
 import helmet from 'koa-helmet';
 import cors from '@koa/cors';
 import Router from '@koa/router';
+import bodyParser from 'koa-bodyparser';
 
 import { middlewares } from '@packages/server';
 
@@ -23,6 +24,7 @@ export function initApp(): Koa<AppKoaState, AppKoaContext> {
     .use(mount('/ping', middlewares.pingMiddleware))
     .use(middlewares.startTimeMiddleware)
     .use(helmet())
+    .use(bodyParser({ enableTypes: ['json', 'form', 'text'] }))
     .use(loggerInitMiddleware)
     .use(middlewares.logRequestMiddleware)
     .use(

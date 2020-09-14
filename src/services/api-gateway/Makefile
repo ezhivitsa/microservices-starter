@@ -29,42 +29,22 @@ lint-code:
 		$(if $(FIX),--fix) \
 		"$(PWD)/**/*.{ts,tsx}"
 
-.PHONY: lint-style
-lint-style:
-	$(if $(NO_CACHE), rm -f .stylelintcache;) \
-	npx stylelint --cache "$(PWD)/src/client/**/*.pcss"
-
 .PHONY: lint
-lint: lint-code lint-style
-
-.PHONY: compile-dry-client
-compile-dry-client:
-	npx tsc -p src/client/tsconfig.json --noEmit
-
-.PHONY: compile-dry-server
-compile-dry-server:
-	npx tsc -p src/server/tsconfig.json --noEmit
+lint: lint-code
 
 .PHONY: compile-dry
-compile-dry: compile-dry-client compile-dry-server
+compile-dry:
+	npx tsc -p tsconfig.json --noEmit
 
-.PHONY: test-common
-test-common:
-	npx jest --config=jest.common.config.json --passWithNoTests
+.PHONY: run-test
+run-test: run-test-unit
 
-.PHONY: test-client
-test-client:
-	npx jest --config=jest.client.config.json --passWithNoTests
-
-.PHONY: test-server
-test-server:
-	npx jest --config=jest.server.config.json --passWithNoTests
-
-.PHONY: test
-test: test-common test-client test-server
+.PHONY: run-test-unit
+run-test-unit:
+	npx jest --config=jest-unit.config.json --passWithNoTests
 
 .PHONY: validate
-validate: lint compile-dry test
+validate: lint compile-dry run-test
 
 # -------------------------------------
 # release targets
