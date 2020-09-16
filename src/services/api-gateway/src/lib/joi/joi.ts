@@ -13,7 +13,7 @@ interface ErrorData {
 
 type ErrorResult = Record<string, ErrorData>;
 
-interface ValidateCurryResult<V> {
+export interface ValidateResult<V> {
   value: V;
   errors: ErrorResult;
 }
@@ -57,7 +57,7 @@ const parseJoiErrors = (joiError?: ValidationError): ErrorResult => {
 };
 
 export const validate = _.curry(
-  <V>(schema: Schema, payload: V): ValidateCurryResult<V> => {
+  <V>(schema: Schema, payload: V): ValidateResult<V> => {
     const { error, value } = schema.validate(payload, joiOptions);
 
     return {

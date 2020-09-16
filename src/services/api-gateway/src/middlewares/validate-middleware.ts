@@ -1,15 +1,19 @@
-import { AppMiddleware, AppContext, Next } from 'koa';
+import { RouterAppMiddleware, RouterAppContext, Next } from 'koa';
 
-// const { validate, Symbols } = require('helpers/validator');
+import { Symbols, ValidatorType, validate } from 'lib/validate';
+
+interface ValidateOptions {
+  throwOnInvalid?: boolean;
+}
 
 const defaultOptions = {
   throwOnInvalid: true,
 };
 
-export const validateMiddleware = (validators = [], options = defaultOptions): AppMiddleware => async (
-  ctx: AppContext,
-  next: Next,
-): Promise<void> => {
+export const validateMiddleware = (
+  validators: ValidatorType<any> | ValidatorType<any>[] = [],
+  options: ValidateOptions = defaultOptions,
+): RouterAppMiddleware => async (ctx: RouterAppContext, next: Next): Promise<void> => {
   const { throwOnInvalid } = {
     ...defaultOptions,
     ...options,
@@ -32,6 +36,6 @@ export const validateMiddleware = (validators = [], options = defaultOptions): A
     ctx.throw(400);
   }
 
-  ctx.validatedRequest = result;
+  ctx.state.validatedRequest = result;
   await next();
 };

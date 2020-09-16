@@ -1,7 +1,13 @@
-import { Schema } from 'joi';
-import { AppMiddleware } from 'koa';
+import { RouterAppContext } from 'koa';
+import _ from 'lodash';
 
-function getValidators = (validators = []) => {
+import { ValidateResult } from 'lib/joi';
+
+export type ValidatorType<D> = (data: D, ctx: RouterAppContext) => ValidateResult<D> | Promise<ValidateResult<D>>;
+
+const PERSISTENT: unique symbol = Symbol('persistent');
+
+function getValidators<D>(validators: ValidatorType<D> | ValidatorType<D>[] = []): ValidatorType<D>[] {
   if (_.isFunction(validators)) {
     return [validators];
   }
@@ -11,30 +17,35 @@ function getValidators = (validators = []) => {
   }
 
   return validators;
-};
+}
 
-module.exports.validate = (payload, validators = []) => {
-  const persistentData = payload[Symbols.PERSISTENT];
-  return getValidators(validators).reduce(
-    async (result, validator) => {
-      const data = await result;
+export async function validate<P>(
+  payload: P & { [PERSISTENT]: RouterAppContext },
+  validators: ValidatorType<P> | ValidatorType<P>[] = [],
+): Promise<ValidateResult<P>> {
+  const ctx = payload[Symbols.PERSISTENT];
 
-      if (data.errors.length) {
-        return data;
-      }
+  const validatorsList = getValidators(validators);
+  const result: ValidateResult<P> = {
+    errors: {},
+    value: payload,
+  };
 
-      const validationResult = await validator(data.value, persistentData);
+  for (let i = 0; i < validatorsList.length; i += 1) {
+    const validator = validatorsList[i];
+    const { errors, value } = await validator(result.value, ctx);
 
-      return {
-        errors: validationResult.errors || [],
-        value: validationResult.value,
-      };
-    },
-    {
-      errors: [],
-      value: payload,
-    },
-  );
-};
+    result.errors = errors;
+    result.value = value;
 
-export function validateSchema(schema: Schema): AppMiddleware {}
+    if (Object.keys(errors).length) {
+      return result;
+    }
+  }
+
+  return result;
+}
+
+export const Symbols = {
+  PERSISTENT,
+} as const;
