@@ -1,7 +1,9 @@
 import Router from '@koa/router';
 
+import { accountRouter } from './account';
+
 const publicRouter = new Router();
 
-publicRouter.post('/signup');
+publicRouter.use('/account', accountRouter.routes());
 
 export { publicRouter };
