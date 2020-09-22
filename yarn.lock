@@ -1652,6 +1652,13 @@
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.5.tgz#dcce4430e64b443ba8945f0290fb564ad5bac6dd"
   integrity sha512-7+2BITlgjgDhH0vvwZU/HZJVyk+2XUlvxXe8dFMedNX/aMkaOq++rMAFXc0tM7ij15QaWlbdQASBR9dihi+bDQ==
 
+"@types/kafkajs@1.9.0":
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/@types/kafkajs/-/kafkajs-1.9.0.tgz#758d82e4a3caad101f7bb5c7be296fd0c9326ee7"
+  integrity sha512-R9VDNbiw+vNfxWjjFHUrLMF/Dfc7asGXzKtYUwI4FaT24Chf5ZNkfvce54p4dkLMxPcsrEsVazAK0Jp2ib4Zxw==
+  dependencies:
+    kafkajs "*"
+
 "@types/keygrip@*":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@types/keygrip/-/keygrip-1.0.2.tgz#513abfd256d7ad0bf1ee1873606317b33b1b2a72"
@@ -7056,6 +7063,18 @@ junk@^3.1.0:
   resolved "https://registry.yarnpkg.com/junk/-/junk-3.1.0.tgz#31499098d902b7e98c5d9b9c80f43457a88abfa1"
   integrity sha512-pBxcB3LFc8QVgdggvZWyeys+hnrNWg4OcZIU/1X59k5jQdLBlCsYGRQaz234SqoRLTCgMH00fY0xRJH+F9METQ==
 
+kafkajs@*:
+  version "1.14.0"
+  resolved "https://registry.yarnpkg.com/kafkajs/-/kafkajs-1.14.0.tgz#3d998a77bfde54dc502e8e88690eedf0b21a1ed6"
+  integrity sha512-W+WCekiooY5rJP3Me5N3gWcQ8O6uG6lw0vv9t+sI+WqXKjKwj2+CWIXJy241x+ITE+1M1D19ABSiL2J8lKja5A==
+
+kafkajs@1.13.0:
+  version "1.13.0"
+  resolved "https://registry.yarnpkg.com/kafkajs/-/kafkajs-1.13.0.tgz#ee85c6c1ccec9950a9b7ddcead83f70e6b4c1343"
+  integrity sha512-T5lD44PsEPghNCTWlqab+PRepyxDvCLj8t6mC3r4EazKdbXT7m9Ep/UpmeqGMTcjLCcUNP7saT1WWKKlfQ2lqA==
+  dependencies:
+    long "^4.0.0"
+
 keygrip@~1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/keygrip/-/keygrip-1.1.0.tgz#871b1681d5e159c62a445b0c74b615e0917e7226"
@@ -7370,6 +7389,11 @@ loglevelnext@^1.0.1, loglevelnext@^1.0.2:
   dependencies:
     es6-symbol "^3.1.1"
     object.assign "^4.1.0"
+
+long@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/long/-/long-4.0.0.tgz#9a7b71cfb7d361a194ea555241c92f7468d5bf28"
+  integrity sha512-XsP+KhQif4bjX1kbuSiySJFNAehNxgLb6hPRGJ9QsUr8ajHkuXGdrHmFUTUUXhDwVX2R5bY4JNZEwbUiMhV+MA==
 
 longest-streak@^2.0.1:
   version "2.0.4"

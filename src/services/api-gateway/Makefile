@@ -15,7 +15,7 @@ dev:
 		-- \
 			--inspect=$(NODE_INSPECTOR_HOST):$(NODE_INSPECTOR_PORT) \
 			--require ts-node/register \
-		-- src/server/boot.ts
+		-- src/boot.ts
 
 # -------------------------------------
 # validation targets

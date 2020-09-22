@@ -1,0 +1,15 @@
+{
+  "name": "@services/authorization",
+  "version": "1.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "@packages/server": "1.0.0",
+    "kafkajs": "1.13.0"
+  },
+  "devDependencies": {
+    "@packages/eslint-config": "1.0.0",
+    "@types/kafkajs": "1.9.0",
+    "ts-node": "9.0.0",
+    "typescript": "4.0.2"
+  }
+}
