@@ -1,0 +1,9 @@
+package microservices_starter.authorization.auth;
+
+message RegistrationRequest {
+  required string email = 1;
+}
+
+message RegistrationResponse {
+  required string access_token = 1;
+}

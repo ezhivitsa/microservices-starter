@@ -11,11 +11,14 @@
   },
   "dependencies": {
     "kafkajs": "1.14.0",
+    "protobufjs": "6.10.1",
     "uuid": "8.3.0"
   },
   "devDependencies": {
     "@packages/eslint-config": "1.0.0",
     "@types/kafkajs": "1.9.0",
+    "@types/node": "14.6.4",
+    "@types/protobufjs": "6.0.0",
     "@types/uuid": "3.4.3",
     "typescript": "4.0.2"
   }
