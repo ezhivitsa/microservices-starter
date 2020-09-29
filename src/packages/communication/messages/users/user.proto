@@ -1,0 +1,8 @@
+package microservices_starter.users.auth;
+
+message UserCreatedEvent {
+  required string id = 1;
+  required string email = 2;
+  optional string first_name = 3;
+  required string last_name = 4;
+}

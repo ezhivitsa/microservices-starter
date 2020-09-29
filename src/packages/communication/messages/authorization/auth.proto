@@ -2,6 +2,8 @@ package microservices_starter.authorization.auth;
 
 message RegistrationRequest {
   required string email = 1;
+  optional string first_name = 3;
+  required string last_name = 4;
 }
 
 message RegistrationResponse {

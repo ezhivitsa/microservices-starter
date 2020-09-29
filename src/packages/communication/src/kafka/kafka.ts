@@ -8,24 +8,16 @@ import {
   Message,
   RecordMetadata,
   ProducerRecord,
-  ProducerEvents,
 } from 'kafkajs';
 import { v4 as uuidv4 } from 'uuid';
 
-import { Channel, getRequestChannel, getReplyChannel } from '../channels';
+import { getRequestChannel, getReplyChannel } from '../channels';
 import { Command, commandSchemas } from '../messages';
 
 import { KafkaCommandTimeoutError } from './error';
 
 interface CommandMetadata {
   requestId: string;
-}
-
-interface MessageHeader {
-  'message-id': string;
-  'request-id': string;
-  'correlation-id'?: string;
-  'return-channel'?: Channel;
 }
 
 interface CommandData<D> {
@@ -83,6 +75,7 @@ export class Kafka {
       headers: {
         'message-id': messageId,
         'request-id': metadata.requestId,
+        command: commandData.command,
         'return-channel': responseChannel,
       },
     };
@@ -106,7 +99,24 @@ export class Kafka {
     });
   }
 
-  async sendReply();
+  async sendReply<D>(commandData: ReplyData<D>, metadata: CommandMetadata): Promise<void> {
+    const commandSchema = commandSchemas[commandData.command];
+
+    const responseChannel = getReplyChannel(commandSchema.channel);
+    const message: Message = {
+      value: commandSchema.requestSchema?.encode(commandData.data) || null,
+      headers: {
+        'request-id': metadata.requestId,
+        'correlation-id': commandData.correlationId,
+        command: commandData.command,
+      },
+    };
+
+    await this._sendMessage({
+      topic: responseChannel,
+      messages: [message],
+    });
+  }
 
   sendEvent<D>(): void {}
 }
