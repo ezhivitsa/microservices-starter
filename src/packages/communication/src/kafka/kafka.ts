@@ -1,41 +1,30 @@
 import {
   Kafka as Kajkajs,
   KafkaConfig,
-  Producer,
   ProducerConfig,
-  Consumer,
   ConsumerConfig,
-  Message,
-  RecordMetadata,
-  ProducerRecord,
   EachMessagePayload,
   KafkaMessage,
   IHeaders,
 } from 'kafkajs';
-import { v4 as uuidv4 } from 'uuid';
 
 import { getRequestChannel, getReplyChannel, getEventChannel } from '../channels';
 import { Command, Event, commandSchemas, eventSchemas } from '../proto-messages';
 
+import { getCommandMessage, getCommandReplyMessage, getEventMessage } from './messages';
 import { KafkaCommandTimeoutError } from './error';
+import { CommandHandler, EventHandler, CommandData, CommandMetadata, ReplyData, EventData } from './types';
+import {
+  COMMAND_HEADER,
+  COMMAND_MESSAGE_ID_HEADER,
+  COMMAND_REQUEST_ID_HEADER,
+  REPLY_CORRELATION_ID_HEADER,
+  EVENT_HEADER,
+  EVENT_ID_HEADER,
+} from './constants';
 
-interface CommandMetadata {
-  requestId: string;
-}
-
-interface CommandData<D> {
-  data: D;
-  command: Command;
-}
-
-interface ReplyData<D> extends CommandData<D> {
-  correlationId: string;
-}
-
-interface EventData<D> {
-  data: D;
-  event: Event;
-}
+import { Producer } from './producer';
+import { Consumer } from './consumer';
 
 interface CacheValue {
   timeoutId: NodeJS.Timeout;
@@ -43,19 +32,7 @@ interface CacheValue {
   reject: (err: Error) => void;
 }
 
-type CommandHandler = <D, R>(data: D, messageId: string) => Promise<R>;
-type EventHandler = <D>(data: D, eventId: string) => void;
-
 const TIMEOUT = 5000;
-
-const MESSAGE_ID_HEADER = 'message-id';
-const REQUEST_ID_HEADER = 'request-id';
-const COMMAND_HEADER = 'command';
-const RESPONSE_CHANNEL_HEADER = 'return-channel';
-const CORRELATION_ID_HEADER = 'correlation-id';
-
-const EVENT_HEADER = 'event';
-const EVENT_ID_HEADER = 'event-id';
 
 export class Kafka {
   private readonly _kafka: Kajkajs;
@@ -65,62 +42,26 @@ export class Kafka {
 
   private _cacheRequest: Record<string, CacheValue> = {};
   private _cacheResponse: Record<string, any> = {};
-  private _channelSubscriptions: Set<string> = new Set();
   private _handleMessages: Set<string> = new Set();
 
   private _commandHandlers: Record<string, CommandHandler> = {};
   private _eventHandlers: Record<string, EventHandler> = {};
 
-  private _producerConnected = false;
-  private _consumerConnected = false;
   private _subscribedToMessages = false;
 
   constructor(config: KafkaConfig, producerConfig?: ProducerConfig, consumerConfig?: ConsumerConfig) {
     this._kafka = new Kajkajs(config);
 
-    this._producer = this._kafka.producer(producerConfig);
-    this._consumer = this._kafka.consumer(consumerConfig);
-  }
-
-  private _getCommandMessage<D>(
-    commandData: CommandData<D>,
-    metadata: CommandMetadata,
-  ): {
-    message: Message;
-    id: string;
-  } {
-    const commandSchema = commandSchemas[commandData.command];
-    const responseChannel = getReplyChannel(commandSchema.channel);
-
-    const messageId = uuidv4();
-
-    const message = {
-      value: commandSchema.requestSchema?.encode(commandData.data) || null,
-      headers: {
-        [MESSAGE_ID_HEADER]: messageId,
-        [REQUEST_ID_HEADER]: metadata.requestId,
-        [COMMAND_HEADER]: commandData.command,
-        [RESPONSE_CHANNEL_HEADER]: responseChannel,
+    this._producer = new Producer(this._kafka, producerConfig);
+    this._consumer = new Consumer(
+      this._kafka,
+      {
+        onCommand: this._handleCommandMessage,
+        onReply: this._handleReplyMessage,
+        onEvent: this._handleEventMessage,
       },
-    };
-
-    return {
-      id: messageId,
-      message,
-    };
-  }
-
-  private _getCommandReplyMessage<D>(replyData: ReplyData<D>, metadata: CommandMetadata): Message {
-    const commandSchema = commandSchemas[replyData.command];
-
-    return {
-      value: commandSchema.requestSchema?.encode(replyData.data) || null,
-      headers: {
-        [REQUEST_ID_HEADER]: metadata.requestId,
-        [CORRELATION_ID_HEADER]: replyData.correlationId,
-        [COMMAND_HEADER]: replyData.command,
-      },
-    };
+      consumerConfig,
+    );
   }
 
   private async _handleCommandMessage(message: KafkaMessage, headers: IHeaders): Promise<void> {
@@ -133,22 +74,22 @@ export class Kafka {
     }
 
     const value = message.value ? commandSchema.requestSchema?.decode(message.value) || null : null;
-    const result = await commandHandler(value, headers[MESSAGE_ID_HEADER] as string);
+    const result = await commandHandler(value, headers[COMMAND_MESSAGE_ID_HEADER] as string);
 
     this.sendReply(
       {
         data: result,
         command,
-        correlationId: headers[MESSAGE_ID_HEADER] as string,
+        correlationId: headers[COMMAND_MESSAGE_ID_HEADER] as string,
       },
       {
-        requestId: headers[REQUEST_ID_HEADER] as string,
+        requestId: headers[COMMAND_REQUEST_ID_HEADER] as string,
       },
     );
   }
 
   private _handleReplyMessage(message: KafkaMessage, headers: IHeaders): void {
-    const headerMessageId = headers[CORRELATION_ID_HEADER] as string;
+    const headerMessageId = headers[REPLY_CORRELATION_ID_HEADER] as string;
     if (!this._handleMessages.has(headerMessageId)) {
       return;
     }
@@ -165,40 +106,32 @@ export class Kafka {
     }
   }
 
+  private _handleEventMessage(message: KafkaMessage, headers: IHeaders): void {
+    const event = headers[EVENT_HEADER] as Event;
+    const eventSchema = eventSchemas[event];
+
+    const eventHandler = this._eventHandlers[event];
+    if (!eventHandler) {
+      return;
+    }
+
+    const value = message.value ? eventSchema.schema?.decode(message.value) || null : null;
+    eventHandler(value, headers[EVENT_ID_HEADER] as string);
+  }
+
   private _handleMessage = async ({ message }: EachMessagePayload): Promise<void> => {
     if (!message.headers) {
       return;
     }
 
-    if (message.headers[MESSAGE_ID_HEADER]) {
+    if (message.headers[COMMAND_MESSAGE_ID_HEADER]) {
       this._handleCommandMessage(message, message.headers);
-    } else if (message.headers[CORRELATION_ID_HEADER]) {
+    } else if (message.headers[REPLY_CORRELATION_ID_HEADER]) {
       this._handleReplyMessage(message, message.headers);
+    } else if (message.headers[EVENT_HEADER]) {
+      this._handleEventMessage(message, message.headers);
     }
   };
-
-  private async _sendMessage(record: ProducerRecord): Promise<RecordMetadata[]> {
-    if (!this._producerConnected) {
-      this._producerConnected = true;
-      await this._producer.connect();
-    }
-
-    return this._producer.send(record);
-  }
-
-  private async _subscribeToChannel(channel: string): Promise<void> {
-    if (!this._consumerConnected) {
-      this._consumerConnected = true;
-      await this._consumer.connect();
-    }
-
-    if (this._channelSubscriptions.has(channel)) {
-      return;
-    }
-
-    await this._consumer.subscribe({ topic: channel });
-    this._channelSubscriptions.add(channel);
-  }
 
   private async _subscribeToResponse(messageId: string): Promise<void> {
     this._handleMessages.add(messageId);
@@ -214,12 +147,12 @@ export class Kafka {
   }
 
   private async _subscribeToReply(responseChannel: string, messageId: string): Promise<void> {
-    await this._subscribeToChannel(responseChannel);
+    await this._consumer.subscribeToChannel(responseChannel);
     await this._subscribeToResponse(messageId);
   }
 
   async sendCommand<D, R>(commandData: CommandData<D>, metadata: CommandMetadata): Promise<R> {
-    const { message, id } = this._getCommandMessage(commandData, metadata);
+    const { message, id } = getCommandMessage(commandData, metadata);
 
     const commandSchema = commandSchemas[commandData.command];
 
@@ -228,7 +161,7 @@ export class Kafka {
 
     await this._subscribeToReply(responseChannel, id);
 
-    await this._sendMessage({
+    await this._producer.sendMessage({
       topic: requestChannel,
       messages: [message],
     });
@@ -252,12 +185,12 @@ export class Kafka {
   }
 
   async sendReply<D>(replyData: ReplyData<D>, metadata: CommandMetadata): Promise<void> {
-    const message = this._getCommandReplyMessage(replyData, metadata);
+    const message = getCommandReplyMessage(replyData, metadata);
 
     const commandSchema = commandSchemas[replyData.command];
     const responseChannel = getReplyChannel(commandSchema.channel);
 
-    await this._sendMessage({
+    await this._producer.sendMessage({
       topic: responseChannel,
       messages: [message],
     });
@@ -265,16 +198,11 @@ export class Kafka {
 
   async sendEvent<D>(eventData: EventData<D>): Promise<void> {
     const eventSchema = eventSchemas[eventData.event];
-
     const eventChannel = getEventChannel(eventSchema.channel);
-    const message: Message = {
-      value: eventSchema.schema?.encode(eventData.data) || null,
-      headers: {
-        [EVENT_HEADER]: eventData.event,
-      },
-    };
 
-    await this._sendMessage({
+    const message = getEventMessage(eventData);
+
+    await this._producer.sendMessage({
       topic: eventChannel,
       messages: [message],
     });
