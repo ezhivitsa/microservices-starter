@@ -9,4 +9,5 @@ export interface CommandSchema {
 
 export interface ChannelCommandSchema extends CommandSchema {
   channel: Channel;
+  errorSchema?: ProtoMessage<any>;
 }

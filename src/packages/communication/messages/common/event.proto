@@ -1,7 +1,9 @@
+syntax = "proto3";
+
 package microservices_starter.common.event;
 
 import "google/protobuf/timestamp.proto";
 
 message EventMeta {
-  required google.protobuf.Timestamp created_at = 1;
+  google.protobuf.Timestamp created_at = 1;
 }

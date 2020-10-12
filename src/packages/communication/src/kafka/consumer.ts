@@ -1,12 +1,13 @@
 import { Kafka, ConsumerConfig, Consumer as KafkaConsumer, KafkaMessage, IHeaders, EachMessagePayload } from 'kafkajs';
 
-import { isMessageCommand, isMessageReply, isMessageEvent } from './messages';
+import { isMessageCommand, isMessageReply, isMessageReplyError, isMessageEvent } from './messages';
 
 type HandlerType = (message: KafkaMessage, headers: IHeaders) => Promise<void> | void;
 
 interface MessageHandlers {
   onCommand: HandlerType;
   onReply: HandlerType;
+  onReplyError: HandlerType;
   onEvent: HandlerType;
 }
 
@@ -36,6 +37,8 @@ export class Consumer {
 
     if (isMessageCommand(headers)) {
       handler = this._messageHandlers.onCommand;
+    } else if (isMessageReplyError(headers)) {
+      handler = this._messageHandlers.onReplyError;
     } else if (isMessageReply(headers)) {
       handler = this._messageHandlers.onReply;
     } else if (isMessageEvent(headers)) {

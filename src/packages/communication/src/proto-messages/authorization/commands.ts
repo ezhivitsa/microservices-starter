@@ -1,6 +1,6 @@
 import * as AuthorizationSchemas from './schemas';
 
-import { getChannelCommands, ChannelCommandSchema } from '../command';
+import { getChannelCommands, ChannelCommandSchema } from '../../messages';
 import { Channel } from '../../channels';
 
 export enum AuthorizationCommand {
@@ -15,4 +15,5 @@ export const authorizationCommandSchemas: Record<AuthorizationCommand, ChannelCo
       responseSchema: AuthorizationSchemas.registrationResponse,
     },
   },
+  AuthorizationSchemas.error,
 );

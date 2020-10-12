@@ -1,10 +1,7 @@
 import { AuthorizationCommand, authorizationCommandSchemas } from './authorization';
 import { UserEvent, userEventSchemas } from './users';
 
-import { ChannelCommandSchema } from '../messages/command';
-import { ChannelEventSchema } from '../messages/event';
-
-export { Result, ProtoMessage, ProtoRoot } from '../messages/proto';
+import { ChannelCommandSchema, ChannelEventSchema } from '../messages';
 
 export type Command = AuthorizationCommand;
 

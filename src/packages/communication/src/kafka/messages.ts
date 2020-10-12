@@ -8,11 +8,13 @@ import {
   COMMAND_MESSAGE_ID_HEADER,
   COMMAND_REQUEST_ID_HEADER,
   REPLY_CORRELATION_ID_HEADER,
+  REPLY_ERROR,
   EVENT_HEADER,
   EVENT_ID_HEADER,
 } from './constants';
 
 import { CommandData, CommandMetadata, ReplyData, EventData } from './types';
+import { KafkaHandlerError } from './errors';
 
 export function getCommandMessage<D>(
   commandData: CommandData<D>,
@@ -53,6 +55,23 @@ export function getCommandReplyMessage<D>(replyData: ReplyData<D>, metadata: Com
   };
 }
 
+export function getCommandReplyErrorMessage(
+  replyErrorData: ReplyData<KafkaHandlerError>,
+  metadata: CommandMetadata,
+): Message {
+  const commandSchema = commandSchemas[replyErrorData.command];
+
+  return {
+    value: commandSchema.errorSchema?.encode(replyErrorData.data) || null,
+    headers: {
+      [COMMAND_REQUEST_ID_HEADER]: metadata.requestId,
+      [COMMAND_HEADER]: replyErrorData.command,
+      [REPLY_CORRELATION_ID_HEADER]: replyErrorData.correlationId,
+      [REPLY_ERROR]: true.toString(),
+    },
+  };
+}
+
 export function getEventMessage<D>(eventData: EventData<D>): Message {
   const eventSchema = eventSchemas[eventData.event];
 
@@ -77,4 +96,8 @@ export function isMessageReply(headers: IHeaders): boolean {
 
 export function isMessageEvent(headers: IHeaders): boolean {
   return headers.hasOwnProperty(EVENT_HEADER) && headers.hasOwnProperty(EVENT_ID_HEADER);
+}
+
+export function isMessageReplyError(headers: IHeaders): boolean {
+  return isMessageReply(headers) && headers.hasOwnProperty(REPLY_ERROR);
 }
