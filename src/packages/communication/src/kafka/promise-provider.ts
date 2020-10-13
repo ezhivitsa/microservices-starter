@@ -1,4 +1,4 @@
-import { KafkaCommandTimeoutError } from './errors';
+import { KafkaCommandTimeoutError, KafkaHandlerError } from './errors';
 
 interface CacheValue {
   timeoutId: NodeJS.Timeout;
@@ -41,7 +41,7 @@ export class PromiseProvider {
 
   reject(id: string, data: any): void {
     if (this._cache[id]) {
-      this._cache[id].reject(data);
+      this._cache[id].reject(new KafkaHandlerError(data));
     }
   }
 }

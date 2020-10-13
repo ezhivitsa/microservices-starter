@@ -1,3 +1,5 @@
+import { logLevel } from '@packages/communication';
+
 import { DEFAULT_PORT, HTTPS } from '../utils';
 
 import { Config } from '../types';
@@ -10,4 +12,9 @@ export const production: Config = {
     format: 'cloud',
   },
   requestIdHeader: 'x-request-id',
+  kafka: {
+    clientId: 'authorization',
+    brokers: ['kafka:9092'],
+    logLevel: logLevel.INFO,
+  },
 };

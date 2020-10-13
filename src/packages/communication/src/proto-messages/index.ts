@@ -14,3 +14,5 @@ export const commandSchemas: Record<Command, ChannelCommandSchema> = {
 export const eventSchemas: Record<Event, ChannelEventSchema> = {
   ...userEventSchemas,
 };
+
+export { AuthorizationCommand, UserEvent };

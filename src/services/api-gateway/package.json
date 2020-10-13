@@ -5,6 +5,7 @@
     "@koa/cors": "3.1.0",
     "@koa/router": "9.4.0",
     "@packages/logger": "1.0.0",
+    "@packages/communication": "1.0.0",
     "joi": "17.2.1",
     "koa": "2.13.0",
     "koa-bodyparser": "4.3.0",

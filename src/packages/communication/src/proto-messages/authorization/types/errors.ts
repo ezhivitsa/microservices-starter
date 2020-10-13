@@ -1,4 +1,4 @@
-export enum ERROR_CODE {
+export enum ErrorCode {
   UNKNOWN = 0,
   NOT_FOUND = 1,
   BAD_PROTO = 2,
@@ -7,6 +7,6 @@ export enum ERROR_CODE {
 }
 
 export interface Error {
-  code: ERROR_CODE;
+  code: ErrorCode;
   message: string;
 }
