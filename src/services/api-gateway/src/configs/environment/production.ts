@@ -11,7 +11,6 @@ export const production: Config = {
     level: 'info',
     format: 'cloud',
   },
-  requestIdHeader: 'x-request-id',
   kafka: {
     clientId: 'authorization',
     brokers: ['kafka:9092'],

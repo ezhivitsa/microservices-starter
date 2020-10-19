@@ -20,6 +20,7 @@ export function initApp(): Koa<AppKoaState, AppKoaContext> {
     .use(configMiddleware)
     .use(errorsMiddleware)
     .use(mount('/ping', middlewares.pingMiddleware))
+    .use(middlewares.requestIdMiddleware)
     .use(middlewares.startTimeMiddleware)
     .use(helmet())
     .use(bodyParser({ enableTypes: ['json', 'form', 'text'] }))
@@ -28,7 +29,6 @@ export function initApp(): Koa<AppKoaState, AppKoaContext> {
     .use(
       cors({
         allowMethods: 'GET, POST, PUT, PATCH, DELETE, OPTIONS',
-        allowHeaders: config.requestIdHeader,
         credentials: true,
         maxAge: 2592000, // 1 month
       }),

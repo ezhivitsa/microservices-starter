@@ -9,6 +9,5 @@ export interface Config {
   readonly port: number;
   readonly useHttps: boolean;
   readonly logger: Readonly<LoggerConfig>;
-  readonly requestIdHeader: string;
   readonly kafka: KafkaConfig;
 }

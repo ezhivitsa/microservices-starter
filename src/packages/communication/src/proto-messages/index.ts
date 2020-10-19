@@ -1,5 +1,5 @@
-import { AuthorizationCommand, authorizationCommandSchemas } from './authorization';
-import { UserEvent, userEventSchemas } from './users';
+import { AuthorizationCommand, authorizationCommandSchemas, AuthorizationTypes } from './authorization';
+import { UserEvent, userEventSchemas, UserTypes } from './users';
 
 import { ChannelCommandSchema, ChannelEventSchema } from '../messages';
 
@@ -15,4 +15,4 @@ export const eventSchemas: Record<Event, ChannelEventSchema> = {
   ...userEventSchemas,
 };
 
-export { AuthorizationCommand, UserEvent };
+export { AuthorizationCommand, UserEvent, AuthorizationTypes, UserTypes };

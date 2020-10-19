@@ -6,6 +6,7 @@ declare module 'koa' {
     startTime: number;
     logger: Logger;
     featureFlagsSet: Set<string>;
+    requestId: string;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-interface

@@ -12,6 +12,7 @@ declare module 'koa' {
     startTime: number;
     logger: Logger;
     validatedRequest: ValidateResult<any>;
+    requestId: string;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-interface

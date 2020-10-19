@@ -29,6 +29,7 @@ export async function initApp(): Promise<Koa<AppKoaState, AppKoaContext>> {
     .use(configMiddleware)
     .use(errorsMiddleware)
     .use(mount('/ping', middlewares.pingMiddleware))
+    .use(middlewares.requestIdMiddleware)
     .use(middlewares.startTimeMiddleware)
     .use(helmet())
     .use(assetsMiddlewares)
