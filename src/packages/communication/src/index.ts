@@ -1,3 +1,3 @@
-export { Kafka, KafkaConfig, logLevel } from './kafka';
+export { Kafka, KafkaConfig, KafkaHandlerError, logLevel } from './kafka';
 export * from './proto-messages';
 export * from './providers';

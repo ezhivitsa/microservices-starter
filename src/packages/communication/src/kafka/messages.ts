@@ -62,7 +62,7 @@ export function getCommandReplyErrorMessage(
   const commandSchema = commandSchemas[replyErrorData.command];
 
   return {
-    value: commandSchema.errorSchema?.encode(replyErrorData.data) || null,
+    value: commandSchema.errorSchema?.encode(replyErrorData.data.errorData) || null,
     headers: {
       [COMMAND_REQUEST_ID_HEADER]: metadata.requestId,
       [COMMAND_HEADER]: replyErrorData.command,
