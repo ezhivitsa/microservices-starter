@@ -1,21 +1,29 @@
 import { Channel } from '../../channels';
 
 import { ProtoMessage } from '../proto';
+import { Version } from '../types';
 
-import { CommandSchema, ChannelCommandSchema } from './types';
+import { CommandSchema, ChannelCommandSchema, CommandKey } from './types';
 
 export function getChannelCommands<T extends string>(
   channel: Channel,
-  commandSchemas: Record<string, CommandSchema>,
+  commandSchemas: CommandSchema<T>[],
+  version: Version,
   errorSchema?: ProtoMessage<any>,
-): Record<T, ChannelCommandSchema> {
-  return Object.keys(commandSchemas).reduce<Record<string, ChannelCommandSchema>>((result, commandKey) => {
-    result[commandKey] = {
-      ...commandSchemas[commandKey],
-      channel,
-      errorSchema,
-    };
+): Map<CommandKey<T>, ChannelCommandSchema> {
+  const result = new Map<CommandKey<T>, ChannelCommandSchema>();
 
-    return result;
-  }, {});
+  commandSchemas.forEach(({ command, requestSchema, responseSchema }) => {
+    result.set(
+      { command, version },
+      {
+        requestSchema,
+        responseSchema,
+        errorSchema,
+        channel,
+      },
+    );
+  });
+
+  return result;
 }

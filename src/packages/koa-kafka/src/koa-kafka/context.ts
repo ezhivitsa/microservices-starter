@@ -2,8 +2,10 @@ import { Kafka, KafkaHandlerError, Command, Event } from '@packages/communicatio
 
 import { ListenData } from './types';
 
-export class Context {
-  state = {};
+export class Context<S extends Record<string, any> = Record<string, any>> {
+  state: S = {} as S;
+
+  body: any;
 
   constructor(private _kafka: Kafka, private _data: ListenData) {}
 
@@ -13,6 +15,14 @@ export class Context {
 
   get event(): Event | undefined {
     return this._data.event;
+  }
+
+  get requestId(): string | undefined {
+    return this._data.requestId;
+  }
+
+  get id(): string {
+    return this._data.id;
   }
 
   throw(errorData: any): void {

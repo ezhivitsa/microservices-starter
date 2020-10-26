@@ -13,8 +13,6 @@ import { Command, Event, commandSchemas, eventSchemas } from '../proto-messages'
 
 import { getCommandMessage, getCommandReplyMessage, getEventMessage, getCommandReplyErrorMessage } from './messages';
 import {
-  // CommandHandler,
-  // EventHandler,
   CommandData,
   CommandMetadata,
   ReplyData,
@@ -46,9 +44,6 @@ export class Kafka {
 
   private _handleReplyMessages: Set<string> = new Set();
 
-  // private _commandHandlers: Record<string, CommandHandler> = {};
-  // private _eventHandlers: Record<string, EventHandler> = {};
-
   private _commandsToHandle: Set<Command> = new Set();
   private _eventsToHandle: Set<Event> = new Set();
 
@@ -75,24 +70,11 @@ export class Kafka {
     const command = headers[COMMAND_HEADER] as Command;
     const commandSchema = commandSchemas[command];
 
-    // const commandHandler = this._commandHandlers[command];
-    // if (!commandHandler) {
-    //   return;
-    // }
-
     if (!this._commandsToHandle.has(command)) {
       return;
     }
 
     const value = message.value ? commandSchema.requestSchema?.decode(message.value) || null : null;
-
-    // const commandData = {
-    //   command,
-    //   correlationId: headers[COMMAND_MESSAGE_ID_HEADER] as string,
-    // };
-    // const commandMetadata = {
-    //   requestId: headers[COMMAND_REQUEST_ID_HEADER] as string,
-    // };
 
     this._listenCommandCallback?.({
       command,
@@ -100,23 +82,6 @@ export class Kafka {
       requestId: headers[COMMAND_REQUEST_ID_HEADER] as string,
       data: value,
     });
-
-    // try {
-    //   const result = await commandHandler(value, headers[COMMAND_MESSAGE_ID_HEADER] as string);
-    //   this.sendReply(
-    //     {
-    //       data: result,
-    //       ...commandData,
-    //     },
-    //     commandMetadata,
-    //   );
-    // } catch (error) {
-    //   if (error instanceof KafkaHandlerError) {
-    //     this.sendReplyError({ data: error, ...commandData }, commandMetadata);
-    //   } else {
-    //     throw error;
-    //   }
-    // }
   }
 
   private _handleReplyMessage(message: KafkaMessage, headers: IHeaders): void {
@@ -149,17 +114,11 @@ export class Kafka {
     const event = headers[EVENT_HEADER] as Event;
     const eventSchema = eventSchemas[event];
 
-    // const eventHandler = this._eventHandlers[event];
-    // if (!eventHandler) {
-    //   return;
-    // }
-
     if (!this._eventsToHandle.has(event)) {
       return;
     }
 
     const value = message.value ? eventSchema.schema?.decode(message.value) || null : null;
-    // eventHandler(value, headers[EVENT_ID_HEADER] as string);
     this._listenEventCallback?.({
       id: headers[EVENT_ID_HEADER] as string,
       event,
@@ -222,14 +181,6 @@ export class Kafka {
       messages: [message],
     });
   }
-
-  // async handleCommand(command: Command, commandHandler: CommandHandler): Promise<void> {
-  //   this._commandHandlers[command] = commandHandler;
-  // }
-
-  // async handleEvent(event: Event, eventHandler: EventHandler): Promise<void> {
-  //   this._eventHandlers[event] = eventHandler;
-  // }
 
   handleCommand(command: Command): void {
     this._commandsToHandle.add(command);

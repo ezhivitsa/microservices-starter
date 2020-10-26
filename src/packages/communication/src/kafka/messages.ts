@@ -46,7 +46,7 @@ export function getCommandReplyMessage<D>(replyData: ReplyData<D>, metadata: Com
   const commandSchema = commandSchemas[replyData.command];
 
   return {
-    value: commandSchema.requestSchema?.encode(replyData.data) || null,
+    value: replyData.data ? commandSchema.requestSchema?.encode(replyData.data) || null : null,
     headers: {
       [COMMAND_REQUEST_ID_HEADER]: metadata.requestId,
       [REPLY_CORRELATION_ID_HEADER]: replyData.correlationId,

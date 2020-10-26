@@ -2,6 +2,7 @@ import { Command, Event } from '../proto-messages';
 
 export interface CommandMetadata {
   requestId: string;
+  version: Version;
 }
 
 export interface CommandData<D> {
@@ -31,8 +32,10 @@ export interface ListenEventMessageData {
   data?: any;
 }
 
-export type CommandHandler = <D, R>(data: D, messageId: string) => Promise<R>;
-export type EventHandler = <D>(data: D, eventId: string) => void;
-
 export type ListenCommandCallback = (message: ListenCommandMessageData) => void;
 export type ListenEventCallback = (message: ListenEventMessageData) => void;
+
+export enum Version {
+  v1 = 'v1',
+  v2 = 'v2',
+}

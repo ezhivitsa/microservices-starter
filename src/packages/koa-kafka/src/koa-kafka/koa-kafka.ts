@@ -5,15 +5,34 @@ import { Context } from './context';
 
 import { Middleware, ComposedMiddleware, Next, ListenData } from './types';
 
-export class KoaKafka {
+export class KoaKafka<S extends Record<string, any> = Record<string, any>> {
   private _middlewares: Middleware[] = [];
 
   constructor(private _kafka: Kafka) {}
 
-  private _handleRequest(ctx: Context, fnMiddleware: ComposedMiddleware): Promise<void> {
+  private _respond(ctx: Context<S>): void {
+    const { body } = ctx;
+
+    if (body === undefined || !ctx.command) {
+      return;
+    }
+
+    this._kafka.sendReply(
+      {
+        data: body,
+        command: ctx.command,
+        correlationId: ctx.id,
+      },
+      {
+        requestId: ctx.requestId || '',
+      },
+    );
+  }
+
+  private _handleRequest(ctx: Context<S>, fnMiddleware: ComposedMiddleware): Promise<void> {
     const onerror = (err: Error): void => ctx.onerror(err);
-    const handleResponse = () => respond(ctx);
-    // onFinished(res, onerror);
+    const handleResponse = (): void => this._respond(ctx);
+
     return fnMiddleware(ctx).then(handleResponse).catch(onerror);
   }
 
@@ -21,7 +40,7 @@ export class KoaKafka {
     const fn = compose(this._middlewares);
 
     return (data: ListenData) => {
-      const ctx = new Context(this._kafka, data);
+      const ctx = new Context<S>(this._kafka, data);
       return this._handleRequest(ctx, fn);
     };
   }
