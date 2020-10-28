@@ -1,4 +1,4 @@
-import { Kafka, KafkaHandlerError, Command, Event } from '@packages/communication';
+import { Kafka, KafkaHandlerError, Command, Event, Version } from '@packages/communication';
 
 import { ListenData } from './types';
 
@@ -25,6 +25,10 @@ export class Context<S extends Record<string, any> = Record<string, any>> {
     return this._data.id;
   }
 
+  get version(): Version {
+    return this._data.version;
+  }
+
   throw(errorData: any): void {
     if (!this._data.command) {
       return;
@@ -40,6 +44,7 @@ export class Context<S extends Record<string, any> = Record<string, any>> {
       },
       {
         requestId: this._data.requestId || '',
+        version: this._data.version,
       },
     );
   }

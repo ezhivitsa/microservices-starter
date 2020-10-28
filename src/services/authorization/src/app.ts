@@ -1,4 +1,4 @@
-import { KoaKafka, AppKoaState } from '@packages/koa-kafka';
+import { KoaKafka, AppState, AppContext } from '@packages/koa-kafka';
 import mount from 'koa-mount';
 
 import { middlewares } from '@packages/server';
@@ -6,11 +6,13 @@ import { middlewares } from '@packages/server';
 import { config } from './lib/config';
 import { kafka } from './lib/kafka';
 
+import { initRoutes } from './routes';
+
 // import { configMiddleware, errorsMiddleware } from './middlewares';
 
-const app = new KoaKafka<AppKoaState>(kafka);
+const app = new KoaKafka<AppState, AppContext>(kafka);
 
-export function initApp(): KoaKafka<AppKoaState> {
+export function initApp(): KoaKafka<AppState, AppContext> {
   // const loggerInitMiddleware = middlewares.prepareLoggerInitMiddleware(config.logger);
 
   // app
@@ -21,6 +23,8 @@ export function initApp(): KoaKafka<AppKoaState> {
   // .use(middlewares.startTimeMiddleware)
   // .use(loggerInitMiddleware)
   // .use(middlewares.logRequestMiddleware);
+
+  initRoutes(app);
 
   return app;
 }

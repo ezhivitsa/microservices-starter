@@ -1,19 +1,16 @@
-import { Middleware, ParameterizedContext } from 'koa';
-import { Logger } from 'winston';
+import { Middleware, Context } from '@packages/communication';
+// import { Logger } from 'winston';
 
 import { Config } from '../src/configs/types';
 
 declare module '@packages/koa-kafka' {
-  export interface AppKoaState {
+  export interface AppState {
     config: Config;
     startTime: number;
-    logger: Logger;
+    // logger: Logger;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  export interface AppKoaContext {}
+  export type AppContext = Context<AppState>;
 
-  export type AppMiddleware = Middleware<AppKoaState, AppKoaContext>;
-
-  export type AppContext = ParameterizedContext<AppKoaState, AppKoaContext>;
+  export type AppMiddleware = Middleware<AppContext>;
 }

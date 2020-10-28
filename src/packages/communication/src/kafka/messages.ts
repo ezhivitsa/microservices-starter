@@ -11,9 +11,10 @@ import {
   REPLY_ERROR,
   EVENT_HEADER,
   EVENT_ID_HEADER,
+  VERSION_HEADER,
 } from './constants';
 
-import { CommandData, CommandMetadata, ReplyData, EventData } from './types';
+import { CommandData, CommandMetadata, EventMetadata, ReplyData, EventData } from './types';
 import { KafkaHandlerError } from './errors';
 
 export function getCommandMessage<D>(
@@ -33,6 +34,7 @@ export function getCommandMessage<D>(
       [COMMAND_MESSAGE_ID_HEADER]: messageId,
       [COMMAND_REQUEST_ID_HEADER]: metadata.requestId,
       [COMMAND_HEADER]: commandData.command,
+      [VERSION_HEADER]: metadata.version,
     },
   };
 
@@ -51,6 +53,7 @@ export function getCommandReplyMessage<D>(replyData: ReplyData<D>, metadata: Com
       [COMMAND_REQUEST_ID_HEADER]: metadata.requestId,
       [REPLY_CORRELATION_ID_HEADER]: replyData.correlationId,
       [COMMAND_HEADER]: replyData.command,
+      [VERSION_HEADER]: metadata.version,
     },
   };
 }
@@ -68,11 +71,12 @@ export function getCommandReplyErrorMessage(
       [COMMAND_HEADER]: replyErrorData.command,
       [REPLY_CORRELATION_ID_HEADER]: replyErrorData.correlationId,
       [REPLY_ERROR]: true.toString(),
+      [VERSION_HEADER]: metadata.version,
     },
   };
 }
 
-export function getEventMessage<D>(eventData: EventData<D>): Message {
+export function getEventMessage<D>(eventData: EventData<D>, metadata: EventMetadata): Message {
   const eventSchema = eventSchemas[eventData.event];
 
   const eventId = uuidv4();
@@ -82,6 +86,7 @@ export function getEventMessage<D>(eventData: EventData<D>): Message {
     headers: {
       [EVENT_HEADER]: eventData.event,
       [EVENT_ID_HEADER]: eventId,
+      [VERSION_HEADER]: metadata.version,
     },
   };
 }

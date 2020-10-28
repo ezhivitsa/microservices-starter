@@ -2,27 +2,25 @@ import { Channel } from '../../channels';
 
 import { ProtoMessage } from '../proto';
 import { Version } from '../types';
+import { getChannelKey } from '../utils';
 
-import { CommandSchema, ChannelCommandSchema, CommandKey } from './types';
+import { CommandSchema, ChannelCommandSchema } from './types';
 
 export function getChannelCommands<T extends string>(
   channel: Channel,
   commandSchemas: CommandSchema<T>[],
   version: Version,
   errorSchema?: ProtoMessage<any>,
-): Map<CommandKey<T>, ChannelCommandSchema> {
-  const result = new Map<CommandKey<T>, ChannelCommandSchema>();
+): Record<string, ChannelCommandSchema> {
+  const result: Record<string, ChannelCommandSchema> = {};
 
   commandSchemas.forEach(({ command, requestSchema, responseSchema }) => {
-    result.set(
-      { command, version },
-      {
-        requestSchema,
-        responseSchema,
-        errorSchema,
-        channel,
-      },
-    );
+    result[getChannelKey(command, version)] = {
+      requestSchema,
+      responseSchema,
+      errorSchema,
+      channel,
+    };
   });
 
   return result;

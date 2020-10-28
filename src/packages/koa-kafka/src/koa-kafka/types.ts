@@ -1,4 +1,4 @@
-import { Command, Event } from '@packages/communication';
+import { Command, Event, Version } from '@packages/communication';
 
 import { Context } from './context';
 
@@ -9,7 +9,7 @@ export interface KafkaContext {
 
 export type Next = () => Promise<void>;
 
-export type Middleware = (ctx: Context, next: Next) => Promise<void>;
+export type Middleware<C extends Context = Context> = (ctx: C, next: Next) => Promise<void>;
 
 export type ComposedMiddleware = (ctx: Context, next?: Next) => Promise<void>;
 
@@ -17,6 +17,7 @@ export interface ListenData {
   command?: Command;
   event?: Event;
   id: string;
+  version: Version;
   requestId?: string;
   data?: any;
 }

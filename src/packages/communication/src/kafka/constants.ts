@@ -6,3 +6,5 @@ export const REPLY_ERROR = 'reply-error';
 
 export const EVENT_HEADER = 'event';
 export const EVENT_ID_HEADER = 'event-id';
+
+export const VERSION_HEADER = 'version';

@@ -1,18 +1,19 @@
 import { Version } from '../types';
 
 import { Channel } from '../../channels';
+import { getChannelKey } from '../utils';
 
-import { EventSchema, ChannelEventSchema, EventKey } from './types';
+import { EventSchema, ChannelEventSchema } from './types';
 
 export function getChannelEvents<T extends string>(
   channel: Channel,
   eventSchemas: EventSchema<T>[],
   version: Version,
-): Map<EventKey<T>, ChannelEventSchema> {
-  const result = new Map<EventKey<T>, ChannelEventSchema>();
+): Record<string, ChannelEventSchema> {
+  const result: Record<string, ChannelEventSchema> = {};
 
   eventSchemas.forEach(({ event, schema }) => {
-    result.set({ event, version }, { channel, schema });
+    result[getChannelKey(event, version)] = { channel, schema };
   });
 
   return result;

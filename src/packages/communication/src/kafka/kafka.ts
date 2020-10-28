@@ -10,11 +10,13 @@ import {
 
 import { getRequestChannel, getReplyChannel, getEventChannel } from '../channels';
 import { Command, Event, commandSchemas, eventSchemas } from '../proto-messages';
+import { getChannelKey, Version } from '../messages';
 
 import { getCommandMessage, getCommandReplyMessage, getEventMessage, getCommandReplyErrorMessage } from './messages';
 import {
   CommandData,
   CommandMetadata,
+  EventMetadata,
   ReplyData,
   EventData,
   ListenCommandCallback,
@@ -27,6 +29,7 @@ import {
   REPLY_CORRELATION_ID_HEADER,
   EVENT_HEADER,
   EVENT_ID_HEADER,
+  VERSION_HEADER,
 } from './constants';
 
 import { Producer } from './producer';
@@ -68,7 +71,8 @@ export class Kafka {
 
   private async _handleCommandMessage(message: KafkaMessage, headers: IHeaders): Promise<void> {
     const command = headers[COMMAND_HEADER] as Command;
-    const commandSchema = commandSchemas[command];
+    const version = (headers[VERSION_HEADER] as Version) || Version.v1;
+    const commandSchema = commandSchemas[getChannelKey(command, version)];
 
     if (!this._commandsToHandle.has(command)) {
       return;
@@ -80,6 +84,7 @@ export class Kafka {
       command,
       id: headers[COMMAND_MESSAGE_ID_HEADER] as string,
       requestId: headers[COMMAND_REQUEST_ID_HEADER] as string,
+      version,
       data: value,
     });
   }
@@ -112,7 +117,8 @@ export class Kafka {
 
   private _handleEventMessage(message: KafkaMessage, headers: IHeaders): void {
     const event = headers[EVENT_HEADER] as Event;
-    const eventSchema = eventSchemas[event];
+    const version = (headers[VERSION_HEADER] as Version) || Version.v1;
+    const eventSchema = eventSchemas[getChannelKey(event, version)];
 
     if (!this._eventsToHandle.has(event)) {
       return;
@@ -121,6 +127,7 @@ export class Kafka {
     const value = message.value ? eventSchema.schema?.decode(message.value) || null : null;
     this._listenEventCallback?.({
       id: headers[EVENT_ID_HEADER] as string,
+      version,
       event,
       data: value,
     });
@@ -135,7 +142,7 @@ export class Kafka {
   async sendCommand<D, R>(commandData: CommandData<D>, metadata: CommandMetadata): Promise<R> {
     const { message, id } = getCommandMessage(commandData, metadata);
 
-    const commandSchema = commandSchemas[commandData.command];
+    const commandSchema = commandSchemas[getChannelKey(commandData.command, metadata.version)];
 
     const requestChannel = getRequestChannel(commandSchema.channel);
     const responseChannel = getReplyChannel(commandSchema.channel);
@@ -170,11 +177,11 @@ export class Kafka {
     await this._sendReplyMessage(message, errorData.command);
   }
 
-  async sendEvent<D>(eventData: EventData<D>): Promise<void> {
-    const eventSchema = eventSchemas[eventData.event];
+  async sendEvent<D>(eventData: EventData<D>, metadata: EventMetadata): Promise<void> {
+    const eventSchema = eventSchemas[getChannelKey(eventData.event, metadata.version)];
     const eventChannel = getEventChannel(eventSchema.channel);
 
-    const message = getEventMessage(eventData);
+    const message = getEventMessage(eventData, metadata);
 
     await this._producer.sendMessage({
       topic: eventChannel,

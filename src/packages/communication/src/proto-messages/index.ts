@@ -7,11 +7,11 @@ export type Command = AuthorizationCommand;
 
 export type Event = UserEvent;
 
-export const commandSchemas: Record<Command, ChannelCommandSchema> = {
+export const commandSchemas: Record<string, ChannelCommandSchema> = {
   ...authorizationCommandSchemas,
 };
 
-export const eventSchemas: Record<Event, ChannelEventSchema> = {
+export const eventSchemas: Record<string, ChannelEventSchema> = {
   ...userEventSchemas,
 };
 

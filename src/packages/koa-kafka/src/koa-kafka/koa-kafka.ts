@@ -1,11 +1,11 @@
-import { Kafka, Command, Event } from '@packages/communication';
+import { Kafka, Command, Event, Version } from '@packages/communication';
 
 import { compose } from './utils';
 import { Context } from './context';
 
 import { Middleware, ComposedMiddleware, Next, ListenData } from './types';
 
-export class KoaKafka<S extends Record<string, any> = Record<string, any>> {
+export class KoaKafka<S extends Record<string, any> = Record<string, any>, C extends Context = Context> {
   private _middlewares: Middleware[] = [];
 
   constructor(private _kafka: Kafka) {}
@@ -25,6 +25,7 @@ export class KoaKafka<S extends Record<string, any> = Record<string, any>> {
       },
       {
         requestId: ctx.requestId || '',
+        version: ctx.version,
       },
     );
   }
@@ -45,11 +46,13 @@ export class KoaKafka<S extends Record<string, any> = Record<string, any>> {
     };
   }
 
-  listen(): void {
+  listen(listenCallback?: () => void): void {
     const callback = this._callback();
 
     this._kafka.listenCommand(callback);
     this._kafka.listenEvent(callback);
+
+    listenCallback?.();
   }
 
   use(fn: Middleware): KoaKafka {
@@ -57,29 +60,29 @@ export class KoaKafka<S extends Record<string, any> = Record<string, any>> {
     return this;
   }
 
-  handleCommand(command: Command, handler: Middleware): KoaKafka {
-    const middleware = async (ctx: Context, next: Next): Promise<void> => {
-      if (ctx.command === command) {
+  handleCommand(version: Version, command: Command, handler: Middleware<C>): KoaKafka {
+    const middleware = async (ctx: C, next: Next): Promise<void> => {
+      if (ctx.command === command && ctx.version === version) {
         return handler(ctx, next);
       }
 
       await next();
     };
 
-    this._middlewares.push(middleware);
+    this._middlewares.push(middleware as any);
     return this;
   }
 
-  handleEvent(event: Event, handler: Middleware): KoaKafka {
-    const middleware = async (ctx: Context, next: Next): Promise<void> => {
-      if (ctx.event === event) {
+  handleEvent(version: Version, event: Event, handler: Middleware<C>): KoaKafka {
+    const middleware = async (ctx: C, next: Next): Promise<void> => {
+      if (ctx.event === event && ctx.version === version) {
         return handler(ctx, next);
       }
 
       await next();
     };
 
-    this._middlewares.push(middleware);
+    this._middlewares.push(middleware as any);
     return this;
   }
 }

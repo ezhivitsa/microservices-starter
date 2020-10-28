@@ -1,13 +1,13 @@
 import * as UserSchemas from './schemas';
 
-import { getChannelEvents, ChannelEventSchema, EventKey, Version } from '../../messages';
+import { getChannelEvents, ChannelEventSchema, Version } from '../../messages';
 import { Channel } from '../../channels';
 
 export enum UserEvent {
   UserCreated = 'user-created',
 }
 
-export const userEventSchemas: Map<EventKey<UserEvent>, ChannelEventSchema> = getChannelEvents(
+export const userEventSchemas: Record<string, ChannelEventSchema> = getChannelEvents(
   Channel.AUTHORIZATION,
   [
     {
