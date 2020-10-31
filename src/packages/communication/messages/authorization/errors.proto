@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package geosmb.authorization.errors;
+package microservices_starter.authorization.errors;
 
 message Error {
   enum ERROR_CODE {

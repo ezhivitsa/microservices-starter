@@ -1,44 +1,32 @@
-import path from 'path';
-import webpack from 'webpack';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import CopyPlugin from 'copy-webpack-plugin';
-import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
+/* eslint-disable @typescript-eslint/no-var-requires */
+const path = require('path');
 
-import { config, isDevelopment } from './src/server/lib/config';
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-import pkg from './package.json';
-
-const { buildPath, staticUrl } = config;
+const pkg = require('./package.json');
 
 const name = pkg.name.replace('@services/', '');
+const clientPath = './src';
+const localNodeModulesPath = './node_modules';
 
-const clientPath = path.resolve(__dirname, 'src/client');
-const localNodeModulesPath = path.resolve(__dirname, 'node_modules');
+const isDevelopment = Boolean(process.env.LOCAL);
+const port = process.env.NODEJS_PORT ? Number(process.env.NODEJS_PORT) : 8080;
 
-const webpackConfig: webpack.Configuration = {
+const webpackConfig = {
   mode: isDevelopment ? 'development' : 'production',
   target: 'web',
-  entry: ['construct-style-sheets-polyfill', path.resolve(clientPath, 'boot.tsx')],
+  entry: [path.resolve(clientPath, 'boot.ts')],
   output: {
-    path: path.resolve(buildPath),
-    filename: 'main.bundle.js',
-    publicPath: `${staticUrl}/${buildPath}/`,
-
-    library: name,
-    libraryTarget: 'umd',
+    filename: 'bundle.js',
+    libraryTarget: 'system',
     jsonpFunction: `webpackJsonp_${name}`,
-  },
-  node: {
-    fs: 'empty',
   },
   devtool: isDevelopment ? 'source-map' : false,
   resolve: {
     alias: {
-      // local aliases
-      common: path.resolve(__dirname, './src/common'),
       // External aliases
       'react-dom': isDevelopment ? '@hot-loader/react-dom' : 'react-dom',
-      systemjs: path.resolve(__dirname, '../../../node_modules/systemjs/dist/system.js'),
     },
     modules: [
       clientPath,
@@ -52,6 +40,14 @@ const webpackConfig: webpack.Configuration = {
     minimize: !isDevelopment,
     namedModules: isDevelopment,
     namedChunks: isDevelopment,
+  },
+  devServer: {
+    hot: isDevelopment,
+    port,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+    },
   },
   module: {
     rules: [
@@ -118,22 +114,14 @@ const webpackConfig: webpack.Configuration = {
   plugins: [
     new ForkTsCheckerWebpackPlugin({
       typescript: {
-        configFile: './src/client/tsconfig.json',
+        configFile: './tsconfig.json',
         diagnosticOptions: {
           semantic: true,
           syntactic: true,
         },
       },
     }),
-    new CopyPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, 'resources/public'),
-          to: path.resolve(buildPath, 'public'),
-        },
-      ],
-    }),
-    ...(isDevelopment ? [] : [new MiniCssExtractPlugin({ filename: 'main.style.css' })]),
+    ...(isDevelopment ? [] : [new MiniCssExtractPlugin({ filename: 'style.css' })]),
   ],
 };
 

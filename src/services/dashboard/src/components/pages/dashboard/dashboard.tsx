@@ -12,6 +12,8 @@ import {
   IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
 
+import { Badge } from '@packages/ui';
+
 import { CardColor, DashboardCard } from './components/dashboard-card';
 import { TableColor, DashboardTable } from './components/dashboard-table';
 

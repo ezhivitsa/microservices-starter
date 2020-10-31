@@ -1,4 +1,4 @@
-import { AppMiddleware, AppContext } from 'koa';
+import { RouterAppMiddleware, RouterAppContext } from 'koa';
 import { createElement } from 'react';
 import { renderToString } from 'react-dom/server';
 
@@ -6,7 +6,7 @@ import { Types } from '@packages/common';
 
 import { IndexPage, IndexPageProps } from 'pages/index-page';
 
-export const indexPageMiddleware: AppMiddleware = (ctx: AppContext): void => {
+export const indexPageMiddleware: RouterAppMiddleware = (ctx: RouterAppContext): void => {
   const {
     featureFlagsSet,
     config: { staticUrl, buildPath, frontUpstreams },

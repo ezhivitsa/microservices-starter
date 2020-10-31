@@ -1,4 +1,4 @@
-import { KafkaConfig } from 'kafkajs';
+import { KafkaConfig, ConsumerConfig } from 'kafkajs';
 
 export interface LoggerConfig {
   format: 'local' | 'cloud';
@@ -9,4 +9,5 @@ export interface Config {
   readonly logger: Readonly<LoggerConfig>;
   readonly requestIdHeader: string;
   readonly kafka: KafkaConfig;
+  readonly kafkaConsumer: ConsumerConfig;
 }

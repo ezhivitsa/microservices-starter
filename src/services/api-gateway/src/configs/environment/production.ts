@@ -16,4 +16,7 @@ export const production: Config = {
     brokers: ['kafka:9092'],
     logLevel: logLevel.INFO,
   },
+  kafkaConsumer: {
+    groupId: 'api-gateway',
+  },
 };

@@ -1,5 +1,5 @@
 {
-  "name": "@services/dashboard",
+  "name": "@services/authorization-form",
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {
@@ -11,10 +11,8 @@
     "classnames": "2.2.6",
     "mobx": "6.0.1",
     "mobx-react-lite": "3.0.1",
-    "path-to-regexp": "3.2.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "react-router-dom": "5.2.0",
     "single-spa-react": "3.1.0"
   },
   "devDependencies": {
@@ -24,7 +22,7 @@
     "@babel/preset-env": "7.12.1",
     "@babel/preset-react": "7.12.1",
     "@babel/preset-typescript": "7.12.1",
-    "@hot-loader/react-dom": "17.0.0",
+    "@hot-loader/react-dom": "16.13.0",
     "@packages/client": "1.0.0",
     "@packages/eslint-config": "1.0.0",
     "@packages/postcss-config": "1.0.0",
@@ -32,7 +30,6 @@
     "@types/mini-css-extract-plugin": "0.9.1",
     "@types/react": "16.9.55",
     "@types/react-dom": "16.9.9",
-    "@types/react-router-dom": "5.1.6",
     "@types/single-spa-react": "2.12.0",
     "@types/systemjs": "6.1.0",
     "@types/webpack-dev-server": "3.11.0",

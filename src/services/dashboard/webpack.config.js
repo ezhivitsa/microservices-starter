@@ -1,17 +1,28 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+// const { lib } = require('@packages/client');
+
+// const pkg = require('./package.json');
+
+// const isDevelopment = Boolean(process.env.LOCAL);
+// const port = process.env.NODEJS_PORT;
+
+// module.exports = lib.getWebpackConfig({
+//   name: pkg.name,
+//   isDevelopment,
+//   port,
+// });
 const path = require('path');
 
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const pkg = require('./package.json');
+const isDevelopment = Boolean(process.env.LOCAL);
+const port = process.env.NODEJS_PORT ? Number(process.env.NODEJS_PORT) : 8080;
 
 const name = pkg.name.replace('@services/', '');
 const clientPath = './src';
 const localNodeModulesPath = './node_modules';
-
-const isDevelopment = Boolean(process.env.LOCAL);
-const port = process.env.NODEJS_PORT ? Number(process.env.NODEJS_PORT) : 8080;
 
 const webpackConfig = {
   mode: isDevelopment ? 'development' : 'production',
@@ -26,7 +37,6 @@ const webpackConfig = {
   resolve: {
     alias: {
       // External aliases
-      '@packages/ui': path.resolve(__dirname, '../../packages/ui/src'),
       'react-dom': isDevelopment ? '@hot-loader/react-dom' : 'react-dom',
     },
     modules: [

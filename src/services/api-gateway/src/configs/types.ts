@@ -1,4 +1,4 @@
-import { KafkaConfig } from '@packages/communication';
+import { KafkaConfig, ConsumerConfig } from '@packages/communication';
 
 export interface LoggerConfig {
   format: 'local' | 'cloud';
@@ -10,4 +10,5 @@ export interface Config {
   readonly useHttps: boolean;
   readonly logger: Readonly<LoggerConfig>;
   readonly kafka: KafkaConfig;
+  readonly kafkaConsumer: ConsumerConfig;
 }

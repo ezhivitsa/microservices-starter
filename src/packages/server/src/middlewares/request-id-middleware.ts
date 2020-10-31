@@ -1,5 +1,5 @@
 import { AppMiddleware, AppContext, Next } from 'koa';
-import uuid from 'uuid/v1';
+import { v1 as uuid } from 'uuid';
 
 export const requestIdMiddleware: AppMiddleware = async (ctx: AppContext, next: Next): Promise<void> => {
   ctx.state.requestId = uuid();

@@ -1,11 +1,11 @@
 import {
   Kafka as Kajkajs,
-  KafkaConfig,
   ProducerConfig,
   ConsumerConfig,
   KafkaMessage,
   IHeaders,
   Message,
+  KafkaConfig,
 } from 'kafkajs';
 
 import { getRequestChannel, getReplyChannel, getEventChannel } from '../channels';
@@ -53,7 +53,7 @@ export class Kafka {
   private _listenCommandCallback?: ListenCommandCallback;
   private _listenEventCallback?: ListenEventCallback;
 
-  constructor(config: KafkaConfig, producerConfig?: ProducerConfig, consumerConfig?: ConsumerConfig) {
+  constructor(config: KafkaConfig, consumerConfig: ConsumerConfig, producerConfig?: ProducerConfig) {
     this._kafka = new Kajkajs(config);
 
     this._producer = new Producer(this._kafka, producerConfig);

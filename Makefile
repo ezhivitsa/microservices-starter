@@ -21,3 +21,18 @@ run-zookeeper:
 .PHONY: run-kafka
 run-kafka:
 	$(DOCKER_COMPOSE) up -d --no-recreate kafka
+
+.PHONY: run
+run:
+	$(DOCKER_COMPOSE) up -d
+
+# -------------------------------------
+# build targets
+# -------------------------------------
+.PHONY: build-ui
+build-ui:
+	cd ./src/packages/ui && npm run build
+
+.PHONY: build-client
+build-client:
+	cd ./src/packages/client && npm run build
