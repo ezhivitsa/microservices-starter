@@ -4,6 +4,8 @@ import classnames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
+import { lib } from '@packages/client';
+
 import styles from './dashboard-card.pcss';
 
 export enum CardColor {
@@ -23,6 +25,8 @@ interface Props {
   iconColor: CardColor;
 }
 
+const b = lib.block(styles, 'dashboardCard');
+
 export function DashboardCard({
   className,
   icon,
@@ -33,21 +37,21 @@ export function DashboardCard({
   footerContent,
 }: Props): ReactElement {
   return (
-    <div className={classnames(styles.dashboardCard, styles[`_color_${iconColor}`], className)}>
-      <div className={styles.dashboardCard__header}>
-        <div className={classnames(styles.dashboardCard__icon, styles[`_color_${iconColor}`])}>
+    <div className={classnames(b({ color: iconColor }), className)}>
+      <div className={b('header')}>
+        <div className={b('icon', { color: iconColor })}>
           <FontAwesomeIcon icon={icon} />
         </div>
 
-        <div className={styles.dashboardCard__data}>
-          <span className={styles.dashboardCard__title}>{title}</span>
+        <div className={b('data')}>
+          <span className={b('title')}>{title}</span>
 
-          <span className={styles.dashboardCard_value}>{value}</span>
+          <span className={b('value')}>{value}</span>
         </div>
       </div>
 
-      <div className={styles.cardFooter}>
-        <FontAwesomeIcon icon={footerIcon} className={styles.dashboardCard__footerIcon} />
+      <div className={b('footer')}>
+        <FontAwesomeIcon icon={footerIcon} className={b('footerIcon')} />
         <span>{footerContent}</span>
       </div>
     </div>

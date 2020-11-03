@@ -12,8 +12,8 @@
   "devDependencies": {
     "@packages/eslint-config": "1.0.0",
     "@types/module-alias": "2.0.0",
-    "@types/oauth2-server": "3.0.5",
+    "@types/oauth2-server": "3.0.12",
     "ts-node": "9.0.0",
-    "typescript": "4.0.2"
+    "typescript": "4.0.5"
   }
 }

@@ -28,5 +28,11 @@ export const production: Config = {
       cssUrl: `${staticUrl}/s3/dashboard/${dashboardVersion}/style.css`,
       rule: '/dashboard',
     },
+    auth: {
+      name: '@services/authorization-form',
+      jsUrl: `${staticUrl}/s3/dashboard/${dashboardVersion}/bundle.js`,
+      cssUrl: `${staticUrl}/s3/dashboard/${dashboardVersion}/style.css`,
+      rule: '/auth',
+    },
   },
 };

@@ -12,7 +12,7 @@ import {
   IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
 
-import { Badge } from '@packages/ui';
+import { lib } from '@packages/client';
 
 import { CardColor, DashboardCard } from './components/dashboard-card';
 import { TableColor, DashboardTable } from './components/dashboard-table';
@@ -33,7 +33,6 @@ interface TableType {
   rows: string[][];
   headerTitle: string;
   headerDescription?: string;
-  className: string;
   color: TableColor;
   keyIndex: number;
 }
@@ -86,7 +85,6 @@ const tables: Array<TableType> = [
       ['4', 'Philip Chaney', '$38,735', 'Korea, South'],
     ],
     keyIndex: 0,
-    className: styles.dashboardTable,
   },
   {
     headerTitle: 'Global Sales by Top Locations',
@@ -100,9 +98,10 @@ const tables: Array<TableType> = [
       ['United Kingdom', '690', '7.87%'],
     ],
     keyIndex: 0,
-    className: styles.dashboardTable,
   },
 ];
+
+const b = lib.block(styles, 'dashboard');
 
 export function DashboardPage(): ReactElement {
   function renderCards(): ReactNode[] {
@@ -116,7 +115,6 @@ export function DashboardPage(): ReactElement {
             title={card.title}
             footerIcon={card.footerIcon}
             footerContent={card.footerContent}
-            className={styles.dashboardCard}
             iconColor={card.iconColor}
           />
         );
@@ -136,7 +134,6 @@ export function DashboardPage(): ReactElement {
             columns={table.columns}
             rows={table.rows}
             keyIndex={0}
-            className={styles.dashboardTable}
           />
         );
       },
@@ -144,9 +141,9 @@ export function DashboardPage(): ReactElement {
   }
 
   return (
-    <div className={styles.dashboard}>
-      <div className={styles.dashboard__cards}>{renderCards()}</div>
-      <div className={styles.dashboard__tables}>{renderTable()}</div>
+    <div className={b()}>
+      <div className={b('cards')}>{renderCards()}</div>
+      <div className={b('tables')}>{renderTable()}</div>
     </div>
   );
 }

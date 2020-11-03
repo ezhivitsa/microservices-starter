@@ -6,7 +6,7 @@
     "@koa/router": "9.4.0",
     "@packages/logger": "1.0.0",
     "@packages/communication": "1.0.0",
-    "joi": "17.2.1",
+    "joi": "17.3.0",
     "koa": "2.13.0",
     "koa-bodyparser": "4.3.0",
     "koa-helmet": "6.0.0",
@@ -17,21 +17,21 @@
   "devDependencies": {
     "@packages/eslint-config": "1.0.0",
     "@packages/server": "1.0.0",
-    "@types/jest": "26.0.13",
+    "@types/jest": "26.0.15",
     "@types/joi": "14.3.4",
     "@types/koa": "2.11.6",
-    "@types/koa-bodyparser": "4.2.0",
+    "@types/koa-bodyparser": "4.3.0",
     "@types/koa-helmet": "6.0.1",
     "@types/koa-mount": "4.0.0",
     "@types/koa__cors": "3.0.2",
     "@types/koa__router": "8.0.3",
     "@types/module-alias": "2.0.0",
-    "@types/lodash": "4.14.108",
+    "@types/lodash": "4.14.164",
     "@types/node": "14.6.4",
-    "jest": "26.4.2",
-    "nodemon": "2.0.4",
-    "ts-jest": "26.3.0",
+    "jest": "26.6.1",
+    "nodemon": "2.0.6",
+    "ts-jest": "26.4.3",
     "ts-node": "9.0.0",
-    "typescript": "4.0.2"
+    "typescript": "4.0.5"
   }
 }

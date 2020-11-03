@@ -1,5 +1,5 @@
 import React, { ReactElement, ReactNode } from 'react';
-import { BrowserRouter, NavLink } from 'react-router-dom';
+import { BrowserRouter, NavLink, withRouter } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
 
 import { lib } from '@packages/client';
@@ -16,6 +16,7 @@ interface NavigationLink {
 }
 
 const { dashboard } = lib.config.frontUpstreams;
+const b = lib.block(styles, 'layout');
 
 const navigationLinks: NavigationLink[] = [
   {
@@ -32,7 +33,7 @@ function LayoutComponent(): ReactElement {
   function renderNavigation(): ReactNode[] {
     return navigationLinks.map((link) => {
       return (
-        <NavLink key={link.to} to={link.to} className={styles.layout__menuLink} activeClassName={styles._active}>
+        <NavLink key={link.to} to={link.to} className={b('menuLink')} activeClassName={styles._active}>
           {link.text}
         </NavLink>
       );
@@ -41,10 +42,10 @@ function LayoutComponent(): ReactElement {
 
   return (
     <BrowserRouter>
-      <div className={styles.layout}>
-        <div className={styles.layout__header} />
-        <div className={styles.layout__menu}>{renderNavigation()}</div>
-        <div id={CONTENT_ELEMENT_ID} className={styles.layout__content} />
+      <div className={b()}>
+        <div className={b('header')} />
+        <div className={b('menu')}>{renderNavigation()}</div>
+        <div id={CONTENT_ELEMENT_ID} className={b('content')} />
       </div>
     </BrowserRouter>
   );

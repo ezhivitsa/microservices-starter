@@ -11,19 +11,21 @@ const { frontUpstreams } = lib.config;
 
 const routes = constructRoutes({
   containerEl: `#${CONTENT_ELEMENT_ID}`,
-  routes: Object.values(frontUpstreams).map((upstream) => {
-    return {
-      type: 'route',
-      path: upstream.rule,
-      routes: [
-        {
-          type: 'application',
-          name: upstream.name,
-          loader: loadingLifecycles,
-        },
-      ],
-    };
-  }),
+  routes: Object.values(frontUpstreams)
+    .filter((_, index) => index === 0)
+    .map((upstream) => {
+      return {
+        type: 'route',
+        path: upstream.rule,
+        routes: [
+          {
+            type: 'application',
+            name: upstream.name,
+            loader: loadingLifecycles,
+          },
+        ],
+      };
+    }),
 });
 
 const applications = constructApplications({

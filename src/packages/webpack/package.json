@@ -1,5 +1,5 @@
 {
-  "name": "@packages/koa-kafka",
+  "name": "@packages/webpack",
   "version": "1.0.0",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -9,11 +9,12 @@
     "install": "npm run build",
     "prepare": "npm run build"
   },
-  "dependencies": {
-    "@packages/communication": "1.0.0"
-  },
   "devDependencies": {
+    "@packages/eslint-config": "1.0.0",
+    "@types/mini-css-extract-plugin": "1.2.0",
     "@types/node": "14.6.4",
+    "fork-ts-checker-webpack-plugin": "5.2.1",
+    "mini-css-extract-plugin": "1.2.1",
     "typescript": "4.0.5"
   }
 }

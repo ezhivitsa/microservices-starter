@@ -95,8 +95,8 @@ const webpackConfig: webpack.Configuration = {
             loader: 'postcss-loader',
             options: {
               sourceMap: isDevelopment,
-              config: {
-                path: __dirname,
+              postcssOptions: {
+                config: path.resolve(__dirname, '.postcssrc.js'),
               },
             },
           },

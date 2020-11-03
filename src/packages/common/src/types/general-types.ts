@@ -2,6 +2,7 @@ import { FeatureFlag } from './feature-flags';
 
 export enum FrontApplication {
   Dashboard = 'dashboard',
+  Auth = 'auth',
 }
 
 export interface FrontUpstream {
