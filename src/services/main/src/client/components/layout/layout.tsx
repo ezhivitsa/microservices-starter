@@ -1,8 +1,9 @@
 import React, { ReactElement, ReactNode } from 'react';
-import { BrowserRouter, NavLink, withRouter } from 'react-router-dom';
+import { BrowserRouter, NavLink, Route, RouteComponentProps } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
 
 import { lib } from '@packages/client';
+import { Types } from '@packages/common';
 
 import { CONTENT_ELEMENT_ID } from 'constants/app.constants';
 
@@ -15,7 +16,10 @@ interface NavigationLink {
   text: string;
 }
 
-const { dashboard } = lib.config.frontUpstreams;
+const {
+  frontUpstreams,
+  frontUpstreams: { dashboard },
+} = lib.config;
 const b = lib.block(styles, 'layout');
 
 const navigationLinks: NavigationLink[] = [
@@ -29,7 +33,11 @@ const navigationLinks: NavigationLink[] = [
   },
 ];
 
-function LayoutComponent(): ReactElement {
+function LayoutComponent({ location: { pathname } }: RouteComponentProps): ReactElement {
+  const upstream = Object.values(frontUpstreams).find(({ rule }) => `${pathname}/`.startsWith(rule));
+  const view = upstream ? upstream.layout : Types.ApplicationLayout.Default;
+  const isDefaultLayout = view === Types.ApplicationLayout.Default;
+
   function renderNavigation(): ReactNode[] {
     return navigationLinks.map((link) => {
       return (
@@ -41,14 +49,24 @@ function LayoutComponent(): ReactElement {
   }
 
   return (
+    <div className={b({ view })}>
+      {isDefaultLayout && (
+        <>
+          <div className={b('header')} />
+          <div className={b('menu')}>{renderNavigation()}</div>
+        </>
+      )}
+      <div id={CONTENT_ELEMENT_ID} className={b('content', { view })} />
+    </div>
+  );
+}
+
+function LayoutRouter(): ReactElement {
+  return (
     <BrowserRouter>
-      <div className={b()}>
-        <div className={b('header')} />
-        <div className={b('menu')}>{renderNavigation()}</div>
-        <div id={CONTENT_ELEMENT_ID} className={b('content')} />
-      </div>
+      <Route component={LayoutComponent} />
     </BrowserRouter>
   );
 }
 
-export const Layout = hot(LayoutComponent);
+export const Layout = hot(LayoutRouter);

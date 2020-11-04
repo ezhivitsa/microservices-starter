@@ -5,11 +5,17 @@ export enum FrontApplication {
   Auth = 'auth',
 }
 
+export enum ApplicationLayout {
+  Default = 'default',
+  Empty = 'empty',
+}
+
 export interface FrontUpstream {
   name: string;
   jsUrl: string;
   cssUrl?: string;
   rule: string;
+  layout: ApplicationLayout;
 }
 
 export type FrontUpstreamsConfig = Record<Readonly<FrontApplication>, FrontUpstream>;

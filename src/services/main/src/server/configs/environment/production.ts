@@ -27,12 +27,14 @@ export const production: Config = {
       jsUrl: `${staticUrl}/s3/dashboard/${dashboardVersion}/bundle.js`,
       cssUrl: `${staticUrl}/s3/dashboard/${dashboardVersion}/style.css`,
       rule: '/dashboard',
+      layout: Types.ApplicationLayout.Default,
     },
     auth: {
       name: '@services/authorization-form',
       jsUrl: `${staticUrl}/s3/dashboard/${dashboardVersion}/bundle.js`,
       cssUrl: `${staticUrl}/s3/dashboard/${dashboardVersion}/style.css`,
       rule: '/auth',
+      layout: Types.ApplicationLayout.Empty,
     },
   },
 };

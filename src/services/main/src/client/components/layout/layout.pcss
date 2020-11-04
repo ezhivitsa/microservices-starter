@@ -2,13 +2,16 @@
 @import 'variables.pcss';
 
 .layout {
-  display: grid;
-  grid-template-columns: minmax(100px, 200px) auto;
-  grid-template-rows: var(--grid40) auto;
-  grid-template-areas: 
-    "header header"
-    "menu content";
   min-height: 100vh;
+
+  &._view_default {
+    display: grid;
+    grid-template-columns: minmax(100px, 200px) auto;
+    grid-template-rows: var(--grid40) auto;
+    grid-template-areas: 
+      "header header"
+      "menu content";
+  }
 
   &__header {
     grid-area: header;
@@ -45,6 +48,17 @@
 
     & > div {
       height: 100%;
+    }
+
+    &._view_empty {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+
+      & > div {
+        flex: 1;
+        width: 100%;
+      }
     }
   }
 }

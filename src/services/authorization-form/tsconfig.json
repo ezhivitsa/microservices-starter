@@ -9,6 +9,7 @@
     "noEmit": true,
     "baseUrl": "./src",
     "jsx": "react",
+    "experimentalDecorators": true,
 
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
