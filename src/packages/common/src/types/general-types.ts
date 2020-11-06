@@ -23,6 +23,7 @@ export type FrontUpstreamsConfig = Record<Readonly<FrontApplication>, FrontUpstr
 export interface SerializableClientConfig {
   readonly featureFlagsArray: FeatureFlag[];
   readonly frontUpstreams: FrontUpstreamsConfig;
+  readonly apiGatewayUrl: string;
 }
 
 export interface ClientConfig extends SerializableClientConfig {

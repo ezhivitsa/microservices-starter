@@ -1,6 +1,6 @@
 export const globalErrorField = '__global';
 
-export type ErrorDetails = Record<string, string[]>;
+export type ErrorDetails = Record<string, string>;
 
 export class ApiError extends Error {
   private _data: ErrorDetails;
@@ -25,7 +25,15 @@ export class ApiError extends Error {
     return this._status;
   }
 
-  getFieldError(field: string): string[] {
-    return this._data[field] || [];
+  get data(): ErrorDetails {
+    return this._data;
+  }
+
+  get globalError(): string {
+    return this.isGlobalError ? this._data[globalErrorField] : '';
+  }
+
+  getFieldError(field: string): string | undefined {
+    return this._data[field];
   }
 }

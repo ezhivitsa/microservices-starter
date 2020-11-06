@@ -1,4 +1,4 @@
-import React, { ReactElement, ChangeEvent, FocusEvent } from 'react';
+import React, { ReactElement, ChangeEvent, FocusEvent, FC } from 'react';
 import { useField } from 'formik';
 
 export type ExtendedComponentProps<FieldValue, ComponentProps> = ComponentProps & {
@@ -10,7 +10,7 @@ export type ExtendedComponentProps<FieldValue, ComponentProps> = ComponentProps 
 
 interface FormikFieldProps<FieldValue, ComponentProps> {
   name: string;
-  component: React.ComponentClass<ComponentProps>;
+  component: FC<ComponentProps>;
   componentProps: ExtendedComponentProps<FieldValue, ComponentProps>;
   onChange?: (value: FieldValue, event: ChangeEvent) => void;
   onBlur?: (event: FocusEvent) => void;

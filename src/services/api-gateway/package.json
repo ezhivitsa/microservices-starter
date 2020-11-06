@@ -6,6 +6,7 @@
     "@koa/router": "9.4.0",
     "@packages/logger": "1.0.0",
     "@packages/communication": "1.0.0",
+    "@packages/common": "1.0.0",
     "joi": "17.3.0",
     "koa": "2.13.0",
     "koa-bodyparser": "4.3.0",

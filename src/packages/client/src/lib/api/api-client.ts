@@ -3,7 +3,7 @@ import axios, { AxiosInstance, AxiosError, AxiosRequestConfig, Method, AxiosResp
 import { ApiError, ErrorDetails, globalErrorField } from './api-error';
 
 interface BaseResponse {
-  errors?: Record<string, string[]>;
+  errors?: Record<string, string>;
 }
 
 interface ApiErrorDataType {
@@ -11,11 +11,7 @@ interface ApiErrorDataType {
   status: number;
 }
 
-type ApiClientRequest = <Req, Res>(
-  url: string,
-  data?: Req,
-  opts?: Partial<AxiosRequestConfig>,
-) => Promise<AxiosResponse<Res>>;
+type ApiClientRequest = <Req, Res>(url: string, data?: Req, opts?: Partial<AxiosRequestConfig>) => Promise<Res>;
 
 interface ApiClient {
   get: ApiClientRequest;
@@ -35,10 +31,10 @@ const throwApiError = ({ data = {}, status = 500 }: ApiErrorDataType): ApiError 
 
 export function initApi({ apiUrl, globalError }: { apiUrl: string; globalError: string }): ApiClient {
   const generalError = {
-    [globalErrorField]: [globalError],
+    [globalErrorField]: globalError,
   };
 
-  const handleResponse = <R extends BaseResponse>(response: AxiosResponse<R>): AxiosResponse<R> => {
+  const handleResponse = <R extends BaseResponse>(response: AxiosResponse<R>): R => {
     if (!response) {
       throwApiError({
         data: generalError,
@@ -48,7 +44,7 @@ export function initApi({ apiUrl, globalError }: { apiUrl: string; globalError: 
     }
 
     if (isOkStatus(response.status)) {
-      return response;
+      return response.data;
     }
 
     const errorData: ApiErrorDataType = {
@@ -56,7 +52,7 @@ export function initApi({ apiUrl, globalError }: { apiUrl: string; globalError: 
       data: response.data && response.data.errors ? response.data.errors : generalError,
     };
     throwApiError(errorData);
-    return response;
+    return response.data;
   };
 
   const api: AxiosInstance = axios.create({
@@ -79,11 +75,7 @@ export function initApi({ apiUrl, globalError }: { apiUrl: string; globalError: 
   );
 
   const httpRequest = (method: Method) =>
-    async function <Req, Res>(
-      url: string,
-      data?: Req,
-      opts?: Partial<AxiosRequestConfig>,
-    ): Promise<AxiosResponse<Res>> {
+    async function <Req, Res>(url: string, data?: Req, opts?: Partial<AxiosRequestConfig>): Promise<Res> {
       let urlWithSlash: string = url;
 
       if (urlWithSlash[0] !== '/') {

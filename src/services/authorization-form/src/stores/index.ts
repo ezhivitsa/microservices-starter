@@ -1,1 +1,1 @@
-export { SignInStore } from './sign-in-store';
+export { SignInStore, FormikSignIn, FormikSignInFieldName } from './sign-in-store';

@@ -37,4 +37,5 @@ export const production: Config = {
       layout: Types.ApplicationLayout.Empty,
     },
   },
+  apiGatewayUrl: `${staticUrl}/api`,
 };

@@ -25,4 +25,5 @@ export const development: Config = {
       cssUrl: undefined,
     },
   },
+  apiGatewayUrl: 'http://localhost:8090/api',
 };

@@ -1,5 +1,5 @@
-import { AppMiddleware, AppContext, Next } from 'koa';
+import { RouterAppMiddleware, RouterAppContext, Next } from 'koa';
 
-export const userMiddleware: AppMiddleware = async (ctx: AppContext, next: Next): Promise<void> => {
+export const userMiddleware: RouterAppMiddleware = async (ctx: RouterAppContext, next: Next): Promise<void> => {
   await next();
 };

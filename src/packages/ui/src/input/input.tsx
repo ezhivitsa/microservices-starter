@@ -4,12 +4,42 @@ import { lib } from '@packages/client';
 
 import styles from './input.pcss';
 
-export enum InputSize {}
+export enum InputSize {
+  XS = 'xs',
+  S = 's',
+  M = 'm',
+  L = 'l',
+}
+
+export type InputType =
+  | 'button'
+  | 'checkbox'
+  | 'color'
+  | 'date'
+  | 'datetime-local'
+  | 'email'
+  | 'file'
+  | 'hidden'
+  | 'image'
+  | 'month'
+  | 'number'
+  | 'password'
+  | 'radio'
+  | 'range'
+  | 'reset'
+  | 'search'
+  | 'submit'
+  | 'tel'
+  | 'text'
+  | 'time'
+  | 'url'
+  | 'week';
 
 interface Props {
-  value: string;
+  value?: string;
   name?: string;
   label?: string;
+  type?: InputType;
   error?: ReactNode;
   size?: InputSize;
   clear?: boolean;
@@ -39,3 +69,7 @@ export function Input(props: Props): ReactElement {
     </div>
   );
 }
+
+Input.defaultProps = {
+  size: InputSize.M,
+};
