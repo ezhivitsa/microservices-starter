@@ -12,6 +12,9 @@
     "prepare": "npm run build"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "1.2.32",
+    "@fortawesome/free-solid-svg-icons": "5.15.1",
+    "@fortawesome/react-fontawesome": "0.1.12",
     "@packages/client": "1.0.0",
     "normalize.css": "8.0.1"
   },
@@ -19,7 +22,7 @@
     "@packages/eslint-config": "1.0.0",
     "@packages/stylelint-config": "1.0.0",
     "@types/classnames": "^2.2.11",
-    "@types/react": "16.9.55",
+    "@types/react": "16.9.56",
     "classnames": "2.2.6",
     "formik": "2.2.1",
     "cpy-cli": "3.1.1",

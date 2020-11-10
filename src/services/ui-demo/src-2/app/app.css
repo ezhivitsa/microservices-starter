@@ -1,0 +1,214 @@
+@import 'packages/ui/vars.css';
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font: 16px var(--font);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-text-size-adjust: none;
+    overflow-x: hidden;
+}
+
+#root {
+    height: 100%;
+}
+
+.demo {
+    &__nav_desktop {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 200px;
+        background: var(--color-background-on-white-alt);
+        padding-top: 20px;
+
+        .menu .menu__group .menu-item {
+            padding-left: var(--grid3);
+        }
+    }
+
+    &__frameless-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        padding: calc(var(--grid) / 2) var(--grid);
+        background: rgba(0, 0, 0, 0.8);
+        color: var(--color-content-on-color);
+    }
+
+    &__frameless-nav-controls {
+        padding: var(--grid) 0;
+    }
+
+    &__frameless-nav-control + &__frameless-nav-control {
+        margin-top: var(--grid);
+    }
+
+    &__source-code-modal .ui-modal__content {
+        padding: 0;
+    }
+
+    &__nav_mobile {
+        display: none;
+    }
+
+    &__nav-box {
+        max-height: calc(100% - calc(var(--grid) * 14));
+        overflow: auto;
+    }
+
+    &__header.heading {
+        padding-left: 12px;
+        margin-bottom: var(--grid1);
+    }
+
+    &__preview {
+        padding: 40px 40px 0 240px;
+        min-height: 100%;
+        box-sizing: border-box;
+    }
+
+    &__preview_dark {
+        background: var(--color-background-on-color);
+    }
+
+    &__section {
+        padding: 20px 40px;
+        margin: 0 -40px;
+        background: var(--color-background-on-white-alt);
+    }
+
+    &__section_dark {
+        background: var(--color-background-on-color);
+    }
+
+    &__tabs {
+        .tab-item {
+            padding-top: 0;
+        }
+    }
+
+    &__row {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-content: flex-start;
+        align-items: flex-start;
+        margin-bottom: var(--grid3);
+
+        &_width_s {
+            max-width: 600px;
+        }
+
+        &_multiline {
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+    }
+
+    &__row-divider {
+        padding: var(--grid2);
+    }
+
+    &__col {
+        padding-right: var(--grid4);
+    }
+
+    &__col_6 {
+        box-sizing: border-box;
+        padding-right: var(--grid4);
+        width: 50%;
+    }
+
+    &__col_4 {
+        box-sizing: border-box;
+        padding-right: var(--grid4);
+        width: 33%;
+    }
+
+    &__col_3 {
+        box-sizing: border-box;
+        padding-right: var(--grid4);
+        width: 25%;
+    }
+
+    &__radio-box {
+        display: inline-block;
+        margin: 10px;
+    }
+
+    &__version {
+        position: absolute;
+        bottom: 10px;
+        left: 12px;
+        color: var(--color-content-minor-on-white);
+    }
+
+    &__component-name.heading {
+        margin-top: 0;
+        padding-bottom: var(--grid4);
+    }
+
+    &__size {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        width: var(--grid8);
+        height: var(--grid8);
+        background: var(--color-content-minor);
+        color: var(--color-content-on-color);
+        text-transform: uppercase;
+        border-radius: 50%;
+        font-weight: var(--font-weight-bold);
+        font-size: var(--font-size-xl);
+        margin: var(--grid8) auto var(--grid4);
+    }
+
+    &__icon-placeholder {
+        width: var(--grid4);
+        height: var(--grid4);
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+        line-height: var(--grid4);
+        position: relative;
+    }
+
+    @media (--small-only) {
+        &__nav_desktop {
+            display: none;
+        }
+
+        &__nav_mobile {
+            display: block;
+        }
+
+        &__preview {
+            padding: 20px 20px 0 20px;
+        }
+
+        &__source {
+            margin: 0 -20px;
+        }
+
+        &__row {
+            flex-wrap: wrap;
+        }
+
+        &__col,
+        &__col_4,
+        &__col_6 {
+            width: 100%;
+            padding: 0;
+            margin-bottom: var(--grid2);
+        }
+    }
+}

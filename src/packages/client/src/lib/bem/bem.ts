@@ -5,6 +5,12 @@ export interface ClassNameGenerator {
   (state?: State): string;
 }
 
+const hyphenRegExp = /-([a-z])/g;
+
+function toCamelCase(value: string): string {
+  return value.replace(hyphenRegExp, (g) => g[1].toUpperCase());
+}
+
 /**
  * Модуль для генерации имен классов.
  */
@@ -20,10 +26,10 @@ export function block(styles: Record<string, string>, blockName: string): ClassN
         resultClassNames = styles[element];
       } else if (typeof elementNameOrState === 'object') {
         state = elementNameOrState;
-        resultClassNames = styles[blockName];
+        resultClassNames = styles[toCamelCase(blockName)];
       }
     } else {
-      resultClassNames = styles[blockName];
+      resultClassNames = styles[toCamelCase(blockName)];
     }
 
     if (state) {
@@ -34,9 +40,10 @@ export function block(styles: Record<string, string>, blockName: string): ClassN
 
         let className: string | undefined;
         if (state[key] === true) {
-          className = styles[`_${key}`];
+          className = styles[`_${toCamelCase(key)}`];
         } else if (state[key]) {
-          className = styles[`_${key}_${state[key]}`];
+          const camelCaseKey = toCamelCase(key);
+          className = styles[`_${camelCaseKey}_${state[camelCaseKey]}`];
         }
 
         if (className) {
