@@ -8,6 +8,7 @@ import { componentsPathTemplate, componentPathTemplate } from 'components/pages/
 import { formatComponentPath } from 'components/pages/paths';
 
 import { DemoComponentPage } from 'components/pages/demo-component';
+import { Layout } from 'components/global/layout';
 
 export function AppComponent(): ReactElement {
   const [firstComponent] = config.components;
@@ -15,15 +16,17 @@ export function AppComponent(): ReactElement {
   return (
     <StrictMode>
       <BrowserRouter>
-        <Switch>
-          {firstComponent && (
-            <Route exact path={componentsPathTemplate}>
-              <Redirect to={formatComponentPath(firstComponent)} />
-            </Route>
-          )}
+        <Layout>
+          <Switch>
+            {firstComponent && (
+              <Route exact path={componentsPathTemplate}>
+                <Redirect to={formatComponentPath(firstComponent)} />
+              </Route>
+            )}
 
-          <Route path={componentPathTemplate} component={DemoComponentPage} />
-        </Switch>
+            <Route path={componentPathTemplate} component={DemoComponentPage} />
+          </Switch>
+        </Layout>
       </BrowserRouter>
     </StrictMode>
   );

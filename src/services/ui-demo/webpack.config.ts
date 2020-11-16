@@ -38,7 +38,7 @@ const webpackConfig: webpack.Configuration = {
       common: path.resolve(__dirname, './src/common'),
       // External aliases
       'react-dom': isDevelopment ? '@hot-loader/react-dom' : 'react-dom',
-      systemjs: path.resolve(__dirname, '../../../node_modules/systemjs/dist/system.js'),
+      '@packages/ui': path.resolve(__dirname, '../../packages/ui/src'),
     },
     modules: [
       clientPath,

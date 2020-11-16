@@ -12,6 +12,7 @@ import { IndexPage, IndexPageProps } from 'pages/index-page';
 export const indexPageMiddleware: Middleware = (ctx: RouterContext): void => {
   const clientConfig: ClientConfig = {
     components: getComponentsWithDemo(),
+    apiPath: config.apiPath,
   };
 
   const props: IndexPageProps = {

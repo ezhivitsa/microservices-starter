@@ -2,8 +2,10 @@ import React, { ReactElement, ReactNode } from 'react';
 import { BrowserRouter, NavLink, Route, RouteComponentProps } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
 
-import { lib } from '@packages/client';
 import { Types } from '@packages/common';
+import { lib } from '@packages/client';
+
+import { config } from 'lib/config';
 
 import { CONTENT_ELEMENT_ID } from 'constants/app.constants';
 
@@ -19,7 +21,7 @@ interface NavigationLink {
 const {
   frontUpstreams,
   frontUpstreams: { dashboard },
-} = lib.config;
+} = config;
 const b = lib.block(styles, 'layout');
 
 const navigationLinks: NavigationLink[] = [

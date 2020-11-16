@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "target": "ES2018",
+    "lib": ["ES2018", "DOM"],
+    "jsx": "react",
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "sourceMap": true,
+    "declaration": true,
+    "baseUrl": "./src",
+    "outDir": "dist",
+    "typeRoots": [
+      "./@types/*",
+      "../../../node_modules/@types/*"
+    ]
+  }
+}

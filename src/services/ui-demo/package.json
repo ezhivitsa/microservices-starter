@@ -6,7 +6,7 @@
     "@koa/cors": "3.1.0",
     "@koa/router": "9.4.0",
     "@packages/common": "1.0.0",
-    "@packages/ui": "1.0.0",
+    "@packages/client": "1.0.0",
     "koa": "2.13.0",
     "koa-mount": "4.0.0",
     "koa-static": "5.0.0",

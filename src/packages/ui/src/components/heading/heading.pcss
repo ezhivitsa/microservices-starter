@@ -1,0 +1,55 @@
+@import 'variables.pcss';
+
+.heading {
+  font-family: var(--font);
+  line-height: var(--line-height-200);
+  font-weight: var(--font-weight-500);
+
+  &, *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  &._size_s {
+    font-size: var(--font-size-200);
+    margin-top: var(--grid3);
+    margin-bottom: var(--grid3);
+  }
+
+  &._size_m {
+    font-size: var(--font-size-400);
+    margin-top: var(--grid4);
+    margin-bottom: var(--grid4);
+
+    @media (--medium) {
+      font-size: var(--font-size-500);
+    }
+  }
+
+  &._size_l {
+    font-size: var(--font-size-500);
+    margin-top: var(--grid4);
+    margin-bottom: var(--grid4);
+
+    @media (--medium) {
+      font-size: var(--font-size-700);
+      margin-top: var(--grid5);
+      margin-bottom: var(--grid5);
+    }
+  }
+
+  &._size_xl {
+    font-size: var(--font-size-700);
+    margin-top: var(--grid8);
+    margin-bottom: var(--grid2);
+
+    @media (--medium) {
+      font-size: var(--font-size-1000);
+      margin-bottom: var(--grid4);
+    }
+  }
+
+  &._view_condensed {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}

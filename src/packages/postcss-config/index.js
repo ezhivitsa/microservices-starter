@@ -5,6 +5,8 @@ const cssVariables = require('postcss-css-variables');
 
 const cssnano = require('cssnano');
 
+const { mediaQueries } = require('@packages/media');
+
 const packagesUiImportPath = '../../../node_modules/@packages/ui/dist/styles';
 
 /**
@@ -29,8 +31,14 @@ module.exports = ({
     cssVariables(),
     postcssPresetEnv({
       stage: 2,
-      feature: {
-        'custom-media-queries': true,
+      features: {
+        'custom-media-queries': {
+          importFrom: [
+            {
+              customMedia: mediaQueries
+            }
+          ]
+        },
         'custom-properties': false
       }
     }),

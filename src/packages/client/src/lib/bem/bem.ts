@@ -23,7 +23,7 @@ export function block(styles: Record<string, string>, blockName: string): ClassN
       if (typeof elementNameOrState === 'string') {
         element += '__' + elementNameOrState;
 
-        resultClassNames = styles[element];
+        resultClassNames = styles[toCamelCase(element)];
       } else if (typeof elementNameOrState === 'object') {
         state = elementNameOrState;
         resultClassNames = styles[toCamelCase(blockName)];

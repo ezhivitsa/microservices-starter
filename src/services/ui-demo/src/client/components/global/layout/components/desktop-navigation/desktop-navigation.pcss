@@ -1,0 +1,22 @@
+@import 'reset.pcss';
+@import 'variables.pcss';
+
+.desktop-navigation {
+  display: flex;
+  flex-direction: column;
+
+  &__item-wrap {
+    margin: var(--grid2) 0;
+  }
+
+  &__item {
+    color: var(--color-blue-500);
+    text-transform: capitalize;
+    text-decoration: none;
+    font-size: var(--font-size-600);
+
+    &:hover {
+      color: var(--color-blue-800);
+    }
+  }
+}

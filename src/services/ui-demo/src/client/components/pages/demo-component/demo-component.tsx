@@ -32,5 +32,9 @@ export function DemoComponentPage(props: RouteComponentProps<Match>): ReactEleme
     fetchComponentMeta();
   }, []);
 
+  if (isLoading) {
+    return <div>Loading</div>;
+  }
+
   return <div>{component}</div>;
 }

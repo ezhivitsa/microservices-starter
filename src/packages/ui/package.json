@@ -16,6 +16,7 @@
     "@fortawesome/free-solid-svg-icons": "5.15.1",
     "@fortawesome/react-fontawesome": "0.1.12",
     "@packages/client": "1.0.0",
+    "@packages/media": "1.0.0",
     "normalize.css": "8.0.1"
   },
   "devDependencies": {

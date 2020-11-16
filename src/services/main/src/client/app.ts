@@ -1,13 +1,13 @@
 import { constructRoutes, constructApplications, constructLayoutEngine } from 'single-spa-layout';
 import { registerApplication, start } from 'single-spa';
 
-import { lib } from '@packages/client';
+import { config } from 'lib/config';
 
 import { CONTENT_ELEMENT_ID } from 'constants/app.constants';
 
 import { loadingLifecycles } from 'components/loading';
 
-const { frontUpstreams } = lib.config;
+const { frontUpstreams } = config;
 
 const routes = constructRoutes({
   containerEl: `#${CONTENT_ELEMENT_ID}`,
