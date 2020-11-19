@@ -14,22 +14,30 @@ function toCamelCase(value: string): string {
 /**
  * Модуль для генерации имен классов.
  */
-export function block(styles: Record<string, string>, blockName: string): ClassNameGenerator {
+export function block(styles: Record<string, string>, blockName: string, theme?: string): ClassNameGenerator {
   return (elementNameOrState?: string | State, state?: State): string => {
     let resultClassNames = '';
     let element = blockName;
 
     if (elementNameOrState) {
       if (typeof elementNameOrState === 'string') {
-        element += '__' + elementNameOrState;
+        element += `__${elementNameOrState}`;
 
         resultClassNames = styles[toCamelCase(element)];
       } else if (typeof elementNameOrState === 'object') {
         state = elementNameOrState;
         resultClassNames = styles[toCamelCase(blockName)];
+
+        if (theme) {
+          resultClassNames += ' ' + styles[`${toCamelCase(blockName)}_theme_${theme}`];
+        }
       }
     } else {
       resultClassNames = styles[toCamelCase(blockName)];
+
+      if (theme) {
+        resultClassNames += ' ' + styles[`${toCamelCase(blockName)}_theme_${theme}`];
+      }
     }
 
     if (state) {

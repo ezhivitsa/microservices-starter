@@ -1,5 +1,7 @@
 import React, { ReactElement, ReactNode } from 'react';
 
+import { lib } from '@packages/client';
+
 import styles from './badge.pcss';
 
 interface Props {
@@ -7,5 +9,7 @@ interface Props {
 }
 
 export function Badge(props: Props): ReactElement<Props> {
-  return <div className={styles.badge}>{props.children}</div>;
+  const b = lib.block(styles, 'badge');
+
+  return <div className={b()}>{props.children}</div>;
 }

@@ -25,9 +25,9 @@ export interface ComponentSource {
 const packagesUiRoot = path.resolve(__dirname, '../../../../../packages/ui/src');
 
 const rootDir = path.resolve(__dirname, '../../../../..');
-const COMPONENTS_ROOT = 'packages/ui/src';
+const COMPONENTS_ROOT = 'packages/ui/src/components';
 
-const dirRegExp = /.*packages\/ui\/src\//;
+const dirRegExp = /.*packages\/ui\/src\/components\//;
 
 export const getComponentsWithDemo = (): string[] => {
   if (!noCache && componentsListCache) {

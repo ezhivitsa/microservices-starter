@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useState } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { GetComponentResponse } from 'common/component-types';
 
@@ -9,8 +9,8 @@ interface Match {
   component: string;
 }
 
-export function DemoComponentPage(props: RouteComponentProps<Match>): ReactElement {
-  const { component } = props.match.params;
+export function DemoComponentPage(): ReactElement {
+  const { component } = useParams<Match>();
 
   const [isLoading, setIsLoading] = useState(true);
   const [componentMeta, setComponentMeta] = useState<GetComponentResponse>();

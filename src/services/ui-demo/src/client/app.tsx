@@ -16,17 +16,19 @@ export function AppComponent(): ReactElement {
   return (
     <StrictMode>
       <BrowserRouter>
-        <Layout>
-          <Switch>
-            {firstComponent && (
-              <Route exact path={componentsPathTemplate}>
-                <Redirect to={formatComponentPath(firstComponent)} />
-              </Route>
-            )}
+        <Switch>
+          {firstComponent && (
+            <Route exact path={componentsPathTemplate}>
+              <Redirect to={formatComponentPath(firstComponent)} />
+            </Route>
+          )}
 
-            <Route path={componentPathTemplate} component={DemoComponentPage} />
-          </Switch>
-        </Layout>
+          <Route path={componentPathTemplate}>
+            <Layout>
+              <DemoComponentPage />
+            </Layout>
+          </Route>
+        </Switch>
       </BrowserRouter>
     </StrictMode>
   );

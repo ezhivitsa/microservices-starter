@@ -1,6 +1,6 @@
 import React, { ReactElement, ReactNode } from 'react';
 
-import { useMq, Media } from '@packages/ui';
+import { useMq, Media, ThemeContextProvider } from '@packages/ui';
 
 import { config } from 'lib/config';
 
@@ -16,11 +16,13 @@ export function Layout(props: Props): ReactElement {
   const isMobile = useMq(Media.SmallOnly);
 
   return (
-    <div>
-      <TopNavigation />
+    <ThemeContextProvider>
+      <div>
+        <TopNavigation />
 
-      {!isMobile && <DesktopNavigation />}
-      {isMobile && <MobileNavigation />}
-    </div>
+        {!isMobile && <DesktopNavigation />}
+        {isMobile && <MobileNavigation />}
+      </div>
+    </ThemeContextProvider>
   );
 }

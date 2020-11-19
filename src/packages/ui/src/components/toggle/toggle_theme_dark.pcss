@@ -1,0 +1,21 @@
+@import 'variables.pcss';
+
+.toggle_theme_dark {
+  .toggle {
+    &__slider {
+      background-color: var(--color-grey-50);
+
+      &::before {
+        background-color: var(--color-grey-800);
+      }
+
+      &._checked {
+        background-color: var(--color-blue-50);
+      }
+    }
+
+    &__label {
+      color: var(--color-grey-50);
+    }
+  }
+}

@@ -1,1 +1,1 @@
-export { block } from './bem';
+export { block, ClassNameGenerator } from './bem';
