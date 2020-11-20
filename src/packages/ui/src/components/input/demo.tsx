@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 
 import { Input, InputSize } from '.';
 
-const sizes = [InputSize.S, InputSize.M, InputSize.M];
+const sizes = [InputSize.S, InputSize.M, InputSize.L, InputSize.XL];
 
 export default function InputDemo(): ReactElement {
   return (

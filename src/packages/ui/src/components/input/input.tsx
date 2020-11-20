@@ -5,10 +5,10 @@ import { lib } from '@packages/client';
 import styles from './input.pcss';
 
 export enum InputSize {
-  XS = 'xs',
   S = 's',
   M = 'm',
   L = 'l',
+  XL = 'xl',
 }
 
 export type InputType =

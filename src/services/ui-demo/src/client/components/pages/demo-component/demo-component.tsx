@@ -5,6 +5,8 @@ import { GetComponentResponse } from 'common/component-types';
 
 import { ComponentsService } from 'services';
 
+import { DemoComponentCode } from './components/demo-component-code';
+
 interface Match {
   component: string;
 }
@@ -36,5 +38,13 @@ export function DemoComponentPage(): ReactElement {
     return <div>Loading</div>;
   }
 
-  return <div>{component}</div>;
+  if (!componentMeta) {
+    return <div />;
+  }
+
+  return (
+    <div>
+      <DemoComponentCode name={componentMeta.name} code={componentMeta.code} extension={componentMeta.extension} />
+    </div>
+  );
 }

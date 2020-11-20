@@ -1,4 +1,4 @@
-type Extension = 'tsx' | 'jsx';
+export type Extension = 'tsx' | 'jsx';
 
 export interface GetComponentResponse {
   name: string;

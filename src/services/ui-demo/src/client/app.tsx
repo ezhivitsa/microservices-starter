@@ -2,6 +2,8 @@ import React, { ReactElement, StrictMode } from 'react';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
 
+import { ThemeContextProvider } from '@packages/ui';
+
 import { config } from 'lib/config';
 
 import { componentsPathTemplate, componentPathTemplate } from 'components/pages/path-templates';
@@ -24,9 +26,11 @@ export function AppComponent(): ReactElement {
           )}
 
           <Route path={componentPathTemplate}>
-            <Layout>
-              <DemoComponentPage />
-            </Layout>
+            <ThemeContextProvider>
+              <Layout>
+                <DemoComponentPage />
+              </Layout>
+            </ThemeContextProvider>
           </Route>
         </Switch>
       </BrowserRouter>

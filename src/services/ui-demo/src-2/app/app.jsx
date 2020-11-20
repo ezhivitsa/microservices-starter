@@ -220,33 +220,6 @@ export class App extends PureComponent {
     );
   }
 
-  renderFramelessNav(cn) {
-    const { component } = this.props.config;
-    const { framelessNavShown } = this.state;
-
-    return (
-      <ThemeProvider theme={Themes.onColor}>
-        <div className={cn('frameless-nav')}>
-          <Link text={framelessNavShown ? 'Hide' : 'Nav'} onClick={this.handleFramelessNavToggle} size="s" pseudo />
-          {' • '}
-          <Link text="Code" onClick={this.handleSourceCodeModalShow} size="s" pseudo />
-          {framelessNavShown && (
-            <div className={cn('frameless-nav-controls')}>
-              <Select
-                className={cn('frameless-nav-control')}
-                options={this.prepareSelectOptions()}
-                value={[component && component.name]}
-                onChange={this.handleSelectChange}
-                size="s"
-                mode="radio"
-              />
-            </div>
-          )}
-        </div>
-      </ThemeProvider>
-    );
-  }
-
   renderThemeTabs(cn) {
     const { theme } = this.state;
 
@@ -298,23 +271,6 @@ export class App extends PureComponent {
     );
   }
 
-  renderFramelessComponent(cn) {
-    const { isComponentLoaded } = this.state;
-
-    if (!isComponentLoaded) {
-      return <Spinner view="fixed" size="l" />;
-    }
-
-    return (
-      <ThemeProvider theme={this.getTheme()}>
-        <>
-          {this.renderCurrentComponentDemo(cn)}
-          {this.renderCurrentComponentSourceCodeModal(cn)}
-        </>
-      </ThemeProvider>
-    );
-  }
-
   renderFramedComponent(cn) {
     const { component: currentComponent } = this.props.config;
     const { isComponentLoaded } = this.state;
@@ -357,15 +313,6 @@ export class App extends PureComponent {
 
     if (!currentComponent) {
       return this.renderNav(cn);
-    }
-
-    if (currentComponent.settings.includes('display-without-frame')) {
-      return (
-        <>
-          {this.renderFramelessNav(cn)}
-          {this.renderFramelessComponent(cn)}
-        </>
-      );
     }
 
     return (

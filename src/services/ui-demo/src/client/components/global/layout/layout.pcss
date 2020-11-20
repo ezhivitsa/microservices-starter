@@ -1,0 +1,39 @@
+@import 'reset.pcss';
+@import 'variables.pcss';
+
+.layout {
+  min-height: 100vh;
+
+  @media (--medium) {
+    display: grid;
+    grid-template-columns: minmax(100px, 200px) auto;
+      grid-template-rows: var(--grid20) auto;
+      grid-template-areas: 
+        "header header"
+        "menu content";
+  }
+
+  &__header {
+    grid-area: header;
+  }
+}
+
+.layout_theme_light {
+  background-color: var(--color-white);
+
+  .layout {
+    &__header {
+      background: var(--color-blue-50);
+    }
+  }
+}
+
+.layout_theme_dark {
+  background-color: var(--color-grey-900);
+
+  .layout {
+    &__header {
+      background: var(--color-deep-purple-900);
+    }
+  }
+}
