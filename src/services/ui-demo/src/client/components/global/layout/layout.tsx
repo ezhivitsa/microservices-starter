@@ -20,10 +20,10 @@ export function Layout(props: Props): ReactElement {
     <div className={b()}>
       <TopNavigation className={b('header')} />
 
-      {!isMobile && <DesktopNavigation />}
+      {!isMobile && <DesktopNavigation className={b('menu')} />}
       {isMobile && <MobileNavigation />}
 
-      <div>{props.children}</div>
+      <div className={b('content')}>{props.children}</div>
     </div>
   );
 }

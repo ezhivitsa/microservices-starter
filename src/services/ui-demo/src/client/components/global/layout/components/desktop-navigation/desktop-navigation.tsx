@@ -1,7 +1,8 @@
 import React, { ReactElement, ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
+import classnames from 'classnames';
 
-import { lib } from '@packages/client';
+import { useStyles } from '@packages/ui';
 
 import { config } from 'lib/config';
 
@@ -9,9 +10,13 @@ import { formatComponentPath } from 'components/pages/paths';
 
 import styles from './desktop-navigation.pcss';
 
-const b = lib.block(styles, 'desktop-navigation');
+interface Props {
+  className?: string;
+}
 
-export function DesktopNavigation(): ReactElement {
+export function DesktopNavigation({ className }: Props): ReactElement {
+  const b = useStyles(styles, 'desktop-navigation');
+
   function renderComponentItem(item: string): ReactNode {
     return (
       <div key={item} className={b('item-wrap')}>
@@ -22,5 +27,5 @@ export function DesktopNavigation(): ReactElement {
     );
   }
 
-  return <div className={b()}>{config.components.map(renderComponentItem)}</div>;
+  return <div className={classnames(b(), className)}>{config.components.map(renderComponentItem)}</div>;
 }

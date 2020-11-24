@@ -32,7 +32,7 @@ export function DemoComponentPage(): ReactElement {
 
   useEffect(() => {
     fetchComponentMeta();
-  }, []);
+  }, [component]);
 
   if (isLoading) {
     return <div>Loading</div>;

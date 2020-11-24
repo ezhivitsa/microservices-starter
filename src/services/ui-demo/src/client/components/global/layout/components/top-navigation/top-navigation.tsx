@@ -1,8 +1,10 @@
 import React, { ReactElement } from 'react';
 import classnames from 'classnames';
 
-import { Heading, Toggle, ToggleSize, Theme, useTheme } from '@packages/ui';
+import { Heading, HeadingView, Toggle, ToggleSize, Theme, useTheme } from '@packages/ui';
 import { lib } from '@packages/client';
+
+import { layoutTexts } from 'texts';
 
 import styles from './top-navigation.pcss';
 
@@ -21,8 +23,15 @@ export function TopNavigation({ className }: Props): ReactElement {
 
   return (
     <div className={classnames(b(), className)}>
-      <Heading className={b('heading')}>UI Components</Heading>
-      <Toggle checked={theme === Theme.Dark} size={ToggleSize.L} label="Dark theme" onChange={handleChangeTheme} />
+      <Heading className={b('heading')} view={HeadingView.Condensed}>
+        {layoutTexts.title}
+      </Heading>
+      <Toggle
+        checked={theme === Theme.Dark}
+        size={ToggleSize.L}
+        label={layoutTexts.toggleTheme}
+        onChange={handleChangeTheme}
+      />
     </div>
   );
 }

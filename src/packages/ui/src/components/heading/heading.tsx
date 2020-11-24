@@ -1,7 +1,7 @@
 import React, { ReactElement, ReactNode } from 'react';
 import classnames from 'classnames';
 
-import { lib } from '@packages/client';
+import { useStyles } from '../../theme';
 
 import styles from './heading.pcss';
 
@@ -27,8 +27,6 @@ interface Props {
   className?: string;
 }
 
-const b = lib.block(styles, 'heading');
-
 const mapSizeToLevel: Record<HeadingSize, HeadingLevel> = {
   [HeadingSize.XL]: 1,
   [HeadingSize.L]: 2,
@@ -38,6 +36,8 @@ const mapSizeToLevel: Record<HeadingSize, HeadingLevel> = {
 };
 
 export function Heading({ size, view, children, className }: Props): ReactElement {
+  const b = useStyles(styles, 'heading');
+
   const headingProps = {
     className: classnames(
       className,

@@ -1,5 +1,8 @@
 @import 'variables.pcss';
 
+@import './desktop-navigation_theme_light.pcss';
+@import './desktop-navigation_theme_dark.pcss';
+
 .desktop-navigation {
   display: flex;
   flex-direction: column;
@@ -9,17 +12,8 @@
   }
 
   &__item {
-    color: var(--color-blue-500);
     text-transform: capitalize;
     text-decoration: none;
     font-size: var(--font-size-600);
-
-    &:hover {
-      color: var(--color-blue-800);
-    }
-
-    &._active {
-      color: var(--color-blue-800);
-    }
   }
 }

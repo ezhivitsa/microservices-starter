@@ -6,7 +6,7 @@
 
   @media (--medium) {
     display: grid;
-    grid-template-columns: minmax(100px, 200px) auto;
+    grid-template-columns: minmax(100px, 180px) auto;
       grid-template-rows: var(--grid20) auto;
       grid-template-areas: 
         "header header"
@@ -15,6 +15,21 @@
 
   &__header {
     grid-area: header;
+    padding: 0 var(--grid3);
+
+    @media (--small-only) {
+      padding-top: var(--grid3);
+      padding-bottom: var(--grid3);
+    }
+  }
+
+  &__menu {
+    grid-area: menu;
+    padding: 0 var(--grid3);
+  }
+
+  &__content {
+    padding: var(--grid4);
   }
 }
 
@@ -23,17 +38,25 @@
 
   .layout {
     &__header {
+      background: var(--color-blue-100);
+    }
+
+    &__menu {
       background: var(--color-blue-50);
     }
   }
 }
 
 .layout_theme_dark {
-  background-color: var(--color-grey-900);
+  background-color: var(--color-grey-800);
 
   .layout {
     &__header {
       background: var(--color-deep-purple-900);
+    }
+
+    &__menu {
+      background: var(--color-deep-purple-800);
     }
   }
 }
