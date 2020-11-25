@@ -1,40 +1,3 @@
-// interface Props {
-//   value?: string;
-//   name?: string;
-//   label?: string;
-//   type?: InputType;
-//   error?: ReactNode;
-//   size?: InputSize;
-//   clear?: boolean;
-//   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-//   onBlur?: (event: FocusEvent<HTMLInputElement>) => void;
-//   onClearClick?: () => void;
-// }
-
-// export function Input(props: Props): ReactElement {
-//   const { name, value, label, error, onChange, onBlur } = props;
-
-//   function renderError(): ReactNode {
-//     if (!error) {
-//       return null;
-//     }
-//   }
-
-//   return (
-//     <div className={b()}>
-//       <div className={b('inner')}>
-//         <label>{label}</label>
-//         <input name={name} value={value} onChange={onChange} onBlur={onBlur} />
-//         {renderError()}
-//       </div>
-//     </div>
-//   );
-// }
-
-// Input.defaultProps = {
-//   size: InputSize.M,
-// };
-
 import React, {
   ReactNode,
   MutableRefObject,
@@ -48,6 +11,9 @@ import React, {
   useRef,
   ReactElement,
 } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { SizeProp } from '@fortawesome/fontawesome-svg-core';
 
 // import { FormatCharacters } from '../masked-input/mask';
 // import IconClose from '../icon/ui/close';
@@ -207,6 +173,29 @@ export function Input({ error, view, size, disabled, type, width, ...props }: Pr
     changeValue(event.target.value, event);
   }
 
+  function handleClearClick(event: MouseEvent): void {
+    changeValue('', event as any);
+
+    props.onClearClick?.(event);
+
+    focus();
+  }
+
+  function focus(): void {
+    const control = props.inputRef?.current;
+    if (control) {
+      control.focus();
+      setSelectionRange(control.value.length);
+    }
+  }
+
+  function setSelectionRange(start = 0, end = props.inputRef?.current.value.length || 0): void {
+    const control = props.inputRef?.current;
+    if (type !== 'email' && control) {
+      control.setSelectionRange(start, end);
+    }
+  }
+
   function renderContent(): ReactNode {
     const isMaskedInput = props.mask !== undefined;
 
@@ -252,12 +241,13 @@ export function Input({ error, view, size, disabled, type, width, ...props }: Pr
     return (
       <span
         className={b('box', {
-          hasClear: !!props.clear,
-          hasIcon: !!props.icon,
+          hasClear,
+          hasIcon,
           hasAddons,
+          hasValue,
+          hasLabel,
           disabled,
           focused,
-          hasValue: !!value,
           size,
           view,
           invalid,
@@ -288,10 +278,12 @@ export function Input({ error, view, size, disabled, type, width, ...props }: Pr
           )}
         </span>
         {props.clear && value && (
-          // <IconButton className={b('clear', {disabled: props.disabled, view, size})} size={props.size} tabIndex={-1} onClick={this.handleClearClick}>
+          // <IconButton className={b('clear', {disabled: props.disabled, view, size})} size={props.size}>
           //   <IconClose size={props.size} />
           // </IconButton>
-          <div />
+          <div className={b('clear', { disabled, view, size })} tabIndex={-1} onClick={handleClearClick}>
+            <FontAwesomeIcon icon={faTimes} />
+          </div>
         )}
         {props.icon && <div className={b('icon', { size, view })}>{props.icon}</div>}
         {props.rightAddons && (
@@ -331,3 +323,7 @@ export function Input({ error, view, size, disabled, type, width, ...props }: Pr
     </span>
   );
 }
+
+Input.defaultProps = {
+  size: InputSize.M,
+};

@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode, Suspense } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 import classnames from 'classnames';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import darkTheme from 'prism-react-renderer/themes/duotoneDark';
@@ -9,6 +9,8 @@ import { useTheme, useStyles, Theme } from '@packages/ui';
 import { Extension } from 'common/component-types';
 
 import styles from './demo-component-code.pcss';
+
+import { DemoComponentPreview } from '../demo-component-preview';
 
 interface Props {
   name: string;
@@ -48,13 +50,7 @@ export function DemoComponentCode({ name, code, extension }: Props): ReactElemen
   }
 
   function renderDemo(): ReactNode {
-    const LoadableComponent = React.lazy(() => import(`@packages/ui/components/${name}/demo.${extension}`));
-
-    return (
-      <Suspense fallback={<div>Loading</div>}>
-        <LoadableComponent />
-      </Suspense>
-    );
+    return <DemoComponentPreview name={name} extension={extension} />;
   }
 
   return (
