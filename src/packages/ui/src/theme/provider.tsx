@@ -12,7 +12,6 @@ const themesList = Object.values(Theme) as string[];
 
 export function ThemeContextProvider(props: Props): ReactElement {
   function setTheme(type: Theme): void {
-    console.log(type);
     window.localStorage?.setItem(THEME_ITEM, type);
     setStateTheme(type);
   }

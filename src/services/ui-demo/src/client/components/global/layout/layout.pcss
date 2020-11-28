@@ -4,7 +4,7 @@
 .layout {
   min-height: 100vh;
 
-  @media (--medium) {
+  @media (--tablet-s) {
     display: grid;
     grid-template-columns: minmax(100px, 180px) auto;
       grid-template-rows: var(--grid20) auto;
@@ -17,7 +17,7 @@
     grid-area: header;
     padding: 0 var(--grid3);
 
-    @media (--small-only) {
+    @media (--mobile) {
       padding-top: var(--grid3);
       padding-bottom: var(--grid3);
     }
@@ -30,6 +30,7 @@
 
   &__content {
     padding: var(--grid4);
+    overflow: auto;
   }
 }
 

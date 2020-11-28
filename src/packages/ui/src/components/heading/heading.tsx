@@ -40,11 +40,11 @@ export function Heading({ size, view, children, className }: Props): ReactElemen
 
   const headingProps = {
     className: classnames(
-      className,
       b({
         size,
         view,
       }),
+      className,
     ),
   };
 

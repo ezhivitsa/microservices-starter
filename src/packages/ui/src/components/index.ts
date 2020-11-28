@@ -6,3 +6,4 @@ export * from './message';
 export * from './heading';
 export * from './select';
 export * from './toggle';
+export * from './paragraph';

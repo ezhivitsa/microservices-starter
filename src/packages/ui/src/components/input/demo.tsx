@@ -1,4 +1,6 @@
 import React, { ReactElement } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClock } from '@fortawesome/free-solid-svg-icons';
 
 import { ClassNameGenerator } from '@packages/client';
 
@@ -55,7 +57,7 @@ export default function InputDemo({ b }: Props): ReactElement {
         <Input view={InputView.Filled} placeholder="Type value" disabled />
       </div>
 
-      <Heading>input with clear button</Heading>
+      <Heading>Input with clear button</Heading>
       <div>
         <Input
           label="label"
@@ -64,6 +66,22 @@ export default function InputDemo({ b }: Props): ReactElement {
           clear
           size={InputSize.S}
           view={InputView.Filled}
+        />
+      </div>
+
+      <Heading>Input with error message</Heading>
+      <div>
+        <Input label="label" placeholder="Type value" defaultValue="123" error="Error message" />
+      </div>
+
+      <Heading>Input with icon</Heading>
+      <div>
+        <Input
+          label="label"
+          placeholder="Type value"
+          defaultValue="123"
+          icon={<FontAwesomeIcon icon={faClock} />}
+          size={InputSize.L}
         />
       </div>
     </div>

@@ -13,11 +13,8 @@ import React, {
 } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { SizeProp } from '@fortawesome/fontawesome-svg-core';
 
 // import { FormatCharacters } from '../masked-input/mask';
-// import IconClose from '../icon/ui/close';
-// import IconButton from '../icon-button/icon-button';
 // import MaskedInput from '../masked-input/masked-input';
 
 import { useStyles } from '../../theme';
@@ -278,9 +275,6 @@ export function Input({ error, view, size, disabled, type, width, ...props }: Pr
           )}
         </span>
         {props.clear && value && (
-          // <IconButton className={b('clear', {disabled: props.disabled, view, size})} size={props.size}>
-          //   <IconClose size={props.size} />
-          // </IconButton>
           <div className={b('clear', { disabled, view, size })} tabIndex={-1} onClick={handleClearClick}>
             <FontAwesomeIcon icon={faTimes} />
           </div>

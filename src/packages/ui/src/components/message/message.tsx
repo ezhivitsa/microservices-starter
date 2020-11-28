@@ -9,7 +9,10 @@ import {
   IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
 
-import { lib } from '@packages/client';
+import { Heading, HeadingSize, HeadingView } from '../heading';
+import { Paragraph } from '../paragraph';
+
+import { useStyles } from '../../theme';
 
 import styles from './message.pcss';
 
@@ -37,9 +40,9 @@ const mapMessageTypeToIcon: Record<MessageType, IconDefinition> = {
   [MessageType.Critical]: faExclamation,
 };
 
-const b = lib.block(styles, 'message');
-
 export function Message({ type, header, content, footer }: Props): ReactElement {
+  const b = useStyles(styles, 'message');
+
   function renderIcon(): ReactNode {
     const icon = mapMessageTypeToIcon[type];
 
@@ -53,12 +56,20 @@ export function Message({ type, header, content, footer }: Props): ReactElement 
   return (
     <div className={b({ type })}>
       {renderIcon()}
-      <div>
-        <div className={b('header')}>{header}</div>
+      <div className={b('content-wrap')}>
+        <Heading view={HeadingView.Condensed} size={HeadingSize.M} className={b('header', { type })}>
+          {header}
+        </Heading>
 
-        <div className={b('content')}>{content}</div>
+        <Paragraph muted className={b('content', { type })}>
+          {content}
+        </Paragraph>
 
-        <div className={b('footer')}>{footer}</div>
+        {footer && (
+          <Paragraph muted className={b('footer', { type })}>
+            {footer}
+          </Paragraph>
+        )}
       </div>
     </div>
   );

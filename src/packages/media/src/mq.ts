@@ -1,14 +1,16 @@
 import { Media } from './types';
 
 export const mediaQueries: Record<Media, string> = {
-  [Media.Small]: 'screen',
-  [Media.SmallOnly]: 'screen and (max-width: 47.9375em)',
-  [Media.Medium]: 'screen and (min-width: 48em)',
-  [Media.MediumOnly]: 'screen and (min-width: 48em) and (max-width: 64em)',
-  [Media.Large]: 'screen and (min-width: 64.0625em)',
-  [Media.LargeOnly]: 'screen and (min-width: 64.0625em) and (max-width: 90em)',
-  [Media.XLarge]: 'screen and (min-width: 90.0625em)',
-  [Media.XLargeOnly]: 'screen and (min-width: 90.0625em) and (max-width: 120em)',
-  [Media.XXLarge]: 'screen and (min-width: 120.0625em)',
-  [Media.XXLargeOnly]: 'screen and (min-width: 120.0625em) and (max-width: 99999999em)',
+  [Media.MobileS]: '(min-width: 320px)',
+  [Media.MobileM]: '(min-width: 375px)',
+  [Media.MobileL]: '(min-width: 412px)',
+  [Media.Mobile]: '(max-width: 599px)',
+  [Media.TabletS]: '(min-width: 600px)',
+  [Media.TabletM]: '(min-width: 768px)',
+  [Media.Tablet]: '(min-width: 600px) and (max-width: 1023px)',
+  [Media.DesktopS]: '(min-width: 1024px)',
+  [Media.DesktopM]: '(min-width: 1280px)',
+  [Media.DesktopL]: '(min-width: 1440px)',
+  [Media.DesktopXL]: '(min-width: 1920px)',
+  [Media.Desktop]: '(min-width: 1024px)',
 };

@@ -13,7 +13,7 @@ interface Props {
 }
 
 export function Layout(props: Props): ReactElement {
-  const isMobile = useMq(Media.SmallOnly);
+  const isMobile = useMq(Media.Mobile);
   const b = useStyles(styles, 'layout');
 
   return (

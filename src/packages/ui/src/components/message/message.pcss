@@ -1,17 +1,37 @@
 @import 'variables.pcss';
 
+@import './message_theme_light.pcss';
+@import './message_theme_dark.pcss';
+
 .message {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: var(--border-radius-400);
+  display: flex;
+  overflow: hidden;
+
   &__icon-wrap {
     display: flex;
-    padding: var(--grid2);
     align-items: center;
+    justify-content: center;
+    border-right-width: 1px;
+    border-right-style: solid;
+    font-size: var(--font-size-600);
+    width: var(--grid10);
+  }
+
+  &__content-wrap {
+    flex: 1;
+    padding: var(--grid3);
   }
 
   &__header {
-    color: 000;
+    margin-bottom: var(--grid2);
+    font-weight: var(--font-weight-600);
   }
 
-  &__content {
-    color: 000;
+  &__footer {
+    margin-top: var(--grid2);
+    padding-top: var(--grid2);
   }
 }
