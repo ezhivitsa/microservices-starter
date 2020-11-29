@@ -12,7 +12,7 @@ export const production: Config = {
     format: 'cloud',
   },
   kafka: {
-    clientId: 'authorization',
+    clientId: 'api-gateway',
     brokers: ['kafka:9092'],
     logLevel: logLevel.INFO,
   },

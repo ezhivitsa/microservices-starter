@@ -4,5 +4,5 @@ import { ServiceMetadata } from '../types';
 import { RegisterRequest, RegisterResponse } from './types';
 
 export async function register(data: RegisterRequest, metadata: ServiceMetadata): Promise<RegisterResponse> {
-  return authorizationProvider.registration(data, metadata);
+  return authorizationProvider.registrationCommand(data, metadata);
 }

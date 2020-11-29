@@ -1,6 +1,7 @@
 import { Middleware, ParameterizedContext } from 'koa';
 import { RouterContext, Middleware as RouterMiddleware } from '@koa/router';
 import { Logger } from 'winston';
+import { Version } from '@packages/communication';
 
 import { Config } from '../src/configs/types';
 
@@ -13,6 +14,7 @@ declare module 'koa' {
     logger: Logger;
     validatedRequest: ValidateResult<any>;
     requestId: string;
+    version: Version;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-interface

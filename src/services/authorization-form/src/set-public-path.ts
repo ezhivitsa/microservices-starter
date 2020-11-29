@@ -1,5 +1,5 @@
 import { setPublicPath } from 'systemjs-webpack-interop';
 
-import { lib } from '@packages/client';
+import { config } from 'lib/config';
 
-setPublicPath(lib.config.frontUpstreams.auth.name);
+setPublicPath(config.frontUpstreams.auth.name);

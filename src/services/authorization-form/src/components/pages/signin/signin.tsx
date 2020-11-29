@@ -1,16 +1,21 @@
 import React, { ReactElement, ReactNode } from 'react';
-import { Formik, FormikHelpers } from 'formik';
+import { Formik, FormikHelpers, FormikProps, Form } from 'formik';
 import { observer } from 'mobx-react-lite';
 
-import { FormikField, Input } from '@packages/ui';
+import { FormikField, Input, InputWidth, Button, ButtonView, ButtonType, useStyles } from '@packages/ui';
 
 import { SignInStoreProvider, useSignInStore } from 'providers';
 import { SignInStore, FormikSignIn, FormikSignInFieldName } from 'stores';
 
+import { signInFormTexts } from 'texts';
+
 import { validationSchema } from './validation';
+
+import styles from './signin.pcss';
 
 export const SignIn = observer(
   (): ReactElement => {
+    const b = useStyles(styles, 'signin');
     const signInStore = useSignInStore();
 
     async function handleSubmit(values: FormikSignIn, { setErrors }: FormikHelpers<FormikSignIn>): Promise<void> {
@@ -25,19 +30,48 @@ export const SignIn = observer(
       }
     }
 
-    function renderForm(): ReactNode {
+    function renderForm({ isValid }: FormikProps<FormikSignIn>): ReactNode {
       return (
-        <>
+        <Form>
           {renderError()}
-          <FormikField name={FormikSignInFieldName.Email} component={Input} componentProps={{ type: 'email' }} />
-          <FormikField name={FormikSignInFieldName.Password} component={Input} componentProps={{ type: 'password' }} />
-        </>
+          <FormikField
+            name={FormikSignInFieldName.Email}
+            component={Input}
+            componentProps={{
+              label: signInFormTexts.email,
+              placeholder: signInFormTexts.emailPlaceholder,
+              type: 'email',
+              width: InputWidth.Available,
+              className: b('input'),
+            }}
+          />
+          <FormikField
+            name={FormikSignInFieldName.Password}
+            component={Input}
+            componentProps={{
+              label: signInFormTexts.password,
+              placeholder: signInFormTexts.passwordPlaceholder,
+              type: 'password',
+              width: InputWidth.Available,
+              className: b('input'),
+            }}
+          />
+
+          <Button view={ButtonView.Action} type={ButtonType.Submit} className={b('button')} disabled={!isValid}>
+            {signInFormTexts.signInBtn}
+          </Button>
+        </Form>
       );
     }
 
     return (
-      <div>
-        <Formik initialValues={signInStore.formikValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
+      <div className={b()}>
+        <Formik
+          initialValues={signInStore.formikValues}
+          validationSchema={validationSchema}
+          validateOnMount
+          onSubmit={handleSubmit}
+        >
           {renderForm}
         </Formik>
       </div>

@@ -11,6 +11,7 @@ import React, {
   useRef,
   ReactElement,
 } from 'react';
+import classnames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
@@ -110,7 +111,7 @@ interface Props {
   onProcessMaskInputEvent?: (event?: ChangeEvent<any>) => void;
 }
 
-export function Input({ error, view, size, disabled, type, width, ...props }: Props): ReactElement {
+export function Input({ error, view, size, disabled, type, width, className, ...props }: Props): ReactElement {
   const b = useStyles(styles, 'input');
 
   const [stateFocused, setFocused] = useState(false);
@@ -291,21 +292,24 @@ export function Input({ error, view, size, disabled, type, width, ...props }: Pr
 
   return (
     <span
-      className={b({
-        type,
-        view,
-        disabled,
-        focused,
-        size,
-        width,
-        hasAddons,
-        hasLeftAddons,
-        hasClear,
-        hasIcon,
-        hasLabel,
-        hasValue,
-        invalid,
-      })}
+      className={classnames(
+        b({
+          type,
+          view,
+          disabled,
+          focused,
+          size,
+          width,
+          hasAddons,
+          hasLeftAddons,
+          hasClear,
+          hasIcon,
+          hasLabel,
+          hasValue,
+          invalid,
+        }),
+        className,
+      )}
       ref={rootRef}
     >
       <span className={b('inner')}>

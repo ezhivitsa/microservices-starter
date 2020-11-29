@@ -1,0 +1,22 @@
+@import 'variables.pcss';
+
+.signin {
+  padding: var(--grid4);
+  border-radius: var(--border-radius-400);
+  max-width: 500px;
+  margin: auto;
+
+  &__input {
+    &:not(:last-of-type) {
+      margin-bottom: var(--grid2);
+    }
+  }
+
+  &__button {
+    margin-top: var(--grid3);
+  }
+}
+
+.signin_theme_light {
+  border: 1px solid var(--color-grey-400);
+}

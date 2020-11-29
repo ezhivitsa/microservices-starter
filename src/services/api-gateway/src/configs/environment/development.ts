@@ -8,4 +8,8 @@ export const development: Config = {
     ...staging.logger,
     format: 'local',
   },
+  kafka: {
+    ...staging.kafka,
+    brokers: ['localhost:9092'],
+  },
 };

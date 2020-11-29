@@ -4,12 +4,13 @@ import { Constants } from '@packages/common';
 
 import { validateMiddleware } from 'middlewares';
 
-import { signUp } from './account';
+import { signUp, signIn } from './account';
 
-import { signUpValidators } from './validators';
+import { signUpValidators, signInValidators } from './validators';
 
 const accountRouter = new Router();
 
 accountRouter.post(Constants.signupPath, validateMiddleware(signUpValidators), signUp);
+accountRouter.post(Constants.signinPath, validateMiddleware(signInValidators), signIn);
 
 export { accountRouter };

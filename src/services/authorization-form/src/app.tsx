@@ -2,7 +2,7 @@ import React, { ReactElement, StrictMode } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
 
-import { lib } from '@packages/client';
+import { config } from 'lib/config';
 
 import { SignUpPage, SignInPage } from './components/pages';
 import { signinPath, signupPath, indexPath } from './components/pages/paths';
@@ -10,7 +10,7 @@ import { signinPath, signupPath, indexPath } from './components/pages/paths';
 function AppComponent(): ReactElement {
   return (
     <StrictMode>
-      <BrowserRouter basename={lib.config.frontUpstreams.auth.rule}>
+      <BrowserRouter basename={config.frontUpstreams.auth.rule}>
         <Switch>
           <Route exact path={indexPath}>
             <Redirect to={signinPath} />

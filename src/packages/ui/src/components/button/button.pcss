@@ -1,0 +1,138 @@
+@import "variables.pcss";
+
+@import "./button_theme_light.pcss";
+@import "./button_theme_dark.pcss";
+
+.button {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  align-items: center;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  outline: 0;
+  user-select: none;
+  font-family: var(--font);
+  text-align: center;
+  white-space: nowrap;
+  transition-duration: 200ms;
+  transition-property: background, border-color, color, width;
+  transition-timing-function: ease;
+  border-radius: var(--border-radius-300);
+
+  &,
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  &::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+  }
+
+  &__addon {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+  }
+
+  &__content {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+  }
+
+  &__text {
+    font-weight: var(--font-weight-400);
+    line-height: normal;
+    padding: 0 0 1px;
+
+    &._view_action,
+    &._view_extra,
+    &._view_rounded {
+      font-weight: var(--font-weight-400);
+    }
+  }
+
+  &__icon {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    padding-right: var(--grid2);
+
+    &._size_s {
+      margin-left: var(--grid1-neg);
+    }
+
+    &._size_m {
+      margin-left: var(--grid2-neg);
+    }
+
+    &._size_l {
+      margin-left: var(--grid3-neg);
+    }
+
+    &._size_xl {
+      margin-left: var(--grid4-neg);
+    }
+  }
+
+  &._width_available {
+    display: flex;
+    width: 100%;
+  }
+
+  &._type_link {
+    text-decoration: none;
+  }
+
+  &._focused {
+    z-index: 1;
+  }
+
+  &._disabled {
+    cursor: default;
+    pointer-events: none;
+    opacity: var(--opacity-200);
+  }
+
+  & > :last-child {
+    padding-right: 0;
+  }
+
+  &._size_s {
+    height: var(--grid7);
+    padding: 0 var(--grid4);
+    font-size: var(--font-size-200);
+  }
+
+  &._size_m {
+    height: var(--grid10);
+    padding: 0 var(--grid5);
+    font-size: var(--font-size-400);
+  }
+
+  &._size_l {
+    height: var(--grid12);
+    padding: 0 var(--grid6);
+    font-size: var(--font-size-500);
+  }
+
+  &._size_xl {
+    height: var(--grid15);
+    padding: 0 var(--grid7);
+    font-size: var(--font-size-700);
+  }
+}

@@ -1,5 +1,7 @@
 import { lib } from '@packages/client';
 
-import { errors } from 'texts';
+import { config } from 'lib/config';
 
-export const api = lib.initApi({ apiUrl: lib.config.apiGatewayUrl, globalError: errors.general });
+import { errorsTexts } from 'texts';
+
+export const api = lib.initApi({ apiUrl: config.apiGatewayUrl, globalError: errorsTexts.general });

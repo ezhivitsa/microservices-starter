@@ -1,1 +1,1 @@
-export { Input, InputSize, InputView } from './input';
+export { Input, InputSize, InputView, InputWidth } from './input';

@@ -2,16 +2,16 @@
 
 import * as yup from 'yup';
 
-import { validation } from 'texts';
+import { validationTexts } from 'texts';
 
 yup.setLocale({
   mixed: {
-    required: validation.mixedRequired,
-    default: validation.mixedDefault,
+    required: validationTexts.mixedRequired,
+    default: validationTexts.mixedDefault,
   },
   string: {
-    email: validation.stringEmail,
-    url: validation.stringUrl,
+    email: validationTexts.stringEmail,
+    url: validationTexts.stringUrl,
   },
 });
 

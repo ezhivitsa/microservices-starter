@@ -1,8 +1,9 @@
 import { observable, computed, action, runInAction } from 'mobx';
 
 import { ApiError } from '@packages/client';
+import { Types } from '@packages/common';
 
-import { Status } from './types';
+import { AuthorizationService } from 'services';
 
 export enum FormikSignInFieldName {
   Email = 'email',
@@ -18,7 +19,7 @@ export class SignInStore {
   @observable private _email = '';
   @observable private _password = '';
 
-  @observable private _status: Status = Status.INITIAL;
+  @observable private _status: Types.Status = Types.Status.Initial;
   @observable private _error: ApiError | null = null;
 
   @computed
@@ -31,27 +32,28 @@ export class SignInStore {
 
   @computed
   get formikErrors(): Partial<FormikSignIn> {
-    return this._status === Status.ERROR ? this._error?.data || {} : {};
+    return this._status === Types.Status.Error ? this._error?.data || {} : {};
   }
 
   @computed
   get generalError(): string | undefined {
-    return this._status === Status.ERROR ? this._error?.globalError : undefined;
+    return this._status === Types.Status.Error ? this._error?.globalError : undefined;
   }
 
   @computed
   get isSigningIn(): boolean {
-    return this._status === Status.PENDING;
+    return this._status === Types.Status.Pending;
   }
 
   @action
   async signIn(values: FormikSignIn): Promise<void> {
-    this._status = Status.PENDING;
+    this._status = Types.Status.Pending;
 
     try {
+      const response = await AuthorizationService.signIn(values);
     } catch (error) {
       runInAction(() => {
-        this._status = Status.ERROR;
+        this._status = Types.Status.Error;
         this._error = error;
       });
     }
