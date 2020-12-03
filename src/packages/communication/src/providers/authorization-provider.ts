@@ -16,4 +16,17 @@ export class AuthorizationProvider extends BaseProvider {
       metadata,
     );
   }
+
+  signInCommand(
+    data: AuthorizationTypes.SignInRequest,
+    metadata: CommandMetadata,
+  ): Promise<AuthorizationTypes.SignInResponse> {
+    return this._kafka.sendCommand(
+      {
+        data,
+        command: AuthorizationCommand.SignIn,
+      },
+      metadata,
+    );
+  }
 }

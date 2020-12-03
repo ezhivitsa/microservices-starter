@@ -15,6 +15,7 @@ declare module 'koa' {
     validatedRequest: ValidateResult<any>;
     requestId: string;
     version: Version;
+    responseChannel: string;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-interface

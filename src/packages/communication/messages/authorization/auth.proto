@@ -11,3 +11,12 @@ message RegistrationRequest {
 message RegistrationResponse {
   string access_token = 1;
 }
+
+message SignInRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message SignInResponse {
+  string access_token = 1;
+}

@@ -20,4 +20,5 @@ export interface ListenData {
   version: Version;
   requestId?: string;
   data?: any;
+  responseChannel?: string;
 }

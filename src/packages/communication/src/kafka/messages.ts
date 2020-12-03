@@ -3,6 +3,8 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { commandSchemas, eventSchemas } from '../proto-messages';
 
+import { getChannelKey } from '../messages';
+
 import {
   COMMAND_HEADER,
   COMMAND_MESSAGE_ID_HEADER,
@@ -12,6 +14,7 @@ import {
   EVENT_HEADER,
   EVENT_ID_HEADER,
   VERSION_HEADER,
+  RESPONSE_CHANNEL_HEADER,
 } from './constants';
 
 import { CommandData, CommandMetadata, EventMetadata, ReplyData, EventData } from './types';
@@ -19,13 +22,13 @@ import { KafkaHandlerError } from './errors';
 
 export function getCommandMessage<D>(
   commandData: CommandData<D>,
+  responseChannel: string,
   metadata: CommandMetadata,
 ): {
   message: Message;
   id: string;
 } {
-  const commandSchema = commandSchemas[commandData.command];
-
+  const commandSchema = commandSchemas[getChannelKey(commandData.command, metadata.version)];
   const messageId = uuidv4();
 
   const message = {
@@ -35,6 +38,7 @@ export function getCommandMessage<D>(
       [COMMAND_REQUEST_ID_HEADER]: metadata.requestId,
       [COMMAND_HEADER]: commandData.command,
       [VERSION_HEADER]: metadata.version,
+      [RESPONSE_CHANNEL_HEADER]: responseChannel,
     },
   };
 
@@ -45,7 +49,7 @@ export function getCommandMessage<D>(
 }
 
 export function getCommandReplyMessage<D>(replyData: ReplyData<D>, metadata: CommandMetadata): Message {
-  const commandSchema = commandSchemas[replyData.command];
+  const commandSchema = commandSchemas[getChannelKey(replyData.command, metadata.version)];
 
   return {
     value: replyData.data ? commandSchema.requestSchema?.encode(replyData.data) || null : null,
@@ -62,7 +66,7 @@ export function getCommandReplyErrorMessage(
   replyErrorData: ReplyData<KafkaHandlerError>,
   metadata: CommandMetadata,
 ): Message {
-  const commandSchema = commandSchemas[replyErrorData.command];
+  const commandSchema = commandSchemas[getChannelKey(replyErrorData.command, metadata.version)];
 
   return {
     value: commandSchema.errorSchema?.encode(replyErrorData.data.errorData) || null,
@@ -77,7 +81,7 @@ export function getCommandReplyErrorMessage(
 }
 
 export function getEventMessage<D>(eventData: EventData<D>, metadata: EventMetadata): Message {
-  const eventSchema = eventSchemas[eventData.event];
+  const eventSchema = eventSchemas[getChannelKey(eventData.event, metadata.version)];
 
   const eventId = uuidv4();
 

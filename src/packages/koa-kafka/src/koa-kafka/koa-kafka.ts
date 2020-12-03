@@ -26,6 +26,7 @@ export class KoaKafka<S extends Record<string, any> = Record<string, any>, C ext
       {
         requestId: ctx.requestId || '',
         version: ctx.version,
+        responseChannel: ctx.responseChannel || '',
       },
     );
   }
@@ -70,6 +71,7 @@ export class KoaKafka<S extends Record<string, any> = Record<string, any>, C ext
     };
 
     this._middlewares.push(middleware as any);
+    this._kafka.handleCommand(command, version);
     return this;
   }
 
@@ -83,6 +85,7 @@ export class KoaKafka<S extends Record<string, any> = Record<string, any>, C ext
     };
 
     this._middlewares.push(middleware as any);
+    this._kafka.handleEvent(event, version);
     return this;
   }
 }

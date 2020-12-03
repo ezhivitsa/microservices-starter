@@ -4,6 +4,7 @@ import { Version } from '../messages';
 export interface CommandMetadata {
   requestId: string;
   version: Version;
+  responseChannel: string;
 }
 
 export interface EventMetadata {
@@ -29,6 +30,7 @@ export interface ListenCommandMessageData {
   requestId: string;
   command: Command;
   version: Version;
+  responseChannel: string;
   data?: any;
 }
 
@@ -36,6 +38,7 @@ export interface ListenEventMessageData {
   id: string;
   event: Event;
   version: Version;
+  responseChannel: string;
   data?: any;
 }
 

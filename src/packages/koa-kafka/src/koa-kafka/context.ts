@@ -29,6 +29,18 @@ export class Context<S extends Record<string, any> = Record<string, any>> {
     return this._data.version;
   }
 
+  get responseChannel(): string | undefined {
+    return this._data.responseChannel;
+  }
+
+  get data(): any {
+    return this._data.data?.data;
+  }
+
+  get dataError(): any {
+    return this._data.data?.error;
+  }
+
   throw(errorData: any): void {
     if (!this._data.command) {
       return;
@@ -45,6 +57,7 @@ export class Context<S extends Record<string, any> = Record<string, any>> {
       {
         requestId: this._data.requestId || '',
         version: this._data.version,
+        responseChannel: this._data.responseChannel || '',
       },
     );
   }

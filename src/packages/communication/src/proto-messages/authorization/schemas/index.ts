@@ -1,2 +1,1 @@
-export * from './auth-schemas';
-export * from './errors-schema';
+export * from './auth-schema';

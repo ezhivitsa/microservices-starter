@@ -13,6 +13,6 @@ export async function signUp(ctx: RouterAppContext): Promise<void> {
 export async function signIn(ctx: RouterAppContext): Promise<void> {
   const data: SignInRequest = ctx.state.validatedRequest.value;
 
-  console.log(data);
-  ctx.body = 'Yes';
+  const result = await accountService.signIn(data, ctx.state);
+  ctx.body = result;
 }
