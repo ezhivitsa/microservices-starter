@@ -3,7 +3,8 @@
   "workspaces": {
     "packages": [
       "src/packages/*",
-      "src/services/*"
+      "src/client-services/*",
+      "src/backend-services/*"
     ]
   }
 }

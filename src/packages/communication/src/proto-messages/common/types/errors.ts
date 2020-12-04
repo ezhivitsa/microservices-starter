@@ -7,6 +7,6 @@ export enum ErrorCode {
 }
 
 export interface Error {
-  code: ErrorCode;
-  message: string;
+  code?: ErrorCode;
+  message?: string;
 }

@@ -1,4 +1,4 @@
-import { Kafka, Command, Event, Version } from '@packages/communication';
+import { Kafka, Command, Event, Version, ErrorCode } from '@packages/communication';
 
 import { compose } from './utils';
 import { Context } from './context';
@@ -43,6 +43,14 @@ export class KoaKafka<S extends Record<string, any> = Record<string, any>, C ext
 
     return (data: ListenData) => {
       const ctx = new Context<S>(this._kafka, data);
+
+      if (ctx.dataError) {
+        ctx.throw({
+          code: ErrorCode.BAD_PROTO,
+        });
+        return;
+      }
+
       return this._handleRequest(ctx, fn);
     };
   }

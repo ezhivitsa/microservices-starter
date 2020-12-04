@@ -1,7 +1,7 @@
 import { Kafka, ProducerConfig, ConsumerConfig, KafkaMessage, IHeaders, Message } from 'kafkajs';
 
-import { Command, commandSchemas } from '../proto-messages';
-import { getChannelKey } from '../messages';
+import { Command, commandSchemas, errorSchema } from '../proto-messages';
+import { getChannelKey, Version } from '../messages';
 import { getRequestChannel } from '../channels';
 
 import {
@@ -18,7 +18,7 @@ import { Producer } from './producer';
 import { Consumer } from './consumer';
 import { PromiseProvider } from './promise-provider';
 
-import { COMMAND_HEADER, REPLY_CORRELATION_ID_HEADER } from './constants';
+import { COMMAND_HEADER, REPLY_CORRELATION_ID_HEADER, VERSION_HEADER } from './constants';
 
 const getResponseChannel = (groupId: string): string => `${groupId}-response`;
 
@@ -58,7 +58,8 @@ export class KafkaCommand {
     }
 
     const command = headers[COMMAND_HEADER] as Command;
-    const commandSchema = commandSchemas[command];
+    const version = (headers[VERSION_HEADER] as Version) || Version.v1;
+    const commandSchema = commandSchemas[getChannelKey(command, version)];
 
     const value = message.value ? commandSchema.responseSchema?.decode(message.value) || null : null;
     this._promiseProviders.resolve(headerMessageId, value);
@@ -70,10 +71,7 @@ export class KafkaCommand {
       return;
     }
 
-    const command = headers[COMMAND_HEADER] as Command;
-    const commandSchema = commandSchemas[command];
-
-    const value = message.value ? commandSchema.errorSchema?.decode(message.value) || null : null;
+    const value = message.value ? errorSchema.decode(message.value) || null : null;
     this._promiseProviders.reject(headerMessageId, value);
   }
 
@@ -84,8 +82,6 @@ export class KafkaCommand {
     const requestChannel = getRequestChannel(commandSchema.channel);
 
     this._handleReplyMessages.add(id);
-
-    console.log('Request channel: ', requestChannel);
 
     await this._producer.sendMessage({
       topic: requestChannel,

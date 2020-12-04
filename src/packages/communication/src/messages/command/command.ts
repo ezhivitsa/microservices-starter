@@ -1,6 +1,5 @@
 import { Channel } from '../../channels';
 
-import { ProtoMessage } from '../proto';
 import { Version } from '../types';
 import { getChannelKey } from '../utils';
 
@@ -10,7 +9,6 @@ export function getChannelCommands<T extends string>(
   channel: Channel,
   commandSchemas: CommandSchema<T>[],
   version: Version,
-  errorSchema?: ProtoMessage<any>,
 ): Record<string, ChannelCommandSchema> {
   const result: Record<string, ChannelCommandSchema> = {};
 
@@ -18,7 +16,6 @@ export function getChannelCommands<T extends string>(
     result[getChannelKey(command, version)] = {
       requestSchema,
       responseSchema,
-      errorSchema,
       channel,
     };
   });
