@@ -2,7 +2,14 @@ include dev.env
 -include dev-local.env
 export
 
+POSTGRES_DEV_VARS := POSTGRES_PORT=${POSTGRES_PORT_DEV} \
+	POSTGRES_HOST=${POSTGRES_HOST_LOCAL} \
+	POSTGRES_DATABASE=${POSTGRES_DB_DEV} \
+	POSTGRES_USER=${POSTGRES_USER_DEV} \
+	POSTGRES_PASSWORD=${POSTGRES_PASSWORD_LOCAL}
+
 DOCKER_COMPOSE := docker-compose -f docker-compose.yml $(DOCKER_COMPOSE_ADDITIONAL_FLAGS)
+DOCKER_COMPOSE_DEV := ${POSTGRES_DEV_VARS} ${DOCKER_COMPOSE}
 
 # -------------------------------------
 # setup targets
@@ -24,7 +31,7 @@ run-kafka:
 
 .PHONY: run
 run:
-	$(DOCKER_COMPOSE) up -d
+	$(DOCKER_COMPOSE_DEV) up -d
 
 # -------------------------------------
 # build targets
