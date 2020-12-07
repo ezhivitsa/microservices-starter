@@ -1,19 +1,19 @@
 import { Optional, Model, DataTypes, Sequelize, ModelAttributes, ModelCtor } from 'sequelize';
 
-enum Role {
+export enum Role {
   User = 'user',
   Admin = 'admin',
   OrganizationAdmin = 'organization-admin',
 }
 
-interface UserAttributes {
+export interface UserAttributes {
   id: string;
   email: string;
   password_hash: string;
   roles: Role[];
 }
 
-type UserCreationAttributes = Optional<UserAttributes, 'id'>;
+export type UserCreationAttributes = Optional<UserAttributes, 'id'>;
 
 export class UserInstance extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
   public id!: string;
@@ -21,8 +21,6 @@ export class UserInstance extends Model<UserAttributes, UserCreationAttributes> 
   public password_hash!: string;
   public roles!: Role[];
 }
-
-type Attrs = UserInstance['_attributes'];
 
 export type UserModel = ModelCtor<UserInstance>;
 

@@ -1,7 +1,9 @@
 export interface RegistrationRequest {
   email: string;
-  firstName?: string;
+  firstName: string;
   lastName: string;
+  password: string;
+  owner: boolean;
 }
 
 export interface RegistrationResponse {

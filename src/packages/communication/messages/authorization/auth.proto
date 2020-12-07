@@ -6,6 +6,8 @@ message RegistrationRequest {
   string email = 1;
   string first_name = 3;
   string last_name = 4;
+  string password = 5;
+  bool owner = 6;
 }
 
 message RegistrationResponse {

@@ -10,4 +10,8 @@ export interface Config {
   readonly requestIdHeader: string;
   readonly kafka: KafkaConfig;
   readonly kafkaConsumer: ConsumerConfig;
+  readonly tokens: {
+    readonly accessTokenLifetime: number;
+    readonly refreshTokenLifetime: number;
+  };
 }

@@ -1,5 +1,5 @@
-export interface User {
-  id: string;
-  firstName: string;
-  lastName: string;
+export interface CreateParams {
+  email: string;
+  password: string;
+  owner: boolean;
 }
