@@ -19,4 +19,8 @@ export const production: Config = {
   kafkaConsumer: {
     groupId: 'api-gateway',
   },
+  tokens: {
+    accessTokenLifetime: 60 * 60, // 1 hour
+    refreshTokenLifetime: 60 * 60 * 24 * 7 * 2, // 2 weeks
+  },
 };

@@ -7,16 +7,16 @@
     "@packages/koa-kafka": "1.0.0",
     "@packages/communication": "1.0.0",
     "module-alias": "2.2.2",
-    "oauth2-server": "3.1.1",
     "pg": "8.5.1",
     "pg-hstore": "2.3.3",
+    "redis": "3.0.2",
     "sequelize": "6.3.5"
   },
   "devDependencies": {
     "@packages/eslint-config": "1.0.0",
     "@types/module-alias": "2.0.0",
-    "@types/oauth2-server": "3.0.12",
     "@types/sequelize": "4.28.9",
+    "@types/redis": "2.8.28",
     "sequelize-cli": "6.2.0",
     "ts-node": "9.0.0",
     "typescript": "4.0.5"

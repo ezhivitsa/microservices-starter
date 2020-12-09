@@ -1,6 +1,7 @@
 import { Middleware, ParameterizedContext } from 'koa';
 import { RouterContext, Middleware as RouterMiddleware } from '@koa/router';
 import { Logger } from 'winston';
+import { OAuth2Server } from 'oauth2-server';
 import { Version } from '@packages/communication';
 
 import { Config } from '../src/configs/types';
@@ -18,8 +19,9 @@ declare module 'koa' {
     responseChannel: string;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  export interface AppKoaContext {}
+  export interface AppKoaContext {
+    oauth: OAuth2Server;
+  }
 
   export type AppMiddleware = Middleware<AppKoaState, AppKoaContext>;
 

@@ -2,23 +2,90 @@ syntax = "proto3";
 
 package microservices_starter.authorization.auth;
 
+import "google/protobuf/timestamp.proto";
+
+// Registration
 message RegistrationRequest {
   string email = 1;
-  string first_name = 3;
-  string last_name = 4;
-  string password = 5;
-  bool owner = 6;
+  string password = 2;
+  bool owner = 3;
 }
 
-message RegistrationResponse {
+enum Role {
+  USER = 1;
+  ADMIN = 2;
+  ORGANIZATION_ADMIN = 3;
+} 
+
+message User {
+  string id = 1;
+  string email = 2;
+  repeated Role roles = 3;
+}
+
+// GetAccessToken
+message GetAccessTokenRequest {
   string access_token = 1;
 }
 
-message SignInRequest {
+message GetAccessTokenResponse {
+  message AccessToken {
+    string access_token = 1;
+    google.protobuf.Timestamp access_token_expires_at = 2;
+    User user = 3;
+  }
+
+  AccessToken token = 1;
+}
+
+// GetRefreshToken
+message GetRefreshTokenRequest {
+  string refresh_token = 1;
+}
+
+message GetRefreshTokenResponse {
+  message RefreshToken {
+    string refresh_token = 1;
+    google.protobuf.Timestamp refresh_token_expires_at = 2;
+    User user = 3;
+  }
+
+  RefreshToken token = 1;
+}
+
+// GetUser
+message GetUserRequest {
   string email = 1;
   string password = 2;
 }
 
-message SignInResponse {
+message GetUserResponse {
+  User user = 1;
+}
+
+// SaveToken
+message SaveTokenRequest {
   string access_token = 1;
+  google.protobuf.Timestamp access_token_expires_at = 2;
+  string refresh_token = 3;
+  google.protobuf.Timestamp refresh_token_expires_at = 4;
+  User user = 5;
+}
+
+// RevokeToken
+message RevokeTokenRequest {
+  string refresh_token = 1;
+  string refresh_token_expires_at = 2;
+  User user = 3;
+}
+
+// VerifyScope
+message VerifyScopeRequest {
+  string access_token = 1;
+  google.protobuf.Timestamp access_token_expires_at = 2;
+  User user = 3;
+}
+
+message VerifyScopeResponse {
+  bool verified = 1;
 }

@@ -5,7 +5,12 @@ import { Channel } from '../../channels';
 
 export enum AuthorizationCommand {
   Registration = 'registration',
-  SignIn = 'sign-in',
+  GetAccessToken = 'get-access-token',
+  GetRefreshToken = 'get-refresh-token',
+  GetUser = 'get-user',
+  SaveToken = 'save-token',
+  RevokeToken = 'revoke-token',
+  VerifyScope = 'verify-scope',
 }
 
 export const authorizationCommandSchemas: Record<string, ChannelCommandSchema> = getChannelCommands(

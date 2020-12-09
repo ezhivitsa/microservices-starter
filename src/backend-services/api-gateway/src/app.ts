@@ -7,6 +7,7 @@ import bodyParser from 'koa-bodyparser';
 import { middlewares } from '@packages/server';
 
 import { config } from './lib/config';
+import { oauth } from './lib/oauth';
 
 import { configMiddleware, errorsMiddleware } from './middlewares';
 import { apiRouter } from './routes';
@@ -15,6 +16,8 @@ const app = new Koa<AppKoaState, AppKoaContext>();
 
 export function initApp(): Koa<AppKoaState, AppKoaContext> {
   const loggerInitMiddleware = middlewares.prepareLoggerInitMiddleware(config.logger);
+
+  app.context.oauth = oauth;
 
   app
     .use(configMiddleware)

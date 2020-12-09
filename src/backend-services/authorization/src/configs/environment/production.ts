@@ -16,8 +16,8 @@ export const production: Config = {
   kafkaConsumer: {
     groupId: 'authorization',
   },
-  tokens: {
-    accessTokenLifetime: 60 * 60, // 1 hour
-    refreshTokenLifetime: 60 * 60 * 24 * 7 * 2, // 2 weeks
+  redis: {
+    host: 'localhost',
+    port: 6379,
   },
 };

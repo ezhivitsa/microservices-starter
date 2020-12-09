@@ -11,4 +11,8 @@ export interface Config {
   readonly logger: Readonly<LoggerConfig>;
   readonly kafka: KafkaConfig;
   readonly kafkaConsumer: ConsumerConfig;
+  readonly tokens: {
+    readonly accessTokenLifetime: number;
+    readonly refreshTokenLifetime: number;
+  };
 }

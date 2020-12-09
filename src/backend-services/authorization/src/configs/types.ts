@@ -1,4 +1,5 @@
 import { KafkaConfig, ConsumerConfig } from 'kafkajs';
+import { ClientOpts } from 'redis';
 
 export interface LoggerConfig {
   format: 'local' | 'cloud';
@@ -10,8 +11,5 @@ export interface Config {
   readonly requestIdHeader: string;
   readonly kafka: KafkaConfig;
   readonly kafkaConsumer: ConsumerConfig;
-  readonly tokens: {
-    readonly accessTokenLifetime: number;
-    readonly refreshTokenLifetime: number;
-  };
+  readonly redis: ClientOpts;
 }
