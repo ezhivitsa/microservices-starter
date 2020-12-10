@@ -19,12 +19,28 @@ export const authorizationCommandSchemas: Record<string, ChannelCommandSchema> =
     {
       command: AuthorizationCommand.Registration,
       requestSchema: AuthorizationSchemas.registrationRequest,
-      responseSchema: AuthorizationSchemas.registrationResponse,
     },
     {
-      command: AuthorizationCommand.SignIn,
-      requestSchema: AuthorizationSchemas.signInRequest,
-      responseSchema: AuthorizationSchemas.signInResponse,
+      command: AuthorizationCommand.GetAccessToken,
+      requestSchema: AuthorizationSchemas.getAccessTokenRequest,
+      responseSchema: AuthorizationSchemas.getAccessTokenResponse,
+    },
+    {
+      command: AuthorizationCommand.GetRefreshToken,
+      requestSchema: AuthorizationSchemas.getRefreshTokenRequest,
+      responseSchema: AuthorizationSchemas.getRefreshTokenResponse,
+    },
+    {
+      command: AuthorizationCommand.GetUser,
+      requestSchema: AuthorizationSchemas.getUserRequest,
+      responseSchema: AuthorizationSchemas.getUserResponse,
+    },
+    { command: AuthorizationCommand.SaveToken, requestSchema: AuthorizationSchemas.saveTokenRequest },
+    { command: AuthorizationCommand.RevokeToken, requestSchema: AuthorizationSchemas.revokeTokenRequest },
+    {
+      command: AuthorizationCommand.VerifyScope,
+      requestSchema: AuthorizationSchemas.verifyScopeRequest,
+      responseSchema: AuthorizationSchemas.verifyScopeResponse,
     },
   ],
   Version.v1,
