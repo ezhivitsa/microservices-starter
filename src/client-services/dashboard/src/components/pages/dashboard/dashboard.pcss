@@ -1,0 +1,19 @@
+@import 'variables.pcss';
+
+.dashboard {
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    justify-items: center;
+    grid-gap: var(--grid4);
+    padding: var(--grid4) 0;
+  }
+
+  &__tables {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    justify-items: center;
+    grid-gap: var(--grid4);
+    margin-top: var(--grid8);
+  }
+}
