@@ -15,15 +15,19 @@ module.exports = {
         primaryKey: true,
       },
       email: {
-        type: new DataTypes.STRING(128),
+        type: DataTypes.STRING(128),
         allowNull: false,
       },
       password_hash: {
-        type: new DataTypes.STRING(128),
+        type: DataTypes.STRING(128),
+        allowNull: false,
+      },
+      password_salt: {
+        type: DataTypes.STRING(128),
         allowNull: false,
       },
       roles: {
-        type: new DataTypes.ENUM(Role.User, Role.Admin, Role.OrganizationAdmin),
+        type: DataTypes.ARRAY(DataTypes.ENUM({ values: [Role.User, Role.Admin, Role.OrganizationAdmin] })),
         allowNull: false,
       },
     });

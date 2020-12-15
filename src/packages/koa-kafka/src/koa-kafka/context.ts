@@ -7,6 +7,8 @@ export class Context<S extends Record<string, any> = Record<string, any>> {
 
   body: any;
 
+  private _validatedData: any;
+
   constructor(private _kafka: Kafka, private _data: ListenData) {}
 
   get command(): Command | undefined {
@@ -34,11 +36,15 @@ export class Context<S extends Record<string, any> = Record<string, any>> {
   }
 
   get data(): any {
-    return this._data.data?.data;
+    return this._validatedData || this._data.data?.data;
   }
 
   get dataError(): any {
     return this._data.data?.error;
+  }
+
+  set validatedData(data: any) {
+    this._validatedData = data;
   }
 
   throw(errorData: ErrorData | KafkaHandlerError): void {

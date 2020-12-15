@@ -1,4 +1,6 @@
-import { UserInstance, Role, UserAttributes, UserCreationAttributes } from 'db/models/user';
+import { UserInstance, UserModel, UserAttributes, UserCreationAttributes } from 'lib/db/models/user';
+import { UserRole } from 'lib/db/models/enums';
+import db from 'lib/db/models';
 import { WhereOptions, FindOptions } from 'sequelize/types';
 
 import { StorageService } from './storage-service';
@@ -15,18 +17,22 @@ interface UpdateFilter {
 interface CreateData {
   email: string;
   passwordHash: string;
-  roles: Role[];
+  passwordSalt: string;
+  roles: UserRole[];
 }
 
 interface UpdateData {
-  roles: Role[];
+  roles: UserRole[];
 }
 
 export class UsersStorageService extends StorageService<UserInstance, Filter, CreateData, UpdateData, UpdateFilter> {
+  _Model: UserModel = db.User;
+
   _buildCreateValue(data: CreateData): UserCreationAttributes {
     return {
       email: data.email,
       password_hash: data.passwordHash,
+      password_salt: data.passwordSalt,
       roles: data.roles,
     };
   }
@@ -52,3 +58,5 @@ export class UsersStorageService extends StorageService<UserInstance, Filter, Cr
     };
   }
 }
+
+export const usersStorageService = new UsersStorageService();

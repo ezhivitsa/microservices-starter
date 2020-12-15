@@ -5,7 +5,7 @@ interface Filter {
 }
 
 export abstract class ReadOnlyStorageService<M extends Model, F extends Filter> {
-  constructor(protected _Model: ModelCtor<M>) {}
+  abstract _Model: ModelCtor<M>;
 
   abstract _buildQuery(filter: F): FindOptions<M['_attributes']>;
 

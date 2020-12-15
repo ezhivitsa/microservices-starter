@@ -1,4 +1,4 @@
-import { Middleware, Context } from '@packages/communication';
+import { Middleware, Context } from '@packages/koa-kafka';
 // import { Logger } from 'winston';
 
 import { Config } from '../src/configs/types';

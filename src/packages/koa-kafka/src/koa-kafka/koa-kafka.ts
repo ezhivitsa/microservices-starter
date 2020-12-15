@@ -1,3 +1,4 @@
+import { ObjectSchema } from 'joi';
 import { Kafka, Command, Event, Version, ErrorCode } from '@packages/communication';
 
 import { compose } from './utils';
@@ -55,6 +56,27 @@ export class KoaKafka<S extends Record<string, any> = Record<string, any>, C ext
     };
   }
 
+  private _setValidateMiddleware(schema: ObjectSchema): void {
+    const middleware = async (ctx: C, next: Next): Promise<void> => {
+      const validateResult = schema.validate(ctx.data);
+
+      if (validateResult.errors) {
+        ctx.throw({
+          code: ErrorCode.VALIDATION_FAILED,
+          message: JSON.stringify(validateResult.errors),
+        });
+        return;
+      }
+
+      const value = validateResult.value;
+      ctx.validatedData = value;
+
+      await next();
+    };
+
+    this._middlewares.push(middleware as any);
+  }
+
   listen(listenCallback?: () => void): void {
     const callback = this._callback();
 
@@ -69,7 +91,21 @@ export class KoaKafka<S extends Record<string, any> = Record<string, any>, C ext
     return this;
   }
 
-  handleCommand(version: Version, command: Command, handler: Middleware<C>): KoaKafka {
+  handleCommand({
+    version,
+    command,
+    schema,
+    handler,
+  }: {
+    version: Version;
+    command: Command;
+    schema?: ObjectSchema;
+    handler: Middleware<C>;
+  }): KoaKafka {
+    if (schema) {
+      this._setValidateMiddleware(schema);
+    }
+
     const middleware = async (ctx: C, next: Next): Promise<void> => {
       if (ctx.command === command && ctx.version === version) {
         return handler(ctx, next);
@@ -79,11 +115,12 @@ export class KoaKafka<S extends Record<string, any> = Record<string, any>, C ext
     };
 
     this._middlewares.push(middleware as any);
+
     this._kafka.handleCommand(command, version);
     return this;
   }
 
-  handleEvent(version: Version, event: Event, handler: Middleware<C>): KoaKafka {
+  handleEvent({ version, event, handler }: { version: Version; event: Event; handler: Middleware<C> }): KoaKafka {
     const middleware = async (ctx: C, next: Next): Promise<void> => {
       if (ctx.event === event && ctx.version === version) {
         return handler(ctx, next);

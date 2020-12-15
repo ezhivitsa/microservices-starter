@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {
-    "@packages/server": "1.0.0",
-    "@packages/koa-kafka": "1.0.0",
     "@packages/communication": "1.0.0",
+    "@packages/koa-kafka": "1.0.0",
+    "@packages/proto": "1.0.0",
+    "@packages/server": "1.0.0",
+    "bcrypt": "5.0.0",
+    "joi": "17.3.0",
     "module-alias": "2.2.2",
     "pg": "8.5.1",
     "pg-hstore": "2.3.3",
@@ -14,6 +17,8 @@
   },
   "devDependencies": {
     "@packages/eslint-config": "1.0.0",
+    "@types/bcrypt": "3.0.0",
+    "@types/joi": "14.3.4",
     "@types/module-alias": "2.0.0",
     "@types/sequelize": "4.28.9",
     "@types/redis": "2.8.28",

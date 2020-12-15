@@ -1,5 +1,5 @@
 {
-  "name": "@packages/koa-kafka",
+  "name": "@packages/proto",
   "version": "1.0.0",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -10,11 +10,9 @@
     "prepare": "npm run build"
   },
   "dependencies": {
-    "@packages/communication": "1.0.0",
-    "joi": "17.3.0"
+    "long": "4.0.0"
   },
   "devDependencies": {
-    "@types/joi": "14.3.4",
     "@types/node": "14.6.4",
     "typescript": "4.0.5"
   }
