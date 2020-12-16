@@ -3,6 +3,7 @@ import { AuthorizationCommand } from '@packages/communication';
 
 import { signUpHandler } from './sign-up';
 import { getAccessTokenHandler } from './get-access-token';
+import { getRefreshTokenHandler } from './get-refresh-token';
 
 import { registrationSchema, getAccessTokenSchema, getRefreshTokenSchema } from './validators';
 

@@ -25,3 +25,9 @@ export interface GetAccessTokenResult {
 export interface GetRefreshTokenParams {
   refreshToken: string;
 }
+
+export interface GetRefreshTokenResult {
+  refreshToken: string;
+  refreshTokenExpiresAt: Date;
+  user: User;
+}
