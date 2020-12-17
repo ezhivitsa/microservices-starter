@@ -9,6 +9,7 @@
     "@packages/server": "1.0.0",
     "bcrypt": "5.0.0",
     "joi": "17.3.0",
+    "long": "4.0.0",
     "module-alias": "2.2.2",
     "pg": "8.5.1",
     "pg-hstore": "2.3.3",

@@ -4,8 +4,15 @@ import { AuthorizationCommand } from '@packages/communication';
 import { signUpHandler } from './sign-up';
 import { getAccessTokenHandler } from './get-access-token';
 import { getRefreshTokenHandler } from './get-refresh-token';
+import { getUserHandler } from './get-user';
 
-import { registrationSchema, getAccessTokenSchema, getRefreshTokenSchema } from './validators';
+import {
+  registrationSchema,
+  getAccessTokenSchema,
+  getRefreshTokenSchema,
+  getUserSchema,
+  saveTokenSchema,
+} from './validators';
 
 export function initV1Routes(app: KoaKafka<AppState, AppContext>): void {
   app.handleCommand({
@@ -26,8 +33,18 @@ export function initV1Routes(app: KoaKafka<AppState, AppContext>): void {
     schema: getRefreshTokenSchema,
     handler: getRefreshTokenHandler,
   });
-  // app.handleCommand(Version.v1, AuthorizationCommand.GetUser, getUserHandler);
-  // app.handleCommand(Version.v1, AuthorizationCommand.SaveToken, saveTokenHandler);
+  app.handleCommand({
+    version: Version.v1,
+    command: AuthorizationCommand.GetUser,
+    schema: getUserSchema,
+    handler: getUserHandler,
+  });
+  app.handleCommand({
+    version: Version.v1,
+    command: AuthorizationCommand.SaveToken,
+    schema: saveTokenSchema,
+    handler: saveTokenHandler,
+  });
   // app.handleCommand(Version.v1, AuthorizationCommand.RevokeToken, revokeTokenHandler);
   // app.handleCommand(Version.v1, AuthorizationCommand.VerifyScope, verifyScopeHandler);
 }

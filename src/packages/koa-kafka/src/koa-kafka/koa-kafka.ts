@@ -58,7 +58,9 @@ export class KoaKafka<S extends Record<string, any> = Record<string, any>, C ext
 
   private _setValidateMiddleware(schema: ObjectSchema): void {
     const middleware = async (ctx: C, next: Next): Promise<void> => {
-      const validateResult = schema.validate(ctx.data);
+      const validateResult = schema.validate(ctx.data, {
+        allowUnknown: true,
+      });
 
       if (validateResult.errors) {
         ctx.throw({
@@ -86,8 +88,8 @@ export class KoaKafka<S extends Record<string, any> = Record<string, any>, C ext
     listenCallback?.();
   }
 
-  use(fn: Middleware): KoaKafka {
-    this._middlewares.push(fn);
+  use(fn: Middleware<C>): KoaKafka {
+    this._middlewares.push(fn as any);
     return this;
   }
 

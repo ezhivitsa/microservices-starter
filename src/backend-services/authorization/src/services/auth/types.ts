@@ -31,3 +31,18 @@ export interface GetRefreshTokenResult {
   refreshTokenExpiresAt: Date;
   user: User;
 }
+
+export interface GetUserParams {
+  email: string;
+  password: string;
+}
+
+export interface SaveTokenParams {
+  accessToken: string;
+  accessTokenExpiresAt: Date;
+  refreshToken: string;
+  refreshTokenExpiresAt: Date;
+  user: {
+    id: string;
+  };
+}
