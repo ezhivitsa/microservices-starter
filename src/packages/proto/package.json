@@ -10,6 +10,7 @@
     "prepare": "npm run build"
   },
   "dependencies": {
+    "protobufjs": "6.10.2",
     "long": "4.0.0"
   },
   "devDependencies": {

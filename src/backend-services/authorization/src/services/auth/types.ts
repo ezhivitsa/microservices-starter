@@ -16,6 +16,10 @@ export interface User {
   roles: UserRole[];
 }
 
+export interface UserShort {
+  id: string;
+}
+
 export interface GetAccessTokenResult {
   accessToken: string;
   accessTokenExpiresAt: Date;
@@ -42,7 +46,17 @@ export interface SaveTokenParams {
   accessTokenExpiresAt: Date;
   refreshToken: string;
   refreshTokenExpiresAt: Date;
-  user: {
-    id: string;
-  };
+  user: UserShort;
+}
+
+export interface RevokeTokenParams {
+  refreshToken: string;
+  refreshTokenExpiresAt: Date;
+  user: UserShort;
+}
+
+export interface VerifyScopeParams {
+  accessToken: string;
+  accessTokenExpiresAt: Date;
+  user: UserShort;
 }

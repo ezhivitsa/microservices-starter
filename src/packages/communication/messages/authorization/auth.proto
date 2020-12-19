@@ -75,7 +75,7 @@ message SaveTokenRequest {
 // RevokeToken
 message RevokeTokenRequest {
   string refresh_token = 1;
-  string refresh_token_expires_at = 2;
+  google.protobuf.Timestamp refresh_token_expires_at = 2;
   User user = 3;
 }
 

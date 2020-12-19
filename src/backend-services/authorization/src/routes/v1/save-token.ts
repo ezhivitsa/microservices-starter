@@ -3,11 +3,11 @@ import { AuthorizationTypes } from '@packages/communication';
 
 import { AuthService } from 'services';
 
-import { mapRefreshTokenDataToProto } from './converters';
+import { mapSaveTokenParamsToClient } from './converters';
 
-export async function saveTokeHandler(ctx: AppContext): Promise<void> {
+export async function saveTokenHandler(ctx: AppContext): Promise<void> {
   const data: AuthorizationTypes.SaveTokenRequest = ctx.data;
-  const token = await AuthService.saveToken(data);
+  await AuthService.saveToken(mapSaveTokenParamsToClient(data));
 
-  ctx.body = mapRefreshTokenDataToProto(token);
+  ctx.body = null;
 }

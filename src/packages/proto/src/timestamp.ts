@@ -1,4 +1,5 @@
-import { fromNumber as longFromNumber, Long } from 'long';
+import { fromNumber as longFromNumber } from 'long';
+import { Long } from 'protobufjs';
 
 export function castDateToTimestamp(date: Date): Timestamp {
   const milliseconds = date.valueOf();

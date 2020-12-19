@@ -4,7 +4,7 @@ import { User } from 'services/auth/types';
 
 import { mapUserRoleToProto } from './enums-to-proto';
 
-export function mapUserToProto(user: User): AuthorizationTypes.User {
+export function mapUserDataToProto(user: User): AuthorizationTypes.User {
   const { email, id, roles } = user;
 
   return {

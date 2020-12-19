@@ -3,7 +3,7 @@ import { castDateToTimestamp } from '@packages/proto';
 
 import { GetRefreshTokenResult } from 'services/auth/types';
 
-import { mapUserToProto } from './user-to-proto';
+import { mapUserDataToProto } from './user-to-proto';
 
 export function mapRefreshTokenDataToProto(
   data: GetRefreshTokenResult | null,
@@ -20,7 +20,7 @@ export function mapRefreshTokenDataToProto(
     token: {
       refreshToken,
       refreshTokenExpiresAt: castDateToTimestamp(refreshTokenExpiresAt),
-      user: mapUserToProto(user),
+      user: mapUserDataToProto(user),
     },
   };
 }

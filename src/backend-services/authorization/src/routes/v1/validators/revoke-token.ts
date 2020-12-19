@@ -4,9 +4,7 @@ import { AuthorizationTypes } from '@packages/communication';
 
 import { timestampSchema, userSchema } from './common';
 
-export const saveTokenSchema = joi.object<AuthorizationTypes.SaveTokenRequest>({
-  accessToken: joi.string().required(),
-  accessTokenExpiresAt: timestampSchema.required(),
+export const revokeTokenSchema = joi.object<AuthorizationTypes.RevokeTokenRequest>({
   refreshToken: joi.string().required(),
   refreshTokenExpiresAt: timestampSchema.required(),
   user: userSchema.required(),

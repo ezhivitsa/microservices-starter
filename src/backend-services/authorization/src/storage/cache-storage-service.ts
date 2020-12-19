@@ -9,4 +9,13 @@ export abstract class CacheStorageService<T> {
     const value = await this._cache.get(key);
     return value ? this._stringToData(value) : null;
   }
+
+  async create(key: string, data: T, expiresAt: Date): Promise<void> {
+    const expiresIn = expiresAt.getDate() - Date.now();
+    await this._cache.set(key, JSON.stringify(data), expiresIn);
+  }
+
+  async delete(key: string): Promise<void> {
+    await this._cache.delete(key);
+  }
 }

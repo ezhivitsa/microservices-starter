@@ -3,7 +3,7 @@ import { castDateToTimestamp } from '@packages/proto';
 
 import { GetAccessTokenResult } from 'services/auth/types';
 
-import { mapUserToProto } from './user-to-proto';
+import { mapUserDataToProto } from './user-to-proto';
 
 export function mapAccessTokenDataToProto(
   data: GetAccessTokenResult | null,
@@ -20,7 +20,7 @@ export function mapAccessTokenDataToProto(
     token: {
       accessToken,
       accessTokenExpiresAt: castDateToTimestamp(accessTokenExpiresAt),
-      user: mapUserToProto(user),
+      user: mapUserDataToProto(user),
     },
   };
 }
