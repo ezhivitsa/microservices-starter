@@ -1,9 +1,9 @@
 import { AuthorizationTypes, AuthorizationCommand } from '../proto-messages';
 
-import { BaseProvider } from './base-provider';
+import { BaseClient } from './base-client';
 import { CommandMetadata } from './types';
 
-export class AuthorizationProvider extends BaseProvider {
+export class AuthorizationClient extends BaseClient {
   registrationCommand(data: AuthorizationTypes.RegistrationRequest, metadata: CommandMetadata): Promise<void> {
     return this._kafka.sendCommand(
       {

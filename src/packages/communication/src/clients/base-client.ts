@@ -1,5 +1,5 @@
 import { Kafka } from '../kafka';
 
-export class BaseProvider {
+export class BaseClient {
   constructor(protected _kafka: Kafka) {}
 }

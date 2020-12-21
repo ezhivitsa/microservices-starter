@@ -3,7 +3,7 @@ import { UserTypes, UserEvent } from '../proto-messages';
 
 import { EventMetadata } from './types';
 
-export class UsersProvider {
+export class UsersClient {
   constructor(private _kafka: Kafka) {}
 
   userCreatedEvent(data: UserTypes.UserCreatedEvent, metadata: EventMetadata): void {

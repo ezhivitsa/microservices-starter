@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "kafkajs": "1.14.0",
-    "protobufjs": "6.10.1",
-    "uuid": "8.3.1"
+    "protobufjs": "6.10.2",
+    "uuid": "8.3.2"
   },
   "devDependencies": {
     "@packages/eslint-config": "1.0.0",

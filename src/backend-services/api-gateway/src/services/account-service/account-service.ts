@@ -1,12 +1,12 @@
-import { authorizationProvider } from 'lib/providers';
+import { authorizationClient } from 'lib/clients';
 
 import { ServiceMetadata } from '../types';
-import { RegisterRequest, RegisterResponse, SignInRequest, SignInResponse } from './types';
+import { RegisterRequest, GetAccessTokenRequest, GetAccessTokenResponse } from './types';
 
-export async function register(data: RegisterRequest, metadata: ServiceMetadata): Promise<RegisterResponse> {
-  return authorizationProvider.registrationCommand(data, metadata);
+export function register(data: RegisterRequest, metadata: ServiceMetadata): Promise<void> {
+  return authorizationClient.registrationCommand(data, metadata);
 }
 
-export async function signIn(data: SignInRequest, metadata: ServiceMetadata): Promise<SignInResponse> {
-  return authorizationProvider.signInCommand(data, metadata);
+export function getAccessToken(data: GetAccessTokenRequest, metadata: ServiceMetadata): Promise<void> {
+  return authorizationClient.registrationCommand(data, metadata);
 }
