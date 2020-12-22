@@ -1,10 +1,18 @@
 {
   "private": true,
+  "scripts": {
+    "g:tsc": "cd $INIT_CWD && tsc"
+  },
+  "devDependencies": {
+    "lerna": "^3.22.1",
+    "typescript": "4.0.5"
+  },
   "workspaces": {
     "packages": [
       "src/packages/*",
       "src/client-services/*",
       "src/backend-services/*"
     ]
-  }
+  },
+  "name": "microservices-starter"
 }

@@ -16,7 +16,7 @@ DOCKER_COMPOSE_DEV := ${POSTGRES_DEV_VARS} ${DOCKER_COMPOSE}
 # -------------------------------------
 .PHONY: deps
 deps:
-	yarn --force
+	yarn
 
 # -------------------------------------
 # dev targets
@@ -32,6 +32,10 @@ run-kafka:
 .PHONY: run
 run:
 	$(DOCKER_COMPOSE_DEV) up -d
+
+.PHONY: build
+build:
+	yarn workspaces foreach -tvp run build
 
 # -------------------------------------
 # build targets

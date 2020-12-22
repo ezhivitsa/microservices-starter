@@ -4,17 +4,17 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
-    "build:watch": "tsc --watch",
-    "install": "npm run build",
-    "prepare": "npm run build"
+    "build": "yarn g:tsc"
   },
   "dependencies": {
-    "@packages/common": "1.0.0",
-    "axios": "0.21.0"
+    "@packages/common": "workspace:*",
+    "axios": "0.21.1"
   },
   "devDependencies": {
-    "@packages/eslint-config": "1.0.0",
+    "@packages/eslint-config": "workspace:*",
+    "@types/jest": "26.0.19",
+    "jest": "26.6.3",
+    "ts-jest": "26.4.4",
     "typescript": "4.0.5"
   }
 }

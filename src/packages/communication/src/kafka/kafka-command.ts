@@ -20,7 +20,7 @@ import { PromiseProvider } from './promise-provider';
 
 import { COMMAND_HEADER, REPLY_CORRELATION_ID_HEADER, VERSION_HEADER } from './constants';
 
-const getResponseChannel = (groupId: string): string => `${groupId}-response`;
+export const getResponseChannel = (groupId: string): string => `${groupId}-response`;
 
 export class KafkaCommand {
   private readonly _producer: Producer;

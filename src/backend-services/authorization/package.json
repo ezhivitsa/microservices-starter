@@ -21,8 +21,8 @@
     "@types/bcrypt": "3.0.0",
     "@types/joi": "14.3.4",
     "@types/module-alias": "2.0.0",
-    "@types/sequelize": "4.28.9",
     "@types/redis": "2.8.28",
+    "@types/sequelize": "4.28.9",
     "sequelize-cli": "6.2.0",
     "ts-node": "9.0.0",
     "typescript": "4.0.5"

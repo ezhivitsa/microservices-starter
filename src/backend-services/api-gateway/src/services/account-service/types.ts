@@ -1,27 +1,20 @@
-export const enum Role {
-  USER = 'user',
-  ADMIN = 'admin',
-  ORGANIZATION_ADMIN = 'organization-admin',
-}
+import { AuthProviderTypes } from 'providers';
 
-export interface User {
-  id: string;
-  email: string;
-  roles: Role[];
-}
+export type RegisterParams = AuthProviderTypes.RegisterParams;
 
-export interface RegisterRequest {
-  email: string;
-  password: string;
-  owner: boolean;
-}
+export type GetAccessTokenParams = AuthProviderTypes.GetAccessTokenParams;
+export type GetAccessTokenResult = AuthProviderTypes.AccessToken;
 
-export interface GetAccessTokenRequest {
-  accessToken: string;
-}
+export type GetRefreshTokenParams = AuthProviderTypes.GetRefreshTokenParams;
+export type GetRefreshTokenResult = AuthProviderTypes.RefreshToken;
 
-export interface AccessToken {
-  accessToken: string;
-  accessTokenExpiresAt: Date;
-  user: User;
-}
+export type GetUserParams = AuthProviderTypes.GetUserParams;
+export type GetUserResult = AuthProviderTypes.User;
+
+export type SaveTokenParams = AuthProviderTypes.SaveTokenParams;
+
+export type RevokeTokenParams = AuthProviderTypes.RevokeTokenParams;
+
+export type VerifyScopeParams = AuthProviderTypes.VerifyScopeParams;
+
+export type User = AuthProviderTypes.User;

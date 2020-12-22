@@ -44,23 +44,20 @@ export async function getRefreshToken(
   return mapRefreshTokenDataToClient(result);
 }
 
-export async function getUserCommand(params: GetUserParams, metadata: ProviderTypes.Metadata): Promise<User | null> {
+export async function getUser(params: GetUserParams, metadata: ProviderTypes.Metadata): Promise<User | null> {
   const { user } = await authorizationClient.getUserCommand(params, metadata);
   return user ? mapUserDataToClient(user) : null;
 }
 
-export async function saveTokenCommand(params: SaveTokenParams, metadata: ProviderTypes.Metadata): Promise<void> {
+export async function saveToken(params: SaveTokenParams, metadata: ProviderTypes.Metadata): Promise<void> {
   await authorizationClient.saveTokenCommand(mapSaveTokenToProto(params), metadata);
 }
 
-export async function revokeTokenCommand(params: RevokeTokenParams, metadata: ProviderTypes.Metadata): Promise<void> {
+export async function revokeToken(params: RevokeTokenParams, metadata: ProviderTypes.Metadata): Promise<void> {
   await authorizationClient.revokeTokenCommand(mapRevokeTokenToProto(params), metadata);
 }
 
-export async function verifyScopeCommand(
-  params: VerifyScopeParams,
-  metadata: ProviderTypes.Metadata,
-): Promise<boolean> {
+export async function verifyScope(params: VerifyScopeParams, metadata: ProviderTypes.Metadata): Promise<boolean> {
   const result = await authorizationClient.verifyScopeCommand(mapVerifyScopeToProto(params), metadata);
   return result.verified;
 }

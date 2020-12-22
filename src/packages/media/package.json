@@ -4,13 +4,10 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
-    "build:watch": "tsc --watch",
-    "install": "npm run build",
-    "prepare": "npm run build"
+    "build": "yarn g:tsc"
   },
   "devDependencies": {
-    "@packages/eslint-config": "1.0.0",
+    "@packages/eslint-config": "workspace:*",
     "typescript": "4.0.5"
   }
 }

@@ -25,7 +25,7 @@
     "@babel/preset-env": "7.12.1",
     "@babel/preset-react": "7.12.1",
     "@babel/preset-typescript": "7.12.1",
-    "@hot-loader/react-dom": "17.0.0",
+    "@hot-loader/react-dom": "17.0.1",
     "@packages/client": "1.0.0",
     "@packages/eslint-config": "1.0.0",
     "@packages/postcss-config": "1.0.0",

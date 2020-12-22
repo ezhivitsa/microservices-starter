@@ -4,14 +4,11 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
-    "build:watch": "tsc --watch",
-    "install": "npm run build",
-    "prepare": "npm run build"
+    "build": "yarn g:tsc"
   },
   "dependencies": {
-    "protobufjs": "6.10.2",
-    "long": "4.0.0"
+    "long": "4.0.0",
+    "protobufjs": "6.10.2"
   },
   "devDependencies": {
     "@types/node": "14.6.4",
