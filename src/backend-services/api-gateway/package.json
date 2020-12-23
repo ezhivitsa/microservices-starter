@@ -4,10 +4,10 @@
   "dependencies": {
     "@koa/cors": "3.1.0",
     "@koa/router": "9.4.0",
-    "@packages/common": "1.0.0",
-    "@packages/communication": "1.0.0",
-    "@packages/logger": "1.0.0",
-    "@packages/proto": "1.0.0",
+    "@packages/common": "workspace:*",
+    "@packages/communication": "workspace:*",
+    "@packages/logger": "workspace:*",
+    "@packages/proto": "workspace:*",
     "joi": "17.3.0",
     "koa": "2.13.0",
     "koa-bodyparser": "4.3.0",
@@ -18,8 +18,8 @@
     "oauth2-server": "3.1.1"
   },
   "devDependencies": {
-    "@packages/eslint-config": "1.0.0",
-    "@packages/server": "1.0.0",
+    "@packages/eslint-config": "workspace:*",
+    "@packages/server": "workspace:*",
     "@types/jest": "26.0.19",
     "@types/joi": "14.3.4",
     "@types/koa": "2.11.6",
@@ -37,5 +37,8 @@
     "ts-jest": "26.4.4",
     "ts-node": "9.0.0",
     "typescript": "4.0.5"
+  },
+  "installConfig": {
+    "hoistingLimits": "workspaces"
   }
 }

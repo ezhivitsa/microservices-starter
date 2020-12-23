@@ -38,14 +38,9 @@ const webpackConfig: webpack.Configuration = {
       common: path.resolve(__dirname, './src/common'),
       // External aliases
       'react-dom': isDevelopment ? '@hot-loader/react-dom' : 'react-dom',
-      systemjs: path.resolve(__dirname, '../../../node_modules/systemjs/dist/system.js'),
+      systemjs: path.resolve(__dirname, './node_modules/systemjs/dist/system.js'),
     },
-    modules: [
-      clientPath,
-      localNodeModulesPath,
-      path.resolve(__dirname, '../../../node_modules'),
-      path.resolve(__dirname, '../../packages'),
-    ],
+    modules: [clientPath, path.resolve(__dirname, '../../../node_modules'), 'node_modules'],
     extensions: ['.ts', '.tsx', '.js', 'jsx'],
   },
   optimization: {

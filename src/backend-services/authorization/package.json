@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {
-    "@packages/communication": "1.0.0",
-    "@packages/koa-kafka": "1.0.0",
-    "@packages/proto": "1.0.0",
-    "@packages/server": "1.0.0",
+    "@packages/communication": "workspace:*",
+    "@packages/koa-kafka": "workspace:*",
+    "@packages/proto": "workspace:*",
+    "@packages/server": "workspace:*",
     "bcrypt": "5.0.0",
     "joi": "17.3.0",
     "long": "4.0.0",
@@ -17,7 +17,7 @@
     "sequelize": "6.3.5"
   },
   "devDependencies": {
-    "@packages/eslint-config": "1.0.0",
+    "@packages/eslint-config": "workspace:*",
     "@types/bcrypt": "3.0.0",
     "@types/joi": "14.3.4",
     "@types/module-alias": "2.0.0",
@@ -26,5 +26,8 @@
     "sequelize-cli": "6.2.0",
     "ts-node": "9.0.0",
     "typescript": "4.0.5"
+  },
+  "installConfig": {
+    "hoistingLimits": "workspaces"
   }
 }
