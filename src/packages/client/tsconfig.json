@@ -8,6 +8,7 @@
     "outDir": "dist",
     "types": ["jest", "node"],
     "declaration": true,
+    "declarationMap": true,
     "sourceMap": true,
     "esModuleInterop": true
   }

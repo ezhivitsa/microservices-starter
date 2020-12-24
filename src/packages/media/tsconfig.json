@@ -12,11 +12,12 @@
     "strict": true,
     "sourceMap": true,
     "declaration": true,
+    "declarationMap": true,
     "baseUrl": "./src",
     "outDir": "dist",
     "typeRoots": [
-      "./@types/*",
-      "../../../node_modules/@types/*"
+      "./@types",
+      "../../../node_modules/@types"
     ]
   }
 }

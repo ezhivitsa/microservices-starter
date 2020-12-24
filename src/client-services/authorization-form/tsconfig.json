@@ -17,6 +17,8 @@
     "strict": true,
     "outDir": "./dist",
 
+    "sourceMap": true,
+
     "typeRoots": [
       "./@types"
     ]
