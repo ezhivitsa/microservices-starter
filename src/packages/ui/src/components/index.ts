@@ -8,3 +8,4 @@ export * from './select';
 export * from './toggle';
 export * from './paragraph';
 export * from './button';
+export * from './link';

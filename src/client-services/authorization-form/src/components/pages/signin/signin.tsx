@@ -2,7 +2,17 @@ import React, { ReactElement, ReactNode } from 'react';
 import { Formik, FormikHelpers, FormikProps, Form } from 'formik';
 import { observer } from 'mobx-react-lite';
 
-import { FormikField, Input, InputWidth, Button, ButtonView, ButtonType, useStyles } from '@packages/ui';
+import {
+  FormikField,
+  Input,
+  InputWidth,
+  Button,
+  ButtonView,
+  ButtonType,
+  Message,
+  MessageType,
+  useStyles,
+} from '@packages/ui';
 
 import { SignInStoreProvider, useSignInStore } from 'providers';
 import { SignInStore, FormikSignIn, FormikSignInFieldName } from 'stores';
@@ -28,6 +38,8 @@ export const SignIn = observer(
       if (!generalError) {
         return null;
       }
+
+      return <Message type={MessageType.Danger} content={generalError} />;
     }
 
     function renderForm({ isValid }: FormikProps<FormikSignIn>): ReactNode {
@@ -56,6 +68,8 @@ export const SignIn = observer(
               className: b('input'),
             }}
           />
+
+          <Link></Link>
 
           <Button view={ButtonView.Action} type={ButtonType.Submit} className={b('button')} disabled={!isValid}>
             {signInFormTexts.signInBtn}

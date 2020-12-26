@@ -42,8 +42,8 @@ const webpackConfig: webpack.Configuration = {
     },
     modules: [
       clientPath,
-      localNodeModulesPath,
       path.resolve(__dirname, '../../../node_modules'),
+      'node_modules',
       path.resolve(__dirname, '../../packages'),
     ],
     extensions: ['.ts', '.tsx', '.js', 'jsx'],

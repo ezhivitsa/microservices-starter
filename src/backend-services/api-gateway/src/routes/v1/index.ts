@@ -1,4 +1,4 @@
-import { AppKoaState } from 'koa';
+import { AppKoaState, AppKoaContext } from 'koa';
 import Router from '@koa/router';
 import { Version } from '@packages/communication';
 
@@ -7,7 +7,7 @@ import { authMiddleware, userMiddleware, versionMiddleware } from 'middlewares';
 import { publicRouter } from './public';
 import { authenticatedRouter } from './authenticated';
 
-const v1Router = new Router<AppKoaState>();
+const v1Router = new Router<AppKoaState, AppKoaContext>();
 
 v1Router
   .use(versionMiddleware(Version.v1))

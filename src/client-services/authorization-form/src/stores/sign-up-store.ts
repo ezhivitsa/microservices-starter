@@ -13,14 +13,14 @@ export enum FormikSignUpFieldName {
 }
 
 export interface FormikSignUp {
-  [FormikSignUpFieldName.FirstName]: string;
+  [FormikSignUpFieldName.FirstName]?: string;
   [FormikSignUpFieldName.LastName]: string;
   [FormikSignUpFieldName.Email]: string;
   [FormikSignUpFieldName.Password]: string;
 }
 
-export class SignInStore {
-  @observable private _firstName = '';
+export class SignUpStore {
+  @observable private _firstName?: string;
   @observable private _lastName = '';
   @observable private _email = '';
   @observable private _password = '';
