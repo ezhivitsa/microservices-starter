@@ -16,7 +16,7 @@ function AppComponent(): ReactElement {
             <Redirect to={signinPath} />
           </Route>
           <Route path={signinPath} component={SignInPage} />
-          <Route path={signupPath} component={SignUpPage} />
+          {/* <Route path={signupPath} component={SignUpPage} /> */}
         </Switch>
       </BrowserRouter>
     </StrictMode>

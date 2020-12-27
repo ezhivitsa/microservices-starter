@@ -12,5 +12,8 @@
   },
   "devDependencies": {
     "typescript": "4.0.5"
+  },
+  "installConfig": {
+    "hoistingLimits": "workspaces"
   }
 }

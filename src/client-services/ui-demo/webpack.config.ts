@@ -42,7 +42,7 @@ const webpackConfig: webpack.Configuration = {
     },
     modules: [
       clientPath,
-      path.resolve(__dirname, '../../../node_modules'),
+      localNodeModulesPath,
       'node_modules',
       path.resolve(__dirname, '../../packages'),
     ],

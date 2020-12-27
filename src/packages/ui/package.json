@@ -18,15 +18,24 @@
     "@packages/eslint-config": "workspace:*",
     "@packages/stylelint-config": "workspace:*",
     "@types/classnames": "^2.2.11",
+    "@types/history": "4.7.6",
     "@types/react": "16.9.56",
+    "@types/react-router-dom": "5.1.5",
     "classnames": "2.2.6",
     "formik": "2.2.1",
+    "history": "4.10.1",
     "react": "17.0.1",
+    "react-router-dom": "5.2.0",
     "typescript": "4.0.5"
   },
   "peerDependencies": {
     "classnames": "^2.2.6",
     "formik": "^2.2.1",
-    "react": "^17.0.1"
+    "history": "^4.10.1",
+    "react": "^17.0.1",
+    "react-router-dom": "^5.2.0"
+  },
+  "installConfig": {
+    "hoistingLimits": "workspaces"
   }
 }

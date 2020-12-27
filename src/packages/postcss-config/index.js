@@ -7,7 +7,7 @@ const cssnano = require('cssnano');
 
 const { mediaQueries } = require('@packages/media');
 
-const packagesUiImportPath = '../../../node_modules/@packages/ui/dist/styles';
+const packagesUiImportPath = './node_modules/@packages/ui/dist/styles';
 
 /**
  * Get postcss configuration

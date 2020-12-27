@@ -9,5 +9,8 @@
   "devDependencies": {
     "@packages/eslint-config": "workspace:*",
     "typescript": "4.0.5"
+  },
+  "installConfig": {
+    "hoistingLimits": "workspaces"
   }
 }

@@ -11,6 +11,8 @@ import {
   ButtonType,
   Message,
   MessageType,
+  Paragraph,
+  RouterLink,
   useStyles,
 } from '@packages/ui';
 
@@ -18,6 +20,8 @@ import { SignInStoreProvider, useSignInStore } from 'providers';
 import { SignInStore, FormikSignIn, FormikSignInFieldName } from 'stores';
 
 import { signInFormTexts } from 'texts';
+
+import { signupPath } from 'components/pages/paths';
 
 import { validationSchema } from './validation';
 
@@ -46,7 +50,7 @@ export const SignIn = observer(
       return (
         <Form>
           {renderError()}
-          <FormikField
+          {/* <FormikField
             name={FormikSignInFieldName.Email}
             component={Input}
             componentProps={{
@@ -67,9 +71,11 @@ export const SignIn = observer(
               width: InputWidth.Available,
               className: b('input'),
             }}
-          />
+          /> */}
 
-          <Link></Link>
+          <Paragraph>
+            {signInFormTexts.signUp({ link: <RouterLink to={signupPath} text={signInFormTexts.singUpLink} /> })}
+          </Paragraph>
 
           <Button view={ButtonView.Action} type={ButtonType.Submit} className={b('button')} disabled={!isValid}>
             {signInFormTexts.signInBtn}

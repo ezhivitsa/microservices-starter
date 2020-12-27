@@ -1,24 +1,24 @@
 @import 'variables.pcss';
 
 .link_theme_dark {
-  color: var(--color-content-alfa-on-color);
+  color: var(--color-light-blue-400);
 
   .link {
+    &__text {
+      border-color: var(--color-light-blue-500);
+    }
+
+    &._disabled {
+      color: var(--color-grey-200);
+    }
+  }
+
+  &:hover,
+  &:focus {
+    color: var(--color-light-blue-200);
+
     .link__text {
-        border-color: var(--color-content-disabled-alfa-on-color);
-    }
-
-    &:hover,
-    &:focus {
-        color: var(--color-content-accent-alfa-on-color);
-
-        .link__text {
-            border-color: var(--color-content-minor-alfa-on-color);
-        }
-    }
-
-    &.link_disabled {
-        color: var(--color-content-disabled-alfa-on-color);
+      border-color: var(--color-light-blue-200);
     }
   }
 }

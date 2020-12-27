@@ -18,7 +18,7 @@ export default function InputDemo({ b }: Props): ReactElement {
       {sizes.map((size) => {
         return (
           <div className={b('row')} key={`${size}-default`}>
-            <Link>link</Link>
+            <Link size={size} text="Link" />
           </div>
         );
       })}

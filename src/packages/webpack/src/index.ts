@@ -5,6 +5,7 @@ import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const clientPath = './src';
+// const localNodeModulesPath = './node_modules';
 
 export const getWebpackConfig = ({
   name,
@@ -35,7 +36,7 @@ export const getWebpackConfig = ({
         // External aliases
         'react-dom': isDevelopment ? '@hot-loader/react-dom' : 'react-dom',
       },
-      modules: [clientPath, path.resolve(dirname, '../../../node_modules'), 'node_modules'],
+      modules: [clientPath, 'node_modules'],
       extensions: ['.ts', '.tsx', '.js', 'jsx'],
     },
     optimization: {
