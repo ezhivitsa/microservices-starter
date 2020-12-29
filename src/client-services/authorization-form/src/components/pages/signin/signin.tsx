@@ -3,7 +3,6 @@ import { Formik, FormikHelpers, FormikProps, Form } from 'formik';
 import { observer } from 'mobx-react-lite';
 
 import {
-  FormikField,
   Input,
   InputWidth,
   Button,
@@ -12,9 +11,9 @@ import {
   Message,
   MessageType,
   Paragraph,
-  RouterLink,
   useStyles,
 } from '@packages/ui';
+import { FormikField, RouterLink } from '@packages/ui-ex';
 
 import { SignInStoreProvider, useSignInStore } from 'providers';
 import { SignInStore, FormikSignIn, FormikSignInFieldName } from 'stores';
@@ -50,7 +49,7 @@ export const SignIn = observer(
       return (
         <Form>
           {renderError()}
-          {/* <FormikField
+          <FormikField
             name={FormikSignInFieldName.Email}
             component={Input}
             componentProps={{
@@ -71,9 +70,9 @@ export const SignIn = observer(
               width: InputWidth.Available,
               className: b('input'),
             }}
-          /> */}
+          />
 
-          <Paragraph>
+          <Paragraph className={b('signup')}>
             {signInFormTexts.signUp({ link: <RouterLink to={signupPath} text={signInFormTexts.singUpLink} /> })}
           </Paragraph>
 

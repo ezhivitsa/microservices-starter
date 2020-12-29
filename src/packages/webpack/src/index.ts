@@ -5,7 +5,6 @@ import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const clientPath = './src';
-// const localNodeModulesPath = './node_modules';
 
 export const getWebpackConfig = ({
   name,
@@ -20,6 +19,8 @@ export const getWebpackConfig = ({
 }): Configuration => {
   const pkgName = name.replace('@services/', '');
   const portNum = port ? Number(port) : 8080;
+
+  const localNodeModules = path.resolve(dirname, 'node_modules');
 
   return {
     mode: isDevelopment ? 'development' : 'production',
@@ -36,7 +37,7 @@ export const getWebpackConfig = ({
         // External aliases
         'react-dom': isDevelopment ? '@hot-loader/react-dom' : 'react-dom',
       },
-      modules: [clientPath, 'node_modules'],
+      modules: [clientPath, localNodeModules, 'node_modules'],
       extensions: ['.ts', '.tsx', '.js', 'jsx'],
     },
     optimization: {

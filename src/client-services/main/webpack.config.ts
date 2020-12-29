@@ -13,6 +13,7 @@ const { buildPath, staticUrl } = config;
 const name = pkg.name.replace('@client-services/', '');
 
 const clientPath = path.resolve(__dirname, 'src/client');
+const localNodeModules = path.resolve(__dirname, 'node_modules');
 
 const webpackConfig: webpack.Configuration = {
   mode: isDevelopment ? 'development' : 'production',
@@ -39,7 +40,7 @@ const webpackConfig: webpack.Configuration = {
       'react-dom': isDevelopment ? '@hot-loader/react-dom' : 'react-dom',
       systemjs: path.resolve(__dirname, './node_modules/systemjs/dist/system.js'),
     },
-    modules: [clientPath, 'node_modules'],
+    modules: [clientPath, localNodeModules, 'node_modules'],
     extensions: ['.ts', '.tsx', '.js', 'jsx'],
   },
   optimization: {

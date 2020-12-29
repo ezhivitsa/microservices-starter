@@ -2,17 +2,8 @@ import React, { ReactElement, ReactNode } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Formik, Form, FormikHelpers, FormikProps } from 'formik';
 
-import {
-  FormikField,
-  Input,
-  InputWidth,
-  Button,
-  ButtonView,
-  ButtonType,
-  Message,
-  MessageType,
-  useStyles,
-} from '@packages/ui';
+import { Input, InputWidth, Button, ButtonView, ButtonType, Message, MessageType, useStyles } from '@packages/ui';
+import { FormikField } from '@packages/ui-ex';
 
 import { useSignUpStore, SignUpStoreProvider } from 'providers';
 import { SignUpStore, FormikSignUp, FormikSignUpFieldName } from 'stores';

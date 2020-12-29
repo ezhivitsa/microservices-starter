@@ -1,13 +1,23 @@
 {
-  "name": "@packages/media",
+  "name": "@packages/ui-ex",
   "version": "1.0.0",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
     "build": "yarn g:tsc"
   },
+  "dependencies": {
+    "@packages/ui": "workspace:*"
+  },
   "devDependencies": {
     "@packages/eslint-config": "workspace:*"
+  },
+  "peerDependencies": {
+    "classnames": "^2.2.6",
+    "formik": "^2.2.1",
+    "history": "^4.10.1",
+    "react": "^17.0.1",
+    "react-router-dom": "^5.2.0"
   },
   "installConfig": {
     "hoistingLimits": "workspaces"

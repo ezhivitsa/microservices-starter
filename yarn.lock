@@ -1377,10 +1377,13 @@ __metadata:
     "@fortawesome/react-fontawesome": 0.1.14
     "@hot-loader/react-dom": 17.0.1
     "@packages/client": "workspace:*"
+    "@packages/common": "workspace:*"
     "@packages/eslint-config": "workspace:*"
     "@packages/postcss-config": "workspace:*"
     "@packages/stylelint-config": "workspace:*"
     "@packages/ui": "workspace:*"
+    "@packages/ui-ex": "workspace:*"
+    "@packages/webpack": "workspace:*"
     "@types/history": 4.7.8
     "@types/react": 17.0.0
     "@types/react-dom": 17.0.0
@@ -1395,10 +1398,13 @@ __metadata:
     core-js: 3.8.1
     css-loader: 5.0.1
     file-loader: 6.2.0
+    fork-ts-checker-webpack-plugin: 6.0.8
     formik: 2.2.1
     history: 4.10.1
+    mini-css-extract-plugin: 1.3.3
     mobx: 6.0.4
     mobx-react-lite: 3.1.6
+    path-to-regexp: 3.2.0
     postcss-loader: 4.1.0
     react: 17.0.1
     react-dom: 17.0.1
@@ -1409,6 +1415,7 @@ __metadata:
     style-loader: 2.0.0
     systemjs-webpack-interop: 2.3.4
     typescript: 4.0.5
+    webpack: 4.44.1
     webpack-cli: 3.3.12
     webpack-dev-server: 3.11.0
     yup: 0.29.3
@@ -1519,6 +1526,7 @@ __metadata:
     mini-css-extract-plugin: 1.3.3
     module-alias: 2.2.2
     nodemon: 2.0.6
+    path-to-regexp: 3.2.0
     postcss: 8.2.1
     postcss-loader: 4.1.0
     react: 17.0.1
@@ -2020,7 +2028,6 @@ __metadata:
     axios: 0.21.1
     jest: 26.6.3
     ts-jest: 26.4.4
-    typescript: 4.0.5
   languageName: unknown
   linkType: soft
 
@@ -2029,7 +2036,6 @@ __metadata:
   resolution: "@packages/common@workspace:src/packages/common"
   dependencies:
     "@packages/eslint-config": "workspace:*"
-    typescript: 4.0.5
   languageName: unknown
   linkType: soft
 
@@ -2042,7 +2048,6 @@ __metadata:
     "@types/uuid": 8.3.0
     kafkajs: 1.14.0
     protobufjs: 6.10.2
-    typescript: 4.0.5
     uuid: 8.3.2
   languageName: unknown
   linkType: soft
@@ -2058,7 +2063,6 @@ __metadata:
     eslint-plugin-prettier: 3.1.4
     eslint-plugin-react: 7.21.5
     prettier: 2.1.2
-    typescript: 4.0.5
   languageName: unknown
   linkType: soft
 
@@ -2070,7 +2074,6 @@ __metadata:
     "@types/joi": 14.3.4
     "@types/node": 14.6.4
     joi: 17.3.0
-    typescript: 4.0.5
   languageName: unknown
   linkType: soft
 
@@ -2082,7 +2085,6 @@ __metadata:
     "@types/node": 14.6.4
     "@types/triple-beam": 1.3.2
     triple-beam: 1.3.0
-    typescript: 4.0.5
     winston: 3.3.3
   languageName: unknown
   linkType: soft
@@ -2092,7 +2094,6 @@ __metadata:
   resolution: "@packages/media@workspace:src/packages/media"
   dependencies:
     "@packages/eslint-config": "workspace:*"
-    typescript: 4.0.5
   languageName: unknown
   linkType: soft
 
@@ -2117,7 +2118,6 @@ __metadata:
     "@types/node": 14.6.4
     long: 4.0.0
     protobufjs: 6.10.2
-    typescript: 4.0.5
   languageName: unknown
   linkType: soft
 
@@ -2130,7 +2130,6 @@ __metadata:
     "@types/koa": 2.11.6
     "@types/node": 14.6.4
     "@types/uuid": 8.3.0
-    typescript: 4.0.5
     uuid: 8.3.2
     winston: 3.3.3
   languageName: unknown
@@ -2146,6 +2145,21 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@packages/ui-ex@workspace:*, @packages/ui-ex@workspace:src/packages/ui-ex":
+  version: 0.0.0-use.local
+  resolution: "@packages/ui-ex@workspace:src/packages/ui-ex"
+  dependencies:
+    "@packages/eslint-config": "workspace:*"
+    "@packages/ui": "workspace:*"
+  peerDependencies:
+    classnames: ^2.2.6
+    formik: ^2.2.1
+    history: ^4.10.1
+    react: ^17.0.1
+    react-router-dom: ^5.2.0
+  languageName: unknown
+  linkType: soft
+
 "@packages/ui@workspace:*, @packages/ui@workspace:src/packages/ui":
   version: 0.0.0-use.local
   resolution: "@packages/ui@workspace:src/packages/ui"
@@ -2157,23 +2171,10 @@ __metadata:
     "@packages/eslint-config": "workspace:*"
     "@packages/media": "workspace:*"
     "@packages/stylelint-config": "workspace:*"
-    "@types/classnames": ^2.2.11
-    "@types/history": 4.7.6
-    "@types/react": 16.9.56
-    "@types/react-router-dom": 5.1.5
-    classnames: 2.2.6
-    formik: 2.2.1
-    history: 4.10.1
     normalize.css: 8.0.1
-    react: 17.0.1
-    react-router-dom: 5.2.0
-    typescript: 4.0.5
   peerDependencies:
     classnames: ^2.2.6
-    formik: ^2.2.1
-    history: ^4.10.1
     react: ^17.0.1
-    react-router-dom: ^5.2.0
   languageName: unknown
   linkType: soft
 
@@ -2187,8 +2188,9 @@ __metadata:
     "@types/webpack-dev-server": 3.11.1
     fork-ts-checker-webpack-plugin: 6.0.8
     mini-css-extract-plugin: 1.3.3
-    typescript: 4.0.5
     webpack: 4.44.1
+  peerDependencies:
+    webpack: ^4.44.1
   languageName: unknown
   linkType: soft
 
@@ -2958,16 +2960,6 @@ __metadata:
     "@types/prop-types": "*"
     csstype: ^3.0.2
   checksum: dcef2034b822a949c5528fa8fa3c64da654fdbb822bd8f0488c0084d84cadb8b90af68813a6c95153d4754079f50b1cab206552c7c20f6b67a26c3641383fe31
-  languageName: node
-  linkType: hard
-
-"@types/react@npm:16.9.56":
-  version: 16.9.56
-  resolution: "@types/react@npm:16.9.56"
-  dependencies:
-    "@types/prop-types": "*"
-    csstype: ^3.0.2
-  checksum: 139867e2b3d577723b9361234f105d0cf1b143202f51fef207355332f972dd74030cfb3918037cb311eefd203ee06e0a370c37755204eefdd35734f0fde070a1
   languageName: node
   linkType: hard
 
@@ -10879,8 +10871,17 @@ fsevents@~2.1.2:
   version: 0.0.0-use.local
   resolution: "microservices-starter@workspace:."
   dependencies:
+    "@types/classnames": ^2.2.11
+    "@types/history": 4.7.6
+    "@types/react": 17.0.0
+    "@types/react-router-dom": 5.1.5
+    classnames: 2.2.6
     cpy-cli: 3.1.1
     del-cli: 3.0.1
+    formik: 2.2.1
+    history: 4.10.1
+    react: 17.0.1
+    react-router-dom: 5.2.0
     typescript: 4.0.5
   languageName: unknown
   linkType: soft

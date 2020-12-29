@@ -16,6 +16,7 @@
     "koa-static": "5.0.0",
     "koa-webpack": "6.0.0",
     "module-alias": "2.2.2",
+    "path-to-regexp": "3.2.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-router-dom": "5.2.0",

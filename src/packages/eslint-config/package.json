@@ -9,11 +9,5 @@
     "eslint-plugin-prettier": "3.1.4",
     "eslint-plugin-react": "7.21.5",
     "prettier": "2.1.2"
-  },
-  "devDependencies": {
-    "typescript": "4.0.5"
-  },
-  "installConfig": {
-    "hoistingLimits": "workspaces"
   }
 }

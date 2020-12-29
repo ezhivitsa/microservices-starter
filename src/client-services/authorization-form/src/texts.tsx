@@ -20,7 +20,7 @@ export const signInFormTexts = {
   signUp({ link }: { link: ReactNode }): ReactNode {
     return (
       <>
-        ${"Don't have an account yet?"} {link} ${'to sign up.'}
+        {"Don't have an account yet?"} {link} {'to sign up.'}
       </>
     );
   },

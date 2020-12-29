@@ -7,8 +7,7 @@
     "build": "yarn g:tsc"
   },
   "devDependencies": {
-    "@packages/eslint-config": "workspace:*",
-    "typescript": "4.0.5"
+    "@packages/eslint-config": "workspace:*"
   },
   "installConfig": {
     "hoistingLimits": "workspaces"

@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 import { Link as ReactRouterLink } from 'react-router-dom';
 import { Location, createPath } from 'history';
 
-import { Link, LinkProps } from '../link';
+import { Link, LinkProps } from '@packages/ui';
 
 interface Props extends Omit<LinkProps, 'url'> {
   to: Location | string;
