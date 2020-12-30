@@ -24,7 +24,7 @@ export abstract class StorageService<
   abstract _buildUpdateWhere(filter: UF): WhereOptions<M['_attributes']>;
 
   create(data: CD): Promise<M> {
-    return this._Model.create(data);
+    return this._Model.create(this._buildCreateValue(data));
   }
 
   async findAndUpdate(filter: UF, updateData: UD): Promise<M[]> {

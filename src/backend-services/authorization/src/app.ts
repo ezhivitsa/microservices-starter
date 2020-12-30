@@ -1,9 +1,5 @@
 import { KoaKafka, AppState, AppContext } from '@packages/koa-kafka';
-import mount from 'koa-mount';
 
-import { middlewares } from '@packages/server';
-
-import { config } from './lib/config';
 import { kafka } from './lib/kafka';
 
 import { initRoutes } from './routes';

@@ -44,6 +44,14 @@ const userAttributes: ModelAttributes = {
     type: DataTypes.ARRAY(DataTypes.ENUM({ values: [UserRole.User, UserRole.Admin, UserRole.OrganizationAdmin] })),
     allowNull: false,
   },
+  createdAt: {
+    type: DataTypes.DATE,
+    allowNull: true,
+  },
+  updatedAt: {
+    type: DataTypes.DATE,
+    allowNull: true,
+  },
 };
 
 export function initUser(sequelize: Sequelize): UserModel {

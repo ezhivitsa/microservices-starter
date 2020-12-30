@@ -1,4 +1,16 @@
-import React, { ReactElement, ReactNode, MouseEvent, FocusEvent, forwardRef, ForwardedRef, useState } from 'react';
+import React, {
+  ReactElement,
+  ComponentClass,
+  FC,
+  AnchorHTMLAttributes,
+  ClassAttributes,
+  ReactNode,
+  MouseEvent,
+  FocusEvent,
+  forwardRef,
+  ForwardedRef,
+  useState,
+} from 'react';
 
 import { useStyles } from '../../theme';
 
@@ -19,11 +31,11 @@ export enum LinkSize {
 
 type LinkTarget = '_self' | '_blank' | '_parent' | '_top';
 
-export interface LinkProps {
+export interface LinkProps<CP = any> {
   icon?: ReactNode;
   iconPosition?: LinkIconPosition;
   text?: ReactNode;
-  url?: string;
+  href?: string;
   download?: string | boolean;
   target?: LinkTarget;
   tabIndex?: number;
@@ -34,12 +46,14 @@ export interface LinkProps {
   children?: ReactNode;
   className?: string;
   id?: string;
-  onClick?: (event?: MouseEvent<any>) => void;
-  onFocus?: (event?: FocusEvent<any>) => void;
-  onBlur?: (event?: FocusEvent<any>) => void;
-  onMouseEnter?: (event?: MouseEvent<any>) => void;
-  onMouseLeave?: (event?: MouseEvent<any>) => void;
-  onDisabledClick?: (event?: MouseEvent<any>) => void;
+  component?: FC<CP> | ComponentClass<FC>;
+  componentProps?: CP;
+  onClick?: (event?: MouseEvent) => void;
+  onFocus?: (event?: FocusEvent) => void;
+  onBlur?: (event?: FocusEvent) => void;
+  onMouseEnter?: (event?: MouseEvent) => void;
+  onMouseLeave?: (event?: MouseEvent) => void;
+  onDisabledClick?: (event?: MouseEvent) => void;
 }
 
 export const Link = forwardRef(
@@ -56,8 +70,10 @@ export const Link = forwardRef(
       size,
       id,
       tabIndex,
-      url,
+      href,
       target,
+      component,
+      componentProps,
       onClick,
       onDisabledClick,
       onFocus,
@@ -112,8 +128,10 @@ export const Link = forwardRef(
       }
     }
 
-    const linkElement = checked || disabled ? 'span' : 'a';
-    const linkProps: React.AnchorHTMLAttributes<HTMLAnchorElement> & React.ClassAttributes<HTMLAnchorElement> = {
+    const isSpan = checked || disabled;
+
+    const linkElement = isSpan ? 'span' : 'a';
+    const linkProps: AnchorHTMLAttributes<HTMLAnchorElement> & ClassAttributes<HTMLAnchorElement> = {
       download,
       className: b({
         disabled,
@@ -136,8 +154,8 @@ export const Link = forwardRef(
     if (target === '_blank') {
       linkProps.rel = 'noreferrer noopener';
     }
-    if (!checked && !disabled) {
-      linkProps.href = url;
+    if (!isSpan) {
+      linkProps.href = href;
       linkProps.target = target;
     }
     const linkContent = [children];
@@ -158,7 +176,11 @@ export const Link = forwardRef(
       linkContent.push(textTemplate, iconTemplate);
     }
 
-    return React.createElement(linkElement, linkProps, linkContent);
+    if (isSpan || !component) {
+      return React.createElement(linkElement, linkProps, linkContent);
+    }
+
+    return React.createElement(component, { ...linkProps, ...componentProps }, linkContent);
   },
 );
 
@@ -167,7 +189,6 @@ Link.displayName = 'Link';
 Link.defaultProps = {
   iconPosition: LinkIconPosition.Left,
   size: LinkSize.M,
-  url: '#',
   tabIndex: 0,
   disabled: false,
   checked: false,

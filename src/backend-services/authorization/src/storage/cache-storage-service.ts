@@ -11,7 +11,7 @@ export abstract class CacheStorageService<T> {
   }
 
   async create(key: string, data: T, expiresAt: Date): Promise<void> {
-    const expiresIn = expiresAt.getDate() - Date.now();
+    const expiresIn = expiresAt.getTime() - Date.now();
     await this._cache.set(key, JSON.stringify(data), expiresIn);
   }
 

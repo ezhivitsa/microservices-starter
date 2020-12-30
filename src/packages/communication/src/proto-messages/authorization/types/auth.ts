@@ -8,9 +8,10 @@ export interface RegistrationRequest {
 }
 
 export const enum Role {
-  USER = 'user',
-  ADMIN = 'admin',
-  ORGANIZATION_ADMIN = 'organization-admin',
+  UNKNOWN = 0,
+  USER = 1,
+  ADMIN = 2,
+  ORGANIZATION_ADMIN = 3,
 }
 
 export interface User {

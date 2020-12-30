@@ -1,4 +1,4 @@
-import { logLevel } from 'kafkajs';
+import { logLevel } from '@packages/communication';
 
 import { Config } from '../types';
 

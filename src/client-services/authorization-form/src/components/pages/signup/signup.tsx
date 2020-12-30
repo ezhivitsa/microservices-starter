@@ -30,7 +30,7 @@ export const SignUp = observer(
         return null;
       }
 
-      return <Message type={MessageType.Danger} content={generalError} />;
+      return <Message type={MessageType.Danger} header={generalError} />;
     }
 
     function renderForm({ isValid }: FormikProps<FormikSignUp>): ReactNode {

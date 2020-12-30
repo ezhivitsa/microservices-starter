@@ -12,6 +12,7 @@ message RegistrationRequest {
 }
 
 enum Role {
+  UNKNOWN = 0;
   USER = 1;
   ADMIN = 2;
   ORGANIZATION_ADMIN = 3;

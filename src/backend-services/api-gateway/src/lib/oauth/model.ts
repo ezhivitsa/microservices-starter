@@ -8,10 +8,13 @@ import { AccountService, AccountTypes } from 'services';
 import { ServiceMetadata } from 'services/types';
 
 const SCOPE = 'api-gateway';
-const client: Client = {
+
+export const CLIENT_SECRET = 'api-gateway-client-secret';
+export const client: Client = {
   id: 'api-gateway-client-id',
   grants: ['password', 'refresh_token'],
 };
+
 const metadata: ServiceMetadata = {
   requestId: '',
   responseChannel: getResponseChannel(config.kafkaConsumer.groupId),
@@ -44,7 +47,7 @@ function isUser(userData: User): userData is AccountTypes.User {
   return userData.hasOwnProperty('id');
 }
 
-export const oauthModel: OAuth2Server.RefreshTokenModel = {
+export const oauthModel: OAuth2Server.PasswordModel & OAuth2Server.RefreshTokenModel = {
   async generateAccessToken(): Promise<string> {
     return generateSecureToken();
   },
@@ -72,10 +75,22 @@ export const oauthModel: OAuth2Server.RefreshTokenModel = {
     return client;
   },
 
-  async saveToken(token: Token): Promise<Token | null> {
-    const { accessToken, refreshToken, scope, client, user } = token;
+  async getUser(username: string, password: string): Promise<User | null> {
+    const user = await AccountService.getUser(
+      {
+        email: username,
+        password,
+      },
+      metadata,
+    );
 
-    if (!refreshToken || !isUser(user)) {
+    return user;
+  },
+
+  async saveToken(token: Token, client: Client, user: User): Promise<Token | null> {
+    const { accessToken, refreshToken, scope } = token;
+
+    if (!refreshToken || !user || !isUser(user)) {
       return null;
     }
 

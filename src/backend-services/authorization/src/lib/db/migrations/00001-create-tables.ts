@@ -30,6 +30,8 @@ module.exports = {
         type: DataTypes.ARRAY(DataTypes.ENUM({ values: [Role.User, Role.Admin, Role.OrganizationAdmin] })),
         allowNull: false,
       },
+      createdAt: { type: DataTypes.DATE, allowNull: true },
+      updatedAt: { type: DataTypes.DATE, allowNull: true },
     });
   },
 

@@ -15,7 +15,7 @@ DEV_VARS := NODE_ENV=development
 # -------------------------------------
 .PHONY: dev
 dev:
-	npx nodemon \
+	${POSTGRES_DEV_VARS} npx nodemon \
 		--config ./nodemon.json \
 		--legacy-watch \
 		-- \

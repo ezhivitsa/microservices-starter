@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import { UserInstance, UserModel, UserAttributes, UserCreationAttributes } from 'lib/db/models/user';
 import { UserRole } from 'lib/db/models/enums';
 import db from 'lib/db/models';
@@ -50,11 +52,13 @@ export class UsersStorageService extends StorageService<UserInstance, Filter, Cr
   }
 
   _buildQuery(filter: Filter): FindOptions<UserAttributes> {
+    const where = {
+      id: filter.id,
+      email: filter.email,
+    };
+
     return {
-      where: {
-        id: filter.id,
-        email: filter.email,
-      },
+      where: _.pickBy(where, (value) => value !== undefined),
     };
   }
 }

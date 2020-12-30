@@ -1,24 +1,23 @@
 import React, { ReactElement } from 'react';
 import { Link as ReactRouterLink } from 'react-router-dom';
-import { Location, createPath } from 'history';
+import { Location } from 'history';
 
 import { Link, LinkProps } from '@packages/ui';
 
-interface Props extends Omit<LinkProps, 'url'> {
+interface Props extends Omit<LinkProps, 'url' | 'component' | 'componentProps'> {
   to: Location | string;
   replace?: boolean;
 }
 
 export function RouterLink({ to, replace, ...restProps }: Props): ReactElement {
   return (
-    <ReactRouterLink
-      to={to}
-      replace={replace}
-      {...{
-        url: typeof to === 'string' ? to : createPath(to),
-        ...restProps,
+    <Link
+      {...restProps}
+      component={ReactRouterLink}
+      componentProps={{
+        to,
+        replace,
       }}
-      component={Link}
     />
   );
 }

@@ -1,4 +1,4 @@
-import { KafkaConfig, ConsumerConfig } from 'kafkajs';
+import { KafkaConfig, ConsumerConfig } from '@packages/communication';
 import { ClientOpts } from 'redis';
 
 export interface LoggerConfig {
