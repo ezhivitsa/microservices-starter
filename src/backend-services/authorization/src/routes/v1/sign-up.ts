@@ -1,10 +1,11 @@
 import { AppContext } from '@packages/koa-kafka';
-import { AuthorizationTypes } from '@packages/communication';
 
 import { AuthService } from 'services';
 
+import { RegistrationRequest } from './types';
+
 export async function signUpHandler(ctx: AppContext): Promise<void> {
-  const data: AuthorizationTypes.RegistrationRequest = ctx.data;
+  const data: RegistrationRequest = ctx.data;
   await AuthService.register(data);
 
   ctx.body = null;

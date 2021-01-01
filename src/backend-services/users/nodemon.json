@@ -1,0 +1,12 @@
+{
+  "exec": "node",
+  "watch": [
+    "src/"
+  ],
+  "ext": "ts,tsx",
+  "env": {
+    "TS_NODE_PRETTY": true,
+    "TS_NODE_FILES": true,
+    "TS_NODE_PROJECT": "./tsconfig.json"
+  }
+}

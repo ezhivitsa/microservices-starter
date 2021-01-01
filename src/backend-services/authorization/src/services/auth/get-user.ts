@@ -12,6 +12,6 @@ export async function getUser(data: GetUserParams): Promise<User | null> {
     return null;
   }
 
-  const isPasswordMatch = await compareTextWithHash(password, user.password_hash, user.password_salt);
+  const isPasswordMatch = await compareTextWithHash(password, user.passwordHash, user.passwordSalt);
   return isPasswordMatch ? user : null;
 }

@@ -1,9 +1,10 @@
-import { AuthorizationTypes } from '@packages/communication';
 import { castTimestampToDate } from '@packages/proto';
 
 import { SaveTokenParams } from 'services/auth/types';
 
-export function mapSaveTokenParamsToClient(params: AuthorizationTypes.SaveTokenRequest): SaveTokenParams {
+import { SaveTokenRequest } from '../types';
+
+export function mapSaveTokenParamsToClient(params: SaveTokenRequest): SaveTokenParams {
   const { accessToken, accessTokenExpiresAt, refreshToken, refreshTokenExpiresAt, user } = params;
 
   return {

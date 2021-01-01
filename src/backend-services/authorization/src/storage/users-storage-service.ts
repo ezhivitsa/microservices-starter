@@ -33,8 +33,8 @@ export class UsersStorageService extends StorageService<UserInstance, Filter, Cr
   _buildCreateValue(data: CreateData): UserCreationAttributes {
     return {
       email: data.email,
-      password_hash: data.passwordHash,
-      password_salt: data.passwordSalt,
+      passwordHash: data.passwordHash,
+      passwordSalt: data.passwordSalt,
       roles: data.roles,
     };
   }

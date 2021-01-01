@@ -1,11 +1,11 @@
 import { AuthorizationCommand, authorizationCommandSchemas, AuthorizationTypes } from './authorization';
-import { UserEvent, userEventSchemas, UserTypes } from './users';
+import { UserCommand, UserEvent, userCommandSchemas, userEventSchemas, UserTypes } from './users';
 import { CommonTypes, CommonSchemas } from './common';
 import { ErrorCode } from './common/types';
 
 import { ChannelCommandSchema, ChannelEventSchema } from '../messages';
 
-export type Command = AuthorizationCommand;
+export type Command = AuthorizationCommand | UserCommand;
 
 export type Event = UserEvent;
 
@@ -13,6 +13,7 @@ export type ErrorData = CommonTypes.Error;
 
 export const commandSchemas: Record<string, ChannelCommandSchema> = {
   ...authorizationCommandSchemas,
+  ...userCommandSchemas,
 };
 
 export const eventSchemas: Record<string, ChannelEventSchema> = {
@@ -21,4 +22,4 @@ export const eventSchemas: Record<string, ChannelEventSchema> = {
 
 export const errorSchema = CommonSchemas.error;
 
-export { AuthorizationCommand, UserEvent, AuthorizationTypes, UserTypes, ErrorCode };
+export { AuthorizationCommand, UserCommand, UserEvent, AuthorizationTypes, UserTypes, ErrorCode };

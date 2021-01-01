@@ -1,7 +1,7 @@
 import joi from 'joi';
 
-import { AuthorizationTypes } from '@packages/communication';
+import { GetRefreshTokenRequest } from '../types';
 
-export const getRefreshTokenSchema = joi.object<AuthorizationTypes.GetRefreshTokenRequest>({
+export const getRefreshTokenSchema = joi.object<GetRefreshTokenRequest>({
   refreshToken: joi.string().required(),
 });

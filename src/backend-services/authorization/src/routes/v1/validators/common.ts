@@ -2,7 +2,8 @@ import joi from 'joi';
 import Long from 'long';
 
 import { Timestamp } from '@packages/proto';
-import { AuthorizationTypes } from '@packages/communication';
+
+import { User } from '../types';
 
 export const longSchema = joi.object<Long>({
   low: joi.number().required(),
@@ -15,6 +16,6 @@ export const timestampSchema = joi.object<Timestamp>({
   nanos: joi.number().required(),
 });
 
-export const userSchema = joi.object<AuthorizationTypes.User>({
+export const userSchema = joi.object<User>({
   id: joi.string().required(),
 });

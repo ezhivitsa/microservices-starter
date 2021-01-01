@@ -4,9 +4,10 @@ import { AuthorizationTypes } from '@packages/communication';
 import { AuthService } from 'services';
 
 import { mapUserDataToProto } from './converters';
+import { GetUserRequest } from './types';
 
 export async function getUserHandler(ctx: AppContext): Promise<void> {
-  const data: AuthorizationTypes.GetUserRequest = ctx.data;
+  const data: GetUserRequest = ctx.data;
   const user = await AuthService.getUser(data);
 
   const response: AuthorizationTypes.GetUserResponse = {

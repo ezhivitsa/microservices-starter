@@ -1,7 +1,7 @@
 import joi from 'joi';
 
-import { AuthorizationTypes } from '@packages/communication';
+import { GetAccessTokenRequest } from '../types';
 
-export const getAccessTokenSchema = joi.object<AuthorizationTypes.GetAccessTokenRequest>({
+export const getAccessTokenSchema = joi.object<GetAccessTokenRequest>({
   accessToken: joi.string().required(),
 });

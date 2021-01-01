@@ -1,4 +1,5 @@
 import { Kafka, ProducerConfig, ConsumerConfig, KafkaMessage, IHeaders, Message } from 'kafkajs';
+import { v4 } from 'uuid';
 
 import { Command, commandSchemas, errorSchema } from '../proto-messages';
 import { getChannelKey, Version } from '../messages';
@@ -37,7 +38,7 @@ export class KafkaCommand {
     this._producer = new Producer(this._kafka, producerConfig);
     this._consumer = new Consumer(
       this._kafka,
-      { ...consumerConfig, groupId: `${consumerConfig.groupId}-command` },
+      { ...consumerConfig, groupId: `${consumerConfig.groupId}-command-${v4()}` },
       this._handleMessage,
     );
     this._consumer.subscribeToTopic(this._responseChannel);

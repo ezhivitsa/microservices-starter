@@ -2,8 +2,33 @@ syntax = "proto3";
 
 package microservices_starter.users.user;
 
-import "../common/event.proto"; 
+import "../common/event.proto";
 
+// Registration
+message RegistrationRequest {
+  string auth_id = 1;
+  string email = 2;
+  string first_name = 3;
+  string last_name = 4;
+}
+
+// GetCurrentUser
+message GetCurrentUserRequest {
+  string auth_id = 1;
+}
+
+message User {
+  string id = 1;
+  string email = 2;
+  string first_name = 3;
+  string last_name = 4;
+}
+
+message GetCurrentUserResponse {
+  User user = 1;
+}
+
+// Events
 message UserCreatedEvent {
   string id = 1;
   string email = 2;

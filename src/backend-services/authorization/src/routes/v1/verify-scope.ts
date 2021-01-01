@@ -4,9 +4,10 @@ import { AuthorizationTypes } from '@packages/communication';
 import { AuthService } from 'services';
 
 import { mapVerifyScopeParamsToClient } from './converters';
+import { VerifyScopeRequest } from './types';
 
 export async function verifyScopeHandler(ctx: AppContext): Promise<void> {
-  const data: AuthorizationTypes.VerifyScopeRequest = ctx.data;
+  const data: VerifyScopeRequest = ctx.data;
   const verified = await AuthService.verifyScope(mapVerifyScopeParamsToClient(data));
 
   const response: AuthorizationTypes.VerifyScopeResponse = {

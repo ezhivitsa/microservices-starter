@@ -5,8 +5,8 @@ import { UserRole } from './enums';
 export interface UserAttributes {
   id: string;
   email: string;
-  password_hash: string;
-  password_salt: string;
+  passwordHash: string;
+  passwordSalt: string;
   roles: UserRole[];
 }
 
@@ -15,8 +15,8 @@ export type UserCreationAttributes = Optional<UserAttributes, 'id'>;
 export class UserInstance extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
   public id!: string;
   public email!: string;
-  public password_hash!: string;
-  public password_salt!: string;
+  public passwordHash!: string;
+  public passwordSalt!: string;
   public roles!: UserRole[];
 }
 
@@ -32,11 +32,11 @@ const userAttributes: ModelAttributes = {
     type: DataTypes.STRING(128),
     allowNull: false,
   },
-  password_hash: {
+  passwordHash: {
     type: DataTypes.STRING(128),
     allowNull: false,
   },
-  password_salt: {
+  passwordSalt: {
     type: DataTypes.STRING(128),
     allowNull: false,
   },
@@ -55,5 +55,5 @@ const userAttributes: ModelAttributes = {
 };
 
 export function initUser(sequelize: Sequelize): UserModel {
-  return sequelize.define<UserInstance>('user', userAttributes);
+  return sequelize.define<UserInstance>('auth', userAttributes);
 }

@@ -1359,6 +1359,29 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@backend-services/users@workspace:src/backend-services/users":
+  version: 0.0.0-use.local
+  resolution: "@backend-services/users@workspace:src/backend-services/users"
+  dependencies:
+    "@packages/communication": "workspace:*"
+    "@packages/eslint-config": "workspace:*"
+    "@packages/koa-kafka": "workspace:*"
+    "@packages/logger": "workspace:*"
+    "@packages/server": "workspace:*"
+    "@types/joi": 14.3.4
+    "@types/module-alias": 2.0.0
+    "@types/sequelize": 4.28.9
+    joi: 17.3.0
+    module-alias: 2.2.2
+    pg: 8.5.1
+    pg-hstore: 2.3.3
+    sequelize: 6.3.5
+    sequelize-cli: 6.2.0
+    ts-node: 9.0.0
+    typescript: 4.0.5
+  languageName: unknown
+  linkType: soft
+
 "@bcoe/v8-coverage@npm:^0.2.3":
   version: 0.2.3
   resolution: "@bcoe/v8-coverage@npm:0.2.3"

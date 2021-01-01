@@ -3,6 +3,7 @@ const EVENT_CHANNEL = 'event';
 
 export enum Channel {
   AUTHORIZATION = 'authorization',
+  USERS = 'users',
 }
 
 export function getRequestChannel(channel: Channel): string {

@@ -8,7 +8,7 @@ enum Role {
 
 module.exports = {
   up: async (queryInterface: QueryInterface) => {
-    await queryInterface.createTable('users', {
+    await queryInterface.createTable('auth', {
       id: {
         type: DataTypes.BIGINT,
         autoIncrement: true,
@@ -18,11 +18,11 @@ module.exports = {
         type: DataTypes.STRING(128),
         allowNull: false,
       },
-      password_hash: {
+      passwordHash: {
         type: DataTypes.STRING(128),
         allowNull: false,
       },
-      password_salt: {
+      passwordSalt: {
         type: DataTypes.STRING(128),
         allowNull: false,
       },

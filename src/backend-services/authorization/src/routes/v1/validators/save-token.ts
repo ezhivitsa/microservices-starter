@@ -1,10 +1,10 @@
 import joi from 'joi';
 
-import { AuthorizationTypes } from '@packages/communication';
-
 import { timestampSchema, userSchema } from './common';
 
-export const saveTokenSchema = joi.object<AuthorizationTypes.SaveTokenRequest>({
+import { SaveTokenRequest } from '../types';
+
+export const saveTokenSchema = joi.object<SaveTokenRequest>({
   accessToken: joi.string().required(),
   accessTokenExpiresAt: timestampSchema.required(),
   refreshToken: joi.string().required(),

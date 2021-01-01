@@ -2,9 +2,9 @@ import { Timestamp } from '../../google';
 
 // Registration
 export interface RegistrationRequest {
-  email: string;
-  password: string;
-  owner: boolean;
+  email?: string;
+  password?: string;
+  owner?: boolean;
 }
 
 export const enum Role {
@@ -15,20 +15,20 @@ export const enum Role {
 }
 
 export interface User {
-  id: string;
-  email: string;
-  roles: Role[];
+  id?: string;
+  email?: string;
+  roles?: Role[];
 }
 
 // GetAccessToken
 export interface GetAccessTokenRequest {
-  accessToken: string;
+  accessToken?: string;
 }
 
 export interface AccessToken {
-  accessToken: string;
-  accessTokenExpiresAt: Timestamp;
-  user: User;
+  accessToken?: string;
+  accessTokenExpiresAt?: Timestamp;
+  user?: User;
 }
 
 export interface GetAccessTokenResponse {
@@ -37,13 +37,13 @@ export interface GetAccessTokenResponse {
 
 // GetRefreshToken
 export interface GetRefreshTokenRequest {
-  refreshToken: string;
+  refreshToken?: string;
 }
 
 export interface RefreshToken {
-  refreshToken: string;
-  refreshTokenExpiresAt: Timestamp;
-  user: User;
+  refreshToken?: string;
+  refreshTokenExpiresAt?: Timestamp;
+  user?: User;
 }
 
 export interface GetRefreshTokenResponse {
@@ -52,8 +52,8 @@ export interface GetRefreshTokenResponse {
 
 // GetUser
 export interface GetUserRequest {
-  email: string;
-  password: string;
+  email?: string;
+  password?: string;
 }
 
 export interface GetUserResponse {
@@ -62,25 +62,25 @@ export interface GetUserResponse {
 
 // SaveToken
 export interface SaveTokenRequest {
-  accessToken: string;
-  accessTokenExpiresAt: Timestamp;
-  refreshToken: string;
-  refreshTokenExpiresAt: Timestamp;
-  user: User;
+  accessToken?: string;
+  accessTokenExpiresAt?: Timestamp;
+  refreshToken?: string;
+  refreshTokenExpiresAt?: Timestamp;
+  user?: User;
 }
 
 // RevokeToken
 export interface RevokeTokenRequest {
-  refreshToken: string;
-  refreshTokenExpiresAt: Timestamp;
-  user: User;
+  refreshToken?: string;
+  refreshTokenExpiresAt?: Timestamp;
+  user?: User;
 }
 
 // VerifyScope
 export interface VerifyScopeRequest {
-  accessToken: string;
-  accessTokenExpiresAt: Timestamp;
-  user: User;
+  accessToken?: string;
+  accessTokenExpiresAt?: Timestamp;
+  user?: User;
 }
 
 export interface VerifyScopeResponse {

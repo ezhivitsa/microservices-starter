@@ -1,12 +1,12 @@
 import { AppContext } from '@packages/koa-kafka';
-import { AuthorizationTypes } from '@packages/communication';
 
 import { AuthService } from 'services';
 
 import { mapSaveTokenParamsToClient } from './converters';
+import { SaveTokenRequest } from './types';
 
 export async function saveTokenHandler(ctx: AppContext): Promise<void> {
-  const data: AuthorizationTypes.SaveTokenRequest = ctx.data;
+  const data: SaveTokenRequest = ctx.data;
   await AuthService.saveToken(mapSaveTokenParamsToClient(data));
 
   ctx.body = null;
