@@ -56,6 +56,7 @@ export class SignUpStore {
   @action
   async signUp(values: FormikSignUp): Promise<void> {
     this._status = Types.Status.Pending;
+    this._error = null;
 
     try {
       const response = await AuthorizationService.signUp({

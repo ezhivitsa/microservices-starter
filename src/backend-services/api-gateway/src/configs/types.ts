@@ -8,6 +8,7 @@ export interface LoggerConfig {
 export interface Config {
   readonly port: number;
   readonly useHttps: boolean;
+  readonly domain: string;
   readonly logger: Readonly<LoggerConfig>;
   readonly kafka: KafkaConfig;
   readonly kafkaConsumer: ConsumerConfig;

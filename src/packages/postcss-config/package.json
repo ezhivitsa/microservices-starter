@@ -4,10 +4,10 @@
   "dependencies": {
     "@packages/media": "workspace:*",
     "cssnano": "4.1.10",
-    "postcss": "8.2.1",
+    "postcss": "8.2.2",
     "postcss-css-variables": "0.17.0",
     "postcss-import": "14.0.0",
-    "postcss-nested": "4.2.3",
+    "postcss-nested": "5.0.3",
     "postcss-preset-env": "6.7.0"
   },
   "installConfig": {

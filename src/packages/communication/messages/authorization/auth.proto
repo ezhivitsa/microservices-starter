@@ -11,6 +11,10 @@ message RegistrationRequest {
   bool owner = 3;
 }
 
+message RegistrationResponse {
+  string id = 1;
+}
+
 enum Role {
   UNKNOWN = 0;
   USER = 1;

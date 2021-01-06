@@ -5,12 +5,12 @@ export const registrationRequest = root.loadProtoMessage<UserTypes.RegistrationR
   'microservices_starter.users.user.RegistrationRequest',
 );
 
-export const getCurrentUserRequest = root.loadProtoMessage<UserTypes.GetCurrentUserRequest>(
-  'microservices_starter.users.user.GetCurrentUserRequest',
+export const getUserByAuthIdRequest = root.loadProtoMessage<UserTypes.GetUserByAuthIdRequest>(
+  'microservices_starter.users.user.GetUserByAuthIdRequest',
 );
 
-export const getCurrentUserResponse = root.loadProtoMessage<UserTypes.GetCurrentUserResponse>(
-  'microservices_starter.users.user.GetCurrentUserResponse',
+export const getUserByAuthIdResponse = root.loadProtoMessage<UserTypes.GetUserByAuthIdResponse>(
+  'microservices_starter.users.user.GetUserByAuthIdResponse',
 );
 
 export const userCreatedEvent = root.loadProtoMessage<UserTypes.UserCreatedEvent>(

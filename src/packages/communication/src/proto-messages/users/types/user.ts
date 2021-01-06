@@ -7,7 +7,7 @@ export interface RegistrationRequest {
 }
 
 // GetCurrentUser
-export interface GetCurrentUserRequest {
+export interface GetUserByAuthIdRequest {
   authId?: string;
 }
 
@@ -18,7 +18,7 @@ export interface User {
   lastName?: string;
 }
 
-export interface GetCurrentUserResponse {
+export interface GetUserByAuthIdResponse {
   user?: User;
 }
 

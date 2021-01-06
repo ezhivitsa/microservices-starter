@@ -1,10 +1,31 @@
-import { Kafka } from '../kafka';
-import { UserTypes, UserEvent } from '../proto-messages';
+import { UserTypes, UserCommand, UserEvent } from '../proto-messages';
 
-import { EventMetadata } from './types';
+import { BaseClient } from './base-client';
+import { CommandMetadata, EventMetadata } from './types';
 
-export class UsersClient {
-  constructor(private _kafka: Kafka) {}
+export class UsersClient extends BaseClient {
+  registrationCommand(data: UserTypes.RegistrationRequest, metadata: CommandMetadata): Promise<void> {
+    return this._kafka.sendCommand(
+      {
+        data,
+        command: UserCommand.Registration,
+      },
+      metadata,
+    );
+  }
+
+  getUserByAuthIdCommand(
+    data: UserTypes.GetUserByAuthIdRequest,
+    metadata: CommandMetadata,
+  ): Promise<UserTypes.GetUserByAuthIdResponse> {
+    return this._kafka.sendCommand(
+      {
+        data,
+        command: UserCommand.GetUserByAuthId,
+      },
+      metadata,
+    );
+  }
 
   userCreatedEvent(data: UserTypes.UserCreatedEvent, metadata: EventMetadata): void {
     this._kafka.sendEvent(

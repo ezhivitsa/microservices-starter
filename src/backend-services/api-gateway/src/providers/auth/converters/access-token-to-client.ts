@@ -12,9 +12,18 @@ export function mapAccessTokenDataToClient(data: AuthorizationTypes.GetAccessTok
 
   const { accessToken, accessTokenExpiresAt, user } = data.token;
 
+  if (!accessToken || !accessTokenExpiresAt || !user) {
+    return null;
+  }
+
+  const clientUser = mapUserDataToClient(user);
+  if (!clientUser) {
+    return null;
+  }
+
   return {
     accessToken,
     accessTokenExpiresAt: castTimestampToDate(accessTokenExpiresAt),
-    user: mapUserDataToClient(user),
+    user: clientUser,
   };
 }

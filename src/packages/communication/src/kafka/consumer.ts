@@ -37,7 +37,11 @@ export class Consumer {
 
     const messageHeaders: Record<string, string> = {};
     Object.keys(headers).forEach((header) => {
-      messageHeaders[header] = headers[header].toString();
+      const headerValue = headers[header];
+
+      if (headerValue) {
+        messageHeaders[header] = headerValue.toString();
+      }
     });
 
     this._messageHandler(message, messageHeaders);

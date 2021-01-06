@@ -5,7 +5,7 @@ import { Channel } from '../../channels';
 
 export enum UserCommand {
   Registration = 'registration',
-  GetCurrentUser = 'get-current-user',
+  GetUserByAuthId = 'get-user-by-auth-id',
 }
 
 export const userCommandSchemas: Record<string, ChannelCommandSchema> = getChannelCommands(
@@ -16,9 +16,9 @@ export const userCommandSchemas: Record<string, ChannelCommandSchema> = getChann
       requestSchema: UsersSchemas.registrationRequest,
     },
     {
-      command: UserCommand.GetCurrentUser,
-      requestSchema: UsersSchemas.getCurrentUserRequest,
-      responseSchema: UsersSchemas.getCurrentUserResponse,
+      command: UserCommand.GetUserByAuthId,
+      requestSchema: UsersSchemas.getUserByAuthIdRequest,
+      responseSchema: UsersSchemas.getUserByAuthIdResponse,
     },
   ],
   Version.v1,

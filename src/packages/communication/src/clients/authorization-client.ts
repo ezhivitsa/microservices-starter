@@ -4,7 +4,10 @@ import { BaseClient } from './base-client';
 import { CommandMetadata } from './types';
 
 export class AuthorizationClient extends BaseClient {
-  registrationCommand(data: AuthorizationTypes.RegistrationRequest, metadata: CommandMetadata): Promise<void> {
+  registrationCommand(
+    data: AuthorizationTypes.RegistrationRequest,
+    metadata: CommandMetadata,
+  ): Promise<AuthorizationTypes.RegistrationResponse> {
     return this._kafka.sendCommand(
       {
         data,

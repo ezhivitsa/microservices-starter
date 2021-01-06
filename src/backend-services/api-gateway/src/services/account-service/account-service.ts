@@ -1,4 +1,4 @@
-import { AuthProvider } from 'providers';
+import { AuthProvider, UsersProvider } from 'providers';
 
 import { ServiceMetadata } from '../types';
 import {
@@ -14,9 +14,19 @@ import {
   VerifyScopeParams,
 } from './types';
 
-export function register(params: RegisterParams, metadata: ServiceMetadata): Promise<void> {
-  // ToDo: add call of user provider
-  return AuthProvider.register(params, metadata);
+export async function register(params: RegisterParams, metadata: ServiceMetadata): Promise<void> {
+  const authId = await AuthProvider.register(params, metadata);
+  if (!authId) {
+    return;
+  }
+
+  await UsersProvider.register(
+    {
+      authId,
+      ...params,
+    },
+    metadata,
+  );
 }
 
 export function getAccessToken(

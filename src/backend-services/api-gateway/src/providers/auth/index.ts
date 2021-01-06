@@ -24,8 +24,9 @@ import {
   mapVerifyScopeToProto,
 } from './converters';
 
-export function register(params: RegisterParams, metadata: ProviderTypes.Metadata): Promise<void> {
-  return authorizationClient.registrationCommand(params, metadata);
+export async function register(params: RegisterParams, metadata: ProviderTypes.Metadata): Promise<string | null> {
+  const { id } = await authorizationClient.registrationCommand(params, metadata);
+  return id || null;
 }
 
 export async function getAccessToken(

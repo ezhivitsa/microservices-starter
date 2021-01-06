@@ -7,6 +7,7 @@ import { Config } from '../types';
 export const production: Config = {
   port: DEFAULT_PORT,
   useHttps: HTTPS,
+  domain: 'localhost',
   logger: {
     level: 'info',
     format: 'cloud',

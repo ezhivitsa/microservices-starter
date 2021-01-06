@@ -3,6 +3,7 @@ import { FeatureFlag } from './feature-flags';
 export enum FrontApplication {
   Dashboard = 'dashboard',
   Auth = 'auth',
+  Settings = 'settings',
 }
 
 export enum ApplicationLayout {

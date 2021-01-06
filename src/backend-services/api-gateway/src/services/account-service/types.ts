@@ -1,6 +1,12 @@
 import { AuthProviderTypes } from 'providers';
 
-export type RegisterParams = AuthProviderTypes.RegisterParams;
+export interface RegisterParams {
+  firstName?: string;
+  lastName: string;
+  email: string;
+  password: string;
+  owner: boolean;
+}
 
 export type GetAccessTokenParams = AuthProviderTypes.GetAccessTokenParams;
 export type GetAccessTokenResult = AuthProviderTypes.AccessToken;

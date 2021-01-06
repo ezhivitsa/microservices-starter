@@ -24,6 +24,11 @@ export const development: Config = {
       jsUrl: 'http://localhost:8082/bundle.js',
       cssUrl: undefined,
     },
+    settings: {
+      ...staging.frontUpstreams.auth,
+      jsUrl: 'http://localhost:8083/bundle.js',
+      cssUrl: undefined,
+    },
   },
   apiGatewayUrl: 'http://localhost:8090/api',
 };

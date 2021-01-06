@@ -14,5 +14,7 @@ export async function getUserHandler(ctx: AppContext): Promise<void> {
     user: user ? mapUserDataToProto(user) : undefined,
   };
 
+  console.log(response);
+
   ctx.body = response;
 }

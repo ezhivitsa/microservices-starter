@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": false,
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "target": "ESNext",
+    "lib": ["esnext", "dom"],
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "baseUrl": "./src",
+    "jsx": "react",
+    "experimentalDecorators": true,
+
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "outDir": "./dist",
+
+    "sourceMap": true,
+
+    "typeRoots": [
+      "./@types"
+    ]
+  }
+}

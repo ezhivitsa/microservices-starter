@@ -7,9 +7,9 @@ import { getHash, generateSalt } from 'lib/secure';
 
 import { ValidationError } from 'services/errors';
 
-import { RegisterParams } from './types';
+import { RegisterParams, User } from './types';
 
-export async function register(data: RegisterParams): Promise<void> {
+export async function register(data: RegisterParams): Promise<User> {
   const { email, password, owner } = data;
   const roles = owner ? [UserRole.User, UserRole.Admin, UserRole.OrganizationAdmin] : [UserRole.User];
 
@@ -21,10 +21,11 @@ export async function register(data: RegisterParams): Promise<void> {
   const salt = await generateSalt();
   const hash = await getHash(password, salt);
 
-  await usersStorageService.create({
+  const user = await usersStorageService.create({
     email,
     passwordHash: hash,
     passwordSalt: salt,
     roles,
   });
+  return user;
 }

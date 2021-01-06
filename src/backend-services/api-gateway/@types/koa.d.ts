@@ -8,7 +8,14 @@ import { Config } from '../src/configs/types';
 
 import { ValidateResult } from '../src/lib/joi';
 
+import { AuthProviderTypes } from '../src/providers';
+
 declare module 'koa' {
+  interface User {
+    id: string;
+    roles: AuthProviderTypes.UserRole[];
+  }
+
   export interface AppKoaState {
     config: Config;
     startTime: number;
@@ -17,6 +24,9 @@ declare module 'koa' {
     requestId: string;
     version: Version;
     responseChannel: string;
+    token?: string;
+    refreshToken?: string;
+    user: User;
   }
 
   export interface AppKoaContext {

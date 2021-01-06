@@ -3,6 +3,8 @@
     "tag": "0.0.1"
   },
   "upstreams": {
-    "dashboard": "0.0.1"
+    "dashboard": "0.0.1",
+    "auth": "0.0.1",
+    "settings": "0.0.1"
   }
 }

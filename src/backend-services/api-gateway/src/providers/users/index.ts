@@ -1,0 +1,18 @@
+import { usersClient } from 'lib/clients';
+
+import { ProviderTypes } from 'providers';
+
+import { mapUserDataToClient } from './converters';
+import { RegisterParams, GetUserByAuthIdParams, User } from './types';
+
+export function register(params: RegisterParams, metadata: ProviderTypes.Metadata): Promise<void> {
+  return usersClient.registrationCommand(params, metadata);
+}
+
+export async function getUserByAuthId(
+  params: GetUserByAuthIdParams,
+  metadata: ProviderTypes.Metadata,
+): Promise<User | null> {
+  const { user } = await usersClient.getUserByAuthIdCommand(params, metadata);
+  return user ? mapUserDataToClient(user) : null;
+}

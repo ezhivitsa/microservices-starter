@@ -12,9 +12,18 @@ export function mapRefreshTokenDataToClient(data: AuthorizationTypes.GetRefreshT
 
   const { refreshToken, refreshTokenExpiresAt, user } = data.token;
 
+  if (!refreshToken || !refreshTokenExpiresAt || !user) {
+    return null;
+  }
+
+  const clientUser = mapUserDataToClient(user);
+  if (!clientUser) {
+    return null;
+  }
+
   return {
     refreshToken,
     refreshTokenExpiresAt: castTimestampToDate(refreshTokenExpiresAt),
-    user: mapUserDataToClient(user),
+    user: clientUser,
   };
 }

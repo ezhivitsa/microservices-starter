@@ -7,6 +7,10 @@ export interface RegistrationRequest {
   owner?: boolean;
 }
 
+export interface RegistrationResponse {
+  id?: string;
+}
+
 export const enum Role {
   UNKNOWN = 0,
   USER = 1,

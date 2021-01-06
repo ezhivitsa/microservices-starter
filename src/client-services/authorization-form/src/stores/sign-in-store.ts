@@ -48,6 +48,7 @@ export class SignInStore {
   @action
   async signIn(values: FormikSignIn): Promise<void> {
     this._status = Types.Status.Pending;
+    this._error = null;
 
     try {
       const response = await AuthorizationService.signIn(values);

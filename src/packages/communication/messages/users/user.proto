@@ -12,8 +12,8 @@ message RegistrationRequest {
   string last_name = 4;
 }
 
-// GetCurrentUser
-message GetCurrentUserRequest {
+// GetUserByAuthId
+message GetUserByAuthIdRequest {
   string auth_id = 1;
 }
 
@@ -24,7 +24,7 @@ message User {
   string last_name = 4;
 }
 
-message GetCurrentUserResponse {
+message GetUserByAuthIdResponse {
   User user = 1;
 }
 
