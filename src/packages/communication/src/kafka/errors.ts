@@ -1,5 +1,3 @@
-import { ErrorData, ErrorCode } from '../proto-messages';
-
 const COMMAND_TIMEOUT = 'Command timeout';
 const KAFKA_HANDLER_ERROR = 'Kafka handler error';
 
@@ -13,23 +11,16 @@ export class KafkaCommandTimeoutError extends Error {
   }
 }
 
-export class KafkaHandlerError extends Error {
-  private _errorData: ErrorData;
-
-  constructor(errorData: ErrorData = {}) {
+export class KafkaHandlerError<T extends Record<string, any> = Record<string, any>> extends Error {
+  constructor(private _errorData: T) {
     super(KAFKA_HANDLER_ERROR);
-
-    this._errorData = {
-      code: errorData.code || ErrorCode.UNKNOWN,
-      message: errorData.message,
-    };
 
     // Explicit setting of prototype due to features
     // of work built in class Error in TS/ES6
     Object.setPrototypeOf(this, KafkaHandlerError.prototype);
   }
 
-  get errorData(): ErrorData {
+  get errorData(): T {
     return this._errorData;
   }
 }

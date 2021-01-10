@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package microservices_starter.authorization.errors;
+
+import "../common/errors.proto";
+
+message Error {
+  enum ERROR_CODE {
+    UNKNOWN = 0;
+    NOT_FOUND = 1;
+    BAD_PROTO = 2;
+    CONFLICT = 3;
+    VALIDATION_FAILED = 4;
+    DUPLICATE_EMAIL = 5;
+  }
+
+  ERROR_CODE code = 1;
+  string message = 2;
+  repeated JoiError joi_errors = 3;
+}

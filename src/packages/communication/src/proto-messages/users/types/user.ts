@@ -22,6 +22,17 @@ export interface GetUserByAuthIdResponse {
   user?: User;
 }
 
+// UpdateUser
+export interface UpdateUserRequest {
+  id?: string;
+  firstName?: string;
+  lastName?: string;
+}
+
+export interface UpdateUserResponse {
+  user?: User;
+}
+
 // Events
 export interface UserCreatedEvent {
   id?: string;

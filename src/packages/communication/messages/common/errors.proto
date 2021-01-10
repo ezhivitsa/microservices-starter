@@ -2,15 +2,7 @@ syntax = "proto3";
 
 package microservices_starter.common.errors;
 
-message Error {
-  enum ERROR_CODE {
-    UNKNOWN = 0;
-    NOT_FOUND = 1;
-    BAD_PROTO = 2;
-    CONFLICT = 3;
-    VALIDATION_FAILED = 4;
-  }
-
-  ERROR_CODE code = 1;
-  string message = 2;
+message JoiError {
+  string message = 1;
+  string type = 2;
 }

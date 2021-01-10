@@ -27,6 +27,13 @@ export class UsersClient extends BaseClient {
     );
   }
 
+  updateUserCommand(
+    data: UserTypes.UpdateUserRequest,
+    metadata: CommandMetadata,
+  ): Promise<UserTypes.UpdateUserResponse> {
+    return this._kafka.sendCommand({ data, command: UserCommand.UpdateUser }, metadata);
+  }
+
   userCreatedEvent(data: UserTypes.UserCreatedEvent, metadata: EventMetadata): void {
     this._kafka.sendEvent(
       {

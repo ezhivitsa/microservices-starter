@@ -1,4 +1,4 @@
-import { Kafka, KafkaHandlerError, Command, Event, Version, ErrorData } from '@packages/communication';
+import { Kafka, KafkaHandlerError, Command, Event, Version } from '@packages/communication';
 
 import { ListenData } from './types';
 
@@ -47,12 +47,12 @@ export class Context<S extends Record<string, any> = Record<string, any>> {
     this._validatedData = data;
   }
 
-  throw(errorData: ErrorData | KafkaHandlerError): void {
+  throw<T extends Record<string, any>>(errorData: T | KafkaHandlerError): void {
     if (!this._data.command) {
       return;
     }
 
-    const data = errorData instanceof KafkaHandlerError ? errorData : new KafkaHandlerError(errorData);
+    const data = errorData instanceof KafkaHandlerError ? errorData : new KafkaHandlerError<T>(errorData);
 
     this._kafka.sendReplyError(
       {

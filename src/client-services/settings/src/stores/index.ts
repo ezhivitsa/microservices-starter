@@ -1,1 +1,1 @@
-export { CurrentUserStore } from './current-user-store';
+export { CurrentUserStore, FormikCurrentUserFieldName, FormikCurrentUser } from './current-user-store';

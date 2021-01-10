@@ -14,3 +14,9 @@ export interface User {
   firstName?: string;
   lastName: string;
 }
+
+export interface UpdateUserParams {
+  id: string;
+  firstName?: string;
+  lastName: string;
+}

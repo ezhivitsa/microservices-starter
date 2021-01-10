@@ -1,14 +1,12 @@
 import { RouterAppContext } from 'koa';
 import { Request, Response } from 'oauth2-server';
 
+import { ServiceTypes } from '@packages/common';
+
 import { ACCESS_TOKEN, REFRESH_TOKEN, EXPIRED_AT } from 'constants/cookie-constants';
 
 import { client, CLIENT_SECRET } from 'lib/oauth';
 import { config } from 'lib/config';
-
-import { AccountService } from 'services';
-
-import { SignUpRequest, SignInRequest } from './types';
 
 interface TokenData {
   access_token: string;
@@ -36,22 +34,8 @@ function setTokens(ctx: RouterAppContext, data: TokenData): void {
   });
 }
 
-export async function signUp(ctx: RouterAppContext): Promise<void> {
-  const data: SignUpRequest = ctx.state.validatedRequest.value;
-
-  await AccountService.register(
-    {
-      ...data,
-      owner: true,
-    },
-    ctx.state,
-  );
-
-  ctx.body = null;
-}
-
-export async function signIn(ctx: RouterAppContext): Promise<void> {
-  const data: SignInRequest = ctx.state.validatedRequest.value;
+export async function signInHandler(ctx: RouterAppContext): Promise<void> {
+  const data: ServiceTypes.SignInRequest = ctx.state.validatedRequest.value;
 
   const req = new Request({
     body: {

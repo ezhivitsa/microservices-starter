@@ -1,14 +1,15 @@
 import { KoaKafka, Version, AppState, AppContext } from '@packages/koa-kafka';
 import { AuthorizationCommand } from '@packages/communication';
 
-import { signUpHandler } from './sign-up';
-import { getAccessTokenHandler } from './get-access-token';
-import { getRefreshTokenHandler } from './get-refresh-token';
-import { getUserHandler } from './get-user';
-import { saveTokenHandler } from './save-token';
-import { revokeTokenHandler } from './revoke-token';
-import { verifyScopeHandler } from './verify-scope';
-
+import {
+  signUpHandler,
+  getAccessTokenHandler,
+  getRefreshTokenHandler,
+  getUserHandler,
+  saveTokenHandler,
+  revokeTokenHandler,
+  verifyScopeHandler,
+} from './handlers';
 import {
   registrationSchema,
   getAccessTokenSchema,

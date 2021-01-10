@@ -3,10 +3,13 @@ import Router from '@koa/router';
 
 import { Constants } from '@packages/common';
 
-import { getCurrent } from './users';
+import { updateCurrentValidators } from './validators';
+import { getCurrentHandler, updateCurrentHandler } from './handlers';
 
 const usersRouter = new Router<AppKoaState, AppKoaContext>();
 
-usersRouter.get(Constants.currentPath, getCurrent);
+usersRouter
+  .get(Constants.currentPath, getCurrentHandler)
+  .put(Constants.currentPath, updateCurrentValidators, updateCurrentHandler);
 
 export { usersRouter };

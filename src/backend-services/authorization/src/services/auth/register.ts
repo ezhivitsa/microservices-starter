@@ -1,11 +1,9 @@
 import { usersStorageService } from 'storage';
 
-import { DUPLICATE_EMAIL } from 'constants/error-constants';
-
 import { UserRole } from 'lib/db/models/enums';
 import { getHash, generateSalt } from 'lib/secure';
 
-import { ValidationError } from 'services/errors';
+import { DuplicateEmailError } from 'services/errors';
 
 import { RegisterParams, User } from './types';
 
@@ -15,7 +13,7 @@ export async function register(data: RegisterParams): Promise<User> {
 
   const usersWithEmail = await usersStorageService.findByFilter({ email });
   if (usersWithEmail.length) {
-    throw new ValidationError({ email: { text: 'User with such email already exist', type: DUPLICATE_EMAIL } });
+    throw new DuplicateEmailError();
   }
 
   const salt = await generateSalt();

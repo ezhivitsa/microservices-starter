@@ -1,9 +1,11 @@
 import React, { ReactElement, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Formik, Form } from 'formik';
+import { Formik, FormikHelpers, Form } from 'formik';
 
-import { CurrentUserStore } from 'stores';
+import { CurrentUserStore, FormikCurrentUser } from 'stores';
 import { useCurrentUserStore, CurrentUserStoreProvider } from 'providers';
+
+import { validationSchema } from './validation';
 
 export const Profile = observer(
   (): ReactElement => {
@@ -17,7 +19,21 @@ export const Profile = observer(
       };
     }, []);
 
-    return <Formik />;
+    async function handleUpdateProfile(
+      values: FormikCurrentUser,
+      { setErrors }: FormikHelpers<FormikCurrentUser>,
+    ): Promise<void> {
+      await currentUserStore.update(values);
+      setErrors(currentUserStore.formikErrors);
+    }
+
+    return (
+      <Formik
+        initialValues={currentUserStore.formikValues}
+        validationSchema={validationSchema}
+        onSubmit={handleUpdateProfile}
+      />
+    );
   },
 );
 

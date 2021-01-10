@@ -28,6 +28,17 @@ message GetUserByAuthIdResponse {
   User user = 1;
 }
 
+// UpdateUser
+message UpdateUserRequest {
+  string id = 1;
+  string firstName = 2;
+  string lastName = 3;
+}
+
+message UpdateUserResponse {
+  User user = 1;
+}
+
 // Events
 message UserCreatedEvent {
   string id = 1;

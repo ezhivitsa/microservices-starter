@@ -3,10 +3,10 @@ import { AuthorizationTypes } from '@packages/communication';
 
 import { UsersService } from 'services';
 
-import { GetCurrentUserRequest } from './types';
+import { GetUserByAuthIdRequest } from '../types';
 
-export async function getCurrentUserHandler(ctx: AppContext): Promise<void> {
-  const data: GetCurrentUserRequest = ctx.data;
+export async function getUserByUserIdHandler(ctx: AppContext): Promise<void> {
+  const data: GetUserByAuthIdRequest = ctx.data;
   const user = await UsersService.getUserByAuthId(data);
 
   const response: AuthorizationTypes.GetUserResponse = {

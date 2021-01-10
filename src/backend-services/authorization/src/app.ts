@@ -1,4 +1,5 @@
 import { KoaKafka, AppState, AppContext } from '@packages/koa-kafka';
+import { AuthorizationTypes } from '@packages/communication';
 
 import { kafka } from './lib/kafka';
 
@@ -6,7 +7,10 @@ import { initRoutes } from './routes';
 
 // import { configMiddleware, errorsMiddleware } from './middlewares';
 
-const app = new KoaKafka<AppState, AppContext>(kafka);
+const app = new KoaKafka<AppState, AppContext>(kafka, {
+  badProtoCode: AuthorizationTypes.ErrorCode.BadProto,
+  validationFailedCode: AuthorizationTypes.ErrorCode.ValidationFailed,
+});
 
 export function initApp(): KoaKafka<AppState, AppContext> {
   // const loggerInitMiddleware = middlewares.prepareLoggerInitMiddleware(config.logger);

@@ -1,7 +1,7 @@
 import { Kafka, ProducerConfig, ConsumerConfig, KafkaMessage, IHeaders, Message } from 'kafkajs';
 import { v4 } from 'uuid';
 
-import { Command, commandSchemas, errorSchema } from '../proto-messages';
+import { Command, commandSchemas } from '../proto-messages';
 import { getChannelKey, Version } from '../messages';
 import { getRequestChannel } from '../channels';
 
@@ -72,7 +72,11 @@ export class KafkaCommand {
       return;
     }
 
-    const value = message.value ? errorSchema.decode(message.value) || null : null;
+    const command = headers[COMMAND_HEADER] as Command;
+    const version = (headers[VERSION_HEADER] as Version) || Version.v1;
+    const commandSchema = commandSchemas[getChannelKey(command, version)];
+
+    const value = message.value ? commandSchema.errorSchema?.decode(message.value) || null : null;
     this._promiseProviders.reject(headerMessageId, value);
   }
 

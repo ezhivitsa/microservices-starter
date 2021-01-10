@@ -8,4 +8,8 @@ export interface User extends Required<Omit<UserTypes.User, 'firstName'>> {
   firstName?: string;
 }
 
-export type GetCurrentUserRequest = Required<UserTypes.GetCurrentUserRequest>;
+export type GetUserByAuthIdRequest = Required<UserTypes.GetUserByAuthIdRequest>;
+
+export interface UpdateUserRequest extends Required<Omit<UserTypes.UpdateUserRequest, 'firstName'>> {
+  firstName?: string;
+}

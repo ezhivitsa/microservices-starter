@@ -1,7 +1,7 @@
 import { Message, IHeaders } from 'kafkajs';
 import { v4 as uuidv4 } from 'uuid';
 
-import { commandSchemas, eventSchemas, errorSchema } from '../proto-messages';
+import { commandSchemas, eventSchemas } from '../proto-messages';
 
 import { getChannelKey } from '../messages';
 
@@ -66,8 +66,12 @@ export function getCommandReplyErrorMessage(
   replyErrorData: ReplyData<KafkaHandlerError>,
   metadata: CommandMetadata,
 ): Message {
+  const commandSchema = commandSchemas[getChannelKey(replyErrorData.command, metadata.version)];
+
   return {
-    value: errorSchema.encode(replyErrorData.data.errorData) || null,
+    value: replyErrorData.data.errorData
+      ? commandSchema.errorSchema?.encode(replyErrorData.data.errorData) || null
+      : null,
     headers: {
       [COMMAND_REQUEST_ID_HEADER]: metadata.requestId,
       [COMMAND_HEADER]: replyErrorData.command,

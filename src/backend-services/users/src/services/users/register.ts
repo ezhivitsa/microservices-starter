@@ -1,8 +1,6 @@
 import { usersStorageService } from 'storage';
 
-import { DUPLICATE_AUTH_ID } from 'constants/error-constants';
-
-import { ValidationError } from 'services/errors';
+import { DuplicateAuthIdError } from 'services/errors';
 
 import { RegisterParams } from './types';
 
@@ -11,7 +9,7 @@ export async function register(data: RegisterParams): Promise<void> {
 
   const usersWithAuthId = await usersStorageService.findByFilter({ authId });
   if (usersWithAuthId.length) {
-    throw new ValidationError({ email: { text: 'User with such authId is already exists', type: DUPLICATE_AUTH_ID } });
+    throw new DuplicateAuthIdError();
   }
 
   await usersStorageService.create({

@@ -3,8 +3,8 @@ import { AuthorizationTypes } from '@packages/communication';
 
 import { AuthService } from 'services';
 
-import { mapUserDataToProto } from './converters';
-import { GetUserRequest } from './types';
+import { mapUserDataToProto } from '../converters';
+import { GetUserRequest } from '../types';
 
 export async function getUserHandler(ctx: AppContext): Promise<void> {
   const data: GetUserRequest = ctx.data;

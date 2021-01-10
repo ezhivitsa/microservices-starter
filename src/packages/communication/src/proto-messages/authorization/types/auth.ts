@@ -12,10 +12,10 @@ export interface RegistrationResponse {
 }
 
 export const enum Role {
-  UNKNOWN = 0,
-  USER = 1,
-  ADMIN = 2,
-  ORGANIZATION_ADMIN = 3,
+  Unknown = 0,
+  User = 1,
+  Admin = 2,
+  OrganizationAdmin = 3,
 }
 
 export interface User {

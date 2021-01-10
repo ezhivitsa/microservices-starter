@@ -44,4 +44,5 @@ export const authorizationCommandSchemas: Record<string, ChannelCommandSchema> =
     },
   ],
   Version.v1,
+  AuthorizationSchemas.error,
 );

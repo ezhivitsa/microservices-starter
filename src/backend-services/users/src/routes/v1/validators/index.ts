@@ -1,2 +1,2 @@
 export { registrationSchema } from './registration';
-export { getCurrentUserSchema } from './get-current-user';
+export { getUserByAuthIdSchema } from './get-user-by-auth-id';

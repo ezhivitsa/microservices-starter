@@ -5,13 +5,12 @@ import { Constants } from '@packages/common';
 
 import { validateMiddleware } from 'middlewares';
 
-import { signUp, signIn } from './account';
-
 import { signUpValidators, signInValidators } from './validators';
+import { signUpHandler, signInHandler } from './handlers';
 
 const accountRouter = new Router<AppKoaState, AppKoaContext>();
 
-accountRouter.post(Constants.signupPath, validateMiddleware(signUpValidators), signUp);
-accountRouter.post(Constants.signinPath, validateMiddleware(signInValidators), signIn);
+accountRouter.post(Constants.signupPath, validateMiddleware(signUpValidators), signUpHandler);
+accountRouter.post(Constants.signinPath, validateMiddleware(signInValidators), signInHandler);
 
 export { accountRouter };

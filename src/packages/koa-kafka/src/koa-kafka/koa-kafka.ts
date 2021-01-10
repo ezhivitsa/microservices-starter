@@ -1,15 +1,20 @@
 import { ObjectSchema } from 'joi';
-import { Kafka, Command, Event, Version, ErrorCode } from '@packages/communication';
+import { Kafka, Command, Event, Version } from '@packages/communication';
 
 import { compose } from './utils';
 import { Context } from './context';
 
 import { Middleware, ComposedMiddleware, Next, ListenData } from './types';
 
+interface Options {
+  badProtoCode: number;
+  validationFailedCode: number;
+}
+
 export class KoaKafka<S extends Record<string, any> = Record<string, any>, C extends Context = Context> {
   private _middlewares: Middleware[] = [];
 
-  constructor(private _kafka: Kafka) {}
+  constructor(private _kafka: Kafka, private _options: Options) {}
 
   private _respond(ctx: Context<S>): void {
     const { body } = ctx;
@@ -47,7 +52,7 @@ export class KoaKafka<S extends Record<string, any> = Record<string, any>, C ext
 
       if (ctx.dataError) {
         ctx.throw({
-          code: ErrorCode.BAD_PROTO,
+          code: this._options.badProtoCode,
         });
         return;
       }
@@ -64,7 +69,7 @@ export class KoaKafka<S extends Record<string, any> = Record<string, any>, C ext
 
       if (validateResult.errors) {
         ctx.throw({
-          code: ErrorCode.VALIDATION_FAILED,
+          code: this._options.validationFailedCode,
           message: JSON.stringify(validateResult.errors),
         });
         return;

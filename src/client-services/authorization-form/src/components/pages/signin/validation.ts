@@ -1,8 +1,6 @@
 import { yup } from 'lib/yup';
 
-import { FormikSignIn } from 'stores';
-
-export const validationSchema = yup.object().shape<FormikSignIn>({
+export const validationSchema = yup.object().shape({
   email: yup.string().email().required(),
   password: yup.string().required(),
 });

@@ -13,6 +13,14 @@ export const getUserByAuthIdResponse = root.loadProtoMessage<UserTypes.GetUserBy
   'microservices_starter.users.user.GetUserByAuthIdResponse',
 );
 
+export const updateUserRequest = root.loadProtoMessage<UserTypes.UpdateUserRequest>(
+  'microservices_starter.users.user.UpdateUserRequest',
+);
+
+export const updateUserResponse = root.loadProtoMessage<UserTypes.UpdateUserResponse>(
+  'microservices_starter.users.user.UpdateUserResponse',
+);
+
 export const userCreatedEvent = root.loadProtoMessage<UserTypes.UserCreatedEvent>(
   'microservices_starter.users.user.UserCreatedEvent',
 );

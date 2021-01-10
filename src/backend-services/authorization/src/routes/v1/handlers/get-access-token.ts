@@ -2,8 +2,8 @@ import { AppContext } from '@packages/koa-kafka';
 
 import { AuthService } from 'services';
 
-import { mapAccessTokenDataToProto } from './converters';
-import { GetAccessTokenRequest } from './types';
+import { mapAccessTokenDataToProto } from '../converters';
+import { GetAccessTokenRequest } from '../types';
 
 export async function getAccessTokenHandler(ctx: AppContext): Promise<void> {
   const data: GetAccessTokenRequest = ctx.data;

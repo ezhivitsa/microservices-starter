@@ -1,9 +1,15 @@
 import { KoaKafka, AppState, AppContext, Next } from '@packages/koa-kafka';
-import { ErrorCode } from '@packages/communication';
+import { UserTypes } from '@packages/communication';
 
-import { ValidationError } from 'services/errors';
+import { ServiceError, ServiceErrorCode } from 'services/errors';
 
 import { initV1Routes } from './v1';
+
+const mapErrorCode: Record<ServiceErrorCode, UserTypes.ErrorCode> = {
+  [ServiceErrorCode.Unknown]: UserTypes.ErrorCode.Unknown,
+  [ServiceErrorCode.NotFound]: UserTypes.ErrorCode.NotFound,
+  [ServiceErrorCode.DuplicateAuthId]: UserTypes.ErrorCode.DuplicateAuthId,
+};
 
 export function initRoutes(app: KoaKafka<AppState, AppContext>): void {
   initV1Routes(app);
@@ -12,18 +18,19 @@ export function initRoutes(app: KoaKafka<AppState, AppContext>): void {
     try {
       await next();
     } catch (err) {
-      let errorCode = ErrorCode.UNKNOWN;
-      let message: Record<string, any> | undefined;
+      let errorCode = UserTypes.ErrorCode.Unknown;
+      let message: string | undefined;
 
-      if (err instanceof ValidationError) {
-        errorCode = ErrorCode.VALIDATION_FAILED;
-        message = err.errorData;
+      if (err instanceof ServiceError) {
+        errorCode = mapErrorCode[err.errorCode];
+        message = err.message;
       }
 
-      ctx.throw({
+      const error: UserTypes.Error = {
         code: errorCode,
-        message: message ? JSON.stringify(message) : undefined,
-      });
+        message,
+      };
+      ctx.throw(error);
     }
   });
 }
