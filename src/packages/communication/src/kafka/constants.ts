@@ -1,3 +1,5 @@
+export const CHANNEL_HEADER = 'channel';
+
 export const COMMAND_HEADER = 'command';
 export const COMMAND_MESSAGE_ID_HEADER = 'message-id';
 export const COMMAND_REQUEST_ID_HEADER = 'request-id';

@@ -10,7 +10,7 @@ export const enum ErrorCode {
 }
 
 export interface Error {
-  code: ErrorCode;
+  code?: ErrorCode;
   message?: string;
   joiErrors?: CommonTypes.JoiError[];
 }

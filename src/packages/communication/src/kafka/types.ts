@@ -1,5 +1,6 @@
 import { Command, Event } from '../proto-messages';
 import { Version } from '../messages';
+import { Channel } from '../channels';
 
 export interface CommandMetadata {
   requestId: string;
@@ -13,6 +14,7 @@ export interface EventMetadata {
 
 export interface CommandData<D> {
   data: D;
+  channel: Channel;
   command: Command;
 }
 
@@ -22,6 +24,7 @@ export interface ReplyData<D> extends CommandData<D> {
 
 export interface EventData<D> {
   data: D;
+  channel: Channel;
   event: Event;
 }
 

@@ -2,7 +2,7 @@ import { Options } from 'sequelize';
 
 const port = Number(process.env.POSTGRES_PORT) || 5432;
 const host = process.env.POSTGRES_HOST || '127.0.0.1';
-const database = process.env.POSTGRES_DATABASE || 'authorization';
+const database = process.env.POSTGRES_DATABASE || 'users';
 const username = process.env.POSTGRES_USER || 'starter';
 const password = process.env.POSTGRES_PASSWORD || undefined;
 

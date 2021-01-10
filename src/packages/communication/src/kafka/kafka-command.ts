@@ -3,7 +3,7 @@ import { v4 } from 'uuid';
 
 import { Command, commandSchemas } from '../proto-messages';
 import { getChannelKey, Version } from '../messages';
-import { getRequestChannel } from '../channels';
+import { getRequestChannel, Channel } from '../channels';
 
 import {
   getCommandMessage,
@@ -19,7 +19,7 @@ import { Producer } from './producer';
 import { Consumer } from './consumer';
 import { PromiseProvider } from './promise-provider';
 
-import { COMMAND_HEADER, REPLY_CORRELATION_ID_HEADER, VERSION_HEADER } from './constants';
+import { CHANNEL_HEADER, COMMAND_HEADER, REPLY_CORRELATION_ID_HEADER, VERSION_HEADER } from './constants';
 
 export const getResponseChannel = (groupId: string): string => `${groupId}-response`;
 
@@ -58,9 +58,10 @@ export class KafkaCommand {
       return;
     }
 
+    const channel = headers[CHANNEL_HEADER] as Channel;
     const command = headers[COMMAND_HEADER] as Command;
     const version = (headers[VERSION_HEADER] as Version) || Version.v1;
-    const commandSchema = commandSchemas[getChannelKey(command, version)];
+    const commandSchema = commandSchemas[getChannelKey({ channel, commandOrEvent: command, version })];
 
     const value = message.value ? commandSchema.responseSchema?.decode(message.value).data || null : null;
     this._promiseProviders.resolve(headerMessageId, value);
@@ -72,9 +73,10 @@ export class KafkaCommand {
       return;
     }
 
+    const channel = headers[CHANNEL_HEADER] as Channel;
     const command = headers[COMMAND_HEADER] as Command;
     const version = (headers[VERSION_HEADER] as Version) || Version.v1;
-    const commandSchema = commandSchemas[getChannelKey(command, version)];
+    const commandSchema = commandSchemas[getChannelKey({ channel, commandOrEvent: command, version })];
 
     const value = message.value ? commandSchema.errorSchema?.decode(message.value) || null : null;
     this._promiseProviders.reject(headerMessageId, value);
@@ -83,7 +85,14 @@ export class KafkaCommand {
   async sendCommand<D, R>(commandData: CommandData<D>, metadata: CommandMetadata): Promise<R> {
     const { message, id } = getCommandMessage(commandData, this._responseChannel, metadata);
 
-    const commandSchema = commandSchemas[getChannelKey(commandData.command, metadata.version)];
+    const commandSchema =
+      commandSchemas[
+        getChannelKey({
+          channel: commandData.channel,
+          commandOrEvent: commandData.command,
+          version: metadata.version,
+        })
+      ];
     const requestChannel = getRequestChannel(commandSchema.channel);
 
     this._handleReplyMessages.add(id);

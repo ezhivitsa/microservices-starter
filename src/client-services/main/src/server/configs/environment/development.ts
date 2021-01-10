@@ -25,7 +25,7 @@ export const development: Config = {
       cssUrl: undefined,
     },
     settings: {
-      ...staging.frontUpstreams.auth,
+      ...staging.frontUpstreams.settings,
       jsUrl: 'http://localhost:8083/bundle.js',
       cssUrl: undefined,
     },

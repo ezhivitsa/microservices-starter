@@ -2,11 +2,12 @@ import { Kafka, ConsumerConfig, KafkaMessage, IHeaders } from 'kafkajs';
 
 import { Command, commandSchemas } from '../proto-messages';
 import { getChannelKey, Version } from '../messages';
-import { getRequestChannel } from '../channels';
+import { getRequestChannel, Channel } from '../channels';
 
 import { ListenCommandCallback } from './types';
 import { Consumer } from './consumer';
 import {
+  CHANNEL_HEADER,
   COMMAND_HEADER,
   COMMAND_MESSAGE_ID_HEADER,
   COMMAND_REQUEST_ID_HEADER,
@@ -31,10 +32,11 @@ export class KafkaCommandHandler {
   }
 
   private _handleMessage = (message: KafkaMessage, headers: IHeaders): void => {
+    const channel = headers[CHANNEL_HEADER] as Channel;
     const command = headers[COMMAND_HEADER] as Command;
     const version = (headers[VERSION_HEADER] as Version) || Version.v1;
 
-    const channelKey = getChannelKey(command, version);
+    const channelKey = getChannelKey({ channel, commandOrEvent: command, version });
     const commandSchema = commandSchemas[channelKey];
 
     if (!this._commandsToHandle.has(channelKey)) {
@@ -53,8 +55,8 @@ export class KafkaCommandHandler {
     });
   };
 
-  handleCommand(command: Command, version: Version): void {
-    const channelKey = getChannelKey(command, version);
+  handleCommand(channel: Channel, command: Command, version: Version): void {
+    const channelKey = getChannelKey({ channel, commandOrEvent: command, version });
     const commandSchema = commandSchemas[channelKey];
     const commandChannel = getRequestChannel(commandSchema.channel);
 

@@ -2,6 +2,7 @@ import { Kafka as Kafkajs, ProducerConfig, ConsumerConfig, KafkaConfig } from 'k
 
 import { Command, Event } from '../proto-messages';
 import { Version } from '../messages';
+import { Channel } from '../channels';
 
 import {
   CommandData,
@@ -52,12 +53,12 @@ export class Kafka {
     return this._kafkaEvent.sendEvent(eventData, metadata);
   }
 
-  handleCommand(command: Command, version: Version): void {
-    this._kafkaCommandHandler.handleCommand(command, version);
+  handleCommand(channel: Channel, command: Command, version: Version): void {
+    this._kafkaCommandHandler.handleCommand(channel, command, version);
   }
 
-  handleEvent(event: Event, version: Version): void {
-    this._kafkaEventHandler.handleEvent(event, version);
+  handleEvent(channel: Channel, event: Event, version: Version): void {
+    this._kafkaEventHandler.handleEvent(channel, event, version);
   }
 
   listenCommand(listenCallback: ListenCommandCallback): void {

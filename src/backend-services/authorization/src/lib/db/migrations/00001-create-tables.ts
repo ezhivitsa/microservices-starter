@@ -8,7 +8,7 @@ enum Role {
 
 module.exports = {
   up: async (queryInterface: QueryInterface) => {
-    await queryInterface.createTable('auth', {
+    await queryInterface.createTable('users', {
       id: {
         type: DataTypes.BIGINT,
         autoIncrement: true,

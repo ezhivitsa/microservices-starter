@@ -13,7 +13,7 @@ export function getChannelEvents<T extends string>(
   const result: Record<string, ChannelEventSchema> = {};
 
   eventSchemas.forEach(({ event, schema }) => {
-    result[getChannelKey(event, version)] = { channel, schema };
+    result[getChannelKey({ channel, commandOrEvent: event, version })] = { channel, schema };
   });
 
   return result;

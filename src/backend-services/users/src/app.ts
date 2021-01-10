@@ -1,11 +1,11 @@
 import { KoaKafka, AppState, AppContext } from '@packages/koa-kafka';
-import { UserTypes } from '@packages/communication';
+import { UserTypes, Channel } from '@packages/communication';
 
 import { kafka } from './lib/kafka';
 
 import { initRoutes } from './routes';
 
-const app = new KoaKafka<AppState, AppContext>(kafka, {
+const app = new KoaKafka<AppState, AppContext>(kafka, Channel.USERS, {
   badProtoCode: UserTypes.ErrorCode.BadProto,
   validationFailedCode: UserTypes.ErrorCode.ValidationFailed,
 });

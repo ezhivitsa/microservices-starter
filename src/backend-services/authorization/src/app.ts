@@ -1,5 +1,5 @@
 import { KoaKafka, AppState, AppContext } from '@packages/koa-kafka';
-import { AuthorizationTypes } from '@packages/communication';
+import { AuthorizationTypes, Channel } from '@packages/communication';
 
 import { kafka } from './lib/kafka';
 
@@ -7,7 +7,7 @@ import { initRoutes } from './routes';
 
 // import { configMiddleware, errorsMiddleware } from './middlewares';
 
-const app = new KoaKafka<AppState, AppContext>(kafka, {
+const app = new KoaKafka<AppState, AppContext>(kafka, Channel.AUTHORIZATION, {
   badProtoCode: AuthorizationTypes.ErrorCode.BadProto,
   validationFailedCode: AuthorizationTypes.ErrorCode.ValidationFailed,
 });

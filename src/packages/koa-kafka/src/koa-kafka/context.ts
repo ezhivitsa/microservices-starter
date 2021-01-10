@@ -1,4 +1,4 @@
-import { Kafka, KafkaHandlerError, Command, Event, Version } from '@packages/communication';
+import { Kafka, KafkaHandlerError, Command, Event, Version, Channel } from '@packages/communication';
 
 import { ListenData } from './types';
 
@@ -9,7 +9,7 @@ export class Context<S extends Record<string, any> = Record<string, any>> {
 
   private _validatedData: any;
 
-  constructor(private _kafka: Kafka, private _data: ListenData) {}
+  constructor(private _kafka: Kafka, private _channel: Channel, private _data: ListenData) {}
 
   get command(): Command | undefined {
     return this._data.command;
@@ -57,6 +57,7 @@ export class Context<S extends Record<string, any> = Record<string, any>> {
     this._kafka.sendReplyError(
       {
         data,
+        channel: this._channel,
         command: this._data.command,
         correlationId: this._data.id,
       },

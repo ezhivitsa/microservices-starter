@@ -2,11 +2,11 @@ import { Kafka, ConsumerConfig, KafkaMessage, IHeaders } from 'kafkajs';
 
 import { Event, eventSchemas } from '../proto-messages';
 import { getChannelKey, Version } from '../messages';
-import { getEventChannel } from '../channels';
+import { getEventChannel, Channel } from '../channels';
 
 import { ListenEventCallback } from './types';
 import { Consumer } from './consumer';
-import { EVENT_HEADER, EVENT_ID_HEADER, RESPONSE_CHANNEL_HEADER, VERSION_HEADER } from './constants';
+import { CHANNEL_HEADER, EVENT_HEADER, EVENT_ID_HEADER, RESPONSE_CHANNEL_HEADER, VERSION_HEADER } from './constants';
 
 export class KafkaEventHandler {
   private readonly _consumer: Consumer;
@@ -25,10 +25,15 @@ export class KafkaEventHandler {
   }
 
   private _handleMessage = (message: KafkaMessage, headers: IHeaders): void => {
+    const channel = headers[CHANNEL_HEADER] as Channel;
     const event = headers[EVENT_HEADER] as Event;
     const version = (headers[VERSION_HEADER] as Version) || Version.v1;
 
-    const channelKey = getChannelKey(event, version);
+    const channelKey = getChannelKey({
+      channel,
+      commandOrEvent: event,
+      version,
+    });
     const eventSchema = eventSchemas[channelKey];
 
     if (!this._eventsToHandle.has(channelKey)) {
@@ -45,8 +50,8 @@ export class KafkaEventHandler {
     });
   };
 
-  handleEvent(event: Event, version: Version): void {
-    const channelKey = getChannelKey(event, version);
+  handleEvent(channel: Channel, event: Event, version: Version): void {
+    const channelKey = getChannelKey({ channel, commandOrEvent: event, version });
     const eventSchema = eventSchemas[channelKey];
     const eventChannel = getEventChannel(eventSchema.channel);
 

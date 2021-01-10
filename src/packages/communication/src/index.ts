@@ -2,3 +2,4 @@ export { Kafka, KafkaConfig, ConsumerConfig, KafkaHandlerError, logLevel, getRes
 export * from './proto-messages';
 export * from './clients';
 export { Version } from './messages';
+export { Channel } from './channels';

@@ -1,5 +1,5 @@
 import { ObjectSchema } from 'joi';
-import { Kafka, Command, Event, Version } from '@packages/communication';
+import { Kafka, Command, Event, Version, Channel } from '@packages/communication';
 
 import { compose } from './utils';
 import { Context } from './context';
@@ -14,7 +14,7 @@ interface Options {
 export class KoaKafka<S extends Record<string, any> = Record<string, any>, C extends Context = Context> {
   private _middlewares: Middleware[] = [];
 
-  constructor(private _kafka: Kafka, private _options: Options) {}
+  constructor(private _kafka: Kafka, private _channel: Channel, private _options: Options) {}
 
   private _respond(ctx: Context<S>): void {
     const { body } = ctx;
@@ -26,6 +26,7 @@ export class KoaKafka<S extends Record<string, any> = Record<string, any>, C ext
     this._kafka.sendReply(
       {
         data: body,
+        channel: this._channel,
         command: ctx.command,
         correlationId: ctx.id,
       },
@@ -48,7 +49,7 @@ export class KoaKafka<S extends Record<string, any> = Record<string, any>, C ext
     const fn = compose(this._middlewares);
 
     return (data: ListenData) => {
-      const ctx = new Context<S>(this._kafka, data);
+      const ctx = new Context<S>(this._kafka, this._channel, data);
 
       if (ctx.dataError) {
         ctx.throw({
@@ -123,7 +124,7 @@ export class KoaKafka<S extends Record<string, any> = Record<string, any>, C ext
 
     this._middlewares.push(middleware as any);
 
-    this._kafka.handleCommand(command, version);
+    this._kafka.handleCommand(this._channel, command, version);
     return this;
   }
 
@@ -137,7 +138,7 @@ export class KoaKafka<S extends Record<string, any> = Record<string, any>, C ext
     };
 
     this._middlewares.push(middleware as any);
-    this._kafka.handleEvent(event, version);
+    this._kafka.handleEvent(this._channel, event, version);
     return this;
   }
 }

@@ -16,7 +16,14 @@ export class KafkaEvent {
   }
 
   async sendEvent<D>(eventData: EventData<D>, metadata: EventMetadata): Promise<void> {
-    const eventSchema = eventSchemas[getChannelKey(eventData.event, metadata.version)];
+    const eventSchema =
+      eventSchemas[
+        getChannelKey({
+          channel: eventData.channel,
+          commandOrEvent: eventData.event,
+          version: metadata.version,
+        })
+      ];
     const eventChannel = getEventChannel(eventSchema.channel);
 
     const message = getEventMessage(eventData, metadata);

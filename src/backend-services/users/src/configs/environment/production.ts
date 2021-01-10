@@ -9,11 +9,11 @@ export const production: Config = {
   },
   requestIdHeader: 'x-request-id',
   kafka: {
-    clientId: 'authorization',
+    clientId: 'users',
     brokers: ['kafka:9092'],
     logLevel: logLevel.INFO,
   },
   kafkaConsumer: {
-    groupId: 'authorization',
+    groupId: 'users',
   },
 };

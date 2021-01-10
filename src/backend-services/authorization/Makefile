@@ -69,7 +69,7 @@ migrate-local: DB_VARS=${POSTGRES_DEV_VARS} ${DEV_VARS}
 migrate-local: migrate
 
 .PHONE: create-db-local
-migrate-local: build
+create-db-local: build
 create-db-local: DB_VARS=${POSTGRES_DEV_VARS} ${DEV_VARS}
 create-db-local: create-db
 

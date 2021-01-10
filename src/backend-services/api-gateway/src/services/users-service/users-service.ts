@@ -10,4 +10,6 @@ export async function getUserByAuthId(
   return UsersProvider.getUserByAuthId(params, metadata);
 }
 
-export async function updateUser(params: UpdateUserParams, metadata: ServiceMetadata): Promise<UserResult | null> {}
+export async function updateUser(params: UpdateUserParams, metadata: ServiceMetadata): Promise<UserResult | null> {
+  return UsersProvider.updateUser(params, metadata);
+}

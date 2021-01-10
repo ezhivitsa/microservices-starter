@@ -55,5 +55,5 @@ const userAttributes: ModelAttributes = {
 };
 
 export function initUser(sequelize: Sequelize): UserModel {
-  return sequelize.define<UserInstance>('auth', userAttributes);
+  return sequelize.define<UserInstance>('users', userAttributes);
 }

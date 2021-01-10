@@ -6,6 +6,7 @@ import { commandSchemas, eventSchemas } from '../proto-messages';
 import { getChannelKey } from '../messages';
 
 import {
+  CHANNEL_HEADER,
   COMMAND_HEADER,
   COMMAND_MESSAGE_ID_HEADER,
   COMMAND_REQUEST_ID_HEADER,
@@ -28,12 +29,20 @@ export function getCommandMessage<D>(
   message: Message;
   id: string;
 } {
-  const commandSchema = commandSchemas[getChannelKey(commandData.command, metadata.version)];
+  const commandSchema =
+    commandSchemas[
+      getChannelKey({
+        channel: commandData.channel,
+        commandOrEvent: commandData.command,
+        version: metadata.version,
+      })
+    ];
   const messageId = uuidv4();
 
   const message = {
     value: commandSchema.requestSchema?.encode(commandData.data) || null,
     headers: {
+      [CHANNEL_HEADER]: commandData.channel,
       [COMMAND_MESSAGE_ID_HEADER]: messageId,
       [COMMAND_REQUEST_ID_HEADER]: metadata.requestId,
       [COMMAND_HEADER]: commandData.command,
@@ -49,11 +58,19 @@ export function getCommandMessage<D>(
 }
 
 export function getCommandReplyMessage<D>(replyData: ReplyData<D>, metadata: CommandMetadata): Message {
-  const commandSchema = commandSchemas[getChannelKey(replyData.command, metadata.version)];
+  const commandSchema =
+    commandSchemas[
+      getChannelKey({
+        channel: replyData.channel,
+        commandOrEvent: replyData.command,
+        version: metadata.version,
+      })
+    ];
 
   return {
     value: replyData.data ? commandSchema.responseSchema?.encode(replyData.data) || null : null,
     headers: {
+      [CHANNEL_HEADER]: replyData.channel,
       [COMMAND_REQUEST_ID_HEADER]: metadata.requestId,
       [REPLY_CORRELATION_ID_HEADER]: replyData.correlationId,
       [COMMAND_HEADER]: replyData.command,
@@ -66,13 +83,21 @@ export function getCommandReplyErrorMessage(
   replyErrorData: ReplyData<KafkaHandlerError>,
   metadata: CommandMetadata,
 ): Message {
-  const commandSchema = commandSchemas[getChannelKey(replyErrorData.command, metadata.version)];
+  const commandSchema =
+    commandSchemas[
+      getChannelKey({
+        channel: replyErrorData.channel,
+        commandOrEvent: replyErrorData.command,
+        version: metadata.version,
+      })
+    ];
 
   return {
     value: replyErrorData.data.errorData
       ? commandSchema.errorSchema?.encode(replyErrorData.data.errorData) || null
       : null,
     headers: {
+      [CHANNEL_HEADER]: replyErrorData.channel,
       [COMMAND_REQUEST_ID_HEADER]: metadata.requestId,
       [COMMAND_HEADER]: replyErrorData.command,
       [REPLY_CORRELATION_ID_HEADER]: replyErrorData.correlationId,
@@ -83,13 +108,21 @@ export function getCommandReplyErrorMessage(
 }
 
 export function getEventMessage<D>(eventData: EventData<D>, metadata: EventMetadata): Message {
-  const eventSchema = eventSchemas[getChannelKey(eventData.event, metadata.version)];
+  const eventSchema =
+    eventSchemas[
+      getChannelKey({
+        channel: eventData.channel,
+        commandOrEvent: eventData.event,
+        version: metadata.version,
+      })
+    ];
 
   const eventId = uuidv4();
 
   return {
     value: eventSchema.schema?.encode(eventData.data) || null,
     headers: {
+      [CHANNEL_HEADER]: eventData.channel,
       [EVENT_HEADER]: eventData.event,
       [EVENT_ID_HEADER]: eventId,
       [VERSION_HEADER]: metadata.version,

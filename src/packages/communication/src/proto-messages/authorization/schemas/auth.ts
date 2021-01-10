@@ -5,6 +5,10 @@ export const registrationRequest = root.loadProtoMessage<AuthorizationTypes.Regi
   'microservices_starter.authorization.auth.RegistrationRequest',
 );
 
+export const registrationResponse = root.loadProtoMessage<AuthorizationTypes.RegistrationResponse>(
+  'microservices_starter.authorization.auth.RegistrationResponse',
+);
+
 export const getAccessTokenRequest = root.loadProtoMessage<AuthorizationTypes.GetAccessTokenRequest>(
   'microservices_starter.authorization.auth.GetAccessTokenRequest',
 );

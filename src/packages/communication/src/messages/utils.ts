@@ -1,5 +1,11 @@
 import { Version } from './types';
 
-export function getChannelKey(commandOrEvent: string, version: Version): string {
-  return `${commandOrEvent}-${version}`;
+interface ChannelKeyData {
+  channel: string;
+  commandOrEvent: string;
+  version: Version;
+}
+
+export function getChannelKey({ channel, commandOrEvent, version }: ChannelKeyData): string {
+  return `${channel}-${commandOrEvent}-${version}`;
 }

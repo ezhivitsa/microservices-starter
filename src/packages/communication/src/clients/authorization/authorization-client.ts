@@ -1,14 +1,31 @@
-import { AuthorizationTypes, AuthorizationCommand } from '../proto-messages';
+import { AuthorizationTypes, AuthorizationCommand } from '../../proto-messages';
 
-import { BaseClient } from './base-client';
-import { CommandMetadata } from './types';
+import { KafkaHandlerError } from '../../kafka';
+import { Channel } from '../../channels';
 
-export class AuthorizationClient extends BaseClient {
+import { BaseClient } from '../base-client';
+import { CommandMetadata } from '../types';
+
+import { AuthorizationError } from './authorization-error';
+
+export class AuthorizationClient extends BaseClient<AuthorizationError> {
+  _channel = Channel.AUTHORIZATION;
+
+  _getClientError(err: Error): AuthorizationError {
+    const errorData =
+      err instanceof KafkaHandlerError
+        ? err.errorData
+        : {
+            message: err.message,
+          };
+    return new AuthorizationError(errorData);
+  }
+
   registrationCommand(
     data: AuthorizationTypes.RegistrationRequest,
     metadata: CommandMetadata,
   ): Promise<AuthorizationTypes.RegistrationResponse> {
-    return this._kafka.sendCommand(
+    return this._sendCommand(
       {
         data,
         command: AuthorizationCommand.Registration,
@@ -21,7 +38,7 @@ export class AuthorizationClient extends BaseClient {
     data: AuthorizationTypes.GetAccessTokenRequest,
     metadata: CommandMetadata,
   ): Promise<AuthorizationTypes.GetAccessTokenResponse> {
-    return this._kafka.sendCommand(
+    return this._sendCommand(
       {
         data,
         command: AuthorizationCommand.GetAccessToken,
@@ -34,7 +51,7 @@ export class AuthorizationClient extends BaseClient {
     data: AuthorizationTypes.GetRefreshTokenRequest,
     metadata: CommandMetadata,
   ): Promise<AuthorizationTypes.GetRefreshTokenResponse> {
-    return this._kafka.sendCommand(
+    return this._sendCommand(
       {
         data,
         command: AuthorizationCommand.GetRefreshToken,
@@ -47,7 +64,7 @@ export class AuthorizationClient extends BaseClient {
     data: AuthorizationTypes.GetUserRequest,
     metadata: CommandMetadata,
   ): Promise<AuthorizationTypes.GetUserResponse> {
-    return this._kafka.sendCommand(
+    return this._sendCommand(
       {
         data,
         command: AuthorizationCommand.GetUser,
@@ -57,7 +74,7 @@ export class AuthorizationClient extends BaseClient {
   }
 
   saveTokenCommand(data: AuthorizationTypes.SaveTokenRequest, metadata: CommandMetadata): Promise<void> {
-    return this._kafka.sendCommand(
+    return this._sendCommand(
       {
         data,
         command: AuthorizationCommand.SaveToken,
@@ -67,7 +84,7 @@ export class AuthorizationClient extends BaseClient {
   }
 
   revokeTokenCommand(data: AuthorizationTypes.RevokeTokenRequest, metadata: CommandMetadata): Promise<void> {
-    return this._kafka.sendCommand(
+    return this._sendCommand(
       {
         data,
         command: AuthorizationCommand.RevokeToken,
@@ -80,7 +97,7 @@ export class AuthorizationClient extends BaseClient {
     data: AuthorizationTypes.VerifyScopeRequest,
     metadata: CommandMetadata,
   ): Promise<AuthorizationTypes.VerifyScopeResponse> {
-    return this._kafka.sendCommand(
+    return this._sendCommand(
       {
         data,
         command: AuthorizationCommand.VerifyScope,

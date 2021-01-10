@@ -15,7 +15,7 @@ export function getChannelCommands<T extends string>(
   const result: Record<string, ChannelCommandSchema> = {};
 
   commandSchemas.forEach(({ command, requestSchema, responseSchema, errorSchema }) => {
-    result[getChannelKey(command, version)] = {
+    result[getChannelKey({ channel, commandOrEvent: command, version })] = {
       requestSchema,
       responseSchema,
       errorSchema: errorSchema || channelErrorSchema,

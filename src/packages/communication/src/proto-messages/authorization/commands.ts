@@ -19,6 +19,7 @@ export const authorizationCommandSchemas: Record<string, ChannelCommandSchema> =
     {
       command: AuthorizationCommand.Registration,
       requestSchema: AuthorizationSchemas.registrationRequest,
+      responseSchema: AuthorizationSchemas.registrationResponse,
     },
     {
       command: AuthorizationCommand.GetAccessToken,

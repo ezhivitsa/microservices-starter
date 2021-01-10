@@ -26,7 +26,7 @@ export const production: Config = {
       name: '@client-services/dashboard',
       jsUrl: `${staticUrl}/s3/dashboard/${dashboardVersion}/bundle.js`,
       cssUrl: `${staticUrl}/s3/dashboard/${dashboardVersion}/style.css`,
-      rule: AuthPaths.indexPath(true),
+      rule: DashboardPaths.indexPath(true),
       layout: Types.ApplicationLayout.Default,
     },
     auth: {
@@ -40,7 +40,7 @@ export const production: Config = {
       name: '@client-services/settings',
       jsUrl: `${staticUrl}/s3/settings/${settingsVersion}/bundle.js`,
       cssUrl: `${staticUrl}/s3/settings/${settingsVersion}/style.css`,
-      rule: AuthPaths.indexPath(true),
+      rule: SettingsPaths.indexPath(true),
       layout: Types.ApplicationLayout.Default,
     },
   },
