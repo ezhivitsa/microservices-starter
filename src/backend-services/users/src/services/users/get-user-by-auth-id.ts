@@ -11,7 +11,9 @@ export async function getUserByAuthId(data: GetUserByAuthIdParams): Promise<User
   }
 
   return {
-    ...user,
+    id: user.id,
+    email: user.email,
     firstName: user.firstName || undefined,
+    lastName: user.lastName,
   };
 }

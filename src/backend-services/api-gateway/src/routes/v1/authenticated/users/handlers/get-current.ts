@@ -7,7 +7,7 @@ import { UsersService } from 'services';
 export async function getCurrentHandler(ctx: RouterAppContext): Promise<void> {
   const user = await UsersService.getUserByAuthId(
     {
-      authId: '',
+      authId: ctx.state.user.id,
     },
     ctx.state,
   );

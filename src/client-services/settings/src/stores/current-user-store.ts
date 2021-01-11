@@ -1,4 +1,4 @@
-import { observable, action, runInAction, computed } from 'mobx';
+import { action, runInAction, computed, makeObservable, observable } from 'mobx';
 
 import { ApiError } from '@packages/client';
 import { Types } from '@packages/common';
@@ -16,84 +16,97 @@ export interface FormikCurrentUser {
 }
 
 export class CurrentUserStore {
-  @observable private _firstName = '';
-  @observable private _lastName = '';
+  firstName = '';
+  lastName = '';
 
-  @observable private _fetchStatus: Types.Status = Types.Status.Initial;
-  @observable private _fetchError: ApiError | null = null;
+  fetchStatus: Types.Status = Types.Status.Initial;
+  fetchError: ApiError | null = null;
 
-  @observable private _updateStatus: Types.Status = Types.Status.Initial;
-  @observable private _updateError: ApiError | null = null;
+  updateStatus: Types.Status = Types.Status.Initial;
+  updateError: ApiError | null = null;
 
-  @computed
-  get isLoading(): boolean {
-    return this._fetchStatus === Types.Status.Initial || this._fetchStatus === Types.Status.Pending;
+  constructor() {
+    makeObservable(this, {
+      firstName: observable,
+      lastName: observable,
+      fetchStatus: observable,
+      fetchError: observable,
+      updateStatus: observable,
+      updateError: observable,
+      isLoading: computed,
+      formikValues: computed,
+      formikErrors: computed,
+      generalError: computed,
+      isUpdating: computed,
+      fetch: action,
+      update: action,
+      dispose: action,
+    });
   }
 
-  @computed
+  get isLoading(): boolean {
+    return this.fetchStatus === Types.Status.Initial || this.fetchStatus === Types.Status.Pending;
+  }
+
   get formikValues(): FormikCurrentUser {
     return {
-      firstName: this._firstName,
-      lastName: this._lastName,
+      firstName: this.firstName,
+      lastName: this.lastName,
     };
   }
 
-  @computed
   get formikErrors(): Partial<FormikCurrentUser> {
-    return this._updateStatus === Types.Status.Error ? this._updateError?.data || {} : {};
+    return this.updateStatus === Types.Status.Error ? this.updateError?.data || {} : {};
   }
 
-  @computed
   get generalError(): string | undefined {
-    return this._updateStatus === Types.Status.Error ? this._updateError?.globalError : undefined;
+    return this.updateStatus === Types.Status.Error ? this.updateError?.globalError : undefined;
   }
 
   @computed
-  get isSigningUp(): boolean {
-    return this._updateStatus === Types.Status.Pending;
+  get isUpdating(): boolean {
+    return this.updateStatus === Types.Status.Pending;
   }
 
-  @action
   async fetch(): Promise<void> {
-    this._fetchStatus = Types.Status.Pending;
-    this._fetchError = null;
+    this.fetchStatus = Types.Status.Pending;
+    this.fetchError = null;
 
     try {
       const currentUser = await UsersService.getCurrentUser();
 
+      console.log(currentUser);
       runInAction(() => {
-        this._fetchStatus = Types.Status.Done;
-        this._firstName = currentUser.firstName || '';
-        this._lastName = currentUser.lastName;
+        this.fetchStatus = Types.Status.Done;
+        this.firstName = currentUser.firstName || '';
+        this.lastName = currentUser.lastName;
       });
     } catch (error) {
       runInAction(() => {
-        this._fetchStatus = Types.Status.Error;
-        this._fetchError = error;
+        this.fetchStatus = Types.Status.Error;
+        this.fetchError = error;
       });
     }
   }
 
-  @action
   async update(values: FormikCurrentUser): Promise<void> {
-    this._updateStatus = Types.Status.Pending;
-    this._updateError = null;
+    this.updateStatus = Types.Status.Pending;
+    this.updateError = null;
 
     try {
     } catch (error) {
       runInAction(() => {
-        this._updateStatus = Types.Status.Error;
-        this._updateError = error;
+        this.updateStatus = Types.Status.Error;
+        this.updateError = error;
       });
     }
   }
 
-  @action
   dispose(): void {
-    this._fetchStatus = Types.Status.Initial;
-    this._fetchError = null;
+    this.fetchStatus = Types.Status.Initial;
+    this.fetchError = null;
 
-    this._updateStatus = Types.Status.Initial;
-    this._updateError = null;
+    this.updateStatus = Types.Status.Initial;
+    this.updateError = null;
   }
 }

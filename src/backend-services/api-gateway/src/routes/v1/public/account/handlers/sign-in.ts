@@ -15,8 +15,8 @@ interface TokenData {
 }
 
 function setTokens(ctx: RouterAppContext, data: TokenData): void {
-  const expiredAt = new Date(Date.now() + data.expires_in);
-  const refreshTokenExpiredAt = new Date(Date.now() + config.tokens.refreshTokenLifetime);
+  const expiredAt = new Date(Date.now() + data.expires_in * 1000);
+  const refreshTokenExpiredAt = new Date(Date.now() + config.tokens.refreshTokenLifetime * 1000);
 
   ctx.cookies.set(ACCESS_TOKEN, data.access_token, {
     httpOnly: true,

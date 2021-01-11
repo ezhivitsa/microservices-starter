@@ -62,6 +62,10 @@ export const Profile = observer(
       );
     }
 
+    if (currentUserStore.isLoading) {
+      return <div>Loading</div>;
+    }
+
     return (
       <Formik
         initialValues={currentUserStore.formikValues}

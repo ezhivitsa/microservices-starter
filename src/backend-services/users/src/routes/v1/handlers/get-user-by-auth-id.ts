@@ -1,5 +1,5 @@
 import { AppContext } from '@packages/koa-kafka';
-import { AuthorizationTypes } from '@packages/communication';
+import { UserTypes } from '@packages/communication';
 
 import { UsersService } from 'services';
 
@@ -9,7 +9,7 @@ export async function getUserByUserIdHandler(ctx: AppContext): Promise<void> {
   const data: GetUserByAuthIdRequest = ctx.data;
   const user = await UsersService.getUserByAuthId(data);
 
-  const response: AuthorizationTypes.GetUserResponse = {
+  const response: UserTypes.GetUserByAuthIdResponse = {
     user: user || undefined,
   };
 

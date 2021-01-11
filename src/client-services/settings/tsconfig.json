@@ -10,6 +10,7 @@
     "baseUrl": "./src",
     "jsx": "react",
     "experimentalDecorators": true,
+    "useDefineForClassFields": true,
 
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
