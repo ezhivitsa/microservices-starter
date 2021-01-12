@@ -1,9 +1,9 @@
 import React, { ReactElement, ReactNode, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Formik, FormikHelpers, Form } from 'formik';
+import { Formik, FormikHelpers, FormikProps, Form } from 'formik';
 
 import { FormikField } from '@packages/ui-ex';
-import { Input, InputWidth, useStyles } from '@packages/ui';
+import { Input, InputWidth, Button, ButtonView, ButtonType, Spinner, useStyles } from '@packages/ui';
 
 import { CurrentUserStore, FormikCurrentUser, FormikCurrentUserFieldName } from 'stores';
 import { useCurrentUserStore, CurrentUserStoreProvider } from 'providers';
@@ -18,6 +18,7 @@ export const Profile = observer(
   (): ReactElement => {
     const b = useStyles(styles, 'profile');
     const currentUserStore = useCurrentUserStore();
+    const { isUpdating } = currentUserStore;
 
     useEffect(() => {
       currentUserStore.fetch();
@@ -35,7 +36,7 @@ export const Profile = observer(
       setErrors(currentUserStore.formikErrors);
     }
 
-    function renderForm(): ReactNode {
+    function renderForm({ isValid, handleSubmit }: FormikProps<FormikCurrentUser>): ReactNode {
       return (
         <Form>
           <FormikField
@@ -58,12 +59,21 @@ export const Profile = observer(
               className: b('input'),
             }}
           />
+
+          <Button
+            view={ButtonView.Action}
+            type={ButtonType.Submit}
+            onClick={handleSubmit}
+            disabled={!isValid || isUpdating}
+          >
+            {profileFormTexts.updateBtn}
+          </Button>
         </Form>
       );
     }
 
     if (currentUserStore.isLoading) {
-      return <div>Loading</div>;
+      return <Spinner />;
     }
 
     return (

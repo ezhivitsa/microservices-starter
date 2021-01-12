@@ -1,4 +1,4 @@
-import { observable, computed, action, runInAction } from 'mobx';
+import { observable, computed, action, runInAction, makeObservable } from 'mobx';
 
 import { ApiError } from '@packages/client';
 import { Types } from '@packages/common';
@@ -20,43 +20,54 @@ export interface FormikSignUp {
 }
 
 export class SignUpStore {
-  @observable private _firstName?: string;
-  @observable private _lastName = '';
-  @observable private _email = '';
-  @observable private _password = '';
+  firstName?: string;
+  lastName = '';
+  email = '';
+  password = '';
 
-  @observable private _status: Types.Status = Types.Status.Initial;
-  @observable private _error: ApiError | null = null;
+  status: Types.Status = Types.Status.Initial;
+  error: ApiError | null = null;
 
-  @computed
+  constructor() {
+    makeObservable(this, {
+      firstName: observable,
+      lastName: observable,
+      email: observable,
+      password: observable,
+      status: observable,
+      error: observable,
+      formikValues: computed,
+      formikErrors: computed,
+      generalError: computed,
+      isSigningUp: computed,
+      signUp: action,
+    });
+  }
+
   get formikValues(): FormikSignUp {
     return {
-      firstName: this._firstName,
-      lastName: this._lastName,
-      email: this._email,
-      password: this._password,
+      firstName: this.firstName,
+      lastName: this.lastName,
+      email: this.email,
+      password: this.password,
     };
   }
 
-  @computed
   get formikErrors(): Partial<FormikSignUp> {
-    return this._status === Types.Status.Error ? this._error?.data || {} : {};
+    return this.status === Types.Status.Error ? this.error?.data || {} : {};
   }
 
-  @computed
   get generalError(): string | undefined {
-    return this._status === Types.Status.Error ? this._error?.globalError : undefined;
+    return this.status === Types.Status.Error ? this.error?.globalError : undefined;
   }
 
-  @computed
   get isSigningUp(): boolean {
-    return this._status === Types.Status.Pending;
+    return this.status === Types.Status.Pending;
   }
 
-  @action
   async signUp(values: FormikSignUp): Promise<void> {
-    this._status = Types.Status.Pending;
-    this._error = null;
+    this.status = Types.Status.Pending;
+    this.error = null;
 
     try {
       const response = await AuthorizationService.signUp({
@@ -65,8 +76,8 @@ export class SignUpStore {
       });
     } catch (error) {
       runInAction(() => {
-        this._status = Types.Status.Error;
-        this._error = error;
+        this.status = Types.Status.Error;
+        this.error = error;
       });
     }
   }

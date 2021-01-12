@@ -7,6 +7,6 @@ import { usersRouter } from './users';
 
 const authenticatedRouter = new Router<AppKoaState, AppKoaContext>();
 
-authenticatedRouter.use(Constants.usersPrefix, usersRouter.routes());
+authenticatedRouter.use(Constants.usersPrefix, usersRouter.routes(), usersRouter.allowedMethods());
 
 export { authenticatedRouter };

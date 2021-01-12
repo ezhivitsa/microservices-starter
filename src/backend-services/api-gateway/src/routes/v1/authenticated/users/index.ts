@@ -3,6 +3,8 @@ import Router from '@koa/router';
 
 import { Constants } from '@packages/common';
 
+import { validateMiddleware } from 'middlewares';
+
 import { updateCurrentValidators } from './validators';
 import { getCurrentHandler, updateCurrentHandler } from './handlers';
 
@@ -10,6 +12,6 @@ const usersRouter = new Router<AppKoaState, AppKoaContext>();
 
 usersRouter
   .get(Constants.currentPath, getCurrentHandler)
-  .put(Constants.currentPath, updateCurrentValidators, updateCurrentHandler);
+  .put(Constants.currentPath, validateMiddleware(updateCurrentValidators), updateCurrentHandler);
 
 export { usersRouter };

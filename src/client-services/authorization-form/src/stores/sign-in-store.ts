@@ -1,4 +1,4 @@
-import { observable, computed, action, runInAction } from 'mobx';
+import { observable, computed, action, runInAction, makeObservable } from 'mobx';
 
 import { ApiError } from '@packages/client';
 import { Types } from '@packages/common';
@@ -16,46 +16,55 @@ export interface FormikSignIn {
 }
 
 export class SignInStore {
-  @observable private _email = '';
-  @observable private _password = '';
+  email = '';
+  password = '';
 
-  @observable private _status: Types.Status = Types.Status.Initial;
-  @observable private _error: ApiError | null = null;
+  status: Types.Status = Types.Status.Initial;
+  error: ApiError | null = null;
 
-  @computed
+  constructor() {
+    makeObservable(this, {
+      email: observable,
+      password: observable,
+      status: observable,
+      error: observable,
+      formikValues: computed,
+      formikErrors: computed,
+      generalError: computed,
+      isSigningIn: computed,
+      signIn: action,
+    });
+  }
+
   get formikValues(): FormikSignIn {
     return {
-      email: this._email,
-      password: this._password,
+      email: this.email,
+      password: this.password,
     };
   }
 
-  @computed
   get formikErrors(): Partial<FormikSignIn> {
-    return this._status === Types.Status.Error ? this._error?.data || {} : {};
+    return this.status === Types.Status.Error ? this.error?.data || {} : {};
   }
 
-  @computed
   get generalError(): string | undefined {
-    return this._status === Types.Status.Error ? this._error?.globalError : undefined;
+    return this.status === Types.Status.Error ? this.error?.globalError : undefined;
   }
 
-  @computed
   get isSigningIn(): boolean {
-    return this._status === Types.Status.Pending;
+    return this.status === Types.Status.Pending;
   }
 
-  @action
   async signIn(values: FormikSignIn): Promise<void> {
-    this._status = Types.Status.Pending;
-    this._error = null;
+    this.status = Types.Status.Pending;
+    this.error = null;
 
     try {
       const response = await AuthorizationService.signIn(values);
     } catch (error) {
       runInAction(() => {
-        this._status = Types.Status.Error;
-        this._error = error;
+        this.status = Types.Status.Error;
+        this.error = error;
       });
     }
   }

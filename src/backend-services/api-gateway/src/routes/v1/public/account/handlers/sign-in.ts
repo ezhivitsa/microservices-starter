@@ -3,36 +3,8 @@ import { Request, Response } from 'oauth2-server';
 
 import { ServiceTypes } from '@packages/common';
 
-import { ACCESS_TOKEN, REFRESH_TOKEN, EXPIRED_AT } from 'constants/cookie-constants';
-
 import { client, CLIENT_SECRET } from 'lib/oauth';
-import { config } from 'lib/config';
-
-interface TokenData {
-  access_token: string;
-  expires_in: number;
-  refresh_token: string;
-}
-
-function setTokens(ctx: RouterAppContext, data: TokenData): void {
-  const expiredAt = new Date(Date.now() + data.expires_in * 1000);
-  const refreshTokenExpiredAt = new Date(Date.now() + config.tokens.refreshTokenLifetime * 1000);
-
-  ctx.cookies.set(ACCESS_TOKEN, data.access_token, {
-    httpOnly: true,
-    expires: expiredAt,
-    domain: config.domain,
-  });
-  ctx.cookies.set(REFRESH_TOKEN, data.refresh_token, {
-    httpOnly: true,
-    expires: refreshTokenExpiredAt,
-    domain: config.domain,
-  });
-  ctx.cookies.set(EXPIRED_AT, expiredAt.toISOString(), {
-    httpOnly: false,
-    domain: config.domain,
-  });
-}
+import { setTokens } from 'lib/tokens';
 
 export async function signInHandler(ctx: RouterAppContext): Promise<void> {
   const data: ServiceTypes.SignInRequest = ctx.state.validatedRequest.value;

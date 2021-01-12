@@ -2,7 +2,7 @@ import { AppKoaState, AppKoaContext } from 'koa';
 import Router from '@koa/router';
 import { Version } from '@packages/communication';
 
-import { tokensMiddleware, authMiddleware, userMiddleware, versionMiddleware } from 'middlewares';
+import { tokensMiddleware, authMiddleware, versionMiddleware } from 'middlewares';
 
 import { publicRouter } from './public';
 import { authenticatedRouter } from './authenticated';
@@ -14,7 +14,6 @@ v1Router
   .use(publicRouter.routes())
   .use(tokensMiddleware)
   .use(authMiddleware)
-  .use(userMiddleware)
-  .use(authenticatedRouter.routes());
+  .use(authenticatedRouter.routes(), authenticatedRouter.allowedMethods());
 
 export { v1Router };

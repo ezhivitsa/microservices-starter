@@ -75,7 +75,6 @@ export class CurrentUserStore {
     try {
       const currentUser = await UsersService.getCurrentUser();
 
-      console.log(currentUser);
       runInAction(() => {
         this.fetchStatus = Types.Status.Done;
         this.firstName = currentUser.firstName || '';
@@ -93,7 +92,14 @@ export class CurrentUserStore {
     this.updateStatus = Types.Status.Pending;
     this.updateError = null;
 
+    this.firstName = values.firstName;
+    this.lastName = values.lastName;
+
     try {
+      await UsersService.updateCurrentUser({
+        firstName: values.firstName || undefined,
+        lastName: values.lastName,
+      });
     } catch (error) {
       runInAction(() => {
         this.updateStatus = Types.Status.Error;

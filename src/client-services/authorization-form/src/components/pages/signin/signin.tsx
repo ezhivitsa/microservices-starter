@@ -30,6 +30,7 @@ export const SignIn = observer(
   (): ReactElement => {
     const b = useStyles(styles, 'signin');
     const signInStore = useSignInStore();
+    const { generalError } = signInStore;
 
     async function handleSubmit(values: FormikSignIn, { setErrors }: FormikHelpers<FormikSignIn>): Promise<void> {
       await signInStore.signIn(values);
@@ -37,7 +38,6 @@ export const SignIn = observer(
     }
 
     function renderError(): ReactNode {
-      const { generalError } = signInStore;
       if (!generalError) {
         return null;
       }

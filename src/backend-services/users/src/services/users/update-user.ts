@@ -16,7 +16,9 @@ export async function updateUser(data: UpdateUserParams): Promise<User | null> {
   }
 
   return {
-    ...user,
+    id: user.id,
+    email: user.email,
     firstName: user.firstName || undefined,
+    lastName: user.lastName,
   };
 }
