@@ -1,0 +1,30 @@
+@import 'variables.pcss';
+
+.profile {
+  &__name-wrap {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: var(--color-blue-800);
+
+    &:hover {
+      color: var(--color-blue-900);
+    }
+  }
+
+  &__name {
+    font-size: var(--font-size-500);
+  }
+
+  &__icon {
+    margin-left: var(--grid2);
+  }
+
+  &__menu {
+    display: none;
+
+    &._visible {
+      display: block;
+    }
+  }
+}

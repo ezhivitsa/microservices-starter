@@ -13,7 +13,8 @@
         "onlyRemoveTypeImports": true
       }
     ],
-    "@babel/preset-react"
+    "@babel/preset-react",
+    "mobx"
   ],
   "plugins": [
     ["@babel/plugin-proposal-decorators", { "legacy": true }],

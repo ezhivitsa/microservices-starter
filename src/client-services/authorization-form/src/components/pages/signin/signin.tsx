@@ -14,6 +14,7 @@ import {
   useStyles,
 } from '@packages/ui';
 import { FormikField, RouterLink } from '@packages/ui-ex';
+import { DashboardPaths, AuthPaths } from '@packages/common';
 
 import { SignInStoreProvider, useSignInStore } from 'providers';
 import { SignInStore, FormikSignIn, FormikSignInFieldName } from 'stores';
@@ -34,7 +35,15 @@ export const SignIn = observer(
 
     async function handleSubmit(values: FormikSignIn, { setErrors }: FormikHelpers<FormikSignIn>): Promise<void> {
       await signInStore.signIn(values);
-      setErrors(signInStore.formikErrors);
+
+      if (signInStore.isSignedIn) {
+        const params = new URLSearchParams(window.location.search);
+        const returnUrl = params.get(AuthPaths.returnUrlParam);
+
+        window.location.href = returnUrl ? returnUrl : DashboardPaths.indexPath(true);
+      } else {
+        setErrors(signInStore.formikErrors);
+      }
     }
 
     function renderError(): ReactNode {

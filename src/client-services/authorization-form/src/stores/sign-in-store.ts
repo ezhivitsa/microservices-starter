@@ -55,12 +55,20 @@ export class SignInStore {
     return this.status === Types.Status.Pending;
   }
 
+  get isSignedIn(): boolean {
+    return this.status === Types.Status.Done && this.error === null;
+  }
+
   async signIn(values: FormikSignIn): Promise<void> {
     this.status = Types.Status.Pending;
     this.error = null;
 
     try {
       const response = await AuthorizationService.signIn(values);
+
+      runInAction(() => {
+        this.status = Types.Status.Done;
+      });
     } catch (error) {
       runInAction(() => {
         this.status = Types.Status.Error;

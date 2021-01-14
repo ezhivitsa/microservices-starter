@@ -63,7 +63,6 @@ export class CurrentUserStore {
     return this.updateStatus === Types.Status.Error ? this.updateError?.globalError : undefined;
   }
 
-  @computed
   get isUpdating(): boolean {
     return this.updateStatus === Types.Status.Pending;
   }

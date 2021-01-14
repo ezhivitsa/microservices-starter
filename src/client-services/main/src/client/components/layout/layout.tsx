@@ -11,6 +11,8 @@ import { CONTENT_ELEMENT_ID } from 'constants/app.constants';
 
 import { menu } from 'texts';
 
+import { Header } from './components/header';
+
 import styles from './layout.pcss';
 
 interface NavigationLink {
@@ -54,7 +56,7 @@ function LayoutComponent({ location: { pathname } }: RouteComponentProps): React
     <div className={b({ view })}>
       {isDefaultLayout && (
         <>
-          <div className={b('header')} />
+          <Header className={b('header')} />
           <div className={b('menu')}>{renderNavigation()}</div>
         </>
       )}

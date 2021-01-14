@@ -65,6 +65,6 @@ export const authMiddleware: RouterAppMiddleware = async (ctx: RouterAppContext,
 
     await next();
   } catch (err) {
-    ctx.throw(403);
+    ctx.throw(401);
   }
 };

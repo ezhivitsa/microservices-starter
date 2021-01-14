@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosError, AxiosRequestConfig, Method, AxiosResponse } from 'axios';
+import { AuthPaths } from '@packages/common';
 
 import { ApiError, ErrorDetails, globalErrorField } from './api-error';
 
@@ -24,6 +25,10 @@ const isOkStatus = (status: number): boolean => {
   return status >= 200 && status < 300;
 };
 
+const isUnauthorizedStatus = (status: number): boolean => {
+  return status === 401;
+};
+
 const throwApiError = ({ data = {}, status = 500 }: ApiErrorDataType): ApiError => {
   console.error('API: Error Ocurred', status, data); //eslint-disable-line
   throw new ApiError(data, status);
@@ -44,6 +49,11 @@ export function initApi({ apiUrl, globalError }: { apiUrl: string; globalError: 
     }
 
     if (isOkStatus(response.status)) {
+      return response.data;
+    }
+    if (isUnauthorizedStatus(response.status)) {
+      const { href } = window.location;
+      window.location.href = AuthPaths.signinPath(href, true);
       return response.data;
     }
 
