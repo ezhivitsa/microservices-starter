@@ -3,12 +3,14 @@ import classnames from 'classnames';
 
 import { useStyles } from '@packages/ui';
 
-import { CurrentUserStoreProvider, useCurrentUserStore } from 'providers';
+import { CurrentUserStoreProvider, useCurrentUserStore, useCreateCurrentUserStore } from 'providers';
 import { CurrentUserStore } from 'stores';
 
 import { Profile } from './components/profile';
 
 import styles from './header.pcss';
+
+// const currentUserStore = new CurrentUserStore();
 
 interface Props {
   className?: string;
@@ -30,8 +32,10 @@ function HeaderComponent({ className }: Props): ReactElement {
 }
 
 export function Header(props: Props): ReactElement {
+  const currentUserStore = useCreateCurrentUserStore();
+
   return (
-    <CurrentUserStoreProvider value={new CurrentUserStore()}>
+    <CurrentUserStoreProvider value={currentUserStore}>
       <HeaderComponent {...props} />
     </CurrentUserStoreProvider>
   );

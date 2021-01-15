@@ -1,1 +1,1 @@
-export { CurrentUserStoreProvider, useCurrentUserStore } from './current-user-provider';
+export { CurrentUserStoreProvider, useCurrentUserStore, useCreateCurrentUserStore } from './current-user-provider';

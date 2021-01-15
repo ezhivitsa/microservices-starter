@@ -6,3 +6,8 @@ export const menu = {
 export const errorsTexts = {
   general: 'Something went wrong',
 };
+
+export const header = {
+  profile: 'My profile',
+  logOut: 'Log out',
+};
