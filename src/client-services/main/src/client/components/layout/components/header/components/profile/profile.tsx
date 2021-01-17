@@ -1,14 +1,15 @@
 import React, { ReactElement, ReactNode, useEffect, useState, useRef } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import classnames from 'classnames';
 import { faChevronDown, faUserCircle, faSignOutAlt, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useStyles } from '@packages/ui';
-import { SettingsPaths } from '@packages/common';
+import { SettingsPaths, AuthPaths } from '@packages/common';
 
 import { useCurrentUserStore } from 'providers';
+import { UsersService } from 'services';
 
 import { header } from 'texts';
 
@@ -31,6 +32,7 @@ export const Profile = observer(({ className }: Props): ReactElement | null => {
   const b = useStyles(styles, 'profile');
   const [menuVisible, setMenuVisible] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const history = useHistory();
 
   const { isLoading, fullName } = currentUserStore;
 
@@ -56,7 +58,10 @@ export const Profile = observer(({ className }: Props): ReactElement | null => {
     };
   });
 
-  function handleLogOutClick(): void {}
+  function handleLogOutClick(): void {
+    UsersService.logOutUser();
+    history.push(AuthPaths.signinPath(undefined, true));
+  }
 
   function handleDocumentClick(e: MouseEvent): void {
     const el = e.target;

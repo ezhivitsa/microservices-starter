@@ -1541,6 +1541,7 @@ __metadata:
     "@types/single-spa-react": 3.0.1
     "@types/systemjs": 6.1.0
     "@types/webpack-env": 1.15.3
+    axios: 0.21.1
     babel-loader: 8.2.2
     babel-preset-mobx: 2.0.0
     classnames: 2.2.6

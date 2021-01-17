@@ -1,3 +1,5 @@
-export const ACCESS_TOKEN = 'access_token';
-export const REFRESH_TOKEN = 'refresh_token';
-export const EXPIRED_AT = 'expired_at';
+import { Constants } from '@packages/common';
+
+export const ACCESS_TOKEN = Constants.accessToken;
+export const REFRESH_TOKEN = Constants.refreshToken;
+export const EXPIRED_AT = Constants.expiredAt;

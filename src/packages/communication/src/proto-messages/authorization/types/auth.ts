@@ -75,8 +75,8 @@ export interface SaveTokenRequest {
 
 // RevokeToken
 export interface RevokeTokenRequest {
+  accessToken?: string;
   refreshToken?: string;
-  refreshTokenExpiresAt?: Timestamp;
   user?: User;
 }
 

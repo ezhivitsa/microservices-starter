@@ -50,8 +50,8 @@ export interface SaveTokenParams {
 }
 
 export interface RevokeTokenParams {
+  accessToken?: string;
   refreshToken: string;
-  refreshTokenExpiresAt: Date;
   user: UserShort;
 }
 

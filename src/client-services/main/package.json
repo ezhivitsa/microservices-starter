@@ -12,6 +12,7 @@
     "@packages/common": "workspace:*",
     "@packages/logger": "workspace:*",
     "@packages/ui": "workspace:*",
+    "axios": "0.21.1",
     "classnames": "2.2.6",
     "koa": "2.13.0",
     "koa-helmet": "5.2.0",

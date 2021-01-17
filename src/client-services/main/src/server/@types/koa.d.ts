@@ -1,5 +1,5 @@
 import { Middleware, ParameterizedContext } from 'koa';
-import { Middleware as RouterMiddleware } from '@koa/router';
+import { Middleware as RouterMiddleware, RouterContext } from '@koa/router';
 import { Logger } from 'winston';
 
 import { Config } from '../configs/types';

@@ -137,15 +137,15 @@ export const oauthModel: OAuth2Server.PasswordModel & OAuth2Server.RefreshTokenM
   },
 
   async revokeToken(token: RefreshToken | Token): Promise<boolean> {
-    const { refreshToken, user } = token;
+    const { accessToken, refreshToken, user } = token;
     if (!refreshToken || !isUser(user)) {
       return false;
     }
 
     await AccountService.revokeToken(
       {
+        accessToken,
         refreshToken,
-        refreshTokenExpiresAt: getRefreshTokenExpiresAt(token.refreshTokenExpiresAt),
         user,
       },
       metadata,

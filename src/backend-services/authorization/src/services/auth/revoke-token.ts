@@ -1,7 +1,14 @@
-import { refreshTokenStorageService } from 'storage';
+import { accessTokenStorageService, refreshTokenStorageService } from 'storage';
 
 import { RevokeTokenParams } from './types';
 
 export async function revokeToken(data: RevokeTokenParams): Promise<void> {
-  await refreshTokenStorageService.delete(data.refreshToken);
+  const promises: Promise<void>[] = [];
+  if (data.accessToken) {
+    promises.push(accessTokenStorageService.delete(data.accessToken));
+  }
+
+  promises.push(refreshTokenStorageService.delete(data.refreshToken));
+
+  await Promise.all(promises);
 }

@@ -13,6 +13,7 @@ import { AuthProviderTypes } from '../src/providers';
 declare module 'koa' {
   interface User {
     id: string;
+    email: string;
     roles: AuthProviderTypes.UserRole[];
   }
 
@@ -27,6 +28,7 @@ declare module 'koa' {
     token?: string;
     refreshToken?: string;
     user: User;
+    refreshTokenExpiresAt?: Date;
   }
 
   export interface AppKoaContext {

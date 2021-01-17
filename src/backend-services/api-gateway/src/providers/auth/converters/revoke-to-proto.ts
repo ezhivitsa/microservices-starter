@@ -1,16 +1,15 @@
 import { AuthorizationTypes } from '@packages/communication';
-import { castDateToTimestamp } from '@packages/proto';
 
 import { RevokeTokenParams } from '../types';
 
 import { mapUserDataToProto } from './user-to-proto';
 
 export function mapRevokeTokenToProto(params: RevokeTokenParams): AuthorizationTypes.RevokeTokenRequest {
-  const { refreshToken, refreshTokenExpiresAt, user } = params;
+  const { refreshToken, accessToken, user } = params;
 
   return {
+    accessToken,
     refreshToken,
-    refreshTokenExpiresAt: castDateToTimestamp(refreshTokenExpiresAt),
     user: mapUserDataToProto(user),
   };
 }

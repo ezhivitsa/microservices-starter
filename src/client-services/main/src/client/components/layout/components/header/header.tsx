@@ -4,13 +4,10 @@ import classnames from 'classnames';
 import { useStyles } from '@packages/ui';
 
 import { CurrentUserStoreProvider, useCurrentUserStore, useCreateCurrentUserStore } from 'providers';
-import { CurrentUserStore } from 'stores';
 
 import { Profile } from './components/profile';
 
 import styles from './header.pcss';
-
-// const currentUserStore = new CurrentUserStore();
 
 interface Props {
   className?: string;

@@ -62,6 +62,7 @@ export const authMiddleware: RouterAppMiddleware = async (ctx: RouterAppContext,
   try {
     const token = await getToken(ctx, ctx.state.token, ctx.state.refreshToken);
     ctx.state.user = token.user as User;
+    ctx.state.refreshTokenExpiresAt = token.refreshTokenExpiresAt;
 
     await next();
   } catch (err) {
