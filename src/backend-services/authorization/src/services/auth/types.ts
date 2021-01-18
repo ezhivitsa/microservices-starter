@@ -14,6 +14,7 @@ export interface User {
   id: string;
   email: string;
   roles: UserRole[];
+  signupToken: string;
 }
 
 export interface UserShort {
@@ -59,4 +60,8 @@ export interface VerifyScopeParams {
   accessToken: string;
   accessTokenExpiresAt: Date;
   user: UserShort;
+}
+
+export interface VerifyEmailParams {
+  token: string;
 }

@@ -2,6 +2,7 @@ import React, { ReactElement, useEffect } from 'react';
 import classnames from 'classnames';
 
 import { useStyles } from '@packages/ui';
+import { Events } from '@packages/common';
 
 import { CurrentUserStoreProvider, useCurrentUserStore, useCreateCurrentUserStore } from 'providers';
 
@@ -20,6 +21,18 @@ function HeaderComponent({ className }: Props): ReactElement {
   useEffect(() => {
     currentUserStore.fetch();
   }, []);
+
+  useEffect(() => {
+    window.addEventListener(Events.updateCurrentUser, handleUpdateCurrentUser);
+
+    return () => {
+      window.removeEventListener(Events.updateCurrentUser, handleUpdateCurrentUser);
+    };
+  });
+
+  function handleUpdateCurrentUser(): void {
+    currentUserStore.fetch();
+  }
 
   return (
     <div className={classnames(className, b())}>

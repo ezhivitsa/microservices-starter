@@ -11,6 +11,7 @@ export async function signUpHandler(ctx: AppContext): Promise<void> {
 
   const response: AuthorizationTypes.RegistrationResponse = {
     id: user.id,
+    signupToken: user.signupToken,
   };
   ctx.body = response;
 }

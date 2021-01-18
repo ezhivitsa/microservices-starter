@@ -1,3 +1,4 @@
+import crypto from 'crypto';
 import bcrypt from 'bcrypt';
 
 /**
@@ -19,4 +20,9 @@ export function generateSalt(): Promise<string> {
  */
 export function compareTextWithHash(text: string, hash: string, salt = ''): Promise<boolean> {
   return bcrypt.compare(`${text[0]}${salt}${text.slice(1)}`, hash);
+}
+
+export function generateSecureToken(): string {
+  const buf = crypto.randomBytes(48);
+  return buf.toString('hex');
 }

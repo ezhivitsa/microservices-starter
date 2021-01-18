@@ -11,6 +11,7 @@ export enum AuthorizationCommand {
   SaveToken = 'save-token',
   RevokeToken = 'revoke-token',
   VerifyScope = 'verify-scope',
+  VerifyEmail = 'verify-email',
 }
 
 export const authorizationCommandSchemas: Record<string, ChannelCommandSchema> = getChannelCommands(
@@ -42,6 +43,10 @@ export const authorizationCommandSchemas: Record<string, ChannelCommandSchema> =
       command: AuthorizationCommand.VerifyScope,
       requestSchema: AuthorizationSchemas.verifyScopeRequest,
       responseSchema: AuthorizationSchemas.verifyScopeResponse,
+    },
+    {
+      command: AuthorizationCommand.VerifyEmail,
+      requestSchema: AuthorizationSchemas.verifyEmailRequest,
     },
   ],
   Version.v1,

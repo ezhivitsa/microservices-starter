@@ -10,6 +10,7 @@ import { StorageService } from './storage-service';
 interface Filter {
   id?: string;
   email?: string;
+  signupToken?: string;
 }
 
 interface UpdateFilter {
@@ -21,10 +22,12 @@ interface CreateData {
   passwordHash: string;
   passwordSalt: string;
   roles: UserRole[];
+  signupToken: string;
 }
 
 interface UpdateData {
-  roles: UserRole[];
+  roles?: UserRole[];
+  isEmailVerified?: boolean;
 }
 
 export class UsersStorageService extends StorageService<UserInstance, Filter, CreateData, UpdateData, UpdateFilter> {
@@ -36,12 +39,15 @@ export class UsersStorageService extends StorageService<UserInstance, Filter, Cr
       passwordHash: data.passwordHash,
       passwordSalt: data.passwordSalt,
       roles: data.roles,
+      signupToken: data.signupToken,
+      isEmailVerified: false,
     };
   }
 
   _buildUpdateValues(data: UpdateData): Partial<UserAttributes> {
     return {
       roles: data.roles,
+      isEmailVerified: data.isEmailVerified,
     };
   }
 
@@ -55,6 +61,7 @@ export class UsersStorageService extends StorageService<UserInstance, Filter, Cr
     const where = {
       id: filter.id,
       email: filter.email,
+      signupToken: filter.signupToken,
     };
 
     return {

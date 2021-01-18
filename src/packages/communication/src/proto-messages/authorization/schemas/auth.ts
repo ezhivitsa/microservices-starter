@@ -48,3 +48,7 @@ export const verifyScopeRequest = root.loadProtoMessage<AuthorizationTypes.Verif
 export const verifyScopeResponse = root.loadProtoMessage<AuthorizationTypes.VerifyScopeResponse>(
   'microservices_starter.authorization.auth.VerifyScopeResponse',
 );
+
+export const verifyEmailRequest = root.loadProtoMessage<AuthorizationTypes.VerifyEmailRequest>(
+  'microservices_starter.authorization.auth.VerifyEmailRequest',
+);

@@ -29,3 +29,11 @@ export class DuplicateEmailError extends ServiceError {
     Object.setPrototypeOf(this, DuplicateEmailError.prototype);
   }
 }
+
+export class NotFoundError extends ServiceError {
+  constructor(message: string) {
+    super(message, ServiceErrorCode.NotFound);
+
+    Object.setPrototypeOf(this, NotFoundError.prototype);
+  }
+}

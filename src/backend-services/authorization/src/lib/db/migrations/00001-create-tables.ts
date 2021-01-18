@@ -30,9 +30,19 @@ module.exports = {
         type: DataTypes.ARRAY(DataTypes.ENUM({ values: [Role.User, Role.Admin, Role.OrganizationAdmin] })),
         allowNull: false,
       },
+      isEmailVerified: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+      },
+      signupToken: {
+        type: DataTypes.STRING(128),
+        allowNull: false,
+      },
       createdAt: { type: DataTypes.DATE, allowNull: true },
       updatedAt: { type: DataTypes.DATE, allowNull: true },
     });
+
+    await queryInterface.addIndex('users', ['email'], { unique: true });
   },
 
   down: async (queryInterface: QueryInterface) => {

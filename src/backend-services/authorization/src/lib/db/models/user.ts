@@ -8,6 +8,8 @@ export interface UserAttributes {
   passwordHash: string;
   passwordSalt: string;
   roles: UserRole[];
+  isEmailVerified: boolean;
+  signupToken: string;
 }
 
 export type UserCreationAttributes = Optional<UserAttributes, 'id'>;
@@ -18,6 +20,8 @@ export class UserInstance extends Model<UserAttributes, UserCreationAttributes> 
   public passwordHash!: string;
   public passwordSalt!: string;
   public roles!: UserRole[];
+  public isEmailVerified!: boolean;
+  public signupToken!: string;
 }
 
 export type UserModel = ModelCtor<UserInstance>;

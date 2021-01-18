@@ -9,6 +9,7 @@ import {
   saveTokenHandler,
   revokeTokenHandler,
   verifyScopeHandler,
+  verifyEmailHandler,
 } from './handlers';
 import {
   registrationSchema,
@@ -18,6 +19,7 @@ import {
   saveTokenSchema,
   revokeTokenSchema,
   verifyScopeSchema,
+  verifyEmailSchema,
 } from './validators';
 
 export function initV1Routes(app: KoaKafka<AppState, AppContext>): void {
@@ -62,5 +64,11 @@ export function initV1Routes(app: KoaKafka<AppState, AppContext>): void {
     command: AuthorizationCommand.VerifyScope,
     schema: verifyScopeSchema,
     handler: verifyScopeHandler,
+  });
+  app.handleCommand({
+    version: Version.v1,
+    command: AuthorizationCommand.VerifyEmail,
+    schema: verifyEmailSchema,
+    handler: verifyEmailHandler,
   });
 }

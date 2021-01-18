@@ -1,3 +1,5 @@
+import { UserAttributes } from 'lib/db/models/user';
+
 import { refreshTokenStorageService, usersStorageService } from 'storage';
 
 import { GetRefreshTokenParams, GetRefreshTokenResult } from './types';
@@ -16,6 +18,6 @@ export async function getRefreshToken(data: GetRefreshTokenParams): Promise<GetR
   return {
     refreshToken: data.refreshToken,
     refreshTokenExpiresAt: refreshTokenData.expiresAt,
-    user,
+    user: user.toJSON() as UserAttributes,
   };
 }

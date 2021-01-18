@@ -38,6 +38,7 @@ export class CurrentUserStore {
       formikErrors: computed,
       generalError: computed,
       isUpdating: computed,
+      isUpdateDone: computed,
       fetch: action,
       update: action,
       dispose: action,
@@ -65,6 +66,10 @@ export class CurrentUserStore {
 
   get isUpdating(): boolean {
     return this.updateStatus === Types.Status.Pending;
+  }
+
+  get isUpdateDone(): boolean {
+    return this.updateStatus === Types.Status.Done;
   }
 
   async fetch(): Promise<void> {
@@ -98,6 +103,10 @@ export class CurrentUserStore {
       await UsersService.updateCurrentUser({
         firstName: values.firstName || undefined,
         lastName: values.lastName,
+      });
+
+      runInAction(() => {
+        this.updateStatus = Types.Status.Done;
       });
     } catch (error) {
       runInAction(() => {

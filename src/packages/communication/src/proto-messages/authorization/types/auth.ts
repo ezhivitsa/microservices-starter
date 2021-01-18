@@ -9,6 +9,7 @@ export interface RegistrationRequest {
 
 export interface RegistrationResponse {
   id?: string;
+  signupToken?: string;
 }
 
 export const enum Role {
@@ -89,4 +90,9 @@ export interface VerifyScopeRequest {
 
 export interface VerifyScopeResponse {
   verified: boolean;
+}
+
+// VerifyEmail
+export interface VerifyEmailRequest {
+  token: string;
 }

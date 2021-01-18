@@ -13,6 +13,7 @@ message RegistrationRequest {
 
 message RegistrationResponse {
   string id = 1;
+  string signup_token = 2;
 }
 
 enum Role {
@@ -93,4 +94,9 @@ message VerifyScopeRequest {
 
 message VerifyScopeResponse {
   bool verified = 1;
+}
+
+// VerifyEmail
+message VerifyEmailRequest {
+  string token = 1;
 }

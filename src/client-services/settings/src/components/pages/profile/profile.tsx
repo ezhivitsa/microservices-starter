@@ -4,6 +4,7 @@ import { Formik, FormikHelpers, FormikProps, Form } from 'formik';
 
 import { FormikField } from '@packages/ui-ex';
 import { Input, InputWidth, Button, ButtonView, ButtonType, Spinner, useStyles } from '@packages/ui';
+import { Events } from '@packages/common';
 
 import { CurrentUserStore, FormikCurrentUser, FormikCurrentUserFieldName } from 'stores';
 import { useCurrentUserStore, CurrentUserStoreProvider } from 'providers';
@@ -34,6 +35,11 @@ export const Profile = observer(
     ): Promise<void> {
       await currentUserStore.update(values);
       setErrors(currentUserStore.formikErrors);
+
+      if (currentUserStore.isUpdateDone) {
+        const event = new Event(Events.updateCurrentUser);
+        window.dispatchEvent(event);
+      }
     }
 
     function renderForm({ isValid, handleSubmit }: FormikProps<FormikCurrentUser>): ReactNode {

@@ -14,3 +14,5 @@ export interface SaveTokenRequest extends Required<AuthorizationTypes.SaveTokenR
 export interface VerifyScopeRequest extends Required<AuthorizationTypes.VerifyScopeRequest> {
   user: User;
 }
+
+export type VerifyEmailRequest = Required<AuthorizationTypes.VerifyEmailRequest>;
