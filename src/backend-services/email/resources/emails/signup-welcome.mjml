@@ -1,11 +1,11 @@
 <mjml>
   <mj-head>
     <!-- ===== STYLES FOR MJML TAGS ==== -->
-    <mj-include path="./styles.mjml" />
+    <mj-include path="./components/styles.mjml" />
   </mj-head>
 
   <mj-body>
-    <mj-include path="./header.mjml" />
+    <mj-include path="./components/header.mjml" />
 
     <mj-section mj-class="main-section">
       <mj-column vertical-align="middle" width="100%">

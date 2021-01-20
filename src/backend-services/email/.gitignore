@@ -1,0 +1,2 @@
+resources/emails/html/*.html
+resources/sent/*

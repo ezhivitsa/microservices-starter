@@ -2,6 +2,8 @@ import { logLevel } from '@packages/communication';
 
 import { Config } from '../types';
 
+const staticUrl = '//microservices-starter-static.com';
+
 export const production: Config = {
   logger: {
     level: 'info',
@@ -20,4 +22,8 @@ export const production: Config = {
     apiKey: '123',
     domain: 'microservices-starter.dev',
   },
+  email: {
+    isSendEmail: true,
+  },
+  apiGatewayUrl: `${staticUrl}/api`,
 };

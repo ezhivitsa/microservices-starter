@@ -56,7 +56,8 @@ validate: lint compile-dry run-test
 # build targets
 # -------------------------------------
 .PHONY: build-emails
-build-emails: npx mjml ./resources/emails/*.mjml -o ./resources/emails/dist/
+build-emails:
+	npx mjml ./resources/emails/*.mjml -o ./resources/emails/html
 
 # -------------------------------------
 # release targets

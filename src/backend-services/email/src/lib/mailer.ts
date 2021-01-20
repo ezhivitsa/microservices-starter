@@ -1,18 +1,44 @@
-import mailgunJS, { messages } from 'mailgun-js';
+import path from 'path';
+import fs from 'fs';
+import { promisify } from 'util';
+
+import { Template } from 'constants/email-constants';
 
 import { logger } from 'lib/logger';
 import { config } from 'lib/config';
+import { sendEmail, SendData } from 'lib/mailgun';
+import { render } from 'lib/renderer';
 
-const mailgun = mailgunJS(config.mailgun);
+const writeFileAsync = promisify(fs.writeFile);
 
-export function send(data: messages.SendData): Promise<messages.SendResponse> {
-  return new Promise((resolve, reject) => {
-    mailgun.messages().send(data, (err, body) => {
-      if (err) {
-        logger.error("Email hasn't been sent...", err);
-        return reject(err);
-      }
-      return resolve(body);
-    });
-  });
+const templatesDir = '../../resources/emails/html';
+
+export async function send(
+  templateName: Template,
+  templateData: Record<string, string | number>,
+  data: SendData,
+): Promise<void> {
+  const templatePath = path.join(templatesDir, `${templateName}.html`);
+  const html = await render(templatePath, templateData);
+
+  if (config.email.isSendEmail) {
+    await sendEmail({ ...data, html });
+  }
+
+  if (config.email.savedEmailHtmlPath) {
+    const savedName = path.extname(templateName) ? templateName : `${templateName}.html`;
+    const tempPath = path.join(config.email.savedEmailHtmlPath, savedName);
+
+    logger.debug(`
+      Emails disabled. '${data.subject}' email html has been stored at: ${tempPath}.
+      The data is: ${JSON.stringify(templateData)}
+    `);
+
+    await writeFileAsync(tempPath, html);
+  }
+
+  logger.debug(`
+    Emails disabled.
+    The data is: ${JSON.stringify(templateData)}
+  `);
 }

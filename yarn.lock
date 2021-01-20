@@ -1363,6 +1363,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@backend-services/email@workspace:src/backend-services/email"
   dependencies:
+    "@packages/common": "workspace:*"
     "@packages/communication": "workspace:*"
     "@packages/eslint-config": "workspace:*"
     "@packages/koa-kafka": "workspace:*"

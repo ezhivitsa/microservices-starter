@@ -6,10 +6,17 @@ export interface LoggerConfig {
   level?: 'info' | 'warn' | 'error';
 }
 
+export interface EmailConfig {
+  isSendEmail: boolean;
+  savedEmailHtmlPath?: string;
+}
+
 export interface Config {
   readonly logger: Readonly<LoggerConfig>;
   readonly requestIdHeader: string;
   readonly kafka: KafkaConfig;
   readonly kafkaConsumer: ConsumerConfig;
   readonly mailgun: ConstructorParams;
+  readonly email: EmailConfig;
+  readonly apiGatewayUrl: string;
 }
