@@ -60,3 +60,7 @@ export interface VerifyScopeParams {
   accessTokenExpiresAt: Date;
   user: User;
 }
+
+export interface VerifyEmailParams {
+  token: string;
+}

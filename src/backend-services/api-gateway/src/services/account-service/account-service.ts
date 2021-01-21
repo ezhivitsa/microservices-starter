@@ -12,6 +12,7 @@ import {
   SaveTokenParams,
   RevokeTokenParams,
   VerifyScopeParams,
+  VerifyEmailParams,
 } from './types';
 
 export async function register(params: RegisterParams, metadata: ServiceMetadata): Promise<void> {
@@ -57,4 +58,8 @@ export async function revokeToken(params: RevokeTokenParams, metadata: ServiceMe
 
 export async function verifyScope(params: VerifyScopeParams, metadata: ServiceMetadata): Promise<boolean> {
   return AuthProvider.verifyScope(params, metadata);
+}
+
+export function verifyEmail(params: VerifyEmailParams, metadata: ServiceMetadata): Promise<void> {
+  return AuthProvider.verifyEmail(params, metadata);
 }

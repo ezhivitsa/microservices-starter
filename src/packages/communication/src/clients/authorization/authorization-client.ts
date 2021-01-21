@@ -105,4 +105,8 @@ export class AuthorizationClient extends BaseClient<AuthorizationError> {
       metadata,
     );
   }
+
+  verifyEmailCommand(data: AuthorizationTypes.VerifyEmailRequest, metadata: CommandMetadata): Promise<void> {
+    return this._sendCommand({ data, command: AuthorizationCommand.VerifyEmail }, metadata);
+  }
 }

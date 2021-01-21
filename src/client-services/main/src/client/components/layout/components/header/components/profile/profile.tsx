@@ -39,7 +39,7 @@ export const Profile = observer(({ className }: Props): ReactElement | null => {
   const menu: MenuItem[] = [
     {
       text: header.profile,
-      url: SettingsPaths.profilePath(true),
+      url: SettingsPaths.profilePath({ fullPath: true }),
       icon: faUserCircle,
     },
     {
@@ -60,7 +60,7 @@ export const Profile = observer(({ className }: Props): ReactElement | null => {
 
   function handleLogOutClick(): void {
     UsersService.logOutUser();
-    history.push(AuthPaths.signinPath(undefined, true));
+    history.push(AuthPaths.signinPath({ fullPath: true }));
   }
 
   function handleDocumentClick(e: MouseEvent): void {

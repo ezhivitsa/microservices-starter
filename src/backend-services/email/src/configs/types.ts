@@ -18,5 +18,5 @@ export interface Config {
   readonly kafkaConsumer: ConsumerConfig;
   readonly mailgun: ConstructorParams;
   readonly email: EmailConfig;
-  readonly apiGatewayUrl: string;
+  readonly webUrl: string;
 }

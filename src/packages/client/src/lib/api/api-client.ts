@@ -53,7 +53,7 @@ export function initApi({ apiUrl, globalError }: { apiUrl: string; globalError: 
     }
     if (isUnauthorizedStatus(response.status)) {
       const { href } = window.location;
-      window.location.href = AuthPaths.signinPath(href, true);
+      window.location.href = AuthPaths.signinPath({ returnUrl: href, fullPath: true });
       return response.data;
     }
 

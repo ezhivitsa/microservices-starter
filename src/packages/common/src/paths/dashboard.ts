@@ -1,3 +1,3 @@
 export const prefix = 'dashboard';
 
-export const indexPath = (fullPath?: boolean): string => (fullPath ? `/${prefix}` : '/');
+export const indexPath = ({ fullPath }: { fullPath?: boolean } = {}): string => (fullPath ? `/${prefix}` : '/');

@@ -13,6 +13,7 @@ import {
   SaveTokenParams,
   RevokeTokenParams,
   VerifyScopeParams,
+  VerifyEmailParams,
 } from './types';
 
 import {
@@ -61,4 +62,8 @@ export async function revokeToken(params: RevokeTokenParams, metadata: ProviderT
 export async function verifyScope(params: VerifyScopeParams, metadata: ProviderTypes.Metadata): Promise<boolean> {
   const result = await authorizationClient.verifyScopeCommand(mapVerifyScopeToProto(params), metadata);
   return result.verified;
+}
+
+export function verifyEmail(params: VerifyEmailParams, metadata: ProviderTypes.Metadata): Promise<void> {
+  return authorizationClient.verifyEmailCommand(params, metadata);
 }

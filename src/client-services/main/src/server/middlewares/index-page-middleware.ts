@@ -46,7 +46,7 @@ export const indexPageMiddleware: RouterAppMiddleware = async (ctx: RouterAppCon
     const user = await getUser(ctx);
 
     if (!user) {
-      ctx.redirect(AuthPaths.signinPath(ctx.url, true));
+      ctx.redirect(AuthPaths.signinPath({ fullPath: true, returnUrl: ctx.url }));
       return;
     }
   }

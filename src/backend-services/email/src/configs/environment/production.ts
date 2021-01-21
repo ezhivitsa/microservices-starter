@@ -25,5 +25,5 @@ export const production: Config = {
   email: {
     isSendEmail: true,
   },
-  apiGatewayUrl: `${staticUrl}/api`,
+  webUrl: '//microservices-starter-static.com',
 };

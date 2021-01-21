@@ -40,7 +40,7 @@ export const SignIn = observer(
         const params = new URLSearchParams(window.location.search);
         const returnUrl = params.get(AuthPaths.returnUrlParam);
 
-        window.location.href = returnUrl ? returnUrl : DashboardPaths.indexPath(true);
+        window.location.href = returnUrl ? returnUrl : DashboardPaths.indexPath({ fullPath: true });
       } else {
         setErrors(signInStore.formikErrors);
       }

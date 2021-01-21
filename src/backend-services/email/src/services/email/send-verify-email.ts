@@ -1,4 +1,4 @@
-import { Constants } from '@packages/common';
+import { AuthPaths } from '@packages/common';
 
 import { Template, NO_REPLY_EMAIL } from 'constants/email-constants';
 
@@ -9,11 +9,9 @@ import { signup } from 'texts';
 
 import { SendVerifyEmailParams } from './types';
 
-const { versionV1, authorizationPrefix, verifyEmailPath } = Constants;
-
 export async function sendVerifyEmail(params: SendVerifyEmailParams): Promise<void> {
   const fullName = `${params.firstName || ''} ${params.lastName}`.trim();
-  const verifyUrl = `${config.apiGatewayUrl}${versionV1}${authorizationPrefix}${verifyEmailPath(params.token)}`;
+  const verifyUrl = `${config.webUrl}${AuthPaths.verifyEmail({ fullPath: true, token: params.token })}`;
 
   const data = {
     fullName,

@@ -19,5 +19,5 @@ export const development: Config = {
     isSendEmail: false,
     savedEmailHtmlPath: resolve(__dirname, '../../../resources/sent'),
   },
-  apiGatewayUrl: 'http://localhost:8090/api',
+  webUrl: 'http://localhost:8080',
 };
