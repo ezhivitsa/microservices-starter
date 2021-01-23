@@ -16,6 +16,11 @@ export interface RegisterParams {
   owner: boolean;
 }
 
+export interface RegisterResult {
+  id: string;
+  signupToken: string;
+}
+
 export interface GetAccessTokenParams {
   accessToken: string;
 }

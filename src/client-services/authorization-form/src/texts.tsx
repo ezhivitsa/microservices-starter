@@ -25,6 +25,7 @@ export const signInFormTexts = {
     );
   },
   singUpLink: 'Click here',
+  verifyEmailSuccess: 'Email was successfully verified',
 };
 
 export const signUpFormTexts = {
@@ -37,4 +38,6 @@ export const signUpFormTexts = {
   password: 'Password',
   passwordPlaceholder: 'Enter password',
   signUpBtn: 'Sign Up',
+  verifyEmail: 'Please, verify your email address',
+  verifyEmailLink: 'Verify email link',
 };

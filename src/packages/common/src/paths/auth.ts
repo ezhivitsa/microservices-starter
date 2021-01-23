@@ -18,6 +18,6 @@ export const signinPath = ({ returnUrl, fullPath }: { returnUrl?: string; fullPa
   return `${path}${search ? '?' : ''}${search}`;
 };
 
-export const verifyEmail = ({ token, fullPath }: { token: string; fullPath?: boolean }): string => {
+export const verifyEmailPath = ({ token, fullPath }: { token: string; fullPath?: boolean }): string => {
   return `${fullPath ? indexPath({ fullPath }) : ''}/verify-email/${token}`;
 };

@@ -48,6 +48,14 @@ const userAttributes: ModelAttributes = {
     type: DataTypes.ARRAY(DataTypes.ENUM({ values: [UserRole.User, UserRole.Admin, UserRole.OrganizationAdmin] })),
     allowNull: false,
   },
+  isEmailVerified: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+  },
+  signupToken: {
+    type: DataTypes.STRING(128),
+    allowNull: false,
+  },
   createdAt: {
     type: DataTypes.DATE,
     allowNull: true,

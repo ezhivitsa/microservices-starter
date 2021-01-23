@@ -25,6 +25,8 @@ export class SignUpStore {
   email = '';
   password = '';
 
+  signupToken?: string;
+
   status: Types.Status = Types.Status.Initial;
   error: ApiError | null = null;
 
@@ -65,6 +67,10 @@ export class SignUpStore {
     return this.status === Types.Status.Pending;
   }
 
+  get isSignUpDone(): boolean {
+    return this.status === Types.Status.Done;
+  }
+
   async signUp(values: FormikSignUp): Promise<void> {
     this.status = Types.Status.Pending;
     this.error = null;
@@ -73,6 +79,11 @@ export class SignUpStore {
       const response = await AuthorizationService.signUp({
         ...values,
         firstName: values.firstName || undefined,
+      });
+
+      runInAction(() => {
+        this.status = Types.Status.Done;
+        this.signupToken = response.signupToken;
       });
     } catch (error) {
       runInAction(() => {

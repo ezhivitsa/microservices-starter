@@ -4,6 +4,7 @@ import { ProviderTypes } from 'providers';
 
 import {
   RegisterParams,
+  RegisterResult,
   GetAccessTokenParams,
   AccessToken,
   GetRefreshTokenParams,
@@ -25,9 +26,12 @@ import {
   mapVerifyScopeToProto,
 } from './converters';
 
-export async function register(params: RegisterParams, metadata: ProviderTypes.Metadata): Promise<string | null> {
-  const { id } = await authorizationClient.registrationCommand(params, metadata);
-  return id || null;
+export async function register(
+  params: RegisterParams,
+  metadata: ProviderTypes.Metadata,
+): Promise<RegisterResult | null> {
+  const { id, signupToken } = await authorizationClient.registrationCommand(params, metadata);
+  return id && signupToken ? { id, signupToken } : null;
 }
 
 export async function getAccessToken(

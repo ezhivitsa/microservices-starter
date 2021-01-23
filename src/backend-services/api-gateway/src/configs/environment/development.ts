@@ -12,4 +12,5 @@ export const development: Config = {
     ...staging.kafka,
     brokers: ['localhost:9092'],
   },
+  returnSignupToken: true,
 };

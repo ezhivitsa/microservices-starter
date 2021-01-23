@@ -18,7 +18,7 @@ export async function send(
   templateData: Record<string, string | number>,
   data: SendData,
 ): Promise<void> {
-  const templatePath = path.join(templatesDir, `${templateName}.html`);
+  const templatePath = path.join(__dirname, templatesDir, `${templateName}.html`);
   const html = await render(templatePath, templateData);
 
   if (config.email.isSendEmail) {
@@ -26,7 +26,7 @@ export async function send(
   }
 
   if (config.email.savedEmailHtmlPath) {
-    const savedName = path.extname(templateName) ? templateName : `${templateName}.html`;
+    const savedName = path.extname(templateName) ? templateName : `${templateName}-${new Date().toISOString()}.html`;
     const tempPath = path.join(config.email.savedEmailHtmlPath, savedName);
 
     logger.debug(`

@@ -16,8 +16,8 @@ import {
 import { FormikField, RouterLink } from '@packages/ui-ex';
 import { DashboardPaths, AuthPaths } from '@packages/common';
 
-import { SignInStoreProvider, useSignInStore } from 'providers';
-import { SignInStore, FormikSignIn, FormikSignInFieldName } from 'stores';
+import { SignInStoreProvider, useSignInStore, useCreateSignInStore, useVerifyEmailStore } from 'providers';
+import { FormikSignIn, FormikSignInFieldName } from 'stores';
 
 import { signInFormTexts } from 'texts';
 
@@ -31,9 +31,13 @@ export const SignIn = observer(
   (): ReactElement => {
     const b = useStyles(styles, 'signin');
     const signInStore = useSignInStore();
+    const verifyEmailStore = useVerifyEmailStore();
+
     const { generalError } = signInStore;
+    const { isVerifyDone } = verifyEmailStore;
 
     async function handleSubmit(values: FormikSignIn, { setErrors }: FormikHelpers<FormikSignIn>): Promise<void> {
+      verifyEmailStore.dispose();
       await signInStore.signIn(values);
 
       if (signInStore.isSignedIn) {
@@ -44,6 +48,14 @@ export const SignIn = observer(
       } else {
         setErrors(signInStore.formikErrors);
       }
+    }
+
+    function renderVerifyEmailMessage(): ReactNode {
+      if (!isVerifyDone) {
+        return null;
+      }
+
+      return <Message type={MessageType.Success} header={signInFormTexts.verifyEmailSuccess} />;
     }
 
     function renderError(): ReactNode {
@@ -57,6 +69,7 @@ export const SignIn = observer(
     function renderForm({ isValid }: FormikProps<FormikSignIn>): ReactNode {
       return (
         <Form>
+          {renderVerifyEmailMessage()}
           {renderError()}
           <FormikField
             name={FormikSignInFieldName.Email}
@@ -109,7 +122,7 @@ export const SignIn = observer(
 
 export function SignInPage(): ReactElement {
   return (
-    <SignInStoreProvider value={new SignInStore()}>
+    <SignInStoreProvider value={useCreateSignInStore()}>
       <SignIn />
     </SignInStoreProvider>
   );

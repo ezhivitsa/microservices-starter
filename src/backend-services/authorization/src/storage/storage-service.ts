@@ -24,6 +24,7 @@ export abstract class StorageService<
   abstract _buildUpdateWhere(filter: UF): WhereOptions<M['_attributes']>;
 
   create(data: CD): Promise<M> {
+    console.log(this._buildCreateValue(data));
     return this._Model.create(this._buildCreateValue(data));
   }
 

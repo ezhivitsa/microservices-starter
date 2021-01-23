@@ -1,4 +1,4 @@
-import { AuthProvider, UsersProvider } from 'providers';
+import { AuthProvider, UsersProvider, EmailProvider } from 'providers';
 
 import { ServiceMetadata } from '../types';
 import {
@@ -15,11 +15,13 @@ import {
   VerifyEmailParams,
 } from './types';
 
-export async function register(params: RegisterParams, metadata: ServiceMetadata): Promise<void> {
-  const authId = await AuthProvider.register(params, metadata);
-  if (!authId) {
-    return;
+export async function register(params: RegisterParams, metadata: ServiceMetadata): Promise<string | null> {
+  const authData = await AuthProvider.register(params, metadata);
+  if (!authData) {
+    return null;
   }
+
+  const { id: authId, signupToken } = authData;
 
   await UsersProvider.register(
     {
@@ -28,6 +30,18 @@ export async function register(params: RegisterParams, metadata: ServiceMetadata
     },
     metadata,
   );
+
+  await EmailProvider.sendVerifyEmail(
+    {
+      firstName: params.firstName,
+      lastName: params.lastName,
+      email: params.email,
+      token: signupToken,
+    },
+    metadata,
+  );
+
+  return signupToken;
 }
 
 export function getAccessToken(

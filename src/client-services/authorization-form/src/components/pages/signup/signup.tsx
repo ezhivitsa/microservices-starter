@@ -2,11 +2,12 @@ import React, { ReactElement, ReactNode } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Formik, Form, FormikHelpers, FormikProps } from 'formik';
 
-import { Input, InputWidth, Button, ButtonView, ButtonType, Message, MessageType, useStyles } from '@packages/ui';
+import { Input, InputWidth, Button, ButtonView, ButtonType, Message, MessageType, Link, useStyles } from '@packages/ui';
 import { FormikField } from '@packages/ui-ex';
+import { AuthPaths } from '@packages/common';
 
-import { useSignUpStore, SignUpStoreProvider } from 'providers';
-import { SignUpStore, FormikSignUp, FormikSignUpFieldName } from 'stores';
+import { useSignUpStore, useCreateSignUpStore, SignUpStoreProvider } from 'providers';
+import { FormikSignUp, FormikSignUpFieldName } from 'stores';
 
 import { signUpFormTexts } from 'texts';
 
@@ -19,13 +20,14 @@ export const SignUp = observer(
     const b = useStyles(styles, 'signup');
     const signUpStore = useSignUpStore();
 
+    const { signupToken, isSignUpDone, generalError } = signUpStore;
+
     async function handleSubmit(values: FormikSignUp, { setErrors }: FormikHelpers<FormikSignUp>): Promise<void> {
       await signUpStore.signUp(values);
       setErrors(signUpStore.formikErrors);
     }
 
     function renderError(): ReactNode {
-      const { generalError } = signUpStore;
       if (!generalError) {
         return null;
       }
@@ -33,10 +35,32 @@ export const SignUp = observer(
       return <Message type={MessageType.Danger} header={generalError} />;
     }
 
+    function renderVerifyEmailMessage(): ReactNode {
+      if (!isSignUpDone) {
+        return null;
+      }
+
+      const url = signupToken ? `${AuthPaths.verifyEmailPath({ fullPath: true, token: signupToken })}` : undefined;
+      return (
+        <Message
+          type={MessageType.Warning}
+          header={signUpFormTexts.verifyEmail}
+          content={
+            url ? (
+              <Link href={url} target="_blank">
+                {signUpFormTexts.verifyEmailLink}
+              </Link>
+            ) : undefined
+          }
+        />
+      );
+    }
+
     function renderForm({ isValid }: FormikProps<FormikSignUp>): ReactNode {
       return (
         <Form>
           {renderError()}
+          {renderVerifyEmailMessage()}
           <FormikField
             name={FormikSignUpFieldName.FirstName}
             component={Input}
@@ -99,7 +123,7 @@ export const SignUp = observer(
 
 export function SignUpPage(): ReactElement {
   return (
-    <SignUpStoreProvider value={new SignUpStore()}>
+    <SignUpStoreProvider value={useCreateSignUpStore()}>
       <SignUp />
     </SignUpStoreProvider>
   );

@@ -16,4 +16,5 @@ export interface Config {
     readonly accessTokenLifetime: number;
     readonly refreshTokenLifetime: number;
   };
+  readonly returnSignupToken: boolean;
 }
