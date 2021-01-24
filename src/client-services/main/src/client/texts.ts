@@ -11,3 +11,7 @@ export const header = {
   profile: 'My profile',
   logOut: 'Log out',
 };
+
+export const messageTexts = {
+  verifyEmail: 'Please, verify your email',
+};

@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import { useStyles } from '@packages/ui';
 import { Events } from '@packages/common';
 
-import { CurrentUserStoreProvider, useCurrentUserStore, useCreateCurrentUserStore } from 'providers';
+import { useCurrentUserStore } from 'providers';
 
 import { Profile } from './components/profile';
 
@@ -14,7 +14,7 @@ interface Props {
   className?: string;
 }
 
-function HeaderComponent({ className }: Props): ReactElement {
+export function Header({ className }: Props): ReactElement {
   const currentUserStore = useCurrentUserStore();
   const b = useStyles(styles, 'header');
 
@@ -38,15 +38,5 @@ function HeaderComponent({ className }: Props): ReactElement {
     <div className={classnames(className, b())}>
       <Profile className={b('profile')} />
     </div>
-  );
-}
-
-export function Header(props: Props): ReactElement {
-  const currentUserStore = useCreateCurrentUserStore();
-
-  return (
-    <CurrentUserStoreProvider value={currentUserStore}>
-      <HeaderComponent {...props} />
-    </CurrentUserStoreProvider>
   );
 }

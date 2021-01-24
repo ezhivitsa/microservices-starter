@@ -2,6 +2,7 @@ export interface GetCurrentUserResponse {
   firstName?: string;
   lastName: string;
   email: string;
+  isEmailVerified: boolean;
 }
 
 export interface UpdateCurrentUserRequest {

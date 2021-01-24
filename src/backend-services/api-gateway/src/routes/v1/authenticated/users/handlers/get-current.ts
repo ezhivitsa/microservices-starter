@@ -17,11 +17,13 @@ export async function getCurrentHandler(ctx: RouterAppContext): Promise<void> {
   }
 
   const { firstName, lastName, email } = user;
+  const { isEmailVerified } = ctx.state.user;
 
   const response: ServiceTypes.GetCurrentUserResponse = {
     firstName,
     lastName,
     email,
+    isEmailVerified,
   };
   ctx.body = response;
 }

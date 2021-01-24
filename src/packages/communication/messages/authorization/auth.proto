@@ -27,6 +27,7 @@ message User {
   string id = 1;
   string email = 2;
   repeated Role roles = 3;
+  bool is_email_verified = 4;
 }
 
 // GetAccessToken

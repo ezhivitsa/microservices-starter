@@ -23,6 +23,7 @@ export interface User {
   id?: string;
   email?: string;
   roles?: Role[];
+  isEmailVerified?: boolean;
 }
 
 // GetAccessToken

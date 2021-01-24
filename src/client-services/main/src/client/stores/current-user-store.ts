@@ -8,6 +8,7 @@ import { UsersService } from 'services';
 export class CurrentUserStore {
   firstName = '';
   lastName = '';
+  isEmailVerified = false;
 
   fetchStatus: Types.Status = Types.Status.Initial;
   fetchError: ApiError | null = null;
@@ -16,6 +17,7 @@ export class CurrentUserStore {
     makeObservable(this, {
       firstName: observable,
       lastName: observable,
+      isEmailVerified: observable,
       fetchStatus: observable,
       fetchError: observable,
       isLoading: computed,
@@ -44,6 +46,7 @@ export class CurrentUserStore {
         this.fetchStatus = Types.Status.Done;
         this.firstName = currentUser.firstName || '';
         this.lastName = currentUser.lastName;
+        this.isEmailVerified = currentUser.isEmailVerified;
       });
     } catch (error) {
       runInAction(() => {

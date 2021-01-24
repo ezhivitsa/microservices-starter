@@ -9,9 +9,12 @@ import { config } from 'lib/config';
 
 import { CONTENT_ELEMENT_ID } from 'constants/app.constants';
 
+import { CurrentUserStoreProvider, useCreateCurrentUserStore } from 'providers';
+
 import { menu } from 'texts';
 
 import { Header } from './components/header';
+import { Messages } from './components/messages';
 
 import styles from './layout.pcss';
 
@@ -60,16 +63,21 @@ function LayoutComponent({ location: { pathname } }: RouteComponentProps): React
           <div className={b('menu')}>{renderNavigation()}</div>
         </>
       )}
-      <div id={CONTENT_ELEMENT_ID} className={b('content', { view })} />
+      <div className={b('content', { view })}>
+        <Messages />
+        <div id={CONTENT_ELEMENT_ID} className={b('content-data')} />
+      </div>
     </div>
   );
 }
 
 function LayoutRouter(): ReactElement {
   return (
-    <BrowserRouter>
-      <Route component={LayoutComponent} />
-    </BrowserRouter>
+    <CurrentUserStoreProvider value={useCreateCurrentUserStore()}>
+      <BrowserRouter>
+        <Route component={LayoutComponent} />
+      </BrowserRouter>
+    </CurrentUserStoreProvider>
   );
 }
 

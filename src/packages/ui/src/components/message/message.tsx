@@ -1,4 +1,5 @@
 import React, { ReactElement, ReactNode } from 'react';
+import classnames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faLightbulb,
@@ -25,6 +26,7 @@ export enum MessageType {
 }
 
 interface Props {
+  className?: string;
   type: MessageType;
   header?: ReactNode;
   content?: ReactNode;
@@ -40,7 +42,7 @@ const mapMessageTypeToIcon: Record<MessageType, IconDefinition> = {
   [MessageType.Critical]: faExclamation,
 };
 
-export function Message({ type, header, content, footer }: Props): ReactElement {
+export function Message({ type, header, content, footer, className }: Props): ReactElement {
   const b = useStyles(styles, 'message');
 
   function renderIcon(): ReactNode {
@@ -54,16 +56,18 @@ export function Message({ type, header, content, footer }: Props): ReactElement 
   }
 
   return (
-    <div className={b({ type })}>
+    <div className={classnames(b({ type }), className)}>
       {renderIcon()}
       <div className={b('content-wrap')}>
         <Heading view={HeadingView.Condensed} size={HeadingSize.M} className={b('header', { type })}>
           {header}
         </Heading>
 
-        <Paragraph muted className={b('content', { type })}>
-          {content}
-        </Paragraph>
+        {content && (
+          <Paragraph muted className={b('content', { type, hasHeader: !!header })}>
+            {content}
+          </Paragraph>
+        )}
 
         {footer && (
           <Paragraph muted className={b('footer', { type })}>

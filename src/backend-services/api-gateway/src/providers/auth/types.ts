@@ -8,6 +8,7 @@ export interface User {
   id: string;
   email: string;
   roles: UserRole[];
+  isEmailVerified: boolean;
 }
 
 export interface RegisterParams {
