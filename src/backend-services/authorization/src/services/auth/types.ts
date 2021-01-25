@@ -16,6 +16,7 @@ export interface User {
   roles: UserRole[];
   signupToken: string;
   isEmailVerified: boolean;
+  createdAt: Date;
 }
 
 export interface UserShort {

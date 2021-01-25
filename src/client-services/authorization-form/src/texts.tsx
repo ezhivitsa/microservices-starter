@@ -9,6 +9,15 @@ export const validationTexts = {
 
 export const errorsTexts = {
   general: 'Something went wrong',
+  duplicateEmail: 'This email is already in use, you can log in using this email',
+  emailNotVerified({ resendBtn }: { resendBtn: ReactNode }): ReactNode {
+    return (
+      <>
+        {"Please, verify your email. If you don't have verification email you can"} {resendBtn} {'it.'}
+      </>
+    );
+  },
+  resendBtn: 'resend',
 };
 
 export const signInFormTexts = {

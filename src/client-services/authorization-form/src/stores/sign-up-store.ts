@@ -1,7 +1,7 @@
 import { observable, computed, action, runInAction, makeObservable } from 'mobx';
 
 import { ApiError } from '@packages/client';
-import { Types } from '@packages/common';
+import { Types, ErrorType } from '@packages/common';
 
 import { AuthorizationService } from 'services';
 
@@ -39,8 +39,7 @@ export class SignUpStore {
       status: observable,
       error: observable,
       formikValues: computed,
-      formikErrors: computed,
-      generalError: computed,
+      generalErrorType: computed,
       isSigningUp: computed,
       signUp: action,
     });
@@ -55,12 +54,8 @@ export class SignUpStore {
     };
   }
 
-  get formikErrors(): Partial<FormikSignUp> {
-    return this.status === Types.Status.Error ? this.error?.data || {} : {};
-  }
-
-  get generalError(): string | undefined {
-    return this.status === Types.Status.Error ? this.error?.globalError : undefined;
+  get generalErrorType(): ErrorType | undefined {
+    return this.status === Types.Status.Error ? this.error?.error?.type : undefined;
   }
 
   get isSigningUp(): boolean {

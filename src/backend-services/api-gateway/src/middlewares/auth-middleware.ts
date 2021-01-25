@@ -1,8 +1,12 @@
 import { RouterAppMiddleware, RouterAppContext, Next, User } from 'koa';
 import { Request, Response, Token } from 'oauth2-server';
 
+import { AuthorizationErrorType } from '@packages/common';
+
 import { client, CLIENT_SECRET } from 'lib/oauth';
 import { setTokens } from 'lib/tokens';
+
+import { ApiError } from 'errors';
 
 async function tryRefreshToken(ctx: RouterAppContext, refreshToken: string): Promise<Token> {
   const req = new Request({
@@ -61,8 +65,15 @@ async function getToken(ctx: RouterAppContext, accessToken?: string, refreshToke
 export const authMiddleware: RouterAppMiddleware = async (ctx: RouterAppContext, next: Next): Promise<void> => {
   try {
     const token = await getToken(ctx, ctx.state.token, ctx.state.refreshToken);
-    ctx.state.user = token.user as User;
+    const user = token.user as User;
+
+    ctx.state.user = user;
     ctx.state.refreshTokenExpiresAt = token.refreshTokenExpiresAt;
+
+    const endVerifyPeriod = user.registeredAt.getTime() + ctx.state.config.timeForVerifyEmail;
+    if (!user.isEmailVerified && endVerifyPeriod < Date.now()) {
+      throw new ApiError(AuthorizationErrorType.EmailNotVerified);
+    }
 
     await next();
   } catch (err) {

@@ -11,15 +11,17 @@ import {
   Message,
   MessageType,
   Paragraph,
+  Link,
   useStyles,
 } from '@packages/ui';
 import { FormikField, RouterLink } from '@packages/ui-ex';
-import { DashboardPaths, AuthPaths } from '@packages/common';
+import { DashboardPaths, AuthPaths, AuthorizationErrorType } from '@packages/common';
 
 import { SignInStoreProvider, useSignInStore, useCreateSignInStore, useVerifyEmailStore } from 'providers';
 import { FormikSignIn, FormikSignInFieldName } from 'stores';
 
-import { signInFormTexts } from 'texts';
+import { signInFormTexts, errorsTexts } from 'texts';
+import { mapErrorToMessage, mapVerifyErrorToMessage } from 'errors';
 
 import { signupPath } from 'components/pages/paths';
 
@@ -33,7 +35,7 @@ export const SignIn = observer(
     const signInStore = useSignInStore();
     const verifyEmailStore = useVerifyEmailStore();
 
-    const { generalError } = signInStore;
+    const { generalErrorType } = signInStore;
     const { isVerifyDone } = verifyEmailStore;
 
     async function handleSubmit(values: FormikSignIn, { setErrors }: FormikHelpers<FormikSignIn>): Promise<void> {
@@ -45,10 +47,10 @@ export const SignIn = observer(
         const returnUrl = params.get(AuthPaths.returnUrlParam);
 
         window.location.href = returnUrl ? returnUrl : DashboardPaths.indexPath({ fullPath: true });
-      } else {
-        setErrors(signInStore.formikErrors);
       }
     }
+
+    function handleResendClick(): void {}
 
     function renderVerifyEmailMessage(): ReactNode {
       if (!isVerifyDone) {
@@ -58,12 +60,27 @@ export const SignIn = observer(
       return <Message type={MessageType.Success} header={signInFormTexts.verifyEmailSuccess} />;
     }
 
+    function renderResetBrn(): ReactNode {
+      return (
+        <Link pseudo onClick={handleResendClick}>
+          {errorsTexts.resendBtn}
+        </Link>
+      );
+    }
+
     function renderError(): ReactNode {
-      if (!generalError) {
+      if (!generalErrorType) {
         return null;
       }
 
-      return <Message type={MessageType.Danger} header={generalError} />;
+      const message =
+        generalErrorType === AuthorizationErrorType.EmailNotVerified
+          ? mapVerifyErrorToMessage({ resendBtn: renderResetBrn() })
+          : mapErrorToMessage[generalErrorType];
+
+      console.log(generalErrorType);
+
+      return <Message type={MessageType.Danger} header={message} />;
     }
 
     function renderForm({ isValid }: FormikProps<FormikSignIn>): ReactNode {

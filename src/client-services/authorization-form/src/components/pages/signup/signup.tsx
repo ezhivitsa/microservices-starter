@@ -1,6 +1,6 @@
 import React, { ReactElement, ReactNode } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Formik, Form, FormikHelpers, FormikProps } from 'formik';
+import { Formik, Form, FormikProps } from 'formik';
 
 import { Input, InputWidth, Button, ButtonView, ButtonType, Message, MessageType, Link, useStyles } from '@packages/ui';
 import { FormikField } from '@packages/ui-ex';
@@ -10,6 +10,7 @@ import { useSignUpStore, useCreateSignUpStore, SignUpStoreProvider } from 'provi
 import { FormikSignUp, FormikSignUpFieldName } from 'stores';
 
 import { signUpFormTexts } from 'texts';
+import { mapErrorToMessage } from 'errors';
 
 import { validationSchema } from './validation';
 
@@ -20,19 +21,18 @@ export const SignUp = observer(
     const b = useStyles(styles, 'signup');
     const signUpStore = useSignUpStore();
 
-    const { signupToken, isSignUpDone, generalError } = signUpStore;
+    const { signupToken, isSignUpDone, generalErrorType } = signUpStore;
 
-    async function handleSubmit(values: FormikSignUp, { setErrors }: FormikHelpers<FormikSignUp>): Promise<void> {
+    async function handleSubmit(values: FormikSignUp): Promise<void> {
       await signUpStore.signUp(values);
-      setErrors(signUpStore.formikErrors);
     }
 
     function renderError(): ReactNode {
-      if (!generalError) {
+      if (!generalErrorType) {
         return null;
       }
 
-      return <Message type={MessageType.Danger} header={generalError} />;
+      return <Message type={MessageType.Danger} header={mapErrorToMessage[generalErrorType]} />;
     }
 
     function renderVerifyEmailMessage(): ReactNode {

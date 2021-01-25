@@ -16,6 +16,7 @@ declare module 'koa' {
     email: string;
     roles: AuthProviderTypes.UserRole[];
     isEmailVerified: boolean;
+    registeredAt: Date;
   }
 
   export interface AppKoaState {

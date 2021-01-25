@@ -24,6 +24,7 @@ export interface User {
   email?: string;
   roles?: Role[];
   isEmailVerified?: boolean;
+  registeredAt?: Timestamp;
 }
 
 // GetAccessToken

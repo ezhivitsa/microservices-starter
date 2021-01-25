@@ -10,9 +10,10 @@ export interface UserAttributes {
   roles: UserRole[];
   isEmailVerified: boolean;
   signupToken: string;
+  createdAt: Date;
 }
 
-export type UserCreationAttributes = Optional<UserAttributes, 'id'>;
+export type UserCreationAttributes = Optional<UserAttributes, 'id' | 'createdAt'>;
 
 export class UserInstance extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
   public id!: string;
@@ -22,6 +23,7 @@ export class UserInstance extends Model<UserAttributes, UserCreationAttributes> 
   public roles!: UserRole[];
   public isEmailVerified!: boolean;
   public signupToken!: string;
+  public createdAt!: Date;
 }
 
 export type UserModel = ModelCtor<UserInstance>;

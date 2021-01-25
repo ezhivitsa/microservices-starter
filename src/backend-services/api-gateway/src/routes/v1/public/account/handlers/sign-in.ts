@@ -1,10 +1,19 @@
-import { RouterAppContext } from 'koa';
+import { RouterAppContext, User } from 'koa';
 import { Request, Response } from 'oauth2-server';
 
-import { ServiceTypes } from '@packages/common';
+import { ServiceTypes, AuthorizationErrorType } from '@packages/common';
 
 import { client, CLIENT_SECRET } from 'lib/oauth';
 import { setTokens } from 'lib/tokens';
+
+import { ApiError } from 'errors';
+
+function validateUser(user: User, timeForVerifyEmail: number): void {
+  const endVerifyPeriod = user.registeredAt.getTime() + timeForVerifyEmail;
+  if (!user.isEmailVerified && endVerifyPeriod < Date.now()) {
+    throw new ApiError(AuthorizationErrorType.EmailNotVerified);
+  }
+}
 
 export async function signInHandler(ctx: RouterAppContext): Promise<void> {
   const data: ServiceTypes.SignInRequest = ctx.state.validatedRequest.value;
@@ -26,7 +35,8 @@ export async function signInHandler(ctx: RouterAppContext): Promise<void> {
   });
   const res = new Response(ctx.response);
 
-  await ctx.oauth.token(req, res);
+  const token = await ctx.oauth.token(req, res);
+  validateUser(token.user as User, ctx.state.config.timeForVerifyEmail);
 
   if (res.headers) {
     ctx.set(res.headers);

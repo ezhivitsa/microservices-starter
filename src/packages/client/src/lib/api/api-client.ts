@@ -1,14 +1,14 @@
 import axios, { AxiosInstance, AxiosError, AxiosRequestConfig, Method, AxiosResponse } from 'axios';
-import { AuthPaths } from '@packages/common';
+import { AuthPaths, CommonErrorType, ErrorData } from '@packages/common';
 
-import { ApiError, ErrorDetails, globalErrorField } from './api-error';
+import { ApiError } from './api-error';
 
 interface BaseResponse {
   errors?: Record<string, string>;
 }
 
 interface ApiErrorDataType {
-  data: ErrorDetails;
+  data: ErrorData;
   status: number;
 }
 
@@ -35,8 +35,11 @@ const throwApiError = ({ data = {}, status = 500 }: ApiErrorDataType): ApiError 
 };
 
 export function initApi({ apiUrl, globalError }: { apiUrl: string; globalError: string }): ApiClient {
-  const generalError = {
-    [globalErrorField]: globalError,
+  const generalError: ErrorData = {
+    error: {
+      type: CommonErrorType.General,
+      message: globalError,
+    },
   };
 
   const handleResponse = <R extends BaseResponse>(response: AxiosResponse<R>): R => {
@@ -59,7 +62,7 @@ export function initApi({ apiUrl, globalError }: { apiUrl: string; globalError: 
 
     const errorData: ApiErrorDataType = {
       status: response.status,
-      data: response.data && response.data.errors ? response.data.errors : generalError,
+      data: (response.data as ErrorData | undefined) || generalError,
     };
     throwApiError(errorData);
     return response.data;

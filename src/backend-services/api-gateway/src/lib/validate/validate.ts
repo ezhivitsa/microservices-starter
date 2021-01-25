@@ -27,18 +27,17 @@ export async function validate<P>(
 
   const validatorsList = getValidators(validators);
   const result: ValidateResult<P> = {
-    errors: {},
     value: payload,
   };
 
   for (let i = 0; i < validatorsList.length; i += 1) {
     const validator = validatorsList[i];
-    const { errors, value } = await validator(result.value, ctx);
+    const { error, value } = await validator(result.value, ctx);
 
-    result.errors = errors;
+    result.error = error;
     result.value = value;
 
-    if (Object.keys(errors).length) {
+    if (error) {
       return result;
     }
   }

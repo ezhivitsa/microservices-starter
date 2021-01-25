@@ -1,3 +1,4 @@
 export enum AuthorizationErrorType {
-  DuplicateEmail = 'DUPLICATE_EMAIL',
+  DuplicateEmail = 'duplicate-email',
+  EmailNotVerified = 'email-not-verified',
 }

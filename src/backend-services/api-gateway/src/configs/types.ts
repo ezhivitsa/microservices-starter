@@ -17,4 +17,6 @@ export interface Config {
     readonly refreshTokenLifetime: number;
   };
   readonly returnSignupToken: boolean;
+  readonly timeForVerifyEmail: number;
+  readonly logErrors400: boolean;
 }

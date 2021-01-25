@@ -25,4 +25,6 @@ export const production: Config = {
     refreshTokenLifetime: 60 * 60 * 24 * 7 * 2, // 2 weeks
   },
   returnSignupToken: false,
+  timeForVerifyEmail: 1000 * 60 * 60 * 24 * 2, // 2 days
+  logErrors400: false,
 };

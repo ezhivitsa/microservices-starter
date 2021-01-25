@@ -1,12 +1,10 @@
-export const globalErrorField = '__global';
-
-export type ErrorDetails = Record<string, string>;
+import { ErrorData, ErrorMessage, JoiErrorMessage } from '@packages/common';
 
 export class ApiError extends Error {
-  private _data: ErrorDetails;
+  private _data: ErrorData;
   private _status: number;
 
-  constructor(data: ErrorDetails, status: number) {
+  constructor(data: ErrorData, status: number) {
     super(JSON.stringify(data));
 
     // Explicit setting of prototype due to features
@@ -17,23 +15,19 @@ export class ApiError extends Error {
     this._status = status;
   }
 
-  get isGlobalError(): boolean {
-    return !!this._data[globalErrorField];
+  get isJoiError(): boolean {
+    return !!this._data.joiErrors;
   }
 
   get status(): number {
     return this._status;
   }
 
-  get data(): ErrorDetails {
-    return this._data;
+  get error(): ErrorMessage | undefined {
+    return this._data.error;
   }
 
-  get globalError(): string {
-    return this.isGlobalError ? this._data[globalErrorField] : '';
-  }
-
-  getFieldError(field: string): string | undefined {
-    return this._data[field];
+  get joiErrors(): JoiErrorMessage[] {
+    return this._data.joiErrors || [];
   }
 }

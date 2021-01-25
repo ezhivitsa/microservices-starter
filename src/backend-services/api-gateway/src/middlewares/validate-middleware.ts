@@ -28,12 +28,8 @@ export const validateMiddleware = (
 
   const result = await validate(payload, validators);
 
-  if (throwOnInvalid && result.errors.length) {
-    ctx.body = {
-      errors: result.errors,
-    };
-
-    ctx.throw(400);
+  if (throwOnInvalid && result.error) {
+    throw result.error;
   }
 
   ctx.state.validatedRequest = result;

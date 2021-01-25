@@ -13,4 +13,5 @@ export const development: Config = {
     brokers: ['localhost:9092'],
   },
   returnSignupToken: true,
+  logErrors400: true,
 };
