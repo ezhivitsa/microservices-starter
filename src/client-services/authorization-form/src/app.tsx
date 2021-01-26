@@ -4,26 +4,34 @@ import { hot } from 'react-hot-loader/root';
 
 import { config } from 'lib/config';
 
-import { VerifyEmailStoreProvider, useCreateVerifyEmailStore } from 'providers';
+import {
+  VerifyEmailStoreProvider,
+  ResendVerifyEmailStoreProvider,
+  useCreateVerifyEmailStore,
+  useCreateResendVerifyEmailStore,
+} from 'providers';
 
-import { SignUpPage, SignInPage, VerifyEmailPage } from './components/pages';
-import { signinPath, signupPath, indexPath } from './components/pages/paths';
+import { SignUpPage, SignInPage, VerifyEmailPage, ResendVerifyEmailPage } from './components/pages';
+import { signinPath, signupPath, resendVerifyEmailPath, indexPath } from './components/pages/paths';
 import { verifyEmailPathTemplate } from './components/pages/path-templates';
 
 function AppComponent(): ReactElement {
   return (
     <StrictMode>
       <VerifyEmailStoreProvider value={useCreateVerifyEmailStore()}>
-        <BrowserRouter basename={config.frontUpstreams.auth.rule}>
-          <Switch>
-            <Route exact path={indexPath}>
-              <Redirect to={signinPath} />
-            </Route>
-            <Route path={signinPath} component={SignInPage} />
-            <Route path={signupPath} component={SignUpPage} />
-            <Route path={verifyEmailPathTemplate} component={VerifyEmailPage} />
-          </Switch>
-        </BrowserRouter>
+        <ResendVerifyEmailStoreProvider value={useCreateResendVerifyEmailStore()}>
+          <BrowserRouter basename={config.frontUpstreams.auth.rule}>
+            <Switch>
+              <Route exact path={indexPath}>
+                <Redirect to={signinPath} />
+              </Route>
+              <Route path={signinPath} component={SignInPage} />
+              <Route path={signupPath} component={SignUpPage} />
+              <Route path={verifyEmailPathTemplate} component={VerifyEmailPage} />
+              <Route path={resendVerifyEmailPath} component={ResendVerifyEmailPage} />
+            </Switch>
+          </BrowserRouter>
+        </ResendVerifyEmailStoreProvider>
       </VerifyEmailStoreProvider>
     </StrictMode>
   );

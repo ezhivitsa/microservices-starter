@@ -109,4 +109,17 @@ export class AuthorizationClient extends BaseClient<AuthorizationError> {
   verifyEmailCommand(data: AuthorizationTypes.VerifyEmailRequest, metadata: CommandMetadata): Promise<void> {
     return this._sendCommand({ data, command: AuthorizationCommand.VerifyEmail }, metadata);
   }
+
+  getSignupToken(
+    data: AuthorizationTypes.GetSignupTokenRequest,
+    metadata: CommandMetadata,
+  ): Promise<AuthorizationTypes.GetSignupTokenResponse> {
+    return this._sendCommand(
+      {
+        data,
+        command: AuthorizationCommand.GetSignupToken,
+      },
+      metadata,
+    );
+  }
 }

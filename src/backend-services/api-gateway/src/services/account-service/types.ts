@@ -26,3 +26,5 @@ export type VerifyScopeParams = AuthProviderTypes.VerifyScopeParams;
 export type User = AuthProviderTypes.User;
 
 export type VerifyEmailParams = AuthProviderTypes.VerifyEmailParams;
+
+export type ResendVerifyEmailParams = AuthProviderTypes.GetSignupTokenParams;

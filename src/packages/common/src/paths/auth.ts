@@ -21,3 +21,7 @@ export const signinPath = ({ returnUrl, fullPath }: { returnUrl?: string; fullPa
 export const verifyEmailPath = ({ token, fullPath }: { token: string; fullPath?: boolean }): string => {
   return `${fullPath ? indexPath({ fullPath }) : ''}/verify-email/${token}`;
 };
+
+export const resendVerifyEmailPath = ({ fullPath }: { fullPath?: boolean } = {}): string => {
+  return `${fullPath ? indexPath({ fullPath }) : ''}/resend-verify-email`;
+};

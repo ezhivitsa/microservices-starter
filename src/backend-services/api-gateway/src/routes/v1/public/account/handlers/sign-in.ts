@@ -36,7 +36,6 @@ export async function signInHandler(ctx: RouterAppContext): Promise<void> {
   const res = new Response(ctx.response);
 
   const token = await ctx.oauth.token(req, res);
-  validateUser(token.user as User, ctx.state.config.timeForVerifyEmail);
 
   if (res.headers) {
     ctx.set(res.headers);
@@ -45,5 +44,7 @@ export async function signInHandler(ctx: RouterAppContext): Promise<void> {
   if (res.body) {
     setTokens(ctx, res.body);
   }
+
+  validateUser(token.user as User, ctx.state.config.timeForVerifyEmail);
   ctx.body = null;
 }

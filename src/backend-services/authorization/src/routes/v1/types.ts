@@ -16,3 +16,4 @@ export interface VerifyScopeRequest extends Required<AuthorizationTypes.VerifySc
 }
 
 export type VerifyEmailRequest = Required<AuthorizationTypes.VerifyEmailRequest>;
+export type GetSignupTokenRequest = Required<AuthorizationTypes.GetSignupTokenRequest>;

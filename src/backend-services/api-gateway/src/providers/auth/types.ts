@@ -71,3 +71,12 @@ export interface VerifyScopeParams {
 export interface VerifyEmailParams {
   token: string;
 }
+
+export interface GetSignupTokenParams {
+  email: string;
+}
+
+export interface GetSignupTokenResult {
+  id: string;
+  token: string;
+}

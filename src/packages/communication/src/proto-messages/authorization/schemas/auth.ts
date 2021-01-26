@@ -52,3 +52,11 @@ export const verifyScopeResponse = root.loadProtoMessage<AuthorizationTypes.Veri
 export const verifyEmailRequest = root.loadProtoMessage<AuthorizationTypes.VerifyEmailRequest>(
   'microservices_starter.authorization.auth.VerifyEmailRequest',
 );
+
+export const getSignupTokenRequest = root.loadProtoMessage<AuthorizationTypes.GetSignupTokenRequest>(
+  'microservices_starter.authorization.auth.GetSignupTokenRequest',
+);
+
+export const getSignupTokenResponse = root.loadProtoMessage<AuthorizationTypes.GetSignupTokenResponse>(
+  'microservices_starter.authorization.auth.GetSignupTokenResponse',
+);

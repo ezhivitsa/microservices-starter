@@ -13,6 +13,7 @@ import {
   RevokeTokenParams,
   VerifyScopeParams,
   VerifyEmailParams,
+  ResendVerifyEmailParams,
 } from './types';
 
 export async function register(params: RegisterParams, metadata: ServiceMetadata): Promise<string | null> {
@@ -76,4 +77,32 @@ export async function verifyScope(params: VerifyScopeParams, metadata: ServiceMe
 
 export function verifyEmail(params: VerifyEmailParams, metadata: ServiceMetadata): Promise<void> {
   return AuthProvider.verifyEmail(params, metadata);
+}
+
+export async function resendVerifyEmail(params: ResendVerifyEmailParams, metadata: ServiceMetadata): Promise<void> {
+  const data = await AuthProvider.getSignupToken(params, metadata);
+  if (!data) {
+    return;
+  }
+
+  const user = await UsersProvider.getUserByAuthId(
+    {
+      authId: data.id,
+    },
+    metadata,
+  );
+
+  if (!user) {
+    return;
+  }
+
+  await EmailProvider.sendVerifyEmail(
+    {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      token: data.token,
+    },
+    metadata,
+  );
 }

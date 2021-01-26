@@ -17,3 +17,7 @@ export interface SignUpResponse {
 export interface VerifyEmailRequest {
   token: string;
 }
+
+export interface ResendVerifyEmail {
+  email: string;
+}

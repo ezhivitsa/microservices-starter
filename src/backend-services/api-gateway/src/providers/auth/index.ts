@@ -15,6 +15,8 @@ import {
   RevokeTokenParams,
   VerifyScopeParams,
   VerifyEmailParams,
+  GetSignupTokenParams,
+  GetSignupTokenResult,
 } from './types';
 
 import {
@@ -65,9 +67,21 @@ export async function revokeToken(params: RevokeTokenParams, metadata: ProviderT
 
 export async function verifyScope(params: VerifyScopeParams, metadata: ProviderTypes.Metadata): Promise<boolean> {
   const result = await authorizationClient.verifyScopeCommand(mapVerifyScopeToProto(params), metadata);
-  return result.verified;
+  return result.verified || false;
 }
 
 export function verifyEmail(params: VerifyEmailParams, metadata: ProviderTypes.Metadata): Promise<void> {
   return authorizationClient.verifyEmailCommand(params, metadata);
+}
+
+export async function getSignupToken(
+  params: GetSignupTokenParams,
+  metadata: ProviderTypes.Metadata,
+): Promise<GetSignupTokenResult | null> {
+  const { id, token } = await authorizationClient.getSignupToken(params, metadata);
+  if (!id || !token) {
+    return null;
+  }
+
+  return { id, token };
 }

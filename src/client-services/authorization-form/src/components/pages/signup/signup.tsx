@@ -1,6 +1,6 @@
 import React, { ReactElement, ReactNode } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Formik, Form, FormikProps } from 'formik';
+import { Formik, Form as FormikForm, FormikProps } from 'formik';
 
 import { Input, InputWidth, Button, ButtonView, ButtonType, Message, MessageType, Link, useStyles } from '@packages/ui';
 import { FormikField } from '@packages/ui-ex';
@@ -11,6 +11,8 @@ import { FormikSignUp, FormikSignUpFieldName } from 'stores';
 
 import { signUpFormTexts } from 'texts';
 import { mapErrorToMessage } from 'errors';
+
+import { Form } from 'components/common/form';
 
 import { validationSchema } from './validation';
 
@@ -59,64 +61,64 @@ export const SignUp = observer(
     function renderForm({ isValid }: FormikProps<FormikSignUp>): ReactNode {
       return (
         <Form>
-          {renderError()}
-          {renderVerifyEmailMessage()}
-          <FormikField
-            name={FormikSignUpFieldName.FirstName}
-            component={Input}
-            componentProps={{
-              label: signUpFormTexts.firstName,
-              placeholder: signUpFormTexts.firstNamePlaceholder,
-              width: InputWidth.Available,
-              className: b('input'),
-            }}
-          />
-          <FormikField
-            name={FormikSignUpFieldName.LastName}
-            component={Input}
-            componentProps={{
-              label: signUpFormTexts.lastName,
-              placeholder: signUpFormTexts.lastNamePlaceholder,
-              width: InputWidth.Available,
-              className: b('input'),
-            }}
-          />
-          <FormikField
-            name={FormikSignUpFieldName.Email}
-            component={Input}
-            componentProps={{
-              label: signUpFormTexts.email,
-              placeholder: signUpFormTexts.emailPlaceholder,
-              type: 'email',
-              width: InputWidth.Available,
-              className: b('input'),
-            }}
-          />
-          <FormikField
-            name={FormikSignUpFieldName.Password}
-            component={Input}
-            componentProps={{
-              label: signUpFormTexts.password,
-              placeholder: signUpFormTexts.passwordPlaceholder,
-              type: 'password',
-              width: InputWidth.Available,
-              className: b('input'),
-            }}
-          />
+          <FormikForm>
+            {renderError()}
+            {renderVerifyEmailMessage()}
+            <FormikField
+              name={FormikSignUpFieldName.FirstName}
+              component={Input}
+              componentProps={{
+                label: signUpFormTexts.firstName,
+                placeholder: signUpFormTexts.firstNamePlaceholder,
+                width: InputWidth.Available,
+                className: b('input'),
+              }}
+            />
+            <FormikField
+              name={FormikSignUpFieldName.LastName}
+              component={Input}
+              componentProps={{
+                label: signUpFormTexts.lastName,
+                placeholder: signUpFormTexts.lastNamePlaceholder,
+                width: InputWidth.Available,
+                className: b('input'),
+              }}
+            />
+            <FormikField
+              name={FormikSignUpFieldName.Email}
+              component={Input}
+              componentProps={{
+                label: signUpFormTexts.email,
+                placeholder: signUpFormTexts.emailPlaceholder,
+                type: 'email',
+                width: InputWidth.Available,
+                className: b('input'),
+              }}
+            />
+            <FormikField
+              name={FormikSignUpFieldName.Password}
+              component={Input}
+              componentProps={{
+                label: signUpFormTexts.password,
+                placeholder: signUpFormTexts.passwordPlaceholder,
+                type: 'password',
+                width: InputWidth.Available,
+                className: b('input'),
+              }}
+            />
 
-          <Button view={ButtonView.Action} type={ButtonType.Submit} className={b('button')} disabled={!isValid}>
-            {signUpFormTexts.signUpBtn}
-          </Button>
+            <Button view={ButtonView.Action} type={ButtonType.Submit} className={b('button')} disabled={!isValid}>
+              {signUpFormTexts.signUpBtn}
+            </Button>
+          </FormikForm>
         </Form>
       );
     }
 
     return (
-      <div className={b()}>
-        <Formik initialValues={signUpStore.formikValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
-          {renderForm}
-        </Formik>
-      </div>
+      <Formik initialValues={signUpStore.formikValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
+        {renderForm}
+      </Formik>
     );
   },
 );

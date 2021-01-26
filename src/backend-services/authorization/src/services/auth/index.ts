@@ -6,3 +6,4 @@ export { saveToken } from './save-token';
 export { revokeToken } from './revoke-token';
 export { verifyScope } from './verify-scope';
 export { verifyEmail } from './verify-email';
+export { getUserByEmail } from './get-user-by-email';

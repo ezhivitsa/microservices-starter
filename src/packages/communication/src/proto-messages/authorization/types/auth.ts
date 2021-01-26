@@ -91,10 +91,20 @@ export interface VerifyScopeRequest {
 }
 
 export interface VerifyScopeResponse {
-  verified: boolean;
+  verified?: boolean;
 }
 
 // VerifyEmail
 export interface VerifyEmailRequest {
-  token: string;
+  token?: string;
+}
+
+// GetSignupToken
+export interface GetSignupTokenRequest {
+  email?: string;
+}
+
+export interface GetSignupTokenResponse {
+  id?: string;
+  token?: string;
 }

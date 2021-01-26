@@ -102,3 +102,13 @@ message VerifyScopeResponse {
 message VerifyEmailRequest {
   string token = 1;
 }
+
+// GetSignupToken
+message GetSignupTokenRequest {
+  string email = 1;
+}
+
+message GetSignupTokenResponse {
+  string id = 1;
+  string token = 2;
+}

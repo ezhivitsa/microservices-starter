@@ -1,5 +1,5 @@
 import React, { ReactElement, ReactNode } from 'react';
-import { Formik, FormikHelpers, FormikProps, Form } from 'formik';
+import { Formik, FormikProps, Form as FormikForm } from 'formik';
 import { observer } from 'mobx-react-lite';
 
 import {
@@ -11,19 +11,26 @@ import {
   Message,
   MessageType,
   Paragraph,
-  Link,
   useStyles,
 } from '@packages/ui';
 import { FormikField, RouterLink } from '@packages/ui-ex';
 import { DashboardPaths, AuthPaths, AuthorizationErrorType } from '@packages/common';
 
-import { SignInStoreProvider, useSignInStore, useCreateSignInStore, useVerifyEmailStore } from 'providers';
+import {
+  SignInStoreProvider,
+  useSignInStore,
+  useCreateSignInStore,
+  useVerifyEmailStore,
+  useResendVerifyEmailStore,
+} from 'providers';
 import { FormikSignIn, FormikSignInFieldName } from 'stores';
 
 import { signInFormTexts, errorsTexts } from 'texts';
 import { mapErrorToMessage, mapVerifyErrorToMessage } from 'errors';
 
-import { signupPath } from 'components/pages/paths';
+import { Form } from 'components/common/form';
+
+import { signupPath, resendVerifyEmailPath } from 'components/pages/paths';
 
 import { validationSchema } from './validation';
 
@@ -34,11 +41,12 @@ export const SignIn = observer(
     const b = useStyles(styles, 'signin');
     const signInStore = useSignInStore();
     const verifyEmailStore = useVerifyEmailStore();
+    const resendVerifyEmailStore = useResendVerifyEmailStore();
 
     const { generalErrorType } = signInStore;
     const { isVerifyDone } = verifyEmailStore;
 
-    async function handleSubmit(values: FormikSignIn, { setErrors }: FormikHelpers<FormikSignIn>): Promise<void> {
+    async function handleSubmit(values: FormikSignIn): Promise<void> {
       verifyEmailStore.dispose();
       await signInStore.signIn(values);
 
@@ -50,7 +58,9 @@ export const SignIn = observer(
       }
     }
 
-    function handleResendClick(): void {}
+    function handleResendClick(email: string): void {
+      resendVerifyEmailStore.setEmail(email);
+    }
 
     function renderVerifyEmailMessage(): ReactNode {
       if (!isVerifyDone) {
@@ -60,79 +70,77 @@ export const SignIn = observer(
       return <Message type={MessageType.Success} header={signInFormTexts.verifyEmailSuccess} />;
     }
 
-    function renderResetBrn(): ReactNode {
+    function renderResetBtn(values: FormikSignIn): ReactNode {
       return (
-        <Link pseudo onClick={handleResendClick}>
+        <RouterLink to={resendVerifyEmailPath} onClick={() => handleResendClick(values.email)}>
           {errorsTexts.resendBtn}
-        </Link>
+        </RouterLink>
       );
     }
 
-    function renderError(): ReactNode {
+    function renderError(values: FormikSignIn): ReactNode {
       if (!generalErrorType) {
         return null;
       }
 
       const message =
         generalErrorType === AuthorizationErrorType.EmailNotVerified
-          ? mapVerifyErrorToMessage({ resendBtn: renderResetBrn() })
+          ? mapVerifyErrorToMessage({ resendBtn: renderResetBtn(values) })
           : mapErrorToMessage[generalErrorType];
-
-      console.log(generalErrorType);
 
       return <Message type={MessageType.Danger} header={message} />;
     }
 
-    function renderForm({ isValid }: FormikProps<FormikSignIn>): ReactNode {
+    function renderForm({ isValid, values }: FormikProps<FormikSignIn>): ReactNode {
       return (
         <Form>
-          {renderVerifyEmailMessage()}
-          {renderError()}
-          <FormikField
-            name={FormikSignInFieldName.Email}
-            component={Input}
-            componentProps={{
-              label: signInFormTexts.email,
-              placeholder: signInFormTexts.emailPlaceholder,
-              type: 'email',
-              width: InputWidth.Available,
-              className: b('input'),
-            }}
-          />
-          <FormikField
-            name={FormikSignInFieldName.Password}
-            component={Input}
-            componentProps={{
-              label: signInFormTexts.password,
-              placeholder: signInFormTexts.passwordPlaceholder,
-              type: 'password',
-              width: InputWidth.Available,
-              className: b('input'),
-            }}
-          />
+          <FormikForm>
+            {renderVerifyEmailMessage()}
+            {renderError(values)}
+            <FormikField
+              name={FormikSignInFieldName.Email}
+              component={Input}
+              componentProps={{
+                label: signInFormTexts.email,
+                placeholder: signInFormTexts.emailPlaceholder,
+                type: 'email',
+                width: InputWidth.Available,
+                className: b('input'),
+              }}
+            />
+            <FormikField
+              name={FormikSignInFieldName.Password}
+              component={Input}
+              componentProps={{
+                label: signInFormTexts.password,
+                placeholder: signInFormTexts.passwordPlaceholder,
+                type: 'password',
+                width: InputWidth.Available,
+                className: b('input'),
+              }}
+            />
 
-          <Paragraph className={b('signup')}>
-            {signInFormTexts.signUp({ link: <RouterLink to={signupPath} text={signInFormTexts.singUpLink} /> })}
-          </Paragraph>
+            <Paragraph className={b('signup')}>
+              {signInFormTexts.signUp({ link: <RouterLink to={signupPath} text={signInFormTexts.singUpLink} /> })}
+            </Paragraph>
 
-          <Button view={ButtonView.Action} type={ButtonType.Submit} className={b('button')} disabled={!isValid}>
-            {signInFormTexts.signInBtn}
-          </Button>
+            <Button view={ButtonView.Action} type={ButtonType.Submit} className={b('button')} disabled={!isValid}>
+              {signInFormTexts.signInBtn}
+            </Button>
+          </FormikForm>
         </Form>
       );
     }
 
     return (
-      <div className={b()}>
-        <Formik
-          initialValues={signInStore.formikValues}
-          validationSchema={validationSchema}
-          validateOnMount
-          onSubmit={handleSubmit}
-        >
-          {renderForm}
-        </Formik>
-      </div>
+      <Formik
+        initialValues={signInStore.formikValues}
+        validationSchema={validationSchema}
+        validateOnMount
+        onSubmit={handleSubmit}
+      >
+        {renderForm}
+      </Formik>
     );
   },
 );

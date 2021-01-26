@@ -50,3 +50,9 @@ export const signUpFormTexts = {
   verifyEmail: 'Please, verify your email address',
   verifyEmailLink: 'Verify email link',
 };
+
+export const resendVerifyEmailTexts = {
+  email: 'Email',
+  emailPlaceholder: 'Enter email',
+  resendBtn: 'Resend email',
+};

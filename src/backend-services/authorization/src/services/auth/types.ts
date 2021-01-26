@@ -67,3 +67,7 @@ export interface VerifyScopeParams {
 export interface VerifyEmailParams {
   token: string;
 }
+
+export interface GetUserByEmailParams {
+  email: string;
+}
