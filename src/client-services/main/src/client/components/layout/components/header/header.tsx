@@ -2,7 +2,7 @@ import React, { ReactElement, useEffect } from 'react';
 import classnames from 'classnames';
 
 import { useStyles } from '@packages/ui';
-import { Events } from '@packages/common';
+import { FrontEvents } from '@packages/common';
 
 import { useCurrentUserStore } from 'providers';
 
@@ -23,10 +23,10 @@ export function Header({ className }: Props): ReactElement {
   }, []);
 
   useEffect(() => {
-    window.addEventListener(Events.updateCurrentUser, handleUpdateCurrentUser);
+    window.addEventListener(FrontEvents.updateCurrentUser, handleUpdateCurrentUser);
 
     return () => {
-      window.removeEventListener(Events.updateCurrentUser, handleUpdateCurrentUser);
+      window.removeEventListener(FrontEvents.updateCurrentUser, handleUpdateCurrentUser);
     };
   });
 

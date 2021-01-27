@@ -1,7 +1,7 @@
 import { observable, computed, action, runInAction, makeObservable } from 'mobx';
 
 import { ApiError } from '@packages/client';
-import { Types, ErrorType } from '@packages/common';
+import { Types, Errors } from '@packages/common';
 
 import { AuthorizationService } from 'services';
 
@@ -42,7 +42,7 @@ export class SignInStore {
     };
   }
 
-  get generalErrorType(): ErrorType | undefined {
+  get generalErrorType(): Errors.ErrorType | undefined {
     return this.status === Types.Status.Error ? this.error?.error?.type : undefined;
   }
 

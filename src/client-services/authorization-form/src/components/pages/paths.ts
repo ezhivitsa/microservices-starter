@@ -1,6 +1,6 @@
-import { AuthPaths } from '@packages/common';
+import { FrontPaths } from '@packages/common';
 
-export const indexPath = AuthPaths.indexPath();
-export const signupPath = AuthPaths.signupPath();
-export const signinPath = AuthPaths.signinPath();
-export const resendVerifyEmailPath = AuthPaths.resendVerifyEmailPath();
+export const indexPath = FrontPaths.Auth.indexPath();
+export const signupPath = FrontPaths.Auth.signupPath();
+export const signinPath = FrontPaths.Auth.signinPath();
+export const resendVerifyEmailPath = FrontPaths.Auth.resendVerifyEmailPath();

@@ -1,6 +1,6 @@
 export * as Types from './types';
-export * as Constants from './constants';
+export * as ServerConstants from './server-constants';
 export * as ServiceTypes from './service-types';
-export * from './paths';
-export * from './errors';
-export * as Events from './events';
+export * as FrontPaths from './front-paths';
+export * as Errors from './errors';
+export * as FrontEvents from './front-events';

@@ -1,4 +1,4 @@
-import { SettingsPaths } from '@packages/common';
+import { FrontPaths } from '@packages/common';
 
-export const indexPath = SettingsPaths.indexPath();
-export const profilePath = SettingsPaths.profilePath();
+export const indexPath = FrontPaths.Settings.indexPath();
+export const profilePath = FrontPaths.Settings.profilePath();

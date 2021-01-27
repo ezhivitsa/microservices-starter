@@ -1,7 +1,7 @@
 import { RouterAppContext, User } from 'koa';
 import { Request, Response } from 'oauth2-server';
 
-import { ServiceTypes, AuthorizationErrorType } from '@packages/common';
+import { ServiceTypes, Errors } from '@packages/common';
 
 import { client, CLIENT_SECRET } from 'lib/oauth';
 import { setTokens } from 'lib/tokens';
@@ -11,7 +11,7 @@ import { ApiError } from 'errors';
 function validateUser(user: User, timeForVerifyEmail: number): void {
   const endVerifyPeriod = user.registeredAt.getTime() + timeForVerifyEmail;
   if (!user.isEmailVerified && endVerifyPeriod < Date.now()) {
-    throw new ApiError(AuthorizationErrorType.EmailNotVerified);
+    throw new ApiError(Errors.AuthorizationErrorType.EmailNotVerified);
   }
 }
 

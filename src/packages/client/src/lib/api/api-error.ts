@@ -1,10 +1,10 @@
-import { ErrorData, ErrorMessage, JoiErrorMessage } from '@packages/common';
+import { Errors } from '@packages/common';
 
 export class ApiError extends Error {
-  private _data: ErrorData;
+  private _data: Errors.ErrorData;
   private _status: number;
 
-  constructor(data: ErrorData, status: number) {
+  constructor(data: Errors.ErrorData, status: number) {
     super(JSON.stringify(data));
 
     // Explicit setting of prototype due to features
@@ -23,11 +23,11 @@ export class ApiError extends Error {
     return this._status;
   }
 
-  get error(): ErrorMessage | undefined {
+  get error(): Errors.ErrorMessage | undefined {
     return this._data.error;
   }
 
-  get joiErrors(): JoiErrorMessage[] {
+  get joiErrors(): Errors.JoiErrorMessage[] {
     return this._data.joiErrors || [];
   }
 }

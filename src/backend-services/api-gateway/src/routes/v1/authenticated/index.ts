@@ -1,12 +1,12 @@
 import { AppKoaState, AppKoaContext } from 'koa';
 import Router from '@koa/router';
 
-import { Constants } from '@packages/common';
+import { ServerConstants } from '@packages/common';
 
 import { usersRouter } from './users';
 
 const authenticatedRouter = new Router<AppKoaState, AppKoaContext>();
 
-authenticatedRouter.use(Constants.usersPrefix, usersRouter.routes(), usersRouter.allowedMethods());
+authenticatedRouter.use(ServerConstants.usersPrefix, usersRouter.routes(), usersRouter.allowedMethods());
 
 export { authenticatedRouter };

@@ -1,3 +1,3 @@
-import { DashboardPaths } from '@packages/common';
+import { FrontPaths } from '@packages/common';
 
-export const dashboardPath = DashboardPaths.indexPath();
+export const dashboardPath = FrontPaths.Dashboard.indexPath();

@@ -1,6 +1,6 @@
-import { Constants, Types } from '@packages/common';
+import { ServerConstants, Types } from '@packages/common';
 
-export function initConfig(configId = Constants.configId): Types.ClientConfig {
+export function initConfig(configId = ServerConstants.configId): Types.ClientConfig {
   const node = document.querySelector(`#${configId}`);
 
   if (!node || !node.textContent) {

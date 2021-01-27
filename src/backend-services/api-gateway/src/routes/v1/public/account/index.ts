@@ -1,7 +1,7 @@
 import { AppKoaState, AppKoaContext } from 'koa';
 import Router from '@koa/router';
 
-import { Constants } from '@packages/common';
+import { ServerConstants } from '@packages/common';
 
 import { validateMiddleware } from 'middlewares';
 
@@ -11,9 +11,13 @@ import { signUpHandler, signInHandler, verifyEmailHandler, resendVerifyEmailHand
 const accountRouter = new Router<AppKoaState, AppKoaContext>();
 
 accountRouter
-  .post(Constants.signupPath, validateMiddleware(signUpValidators), signUpHandler)
-  .post(Constants.signinPath, validateMiddleware(signInValidators), signInHandler)
-  .post(Constants.verifyEmailPath, validateMiddleware(verifyEmailValidators), verifyEmailHandler)
-  .post(Constants.resendVerifyEmailPath, validateMiddleware(resendVerifyEmailValidators), resendVerifyEmailHandler);
+  .post(ServerConstants.signupPath, validateMiddleware(signUpValidators), signUpHandler)
+  .post(ServerConstants.signinPath, validateMiddleware(signInValidators), signInHandler)
+  .post(ServerConstants.verifyEmailPath, validateMiddleware(verifyEmailValidators), verifyEmailHandler)
+  .post(
+    ServerConstants.resendVerifyEmailPath,
+    validateMiddleware(resendVerifyEmailValidators),
+    resendVerifyEmailHandler,
+  );
 
 export { accountRouter };

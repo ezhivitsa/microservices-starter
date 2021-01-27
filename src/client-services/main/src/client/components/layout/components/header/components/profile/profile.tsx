@@ -6,7 +6,7 @@ import { faChevronDown, faUserCircle, faSignOutAlt, IconDefinition } from '@fort
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useStyles } from '@packages/ui';
-import { SettingsPaths, AuthPaths } from '@packages/common';
+import { FrontPaths } from '@packages/common';
 
 import { useCurrentUserStore } from 'providers';
 import { UsersService } from 'services';
@@ -39,7 +39,7 @@ export const Profile = observer(({ className }: Props): ReactElement | null => {
   const menu: MenuItem[] = [
     {
       text: header.profile,
-      url: SettingsPaths.profilePath({ fullPath: true }),
+      url: FrontPaths.Settings.profilePath({ fullPath: true }),
       icon: faUserCircle,
     },
     {
@@ -60,7 +60,7 @@ export const Profile = observer(({ className }: Props): ReactElement | null => {
 
   function handleLogOutClick(): void {
     UsersService.logOutUser();
-    history.push(AuthPaths.signinPath({ fullPath: true }));
+    history.push(FrontPaths.Auth.signinPath({ fullPath: true }));
   }
 
   function handleDocumentClick(e: MouseEvent): void {

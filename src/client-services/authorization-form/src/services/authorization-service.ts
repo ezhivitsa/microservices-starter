@@ -1,8 +1,15 @@
-import { ServiceTypes, Constants } from '@packages/common';
+import { ServiceTypes, ServerConstants } from '@packages/common';
 
 import { api } from './api';
 
-const { versionV1, authorizationPrefix, signinPath, signupPath, verifyEmailPath, resendVerifyEmailPath } = Constants;
+const {
+  versionV1,
+  authorizationPrefix,
+  signinPath,
+  signupPath,
+  verifyEmailPath,
+  resendVerifyEmailPath,
+} = ServerConstants;
 
 export function signIn(data: ServiceTypes.SignInRequest): Promise<void> {
   return api.post(`${versionV1}${authorizationPrefix}${signinPath}`, data);

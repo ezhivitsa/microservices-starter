@@ -1,5 +1,5 @@
-import { Constants } from '@packages/common';
+import { ServerConstants } from '@packages/common';
 
-export const ACCESS_TOKEN = Constants.accessToken;
-export const REFRESH_TOKEN = Constants.refreshToken;
-export const EXPIRED_AT = Constants.expiredAt;
+export const ACCESS_TOKEN = ServerConstants.accessToken;
+export const REFRESH_TOKEN = ServerConstants.refreshToken;
+export const EXPIRED_AT = ServerConstants.expiredAt;

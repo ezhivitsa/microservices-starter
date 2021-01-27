@@ -1,7 +1,7 @@
-import { ErrorType } from '@packages/common';
+import { Errors } from '@packages/common';
 
 export class ApiError extends Error {
-  constructor(private _type: ErrorType, private _message?: string) {
+  constructor(private _type: Errors.ErrorType, private _message?: string) {
     super(_message);
 
     // Explicit setting of prototype due to features
@@ -9,7 +9,7 @@ export class ApiError extends Error {
     Object.setPrototypeOf(this, ApiError.prototype);
   }
 
-  get type(): ErrorType {
+  get type(): Errors.ErrorType {
     return this._type;
   }
 }

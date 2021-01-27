@@ -1,7 +1,7 @@
 import { AppKoaState, AppKoaContext } from 'koa';
 import Router from '@koa/router';
 
-import { Constants } from '@packages/common';
+import { ServerConstants } from '@packages/common';
 
 import { validateMiddleware } from 'middlewares';
 
@@ -11,8 +11,8 @@ import { getCurrentHandler, updateCurrentHandler, logOutHandler } from './handle
 const usersRouter = new Router<AppKoaState, AppKoaContext>();
 
 usersRouter
-  .get(Constants.currentPath, getCurrentHandler)
-  .put(Constants.currentPath, validateMiddleware(updateCurrentValidators), updateCurrentHandler)
-  .post(Constants.logOutPath, logOutHandler);
+  .get(ServerConstants.currentPath, getCurrentHandler)
+  .put(ServerConstants.currentPath, validateMiddleware(updateCurrentValidators), updateCurrentHandler)
+  .post(ServerConstants.logOutPath, logOutHandler);
 
 export { usersRouter };

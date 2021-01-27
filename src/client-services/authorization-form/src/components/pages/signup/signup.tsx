@@ -4,7 +4,7 @@ import { Formik, Form as FormikForm, FormikProps } from 'formik';
 
 import { Input, InputWidth, Button, ButtonView, ButtonType, Message, MessageType, Link, useStyles } from '@packages/ui';
 import { FormikField } from '@packages/ui-ex';
-import { AuthPaths } from '@packages/common';
+import { FrontPaths } from '@packages/common';
 
 import { useSignUpStore, useCreateSignUpStore, SignUpStoreProvider } from 'providers';
 import { FormikSignUp, FormikSignUpFieldName } from 'stores';
@@ -42,7 +42,9 @@ export const SignUp = observer(
         return null;
       }
 
-      const url = signupToken ? `${AuthPaths.verifyEmailPath({ fullPath: true, token: signupToken })}` : undefined;
+      const url = signupToken
+        ? `${FrontPaths.Auth.verifyEmailPath({ fullPath: true, token: signupToken })}`
+        : undefined;
       return (
         <Message
           type={MessageType.Warning}

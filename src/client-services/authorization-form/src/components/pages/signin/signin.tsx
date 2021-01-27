@@ -14,7 +14,7 @@ import {
   useStyles,
 } from '@packages/ui';
 import { FormikField, RouterLink } from '@packages/ui-ex';
-import { DashboardPaths, AuthPaths, AuthorizationErrorType } from '@packages/common';
+import { FrontPaths, Errors } from '@packages/common';
 
 import {
   SignInStoreProvider,
@@ -52,9 +52,9 @@ export const SignIn = observer(
 
       if (signInStore.isSignedIn) {
         const params = new URLSearchParams(window.location.search);
-        const returnUrl = params.get(AuthPaths.returnUrlParam);
+        const returnUrl = params.get(FrontPaths.Auth.returnUrlParam);
 
-        window.location.href = returnUrl ? returnUrl : DashboardPaths.indexPath({ fullPath: true });
+        window.location.href = returnUrl ? returnUrl : FrontPaths.Dashboard.indexPath({ fullPath: true });
       }
     }
 
@@ -84,7 +84,7 @@ export const SignIn = observer(
       }
 
       const message =
-        generalErrorType === AuthorizationErrorType.EmailNotVerified
+        generalErrorType === Errors.AuthorizationErrorType.EmailNotVerified
           ? mapVerifyErrorToMessage({ resendBtn: renderResetBtn(values) })
           : mapErrorToMessage[generalErrorType];
 

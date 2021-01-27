@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosError, AxiosRequestConfig, Method, AxiosResponse } from 'axios';
-import { AuthPaths, CommonErrorType, ErrorData } from '@packages/common';
+import { FrontPaths, Errors } from '@packages/common';
 
 import { ApiError } from './api-error';
 
@@ -8,7 +8,7 @@ interface BaseResponse {
 }
 
 interface ApiErrorDataType {
-  data: ErrorData;
+  data: Errors.ErrorData;
   status: number;
 }
 
@@ -35,9 +35,9 @@ const throwApiError = ({ data = {}, status = 500 }: ApiErrorDataType): ApiError 
 };
 
 export function initApi({ apiUrl, globalError }: { apiUrl: string; globalError: string }): ApiClient {
-  const generalError: ErrorData = {
+  const generalError: Errors.ErrorData = {
     error: {
-      type: CommonErrorType.General,
+      type: Errors.CommonErrorType.General,
       message: globalError,
     },
   };
@@ -56,13 +56,13 @@ export function initApi({ apiUrl, globalError }: { apiUrl: string; globalError: 
     }
     if (isUnauthorizedStatus(response.status)) {
       const { href } = window.location;
-      window.location.href = AuthPaths.signinPath({ returnUrl: href, fullPath: true });
+      window.location.href = FrontPaths.Auth.signinPath({ returnUrl: href, fullPath: true });
       return response.data;
     }
 
     const errorData: ApiErrorDataType = {
       status: response.status,
-      data: (response.data as ErrorData | undefined) || generalError,
+      data: (response.data as Errors.ErrorData | undefined) || generalError,
     };
     throwApiError(errorData);
     return response.data;

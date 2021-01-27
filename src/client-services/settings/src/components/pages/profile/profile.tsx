@@ -4,7 +4,7 @@ import { Formik, FormikHelpers, FormikProps, Form } from 'formik';
 
 import { FormikField } from '@packages/ui-ex';
 import { Input, InputWidth, Button, ButtonView, ButtonType, Spinner, useStyles } from '@packages/ui';
-import { Events } from '@packages/common';
+import { FrontEvents } from '@packages/common';
 
 import { CurrentUserStore, FormikCurrentUser, FormikCurrentUserFieldName } from 'stores';
 import { useCurrentUserStore, CurrentUserStoreProvider } from 'providers';
@@ -37,7 +37,7 @@ export const Profile = observer(
       setErrors(currentUserStore.formikErrors);
 
       if (currentUserStore.isUpdateDone) {
-        const event = new Event(Events.updateCurrentUser);
+        const event = new Event(FrontEvents.updateCurrentUser);
         window.dispatchEvent(event);
       }
     }

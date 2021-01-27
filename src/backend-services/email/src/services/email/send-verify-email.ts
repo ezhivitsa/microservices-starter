@@ -1,4 +1,4 @@
-import { AuthPaths } from '@packages/common';
+import { FrontPaths } from '@packages/common';
 
 import { Template, NO_REPLY_EMAIL } from 'constants/email-constants';
 
@@ -11,7 +11,7 @@ import { SendVerifyEmailParams } from './types';
 
 export async function sendVerifyEmail(params: SendVerifyEmailParams): Promise<void> {
   const fullName = `${params.firstName || ''} ${params.lastName}`.trim();
-  const verifyUrl = `${config.webUrl}${AuthPaths.verifyEmailPath({ fullPath: true, token: params.token })}`;
+  const verifyUrl = `${config.webUrl}${FrontPaths.Auth.verifyEmailPath({ fullPath: true, token: params.token })}`;
 
   const data = {
     fullName,

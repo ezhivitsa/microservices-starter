@@ -3,24 +3,24 @@ import { createElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import axios from 'axios';
 
-import { Types, ServiceTypes, Constants, AuthPaths } from '@packages/common';
+import { Types, ServiceTypes, ServerConstants, FrontPaths } from '@packages/common';
 
 import { config } from 'lib/config';
 
 import { IndexPage, IndexPageProps } from 'pages/index-page';
 
-const { versionV1, usersPrefix, currentPath } = Constants;
+const { versionV1, usersPrefix, currentPath } = ServerConstants;
 
 async function getUser(ctx: RouterAppContext): Promise<ServiceTypes.GetCurrentUserResponse | null> {
-  const accessToken = ctx.cookies.get(Constants.accessToken);
-  const refreshToken = ctx.cookies.get(Constants.refreshToken);
+  const accessToken = ctx.cookies.get(ServerConstants.accessToken);
+  const refreshToken = ctx.cookies.get(ServerConstants.refreshToken);
 
   try {
     const user = await axios.get(`${config.apiGatewayUrl}${versionV1}${usersPrefix}${currentPath}`, {
       responseType: 'json',
       withCredentials: true,
       headers: {
-        Cookie: `${Constants.accessToken}=${accessToken};${Constants.refreshToken}=${refreshToken};`,
+        Cookie: `${ServerConstants.accessToken}=${accessToken};${ServerConstants.refreshToken}=${refreshToken};`,
       },
     });
     return user.data;
@@ -46,7 +46,7 @@ export const indexPageMiddleware: RouterAppMiddleware = async (ctx: RouterAppCon
     const user = await getUser(ctx);
 
     if (!user) {
-      ctx.redirect(AuthPaths.signinPath({ fullPath: true, returnUrl: ctx.url }));
+      ctx.redirect(FrontPaths.Auth.signinPath({ fullPath: true, returnUrl: ctx.url }));
       return;
     }
   }

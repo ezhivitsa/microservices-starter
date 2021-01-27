@@ -1,7 +1,7 @@
 import { RouterAppMiddleware, RouterAppContext, Next, User } from 'koa';
 import { Request, Response, Token } from 'oauth2-server';
 
-import { AuthorizationErrorType } from '@packages/common';
+import { Errors } from '@packages/common';
 
 import { client, CLIENT_SECRET } from 'lib/oauth';
 import { setTokens } from 'lib/tokens';
@@ -72,7 +72,7 @@ export const authMiddleware: RouterAppMiddleware = async (ctx: RouterAppContext,
 
     const endVerifyPeriod = user.registeredAt.getTime() + ctx.state.config.timeForVerifyEmail;
     if (!user.isEmailVerified && endVerifyPeriod < Date.now()) {
-      throw new ApiError(AuthorizationErrorType.EmailNotVerified);
+      throw new ApiError(Errors.AuthorizationErrorType.EmailNotVerified);
     }
 
     await next();

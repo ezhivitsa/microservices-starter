@@ -1,8 +1,8 @@
-import { AuthPaths } from '@packages/common';
+import { FrontPaths } from '@packages/common';
 
 const tokenPlaceholder = ':token';
 
-export const verifyEmailPathTemplate = AuthPaths.verifyEmailPath({ token: tokenPlaceholder });
+export const verifyEmailPathTemplate = FrontPaths.Auth.verifyEmailPath({ token: tokenPlaceholder });
 
 export interface VerifyEmailParams {
   token: string;
