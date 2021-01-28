@@ -7,3 +7,5 @@ export { revokeToken } from './revoke-token';
 export { verifyScope } from './verify-scope';
 export { verifyEmail } from './verify-email';
 export { getUserByEmail } from './get-user-by-email';
+export { getForgotPasswordToken } from './get-forgot-password-token';
+export { resetPassword } from './reset-password';

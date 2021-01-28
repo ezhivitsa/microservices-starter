@@ -71,3 +71,17 @@ export interface VerifyEmailParams {
 export interface GetUserByEmailParams {
   email: string;
 }
+
+export interface GetForgotPasswordTokenParams {
+  email: string;
+}
+
+export interface GetForgotPasswordTokenResult {
+  id: string;
+  token: string;
+}
+
+export interface ResetPasswordParams {
+  token: string;
+  password: string;
+}

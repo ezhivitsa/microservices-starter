@@ -112,3 +112,19 @@ message GetSignupTokenResponse {
   string id = 1;
   string token = 2;
 }
+
+// GetForgotPasswordToken
+message GetForgotPasswordTokenRequest {
+  string email = 1;
+}
+
+message GetForgotPasswordTokenResponse {
+  string id = 1;
+  string token = 2;
+}
+
+// ResetPassword
+message ResetPasswordRequest {
+  string token = 1;
+  string password = 2;
+}

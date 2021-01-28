@@ -10,6 +10,7 @@ export interface UserAttributes {
   roles: UserRole[];
   isEmailVerified: boolean;
   signupToken: string;
+  resetPasswordToken: string | null;
   createdAt: Date;
 }
 
@@ -23,6 +24,7 @@ export class UserInstance extends Model<UserAttributes, UserCreationAttributes> 
   public roles!: UserRole[];
   public isEmailVerified!: boolean;
   public signupToken!: string;
+  public resetPasswordToken!: string | null;
   public createdAt!: Date;
 }
 
@@ -57,6 +59,10 @@ const userAttributes: ModelAttributes = {
   signupToken: {
     type: DataTypes.STRING(128),
     allowNull: false,
+  },
+  resetPasswordToken: {
+    type: DataTypes.STRING(128),
+    allowNull: true,
   },
   createdAt: {
     type: DataTypes.DATE,

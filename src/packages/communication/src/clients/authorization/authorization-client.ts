@@ -110,7 +110,7 @@ export class AuthorizationClient extends BaseClient<AuthorizationError> {
     return this._sendCommand({ data, command: AuthorizationCommand.VerifyEmail }, metadata);
   }
 
-  getSignupToken(
+  getSignupTokenCommand(
     data: AuthorizationTypes.GetSignupTokenRequest,
     metadata: CommandMetadata,
   ): Promise<AuthorizationTypes.GetSignupTokenResponse> {
@@ -121,5 +121,16 @@ export class AuthorizationClient extends BaseClient<AuthorizationError> {
       },
       metadata,
     );
+  }
+
+  getForgotPasswordTokenCommand(
+    data: AuthorizationTypes.GetForgotPasswordTokenRequest,
+    metadata: CommandMetadata,
+  ): Promise<AuthorizationTypes.GetForgotPasswordTokenResponse> {
+    return this._sendCommand({ data, command: AuthorizationCommand.GetForgotPasswordToken }, metadata);
+  }
+
+  resetPasswordCommand(data: AuthorizationTypes.ResetPasswordRequest, metadata: CommandMetadata): Promise<void> {
+    return this._sendCommand({ data, command: AuthorizationCommand.ResetPassword }, metadata);
   }
 }

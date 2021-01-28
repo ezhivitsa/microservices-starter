@@ -14,6 +14,7 @@ import {
   VerifyScopeParams,
   VerifyEmailParams,
   ResendVerifyEmailParams,
+  SendForgotPasswordEmailParams,
 } from './types';
 
 export async function register(params: RegisterParams, metadata: ServiceMetadata): Promise<string | null> {
@@ -85,18 +86,37 @@ export async function resendVerifyEmail(params: ResendVerifyEmailParams, metadat
     return;
   }
 
-  const user = await UsersProvider.getUserByAuthId(
-    {
-      authId: data.id,
-    },
-    metadata,
-  );
-
+  const user = await UsersProvider.getUserByAuthId({ authId: data.id }, metadata);
   if (!user) {
     return;
   }
 
   await EmailProvider.sendVerifyEmail(
+    {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      token: data.token,
+    },
+    metadata,
+  );
+}
+
+export async function sendForgotPasswordEmail(
+  params: SendForgotPasswordEmailParams,
+  metadata: ServiceMetadata,
+): Promise<void> {
+  const data = await AuthProvider.getForgotPasswordToken(params, metadata);
+  if (!data) {
+    return;
+  }
+
+  const user = await UsersProvider.getUserByAuthId({ authId: data.id }, metadata);
+  if (!user) {
+    return;
+  }
+
+  await EmailProvider.sendForgotPasswordEmail(
     {
       firstName: user.firstName,
       lastName: user.lastName,

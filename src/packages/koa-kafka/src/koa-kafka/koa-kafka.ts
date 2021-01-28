@@ -109,7 +109,7 @@ export class KoaKafka<S extends Record<string, any> = Record<string, any>, C ext
     command: Command;
     schema?: ObjectSchema;
     handler: Middleware<C>;
-  }): KoaKafka {
+  }): KoaKafka<S, C> {
     if (schema) {
       this._setValidateMiddleware(schema);
     }

@@ -5,6 +5,7 @@ import { Channel } from '../../channels';
 
 export enum EmailCommand {
   SendVerifyEmail = 'send-verify-email',
+  SendForgotPasswordEmail = 'send-forgot-password-email',
 }
 
 export const emailCommandSchemas: Record<string, ChannelCommandSchema> = getChannelCommands(
@@ -13,6 +14,10 @@ export const emailCommandSchemas: Record<string, ChannelCommandSchema> = getChan
     {
       command: EmailCommand.SendVerifyEmail,
       requestSchema: EmailSchemas.sendVerifyEmailRequest,
+    },
+    {
+      command: EmailCommand.SendForgotPasswordEmail,
+      requestSchema: EmailSchemas.sendForgotPasswordEmailRequest,
     },
   ],
   Version.v1,

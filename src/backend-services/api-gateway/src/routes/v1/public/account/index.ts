@@ -5,8 +5,22 @@ import { ServerConstants } from '@packages/common';
 
 import { validateMiddleware } from 'middlewares';
 
-import { signUpValidators, signInValidators, verifyEmailValidators, resendVerifyEmailValidators } from './validators';
-import { signUpHandler, signInHandler, verifyEmailHandler, resendVerifyEmailHandler } from './handlers';
+import {
+  signUpValidators,
+  signInValidators,
+  verifyEmailValidators,
+  resendVerifyEmailValidators,
+  forgotPasswordValidators,
+  resetPasswordValidators,
+} from './validators';
+import {
+  signUpHandler,
+  signInHandler,
+  verifyEmailHandler,
+  resendVerifyEmailHandler,
+  forgotPasswordHandler,
+  resetPasswordHandler,
+} from './handlers';
 
 const accountRouter = new Router<AppKoaState, AppKoaContext>();
 
@@ -18,6 +32,8 @@ accountRouter
     ServerConstants.resendVerifyEmailPath,
     validateMiddleware(resendVerifyEmailValidators),
     resendVerifyEmailHandler,
-  );
+  )
+  .post(ServerConstants.forgotPasswordPath, validateMiddleware(forgotPasswordValidators), forgotPasswordHandler)
+  .post(ServerConstants.resetPasswordPath, validateMiddleware(resetPasswordValidators), resetPasswordHandler);
 
 export { accountRouter };

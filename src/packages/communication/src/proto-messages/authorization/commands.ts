@@ -13,6 +13,8 @@ export enum AuthorizationCommand {
   VerifyScope = 'verify-scope',
   VerifyEmail = 'verify-email',
   GetSignupToken = 'get-signup-token',
+  GetForgotPasswordToken = 'get-forgot-password-token',
+  ResetPassword = 'reset-password',
 }
 
 export const authorizationCommandSchemas: Record<string, ChannelCommandSchema> = getChannelCommands(
@@ -53,6 +55,15 @@ export const authorizationCommandSchemas: Record<string, ChannelCommandSchema> =
       command: AuthorizationCommand.GetSignupToken,
       requestSchema: AuthorizationSchemas.getSignupTokenRequest,
       responseSchema: AuthorizationSchemas.getSignupTokenResponse,
+    },
+    {
+      command: AuthorizationCommand.GetForgotPasswordToken,
+      requestSchema: AuthorizationSchemas.getForgotPasswordTokenRequest,
+      responseSchema: AuthorizationSchemas.getForgotPasswordTokenResponse,
+    },
+    {
+      command: AuthorizationCommand.ResetPassword,
+      requestSchema: AuthorizationSchemas.resetPasswordRequest,
     },
   ],
   Version.v1,

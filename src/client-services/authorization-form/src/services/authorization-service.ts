@@ -9,6 +9,8 @@ const {
   signupPath,
   verifyEmailPath,
   resendVerifyEmailPath,
+  forgotPasswordPath,
+  resetPasswordPath,
 } = ServerConstants;
 
 export function signIn(data: ServiceTypes.SignInRequest): Promise<void> {
@@ -23,6 +25,14 @@ export function verifyEmail(data: ServiceTypes.VerifyEmailRequest): Promise<void
   return api.post(`${versionV1}${authorizationPrefix}${verifyEmailPath}`, data);
 }
 
-export function resendVerifyEmail(data: ServiceTypes.ResendVerifyEmail): Promise<void> {
+export function resendVerifyEmail(data: ServiceTypes.ResendVerifyEmailRequest): Promise<void> {
   return api.post(`${versionV1}${authorizationPrefix}${resendVerifyEmailPath}`, data);
+}
+
+export function forgotPassword(data: ServiceTypes.ForgotPasswordRequest): Promise<void> {
+  return api.post(`${versionV1}${authorizationPrefix}${forgotPasswordPath}`, data);
+}
+
+export function resetPassword(data: ServiceTypes.ResendVerifyEmailRequest): Promise<void> {
+  return api.post(`${versionV1}${authorizationPrefix}${resetPasswordPath}`, data);
 }

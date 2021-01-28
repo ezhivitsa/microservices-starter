@@ -25,3 +25,11 @@ export const verifyEmailPath = ({ token, fullPath }: { token: string; fullPath?:
 export const resendVerifyEmailPath = ({ fullPath }: { fullPath?: boolean } = {}): string => {
   return `${fullPath ? indexPath({ fullPath }) : ''}/resend-verify-email`;
 };
+
+export const forgotPasswordPath = ({ fullPath }: { fullPath?: boolean } = {}): string => {
+  return `${fullPath ? indexPath({ fullPath }) : ''}/forgot-password`;
+};
+
+export const resetPasswordPath = ({ token, fullPath }: { token: string; fullPath?: boolean }): string => {
+  return `${fullPath ? indexPath({ fullPath }) : ''}/reset-password/${token}`;
+};

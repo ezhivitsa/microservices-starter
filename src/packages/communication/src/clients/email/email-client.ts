@@ -30,4 +30,17 @@ export class EmailClient extends BaseClient<EmailError> {
       metadata,
     );
   }
+
+  sendForgotPasswordEmailCommand(
+    data: EmailTypes.SendForgotPasswordEmailRequest,
+    metadata: CommandMetadata,
+  ): Promise<void> {
+    return this._sendCommand(
+      {
+        data,
+        command: EmailCommand.SendForgotPasswordEmail,
+      },
+      metadata,
+    );
+  }
 }

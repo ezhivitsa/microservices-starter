@@ -14,10 +14,18 @@ export interface SignUpResponse {
   signupToken?: string;
 }
 
-export interface VerifyEmailRequest {
+export interface VerifyEmailParams {
   token: string;
 }
 
-export interface ResendVerifyEmail {
+export interface ResendVerifyEmailRequest {
   email: string;
+}
+
+export interface ForgotPasswordRequest {
+  email: string;
+}
+
+export interface ResetPasswordRequest {
+  token: string;
 }

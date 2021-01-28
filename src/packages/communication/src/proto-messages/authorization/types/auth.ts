@@ -108,3 +108,19 @@ export interface GetSignupTokenResponse {
   id?: string;
   token?: string;
 }
+
+// GetForgotPasswordToken
+export interface GetForgotPasswordTokenRequest {
+  email?: string;
+}
+
+export interface GetForgotPasswordTokenResponse {
+  id?: string;
+  token?: string;
+}
+
+// ResetPassword
+export interface ResetPasswordRequest {
+  token?: string;
+  password?: string;
+}

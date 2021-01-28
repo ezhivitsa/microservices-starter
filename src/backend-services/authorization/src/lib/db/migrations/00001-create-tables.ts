@@ -38,6 +38,10 @@ module.exports = {
         type: DataTypes.STRING(128),
         allowNull: false,
       },
+      resetPasswordToken: {
+        type: DataTypes.STRING(128),
+        allowNull: true,
+      },
       createdAt: { type: DataTypes.DATE, allowNull: true },
       updatedAt: { type: DataTypes.DATE, allowNull: true },
     });

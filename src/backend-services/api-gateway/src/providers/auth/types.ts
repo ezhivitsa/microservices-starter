@@ -80,3 +80,21 @@ export interface GetSignupTokenResult {
   id: string;
   token: string;
 }
+
+export interface SendForgotPasswordEmailParams {
+  email: string;
+}
+
+export interface GetForgotPasswordTokenParams {
+  email: string;
+}
+
+export interface GetForgotPasswordTokenResult {
+  id: string;
+  token: string;
+}
+
+export interface ResetPasswordParams {
+  token: string;
+  password: string;
+}

@@ -4,8 +4,8 @@ import { ServiceTypes } from '@packages/common';
 
 import { validate } from 'lib/joi';
 
-const schema = joi.object<ServiceTypes.VerifyEmailParams>({
+const schema = joi.object<ServiceTypes.ResetPasswordRequest>({
   token: joi.string().required(),
 });
 
-export const verifyEmailValidators = validate(schema);
+export const resetPasswordValidators = validate(schema);

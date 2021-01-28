@@ -17,6 +17,9 @@ import {
   VerifyEmailParams,
   GetSignupTokenParams,
   GetSignupTokenResult,
+  GetForgotPasswordTokenParams,
+  GetForgotPasswordTokenResult,
+  ResetPasswordParams,
 } from './types';
 
 import {
@@ -78,10 +81,26 @@ export async function getSignupToken(
   params: GetSignupTokenParams,
   metadata: ProviderTypes.Metadata,
 ): Promise<GetSignupTokenResult | null> {
-  const { id, token } = await authorizationClient.getSignupToken(params, metadata);
+  const { id, token } = await authorizationClient.getSignupTokenCommand(params, metadata);
   if (!id || !token) {
     return null;
   }
 
   return { id, token };
+}
+
+export async function getForgotPasswordToken(
+  params: GetForgotPasswordTokenParams,
+  metadata: ProviderTypes.Metadata,
+): Promise<GetForgotPasswordTokenResult | null> {
+  const { id, token } = await authorizationClient.getForgotPasswordTokenCommand(params, metadata);
+  if (!id || !token) {
+    return null;
+  }
+
+  return { id, token };
+}
+
+export function resetPassword(params: ResetPasswordParams, metadata: ProviderTypes.Metadata): Promise<void> {
+  return authorizationClient.resetPasswordCommand(params, metadata);
 }

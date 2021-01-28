@@ -11,6 +11,7 @@ interface Filter {
   id?: string;
   email?: string;
   signupToken?: string;
+  resetPasswordToken?: string;
 }
 
 interface UpdateFilter {
@@ -28,6 +29,9 @@ interface CreateData {
 interface UpdateData {
   roles?: UserRole[];
   isEmailVerified?: boolean;
+  passwordHash?: string;
+  passwordSalt?: string;
+  resetPasswordToken?: string | null;
 }
 
 export class UsersStorageService extends StorageService<UserInstance, Filter, CreateData, UpdateData, UpdateFilter> {
@@ -40,6 +44,7 @@ export class UsersStorageService extends StorageService<UserInstance, Filter, Cr
       passwordSalt: data.passwordSalt,
       roles: data.roles,
       signupToken: data.signupToken,
+      resetPasswordToken: null,
       isEmailVerified: false,
     };
   }
@@ -48,6 +53,9 @@ export class UsersStorageService extends StorageService<UserInstance, Filter, Cr
     return {
       roles: data.roles,
       isEmailVerified: data.isEmailVerified,
+      resetPasswordToken: data.resetPasswordToken,
+      passwordHash: data.passwordHash,
+      passwordSalt: data.passwordSalt,
     };
   }
 
@@ -62,6 +70,7 @@ export class UsersStorageService extends StorageService<UserInstance, Filter, Cr
       id: filter.id,
       email: filter.email,
       signupToken: filter.signupToken,
+      resetPasswordToken: filter.resetPasswordToken,
     };
 
     return {

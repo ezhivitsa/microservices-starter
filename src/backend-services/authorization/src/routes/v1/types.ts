@@ -17,3 +17,8 @@ export interface VerifyScopeRequest extends Required<AuthorizationTypes.VerifySc
 
 export type VerifyEmailRequest = Required<AuthorizationTypes.VerifyEmailRequest>;
 export type GetSignupTokenRequest = Required<AuthorizationTypes.GetSignupTokenRequest>;
+
+export type GetForgotPasswordTokenRequest = Required<AuthorizationTypes.GetForgotPasswordTokenRequest>;
+export type GetForgotPasswordTokenResponse = Required<AuthorizationTypes.GetForgotPasswordTokenResponse>;
+
+export type ResetPasswordRequest = Required<AuthorizationTypes.ResetPasswordRequest>;

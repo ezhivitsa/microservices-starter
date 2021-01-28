@@ -6,6 +6,7 @@ import { getHash, generateSalt, generateSecureToken } from 'lib/secure';
 
 import { DuplicateEmailError } from 'services/errors';
 
+import { generatePasswordHast } from './utils';
 import { RegisterParams, User } from './types';
 
 export async function register(data: RegisterParams): Promise<User> {
@@ -17,8 +18,7 @@ export async function register(data: RegisterParams): Promise<User> {
     throw new DuplicateEmailError();
   }
 
-  const salt = await generateSalt();
-  const hash = await getHash(password, salt);
+  const { hash, salt } = await generatePasswordHast(password);
   const signupToken = generateSecureToken();
 
   const user = await usersStorageService.create({

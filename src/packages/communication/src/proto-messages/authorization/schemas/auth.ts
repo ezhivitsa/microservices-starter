@@ -60,3 +60,15 @@ export const getSignupTokenRequest = root.loadProtoMessage<AuthorizationTypes.Ge
 export const getSignupTokenResponse = root.loadProtoMessage<AuthorizationTypes.GetSignupTokenResponse>(
   'microservices_starter.authorization.auth.GetSignupTokenResponse',
 );
+
+export const getForgotPasswordTokenRequest = root.loadProtoMessage<AuthorizationTypes.GetForgotPasswordTokenRequest>(
+  'microservices_starter.authorization.auth.GetForgotPasswordTokenRequest',
+);
+
+export const getForgotPasswordTokenResponse = root.loadProtoMessage<AuthorizationTypes.GetForgotPasswordTokenResponse>(
+  'microservices_starter.authorization.auth.GetForgotPasswordTokenResponse',
+);
+
+export const resetPasswordRequest = root.loadProtoMessage<AuthorizationTypes.ResetPasswordRequest>(
+  'microservices_starter.authorization.auth.ResetPasswordRequest',
+);

@@ -11,9 +11,16 @@ import {
   useCreateResendVerifyEmailStore,
 } from 'providers';
 
-import { SignUpPage, SignInPage, VerifyEmailPage, ResendVerifyEmailPage } from './components/pages';
-import { signinPath, signupPath, resendVerifyEmailPath, indexPath } from './components/pages/paths';
-import { verifyEmailPathTemplate } from './components/pages/path-templates';
+import {
+  SignUpPage,
+  SignInPage,
+  VerifyEmailPage,
+  ResendVerifyEmailPage,
+  ForgotPasswordPage,
+  ResetPasswordPage,
+} from './components/pages';
+import { signinPath, signupPath, resendVerifyEmailPath, indexPath, forgotPasswordPath } from './components/pages/paths';
+import { verifyEmailPathTemplate, resetPasswordPathTemplate } from './components/pages/path-templates';
 
 function AppComponent(): ReactElement {
   return (
@@ -29,6 +36,8 @@ function AppComponent(): ReactElement {
               <Route path={signupPath} component={SignUpPage} />
               <Route path={verifyEmailPathTemplate} component={VerifyEmailPage} />
               <Route path={resendVerifyEmailPath} component={ResendVerifyEmailPage} />
+              <Route path={forgotPasswordPath} component={ForgotPasswordPage} />
+              <Route path={resetPasswordPathTemplate} component={ResetPasswordPage} />
             </Switch>
           </BrowserRouter>
         </ResendVerifyEmailStoreProvider>
