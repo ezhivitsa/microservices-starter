@@ -14,7 +14,7 @@ export interface SignUpResponse {
   signupToken?: string;
 }
 
-export interface VerifyEmailParams {
+export interface VerifyEmailRequest {
   token: string;
 }
 
@@ -28,4 +28,5 @@ export interface ForgotPasswordRequest {
 
 export interface ResetPasswordRequest {
   token: string;
+  password: string;
 }

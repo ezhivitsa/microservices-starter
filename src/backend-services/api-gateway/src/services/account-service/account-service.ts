@@ -15,6 +15,7 @@ import {
   VerifyEmailParams,
   ResendVerifyEmailParams,
   SendForgotPasswordEmailParams,
+  ResetPasswordParams,
 } from './types';
 
 export async function register(params: RegisterParams, metadata: ServiceMetadata): Promise<string | null> {
@@ -125,4 +126,8 @@ export async function sendForgotPasswordEmail(
     },
     metadata,
   );
+}
+
+export async function resetPassword(params: ResetPasswordParams, metadata: ServiceMetadata): Promise<void> {
+  await AuthProvider.resetPassword(params, metadata);
 }

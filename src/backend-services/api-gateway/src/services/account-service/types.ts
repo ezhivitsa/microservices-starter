@@ -30,3 +30,5 @@ export type VerifyEmailParams = AuthProviderTypes.VerifyEmailParams;
 export type ResendVerifyEmailParams = AuthProviderTypes.GetSignupTokenParams;
 
 export type SendForgotPasswordEmailParams = AuthProviderTypes.SendForgotPasswordEmailParams;
+
+export type ResetPasswordParams = AuthProviderTypes.ResetPasswordParams;

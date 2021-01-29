@@ -5,7 +5,7 @@ import { ServiceTypes } from '@packages/common';
 import { AccountService } from 'services';
 
 export async function verifyEmailHandler(ctx: RouterAppContext): Promise<void> {
-  const { token }: ServiceTypes.VerifyEmailParams = ctx.state.validatedRequest.value;
+  const { token }: ServiceTypes.VerifyEmailRequest = ctx.state.validatedRequest.value;
 
   await AccountService.verifyEmail(
     {
