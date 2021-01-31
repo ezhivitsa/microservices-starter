@@ -62,13 +62,18 @@ export class KoaKafka<S extends Record<string, any> = Record<string, any>, C ext
     };
   }
 
-  private _setValidateMiddleware(schema: ObjectSchema): void {
-    const middleware = async (ctx: C, next: Next): Promise<void> => {
+  private _setValidateMiddleware(schema: ObjectSchema, command: Command, version: Version): void {
+    const validateMiddleware = async (ctx: C, next: Next): Promise<void> => {
+      if (ctx.command !== command || ctx.version !== version) {
+        await next();
+        return;
+      }
+
       const validateResult = schema.validate(ctx.data, {
         allowUnknown: true,
       });
 
-      if (validateResult.errors) {
+      if (validateResult.error) {
         ctx.throw({
           code: this._options.validationFailedCode,
           message: JSON.stringify(validateResult.errors),
@@ -82,7 +87,7 @@ export class KoaKafka<S extends Record<string, any> = Record<string, any>, C ext
       await next();
     };
 
-    this._middlewares.push(middleware as any);
+    this._middlewares.push(validateMiddleware as any);
   }
 
   listen(listenCallback?: () => void): void {
@@ -94,7 +99,7 @@ export class KoaKafka<S extends Record<string, any> = Record<string, any>, C ext
     listenCallback?.();
   }
 
-  use(fn: Middleware<C>): KoaKafka {
+  use(fn: Middleware<C>): KoaKafka<S, C> {
     this._middlewares.push(fn as any);
     return this;
   }
@@ -111,7 +116,7 @@ export class KoaKafka<S extends Record<string, any> = Record<string, any>, C ext
     handler: Middleware<C>;
   }): KoaKafka<S, C> {
     if (schema) {
-      this._setValidateMiddleware(schema);
+      this._setValidateMiddleware(schema, command, version);
     }
 
     const middleware = async (ctx: C, next: Next): Promise<void> => {

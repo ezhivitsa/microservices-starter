@@ -1,6 +1,8 @@
 import { KoaKafka, AppState, AppContext, Next } from '@packages/koa-kafka';
 import { AuthorizationTypes } from '@packages/communication';
 
+import { logger } from 'lib/logger';
+
 import { ServiceError, ServiceErrorCode } from 'services/errors';
 
 import { initV1Routes } from './v1';
@@ -12,8 +14,6 @@ const mapErrorCode: Record<ServiceErrorCode, AuthorizationTypes.ErrorCode> = {
 };
 
 export function initRoutes(app: KoaKafka<AppState, AppContext>): void {
-  initV1Routes(app);
-
   app.use(async (ctx: AppContext, next: Next) => {
     try {
       await next();
@@ -24,6 +24,8 @@ export function initRoutes(app: KoaKafka<AppState, AppContext>): void {
       if (err instanceof ServiceError) {
         errorCode = mapErrorCode[err.errorCode];
         message = err.message;
+      } else {
+        logger.error(err);
       }
 
       const error: AuthorizationTypes.Error = {
@@ -33,4 +35,6 @@ export function initRoutes(app: KoaKafka<AppState, AppContext>): void {
       ctx.throw(error);
     }
   });
+
+  initV1Routes(app);
 }

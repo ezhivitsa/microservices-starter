@@ -5,16 +5,12 @@ export enum ServiceErrorCode {
 }
 
 export class ServiceError extends Error {
-  constructor(private _message: string = '', private _errorCode: ServiceErrorCode = ServiceErrorCode.Unknown) {
-    super('Service error');
+  constructor(message = '', private _errorCode: ServiceErrorCode = ServiceErrorCode.Unknown) {
+    super(message || 'Service error');
 
     // Explicit setting of prototype due to features
     // of work built in class Error in TS/ES6
     Object.setPrototypeOf(this, ServiceError.prototype);
-  }
-
-  get message(): string {
-    return this._message;
   }
 
   get errorCode(): ServiceErrorCode {

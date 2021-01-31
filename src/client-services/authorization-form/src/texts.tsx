@@ -34,6 +34,15 @@ export const signInFormTexts = {
     );
   },
   singUpLink: 'Click here',
+  forgotPassword({ link }: { link: ReactNode }): ReactNode {
+    return (
+      <>
+        {'Forgot your password?'} {link}
+        {'.'}
+      </>
+    );
+  },
+  forgotPasswordLink: 'Click here',
   verifyEmailSuccess: 'Email was successfully verified',
 };
 
@@ -55,4 +64,16 @@ export const resendVerifyEmailTexts = {
   email: 'Email',
   emailPlaceholder: 'Enter email',
   resendBtn: 'Resend email',
+};
+
+export const forgotPasswordTexts = {
+  email: 'Email',
+  emailPlaceholder: 'Enter email',
+  sendBtn: 'Send',
+};
+
+export const resetPasswordTexts = {
+  password: 'Password',
+  passwordPlaceholder: 'Enter placeholder',
+  resetBtn: 'Reset',
 };

@@ -30,7 +30,7 @@ import { mapErrorToMessage, mapVerifyErrorToMessage } from 'errors';
 
 import { Form } from 'components/common/form';
 
-import { signupPath, resendVerifyEmailPath } from 'components/pages/paths';
+import { signupPath, resendVerifyEmailPath, forgotPasswordPath } from 'components/pages/paths';
 
 import { validationSchema } from './validation';
 
@@ -120,8 +120,14 @@ export const SignIn = observer(
               }}
             />
 
-            <Paragraph className={b('signup')}>
+            <Paragraph className={b('info')}>
               {signInFormTexts.signUp({ link: <RouterLink to={signupPath} text={signInFormTexts.singUpLink} /> })}
+            </Paragraph>
+
+            <Paragraph className={b('info')}>
+              {signInFormTexts.forgotPassword({
+                link: <RouterLink to={forgotPasswordPath} text={signInFormTexts.forgotPasswordLink} />,
+              })}
             </Paragraph>
 
             <Button view={ButtonView.Action} type={ButtonType.Submit} className={b('button')} disabled={!isValid}>

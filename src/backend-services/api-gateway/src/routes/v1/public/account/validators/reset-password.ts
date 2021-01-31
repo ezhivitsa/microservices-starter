@@ -6,6 +6,7 @@ import { validate } from 'lib/joi';
 
 const schema = joi.object<ServiceTypes.ResetPasswordRequest>({
   token: joi.string().required(),
+  password: joi.string().required(),
 });
 
 export const resetPasswordValidators = validate(schema);

@@ -33,6 +33,6 @@ export function forgotPassword(data: ServiceTypes.ForgotPasswordRequest): Promis
   return api.post(`${versionV1}${authorizationPrefix}${forgotPasswordPath}`, data);
 }
 
-export function resetPassword(data: ServiceTypes.ResendVerifyEmailRequest): Promise<void> {
+export function resetPassword(data: ServiceTypes.ResetPasswordRequest): Promise<void> {
   return api.post(`${versionV1}${authorizationPrefix}${resetPasswordPath}`, data);
 }
