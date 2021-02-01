@@ -1,4 +1,8 @@
-import { AuthProvider, UsersProvider, EmailProvider } from 'providers';
+import { AuthorizationError, AuthorizationTypes } from '@packages/communication';
+import { Errors } from '@packages/common';
+
+import { AuthProvider, AuthProviderTypes, UsersProvider, EmailProvider } from 'providers';
+import { ApiError } from 'errors';
 
 import { ServiceMetadata } from '../types';
 import {
@@ -19,7 +23,22 @@ import {
 } from './types';
 
 export async function register(params: RegisterParams, metadata: ServiceMetadata): Promise<string | null> {
-  const authData = await AuthProvider.register(params, metadata);
+  let authData: AuthProviderTypes.RegisterResult | null;
+  try {
+    authData = await AuthProvider.register(params, metadata);
+  } catch (err) {
+    if (err instanceof AuthorizationError) {
+      let type: Errors.ErrorType = Errors.CommonErrorType.General;
+      if (err.code === AuthorizationTypes.ErrorCode.DuplicateEmail) {
+        type = Errors.AuthorizationErrorType.DuplicateEmail;
+      }
+
+      throw new ApiError(type, err.message);
+    }
+
+    throw err;
+  }
+
   if (!authData) {
     return null;
   }

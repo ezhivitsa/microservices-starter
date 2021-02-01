@@ -78,7 +78,7 @@ export class KafkaCommand {
     const version = (headers[VERSION_HEADER] as Version) || Version.v1;
     const commandSchema = commandSchemas[getChannelKey({ channel, commandOrEvent: command, version })];
 
-    const value = message.value ? commandSchema.errorSchema?.decode(message.value) || null : null;
+    const value = message.value ? commandSchema.errorSchema?.decode(message.value).data || null : null;
     this._promiseProviders.reject(headerMessageId, value);
   }
 

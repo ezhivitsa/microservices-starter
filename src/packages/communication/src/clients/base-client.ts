@@ -12,15 +12,16 @@ export abstract class BaseClient<E extends Error> {
 
   abstract _getClientError(err: Error): E;
 
-  protected _sendCommand<Req, Res>(req: Omit<CommandData<Req>, 'channel'>, meta: CommandMetadata): Promise<Res> {
+  protected async _sendCommand<Req, Res>(req: Omit<CommandData<Req>, 'channel'>, meta: CommandMetadata): Promise<Res> {
     try {
-      return this._kafka.sendCommand(
+      const res: Res = await this._kafka.sendCommand(
         {
           ...req,
           channel: this._channel,
         },
         meta,
       );
+      return res;
     } catch (err) {
       throw this._getClientError(err);
     }
