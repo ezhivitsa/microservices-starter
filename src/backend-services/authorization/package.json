@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {
+    "@packages/backend-service": "workspace:*",
     "@packages/communication": "workspace:*",
     "@packages/koa-kafka": "workspace:*",
     "@packages/logger": "workspace:*",

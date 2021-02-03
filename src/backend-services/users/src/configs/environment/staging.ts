@@ -4,4 +4,5 @@ import { production } from './production';
 
 export const staging: Config = {
   ...production,
+  logServiceErrors: true,
 };

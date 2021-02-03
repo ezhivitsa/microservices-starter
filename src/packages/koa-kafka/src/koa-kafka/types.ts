@@ -22,3 +22,9 @@ export interface ListenData {
   data?: any;
   responseChannel?: string;
 }
+
+export enum RequestStatus {
+  Ok = 'ok',
+  BadRequest = 'bad-request',
+  Error = 'error',
+}

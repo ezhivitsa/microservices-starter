@@ -16,4 +16,5 @@ export const production: Config = {
   kafkaConsumer: {
     groupId: 'users',
   },
+  logServiceErrors: false,
 };

@@ -24,14 +24,17 @@ export function initRoutes(app: KoaKafka<AppState, AppContext>): void {
       if (err instanceof ServiceError) {
         errorCode = mapErrorCode[err.errorCode];
         message = err.message;
-      } else {
-        logger.error(err);
       }
 
       const error: AuthorizationTypes.Error = {
         code: errorCode,
         message,
       };
+
+      if (ctx.state.config.logServiceErrors || !(err instanceof ServiceError)) {
+        logger.error(error);
+      }
+
       ctx.throw(error);
     }
   });

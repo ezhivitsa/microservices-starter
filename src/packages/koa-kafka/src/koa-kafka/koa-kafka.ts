@@ -4,7 +4,7 @@ import { Kafka, Command, Event, Version, Channel } from '@packages/communication
 import { compose } from './utils';
 import { Context } from './context';
 
-import { Middleware, ComposedMiddleware, Next, ListenData } from './types';
+import { Middleware, ComposedMiddleware, Next, ListenData, RequestStatus } from './types';
 
 interface Options {
   badProtoCode: number;
@@ -36,6 +36,7 @@ export class KoaKafka<S extends Record<string, any> = Record<string, any>, C ext
         responseChannel: ctx.responseChannel || '',
       },
     );
+    ctx.end(RequestStatus.Ok);
   }
 
   private _handleRequest(ctx: Context<S>, fnMiddleware: ComposedMiddleware): Promise<void> {

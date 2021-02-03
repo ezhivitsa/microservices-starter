@@ -1,6 +1,8 @@
 import { Kafka, KafkaHandlerError, Command, Event, Version, Channel } from '@packages/communication';
 
-import { ListenData } from './types';
+import { ListenData, RequestStatus } from './types';
+
+type FinishCallback = (status: RequestStatus) => void;
 
 export class Context<S extends Record<string, any> = Record<string, any>> {
   state: S = {} as S;
@@ -8,6 +10,8 @@ export class Context<S extends Record<string, any> = Record<string, any>> {
   body: any;
 
   private _validatedData: any;
+
+  private _finishCallbacks: FinishCallback[] = [];
 
   constructor(private _kafka: Kafka, private _channel: Channel, private _data: ListenData) {}
 
@@ -47,7 +51,7 @@ export class Context<S extends Record<string, any> = Record<string, any>> {
     this._validatedData = data;
   }
 
-  throw<T extends Record<string, any>>(errorData: T | KafkaHandlerError): void {
+  throw<T extends Record<string, any>>(errorData: T | KafkaHandlerError, status?: RequestStatus): void {
     if (!this._data.command) {
       return;
     }
@@ -67,6 +71,8 @@ export class Context<S extends Record<string, any> = Record<string, any>> {
         responseChannel: this._data.responseChannel || '',
       },
     );
+
+    this.end(status || RequestStatus.BadRequest);
   }
 
   onerror(err?: Error): void {
@@ -75,6 +81,16 @@ export class Context<S extends Record<string, any> = Record<string, any>> {
     }
 
     const message = err.message;
-    this.throw(new KafkaHandlerError({ message }));
+    this.throw(new KafkaHandlerError({ message }), RequestStatus.Error);
+  }
+
+  onFinish(callback: FinishCallback): void {
+    this._finishCallbacks.push(callback);
+  }
+
+  end(status: RequestStatus): void {
+    for (const callback of this._finishCallbacks) {
+      callback(status);
+    }
   }
 }

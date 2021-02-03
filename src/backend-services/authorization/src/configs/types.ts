@@ -12,4 +12,5 @@ export interface Config {
   readonly kafka: KafkaConfig;
   readonly kafkaConsumer: ConsumerConfig;
   readonly redis: ClientOpts;
+  readonly logServiceErrors: boolean;
 }

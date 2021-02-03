@@ -1,0 +1,19 @@
+{
+  "name": "@packages/backend-service",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "build": "yarn g:tsc"
+  },
+  "dependencies": {
+    "@packages/koa-kafka": "workspace:*",
+    "@packages/logger": "workspace:*"
+  },
+  "devDependencies": {
+    "@packages/eslint-config": "workspace:*"
+  },
+  "installConfig": {
+    "hoistingLimits": "workspaces"
+  }
+}

@@ -1331,6 +1331,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@backend-services/authorization@workspace:src/backend-services/authorization"
   dependencies:
+    "@packages/backend-service": "workspace:*"
     "@packages/communication": "workspace:*"
     "@packages/eslint-config": "workspace:*"
     "@packages/koa-kafka": "workspace:*"
@@ -1363,6 +1364,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@backend-services/email@workspace:src/backend-services/email"
   dependencies:
+    "@packages/backend-service": "workspace:*"
     "@packages/common": "workspace:*"
     "@packages/communication": "workspace:*"
     "@packages/eslint-config": "workspace:*"
@@ -1386,6 +1388,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@backend-services/users@workspace:src/backend-services/users"
   dependencies:
+    "@packages/backend-service": "workspace:*"
     "@packages/communication": "workspace:*"
     "@packages/eslint-config": "workspace:*"
     "@packages/koa-kafka": "workspace:*"
@@ -2132,6 +2135,16 @@ __metadata:
   checksum: ed2cb75eefe218113794416fae43b5307f7c30476506942ed6c6c51f702713323842f81102ae1327f9134130bec0360312e6f858ddef143c21d9e269e90737ac
   languageName: node
   linkType: hard
+
+"@packages/backend-service@workspace:*, @packages/backend-service@workspace:src/packages/backend-service":
+  version: 0.0.0-use.local
+  resolution: "@packages/backend-service@workspace:src/packages/backend-service"
+  dependencies:
+    "@packages/eslint-config": "workspace:*"
+    "@packages/koa-kafka": "workspace:*"
+    "@packages/logger": "workspace:*"
+  languageName: unknown
+  linkType: soft
 
 "@packages/client@workspace:*, @packages/client@workspace:src/packages/client":
   version: 0.0.0-use.local
@@ -11470,6 +11483,7 @@ fsevents@~2.3.1:
     react: 17.0.1
     react-router-dom: 5.2.0
     typescript: 4.1.3
+    winston: 3.3.3
   languageName: unknown
   linkType: soft
 
