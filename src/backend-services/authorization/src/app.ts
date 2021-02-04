@@ -4,14 +4,14 @@ import { middlewares } from '@packages/backend-service';
 
 import { kafka } from './lib/kafka';
 import { config } from './lib/config';
+import { uniqModel } from './lib/uniq-model';
 
 import { initRoutes } from './routes';
-
-// import { configMiddleware, errorsMiddleware } from './middlewares';
 
 const app = new KoaKafka<AppState, AppContext>(kafka, Channel.AUTHORIZATION, {
   badProtoCode: AuthorizationTypes.ErrorCode.BadProto,
   validationFailedCode: AuthorizationTypes.ErrorCode.ValidationFailed,
+  uniqModel,
 });
 
 export function initApp(): KoaKafka<AppState, AppContext> {

@@ -28,3 +28,9 @@ export enum RequestStatus {
   BadRequest = 'bad-request',
   Error = 'error',
 }
+
+export interface UniqModel {
+  conflictCode: number;
+  saveId: (id: string) => Promise<void>;
+  isUniqId: (id: string) => Promise<boolean>;
+}

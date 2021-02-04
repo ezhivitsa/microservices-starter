@@ -42,8 +42,19 @@ module.exports = {
         type: DataTypes.STRING(128),
         allowNull: true,
       },
-      createdAt: { type: DataTypes.DATE, allowNull: true },
-      updatedAt: { type: DataTypes.DATE, allowNull: true },
+      createdAt: { type: DataTypes.DATE, allowNull: false },
+      updatedAt: { type: DataTypes.DATE, allowNull: false },
+    });
+
+    await queryInterface.createTable('commands', {
+      id: {
+        type: DataTypes.STRING(128),
+        primaryKey: true,
+        unique: true,
+        allowNull: false,
+      },
+      createdAt: { type: DataTypes.DATE, allowNull: false },
+      updatedAt: { type: DataTypes.DATE, allowNull: false },
     });
 
     await queryInterface.addIndex('users', ['email'], { unique: true });

@@ -4,11 +4,12 @@ import { Kafka, Command, Event, Version, Channel } from '@packages/communication
 import { compose } from './utils';
 import { Context } from './context';
 
-import { Middleware, ComposedMiddleware, Next, ListenData, RequestStatus } from './types';
+import { Middleware, ComposedMiddleware, Next, ListenData, RequestStatus, UniqModel } from './types';
 
 interface Options {
   badProtoCode: number;
   validationFailedCode: number;
+  uniqModel?: UniqModel;
 }
 
 export class KoaKafka<S extends Record<string, any> = Record<string, any>, C extends Context = Context> {
@@ -63,32 +64,23 @@ export class KoaKafka<S extends Record<string, any> = Record<string, any>, C ext
     };
   }
 
-  private _setValidateMiddleware(schema: ObjectSchema, command: Command, version: Version): void {
-    const validateMiddleware = async (ctx: C, next: Next): Promise<void> => {
-      if (ctx.command !== command || ctx.version !== version) {
-        await next();
-        return;
-      }
+  private _validateCommand(ctx: C, schema: ObjectSchema): boolean {
+    const validateResult = schema.validate(ctx.data, {
+      allowUnknown: true,
+    });
 
-      const validateResult = schema.validate(ctx.data, {
-        allowUnknown: true,
+    if (validateResult.error) {
+      ctx.throw({
+        code: this._options.validationFailedCode,
+        message: JSON.stringify(validateResult.errors),
       });
+      return false;
+    }
 
-      if (validateResult.error) {
-        ctx.throw({
-          code: this._options.validationFailedCode,
-          message: JSON.stringify(validateResult.errors),
-        });
-        return;
-      }
+    const value = validateResult.value;
+    ctx.validatedData = value;
 
-      const value = validateResult.value;
-      ctx.validatedData = value;
-
-      await next();
-    };
-
-    this._middlewares.push(validateMiddleware as any);
+    return true;
   }
 
   listen(listenCallback?: () => void): void {
@@ -110,22 +102,41 @@ export class KoaKafka<S extends Record<string, any> = Record<string, any>, C ext
     command,
     schema,
     handler,
+    validateUniq,
   }: {
     version: Version;
     command: Command;
     schema?: ObjectSchema;
     handler: Middleware<C>;
+    validateUniq?: boolean;
   }): KoaKafka<S, C> {
-    if (schema) {
-      this._setValidateMiddleware(schema, command, version);
-    }
-
     const middleware = async (ctx: C, next: Next): Promise<void> => {
-      if (ctx.command === command && ctx.version === version) {
-        return handler(ctx, next);
+      if (ctx.command !== command || ctx.version !== version) {
+        await next();
+        return;
       }
 
-      await next();
+      const { uniqModel } = this._options;
+      if (uniqModel && validateUniq) {
+        const isUniq = await uniqModel.isUniqId(ctx.id);
+        if (!isUniq) {
+          ctx.throw({
+            code: uniqModel.conflictCode,
+          });
+          return;
+        }
+
+        uniqModel.saveId(ctx.id);
+      }
+
+      if (schema) {
+        const valid = this._validateCommand(ctx, schema);
+        if (!valid) {
+          return;
+        }
+      }
+
+      return handler(ctx, next);
     };
 
     this._middlewares.push(middleware as any);
@@ -136,11 +147,22 @@ export class KoaKafka<S extends Record<string, any> = Record<string, any>, C ext
 
   handleEvent({ version, event, handler }: { version: Version; event: Event; handler: Middleware<C> }): KoaKafka {
     const middleware = async (ctx: C, next: Next): Promise<void> => {
-      if (ctx.event === event && ctx.version === version) {
-        return handler(ctx, next);
+      if (ctx.event !== event || ctx.version !== version) {
+        await next();
+        return;
       }
 
-      await next();
+      const { uniqModel } = this._options;
+      if (uniqModel) {
+        const isUniq = await uniqModel.isUniqId(ctx.id);
+        if (!isUniq) {
+          return;
+        }
+
+        uniqModel.saveId(ctx.id);
+      }
+
+      return handler(ctx, next);
     };
 
     this._middlewares.push(middleware as any);

@@ -2,7 +2,7 @@ import { usersStorageService } from 'storage';
 
 import { UserRole } from 'lib/db/models/enums';
 import { UserAttributes } from 'lib/db/models/user';
-import { getHash, generateSalt, generateSecureToken } from 'lib/secure';
+import { generateSecureToken } from 'lib/secure';
 
 import { DuplicateEmailError } from 'services/errors';
 

@@ -35,6 +35,7 @@ export function initV1Routes(app: KoaKafka<AppState, AppContext>): void {
       command: AuthorizationCommand.Registration,
       schema: registrationSchema,
       handler: signUpHandler,
+      validateUniq: true,
     })
     .handleCommand({
       version: Version.v1,
@@ -95,5 +96,6 @@ export function initV1Routes(app: KoaKafka<AppState, AppContext>): void {
       command: AuthorizationCommand.ResetPassword,
       schema: resetPasswordSchema,
       handler: resetPasswordHandler,
+      validateUniq: true,
     });
 }

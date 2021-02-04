@@ -10,6 +10,7 @@ export function initV1Routes(app: KoaKafka<AppState, AppContext>): void {
     command: UserCommand.Registration,
     schema: registrationSchema,
     handler: signUpHandler,
+    validateUniq: true,
   });
   app.handleCommand({
     version: Version.v1,

@@ -4,12 +4,14 @@ import { middlewares } from '@packages/backend-service';
 
 import { kafka } from './lib/kafka';
 import { config } from './lib/config';
+import { uniqModel } from './lib/uniq-model';
 
 import { initRoutes } from './routes';
 
 const app = new KoaKafka<AppState, AppContext>(kafka, Channel.USERS, {
   badProtoCode: UserTypes.ErrorCode.BadProto,
   validationFailedCode: UserTypes.ErrorCode.ValidationFailed,
+  uniqModel,
 });
 
 export function initApp(): KoaKafka<AppState, AppContext> {

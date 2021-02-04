@@ -27,6 +27,17 @@ module.exports = {
       createdAt: { type: DataTypes.DATE, allowNull: true },
       updatedAt: { type: DataTypes.DATE, allowNull: true },
     });
+
+    await queryInterface.createTable('commands', {
+      id: {
+        type: DataTypes.STRING(128),
+        primaryKey: true,
+        unique: true,
+        allowNull: false,
+      },
+      createdAt: { type: DataTypes.DATE, allowNull: true },
+      updatedAt: { type: DataTypes.DATE, allowNull: true },
+    });
   },
 
   down: async (queryInterface: QueryInterface) => {

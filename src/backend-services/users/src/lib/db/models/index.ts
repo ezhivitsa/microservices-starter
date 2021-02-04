@@ -1,5 +1,6 @@
 import { Sequelize, Options } from 'sequelize';
 import { initUser } from './user';
+import { initCommand } from './command';
 
 import { configs } from '../config/config';
 
@@ -14,6 +15,7 @@ const db = {
   sequelize,
   Sequelize,
   User: initUser(sequelize),
+  Command: initCommand(sequelize),
 };
 
 Object.values(db).forEach((model: any) => {
