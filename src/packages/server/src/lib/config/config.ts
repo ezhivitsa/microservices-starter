@@ -1,10 +1,21 @@
 import { ENV, Environment } from './environment';
 
-export function initConfig<C>({ development, production, staging }: { development: C; production: C; staging: C }): C {
+export function initConfig<C>({
+  development,
+  production,
+  staging,
+  testing,
+}: {
+  development: C;
+  production: C;
+  staging: C;
+  testing?: C;
+}): C {
   const configsMap: Record<Environment, C> = {
     development,
     production,
     staging,
+    testing: testing || development,
   };
 
   function getConfig(env: Environment): [Environment, C] {

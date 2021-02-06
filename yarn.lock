@@ -1319,7 +1319,7 @@ __metadata:
     koa-mount: 4.0.0
     lodash: 4.17.20
     module-alias: 2.2.2
-    nodemon: 2.0.6
+    nodemon: 2.0.7
     oauth2-server: 3.1.1
     ts-jest: 26.4.4
     ts-node: 9.0.0
@@ -1339,6 +1339,7 @@ __metadata:
     "@packages/proto": "workspace:*"
     "@packages/server": "workspace:*"
     "@types/bcrypt": 3.0.0
+    "@types/jest": 26.0.20
     "@types/joi": 14.3.4
     "@types/lodash": 4.14.108
     "@types/long": 4.0.1
@@ -1346,15 +1347,19 @@ __metadata:
     "@types/redis": 2.8.28
     "@types/sequelize": 4.28.9
     bcrypt: 5.0.0
+    jest: 26.6.3
     joi: 17.3.0
     lodash: 4.17.20
     long: 4.0.0
     module-alias: 2.2.2
+    nodemon: 2.0.7
     pg: 8.5.1
     pg-hstore: 2.3.3
     redis: 3.0.2
     sequelize: 6.3.5
     sequelize-cli: 6.2.0
+    ts-jest: 26.5.0
+    ts-mock-imports: 1.3.3
     ts-node: 9.0.0
     typescript: 4.1.3
   languageName: unknown
@@ -1586,7 +1591,7 @@ __metadata:
     mobx: 6.0.4
     mobx-react-lite: 3.1.6
     module-alias: 2.2.2
-    nodemon: 2.0.6
+    nodemon: 2.0.7
     path-to-regexp: 3.2.0
     postcss: 8.2.1
     postcss-loader: 4.1.0
@@ -1714,7 +1719,7 @@ __metadata:
     koa-webpack: 6.0.0
     mini-css-extract-plugin: 1.3.3
     module-alias: 2.2.2
-    nodemon: 2.0.6
+    nodemon: 2.0.7
     path-to-regexp: 3.2.0
     postcss: 8.2.1
     postcss-loader: 4.1.0
@@ -2736,6 +2741,16 @@ __metadata:
     jest-diff: ^26.0.0
     pretty-format: ^26.0.0
   checksum: 98c8daaf89ca79823461818c1c22d337354e250a135e0314ba1a49e615620c8e2f54c5b900ba8554bf853919c97538f9a38b5af00cea83fd715ee2e6d75e04b8
+  languageName: node
+  linkType: hard
+
+"@types/jest@npm:26.0.20":
+  version: 26.0.20
+  resolution: "@types/jest@npm:26.0.20"
+  dependencies:
+    jest-diff: ^26.0.0
+    pretty-format: ^26.0.0
+  checksum: 221e39c7c9ce8d71ae4b2ba6abeef1a5b04f1cd96419b9fbbb65534bef4c4215b650561183073dcf47584ff1888d1f4fa7d2af2a38492b7feb9a3bfdcd24c44f
   languageName: node
   linkType: hard
 
@@ -10997,7 +11012,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"lodash@npm:4.17.20, lodash@npm:^4.15.0, lodash@npm:^4.17.11, lodash@npm:^4.17.14, lodash@npm:^4.17.15, lodash@npm:^4.17.19, lodash@npm:^4.17.20, lodash@npm:^4.17.5":
+"lodash@npm:4.17.20, lodash@npm:4.x, lodash@npm:^4.15.0, lodash@npm:^4.17.11, lodash@npm:^4.17.14, lodash@npm:^4.17.15, lodash@npm:^4.17.19, lodash@npm:^4.17.20, lodash@npm:^4.17.5":
   version: 4.17.20
   resolution: "lodash@npm:4.17.20"
   checksum: c62101d2500c383b5f174a7e9e6fe8098149ddd6e9ccfa85f36d4789446195f5c4afd3cfba433026bcaf3da271256566b04a2bf2618e5a39f6e67f8c12030cb6
@@ -12508,9 +12523,9 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"nodemon@npm:2.0.6":
-  version: 2.0.6
-  resolution: "nodemon@npm:2.0.6"
+"nodemon@npm:2.0.7":
+  version: 2.0.7
+  resolution: "nodemon@npm:2.0.7"
   dependencies:
     chokidar: ^3.2.2
     debug: ^3.2.6
@@ -12524,7 +12539,7 @@ fsevents@~2.3.1:
     update-notifier: ^4.1.0
   bin:
     nodemon: bin/nodemon.js
-  checksum: 6a4b0d6ba2c164796a2b164cd8c7e0587387b5fca224526bd1267e93b99a23071b31f51a5eecbeccd656a0ec097a194d9a123a3bc8833e148c53de9c4c3dcebd
+  checksum: e1e8acb584120579714c29d7e12b4efca2188b73ea537a560b1a66ec995dccbd8c0742af2c25f1a18df7e7bb8448477e80063824708466cda491dfc52ab6e233
   languageName: node
   linkType: hard
 
@@ -17343,6 +17358,40 @@ fsevents@~2.3.1:
   bin:
     ts-jest: cli.js
   checksum: bee46b789c13a9f195c80fbb201362c6c2e5150abb5aeb3699c4ccc17b9bc9c4b229e06230c5a23bf8f17bfd05311c33a4ea33a7641683e8a4bec21529f4da77
+  languageName: node
+  linkType: hard
+
+"ts-jest@npm:26.5.0":
+  version: 26.5.0
+  resolution: "ts-jest@npm:26.5.0"
+  dependencies:
+    "@types/jest": 26.x
+    bs-logger: 0.x
+    buffer-from: 1.x
+    fast-json-stable-stringify: 2.x
+    jest-util: ^26.1.0
+    json5: 2.x
+    lodash: 4.x
+    make-error: 1.x
+    mkdirp: 1.x
+    semver: 7.x
+    yargs-parser: 20.x
+  peerDependencies:
+    jest: ">=26 <27"
+    typescript: ">=3.8 <5.0"
+  bin:
+    ts-jest: cli.js
+  checksum: 5932ba26136feb4edac746609198fcebf2dcf865dcfbf64f54b7cc97aea61529d52660de8d0d500b1c9b5e3e5a29540458c195f8a4190f2edb67846a1423d922
+  languageName: node
+  linkType: hard
+
+"ts-mock-imports@npm:1.3.3":
+  version: 1.3.3
+  resolution: "ts-mock-imports@npm:1.3.3"
+  peerDependencies:
+    sinon: ">= 4.1.2"
+    typescript: ">=2.6.1 < 4.2"
+  checksum: 825db66f190e5785fa48c305f8a48d484260c3eb9dd10509f5234b876dd9c38a9cba9e35e9a45f81331b8512ac9deae42c9a90d7a7c6f7d1a20c4364234b84a7
   languageName: node
   linkType: hard
 

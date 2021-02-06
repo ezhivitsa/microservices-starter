@@ -20,6 +20,12 @@ import { KafkaCommand } from './kafka-command';
 import { KafkaEventHandler } from './kafka-event-handler';
 import { KafkaEvent } from './kafka-event';
 
+import { KafkaJsMock } from './kafka-mock';
+
+interface Config {
+  mock?: boolean;
+}
+
 export class Kafka {
   private readonly _kafka: Kafkajs;
 
@@ -28,8 +34,8 @@ export class Kafka {
   private readonly _kafkaEventHandler: KafkaEventHandler;
   private readonly _kafkaEvent: KafkaEvent;
 
-  constructor(config: KafkaConfig, consumerConfig: ConsumerConfig, producerConfig?: ProducerConfig) {
-    this._kafka = new Kafkajs(config);
+  constructor(config: KafkaConfig & Config, consumerConfig: ConsumerConfig, producerConfig?: ProducerConfig) {
+    this._kafka = config.mock ? ((new KafkaJsMock() as unknown) as Kafkajs) : new Kafkajs(config);
 
     this._kafkaCommandHandler = new KafkaCommandHandler(this._kafka, consumerConfig);
     this._kafkaCommand = new KafkaCommand(this._kafka, consumerConfig, producerConfig);

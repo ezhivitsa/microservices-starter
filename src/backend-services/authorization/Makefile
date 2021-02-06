@@ -8,7 +8,17 @@ POSTGRES_DEV_VARS := POSTGRES_PORT=${POSTGRES_PORT_DEV} \
 	POSTGRES_USER=${POSTGRES_USER_DEV} \
 	POSTGRES_PASSWORD=${POSTGRES_PASSWORD_LOCAL}
 
+POSTGRES_AUTOTEST_VARS := POSTGRES_PORT=${POSTGRES_PORT_AUTOTEST} \
+	POSTGRES_HOST=${POSTGRES_HOST_LOCAL} \
+	POSTGRES_DATABASE=${POSTGRES_DB_AUTOTEST} \
+	POSTGRES_USER=${POSTGRES_USER_AUTOTEST} \
+	POSTGRES_PASSWORD=${POSTGRES_PASSWORD_LOCAL} \
+
 DEV_VARS := NODE_ENV=development
+AUTOTEST_VARS := NODE_ENV=test OVERRIDE_ENV=testing
+
+DOCKER_COMPOSE := docker-compose -f docker-compose.yaml $(DOCKER_COMPOSE_ADDITIONAL_FLAGS)
+DOCKER_COMPOSE_AUTOTEST := ${POSTGRES_AUTOTEST_VARS} ${DOCKER_COMPOSE}
 
 # -------------------------------------
 # dev targets
@@ -21,7 +31,7 @@ dev:
 		-- \
 			--inspect=$(NODE_INSPECTOR_HOST):$(NODE_INSPECTOR_PORT) \
 			--require ts-node/register \
-		-- src/boot.ts
+		-- src/app/boot.ts
 
 # -------------------------------------
 # validation targets
@@ -42,15 +52,34 @@ lint: lint-code
 compile-dry:
 	npx tsc -p tsconfig.json --noEmit
 
-.PHONY: run-test
-run-test: run-test-unit
-
-.PHONY: run-test-unit
-run-test-unit:
-	npx jest --config=jest-unit.config.json --passWithNoTests
-
 .PHONY: validate
 validate: lint compile-dry run-test
+
+.PHONY: db-test-start
+db-test-start:
+	$(DOCKER_COMPOSE_AUTOTEST) up -d --no-recreate
+
+.PHONY: db-test-stop
+db-test-stop:
+	$(DOCKER_COMPOSE_AUTOTEST) rm -v -s -f
+
+.PHONY: test-docker
+test-docker: db-test-stop
+test-docker: db-test-start
+test-docker: create-db-test migrate-test run-test
+
+.PHONY: run-test
+run-test: run-test-integration
+
+.PHONY: run-test-integration
+run-test-integration:
+	${AUTOTEST_VARS} ${POSTGRES_AUTOTEST_VARS} \
+	npx jest \
+		--config=jest-integration.config.json \
+		--passWithNoTests \
+		--maxConcurrency=1 \
+		--runInBand \
+		--forceExit $(JEST_ADDITIONAL_FLAGS)
 
 # -------------------------------------
 # db targets
@@ -68,10 +97,20 @@ migrate-local: build
 migrate-local: DB_VARS=${POSTGRES_DEV_VARS} ${DEV_VARS}
 migrate-local: migrate
 
+.PHONY: migrate-test
+migrate-test: build
+migrate-test: DB_VARS=${POSTGRES_AUTOTEST_VARS} ${AUTOTEST_VARS}
+migrate-test: migrate
+
 .PHONE: create-db-local
 create-db-local: build
 create-db-local: DB_VARS=${POSTGRES_DEV_VARS} ${DEV_VARS}
 create-db-local: create-db
+
+.PHONE: create-db-test
+create-db-test: build
+create-db-test: DB_VARS=${POSTGRES_AUTOTEST_VARS} ${AUTOTEST_VARS}
+create-db-test: create-db
 
 # -------------------------------------
 # release targets

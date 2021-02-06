@@ -1,7 +1,7 @@
 {
   "exec": "node",
   "watch": [
-    "src/"
+    "src/app"
   ],
   "ext": "ts,tsx",
   "env": {

@@ -1,0 +1,21 @@
+version: '3.7'
+services:
+  db-autotest:
+    container_name: db-autotest
+    image: postgres:13-alpine
+    environment:
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - POSTGRES_DATABASE=${POSTGRES_DATABASE}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - ${POSTGRES_PORT}:5432
+
+  redis-autotest:
+    container_name: redis-autotest
+    image: redis:6.0.9
+    command: ["redis-server", "--appendonly", "yes"]
+    hostname: redis
+    ports:
+      - "6379:6379"
