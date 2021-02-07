@@ -17,6 +17,7 @@ export interface User {
   signupToken: string;
   isEmailVerified: boolean;
   createdAt: Date;
+  resetPasswordToken: string | null;
 }
 
 export interface UserShort {

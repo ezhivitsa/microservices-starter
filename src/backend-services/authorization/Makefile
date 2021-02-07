@@ -53,7 +53,7 @@ compile-dry:
 	npx tsc -p tsconfig.json --noEmit
 
 .PHONY: validate
-validate: lint compile-dry run-test
+validate: lint compile-dry test-docker
 
 .PHONY: db-test-start
 db-test-start:

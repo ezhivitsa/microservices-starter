@@ -1,5 +1,3 @@
-import '../../app/boot';
-
 import { cleanDB } from '../utils/db-utils';
 
 import { register } from '../commands';

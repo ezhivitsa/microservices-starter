@@ -1,5 +1,3 @@
-import '../../app/boot';
-
 import { cleanDB } from '../utils/db-utils';
 
 import { registerUser, getUserById } from '../fixtures/users';
@@ -11,7 +9,7 @@ describe('command /v1/verify-email', () => {
     await cleanDB();
   });
 
-  it('should successfully register user', async () => {
+  it('should successfully verify user email', async () => {
     const user = await registerUser();
 
     await verifyEmail({
