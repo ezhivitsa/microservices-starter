@@ -13,7 +13,10 @@
     "strict": true,
     "outDir": "./dist",
     "baseUrl": "./src",
-    "types": ["node"]
+    "types": ["node", "jest"],
+    "paths": {
+      "@root/*": ["app/*"]
+    }
   },
   "exclude": ["node_modules"]
 }

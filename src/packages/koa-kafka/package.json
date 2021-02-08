@@ -8,10 +8,10 @@
   },
   "dependencies": {
     "@packages/communication": "workspace:*",
-    "joi": "17.3.0"
+    "joi": "17.4.0"
   },
   "devDependencies": {
-    "@types/joi": "14.3.4",
+    "@types/joi": "17.2.3",
     "@types/node": "14.6.4"
   },
   "installConfig": {

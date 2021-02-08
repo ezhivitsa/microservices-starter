@@ -10,13 +10,13 @@
     "@packages/logger": "workspace:*",
     "@packages/server": "workspace:*",
     "handlebars": "4.7.6",
-    "joi": "17.3.0",
+    "joi": "17.4.0",
     "mailgun-js": "0.22.0",
     "module-alias": "2.2.2"
   },
   "devDependencies": {
     "@packages/eslint-config": "workspace:*",
-    "@types/joi": "14.3.4",
+    "@types/joi": "17.2.3",
     "@types/mailgun-js": "0.22.11",
     "@types/module-alias": "2.0.0",
     "mjml": "4.8.1",

@@ -72,7 +72,7 @@ export class KoaKafka<S extends Record<string, any> = Record<string, any>, C ext
     if (validateResult.error) {
       ctx.throw({
         code: this._options.validationFailedCode,
-        message: JSON.stringify(validateResult.errors),
+        message: JSON.stringify(validateResult.error),
       });
       return false;
     }
