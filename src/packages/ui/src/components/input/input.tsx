@@ -10,6 +10,7 @@ import React, {
   useEffect,
   useRef,
   ReactElement,
+  ClipboardEvent,
 } from 'react';
 import classnames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -96,19 +97,19 @@ interface Props {
   title?: string;
   inputRef?: MutableRefObject<HTMLInputElement>;
 
-  onChange?: (value?: string, event?: ChangeEvent<any>) => void;
-  onFocus?: (event?: FocusEvent<any>) => void;
-  onClick?: (event?: MouseEvent<any>) => void;
-  onBlur?: (event?: FocusEvent<any>) => void;
-  onClearClick?: (event?: MouseEvent<any>) => void;
-  onKeyDown?: (event?: KeyboardEvent<any>) => void;
-  onKeyUp?: (event?: KeyboardEvent<any>) => void;
-  onPaste?: (event?: React.ClipboardEvent<any>) => void;
-  onTouchStart?: (event?: TouchEvent<any>) => void;
-  onTouchEnd?: (event?: TouchEvent<any>) => void;
-  onTouchMove?: (event?: TouchEvent<any>) => void;
-  onTouchCancel?: (event?: TouchEvent<any>) => void;
-  onProcessMaskInputEvent?: (event?: ChangeEvent<any>) => void;
+  onChange?: (value?: string, event?: ChangeEvent) => void;
+  onFocus?: (event?: FocusEvent) => void;
+  onClick?: (event?: MouseEvent) => void;
+  onBlur?: (event?: FocusEvent) => void;
+  onClearClick?: (event?: MouseEvent) => void;
+  onKeyDown?: (event?: KeyboardEvent) => void;
+  onKeyUp?: (event?: KeyboardEvent) => void;
+  onPaste?: (event?: ClipboardEvent) => void;
+  onTouchStart?: (event?: TouchEvent) => void;
+  onTouchEnd?: (event?: TouchEvent) => void;
+  onTouchMove?: (event?: TouchEvent) => void;
+  onTouchCancel?: (event?: TouchEvent) => void;
+  onProcessMaskInputEvent?: (event?: ChangeEvent) => void;
 }
 
 export function Input({ error, view, size, disabled, type, width, className, ...props }: Props): ReactElement {

@@ -62,16 +62,16 @@ interface Props {
   checked?: boolean;
   children?: ReactNode;
   className?: string;
-  onClick?: (event?: MouseEvent<any>) => void;
-  onFocus?: (event?: FocusEvent<any>) => void;
-  onBlur?: (event?: FocusEvent<any>) => void;
-  onMouseEnter?: (event?: MouseEvent<any>) => void;
-  onMouseLeave?: (event?: MouseEvent<any>) => void;
-  onMouseDown?: (event?: MouseEvent<any>) => void;
-  onMouseUp?: (event?: MouseEvent<any>) => void;
-  onMouseOut?: (event?: MouseEvent<any>) => void;
-  onKeyDown?: (event?: KeyboardEvent<any>) => void;
-  onKeyUp?: (event?: KeyboardEvent<any>) => void;
+  onClick?: (event?: MouseEvent) => void;
+  onFocus?: (event?: FocusEvent) => void;
+  onBlur?: (event?: FocusEvent) => void;
+  onMouseEnter?: (event?: MouseEvent) => void;
+  onMouseLeave?: (event?: MouseEvent) => void;
+  onMouseDown?: (event?: MouseEvent) => void;
+  onMouseUp?: (event?: MouseEvent) => void;
+  onMouseOut?: (event?: MouseEvent) => void;
+  onKeyDown?: (event?: KeyboardEvent) => void;
+  onKeyUp?: (event?: KeyboardEvent) => void;
 }
 
 export function Button({

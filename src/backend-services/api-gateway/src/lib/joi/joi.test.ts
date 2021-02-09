@@ -18,7 +18,7 @@ describe('joi validator', () => {
     expect(validationResult).toMatchObject(validationResultPartial);
 
     expect(validationResult).toMatchObject({
-      errors: {},
+      error: undefined,
       value: {
         email: 'test@test.com',
       },

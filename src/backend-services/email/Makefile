@@ -2,11 +2,7 @@ include dev.env
 -include dev-local.env
 export
 
-POSTGRES_DEV_VARS := POSTGRES_PORT=${POSTGRES_PORT_DEV} \
-	POSTGRES_HOST=${POSTGRES_HOST_LOCAL} \
-	POSTGRES_DATABASE=${POSTGRES_DB_DEV} \
-	POSTGRES_USER=${POSTGRES_USER_DEV} \
-	POSTGRES_PASSWORD=${POSTGRES_PASSWORD_LOCAL}
+MAILGUN_DEV_VARS := MAILGUN_API_KEY=${MAILGUN_API_KEY_DEV}
 
 DEV_VARS := NODE_ENV=development
 
@@ -15,7 +11,7 @@ DEV_VARS := NODE_ENV=development
 # -------------------------------------
 .PHONY: dev
 dev:
-	${POSTGRES_DEV_VARS} npx nodemon \
+	${MAILGUN_DEV_VARS} ${DEV_VARS} npx nodemon \
 		--config ./nodemon.json \
 		--legacy-watch \
 		-- \
@@ -42,15 +38,8 @@ lint: lint-code
 compile-dry:
 	npx tsc -p tsconfig.json --noEmit
 
-.PHONY: run-test
-run-test: run-test-unit
-
-.PHONY: run-test-unit
-run-test-unit:
-	npx jest --config=jest-unit.config.json --passWithNoTests
-
 .PHONY: validate
-validate: lint compile-dry run-test
+validate: lint compile-dry
 
 # -------------------------------------
 # build targets

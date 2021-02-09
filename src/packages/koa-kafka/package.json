@@ -4,13 +4,15 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "build": "yarn g:tsc"
+    "build": "yarn g:tsc",
+    "lint": "yarn g:lint:eslint && yarn g:lint:tsc"
   },
   "dependencies": {
     "@packages/communication": "workspace:*",
     "joi": "17.4.0"
   },
   "devDependencies": {
+    "@packages/eslint-config": "workspace:*",
     "@types/joi": "17.2.3",
     "@types/node": "14.6.4"
   },

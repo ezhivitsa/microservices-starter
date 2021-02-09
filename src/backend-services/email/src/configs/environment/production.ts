@@ -2,7 +2,7 @@ import { logLevel } from '@packages/communication';
 
 import { Config } from '../types';
 
-const staticUrl = '//microservices-starter-static.com';
+const mailgunApiKey = process.env.MAILGUN_API_KEY || '';
 
 export const production: Config = {
   logger: {
@@ -19,7 +19,7 @@ export const production: Config = {
     groupId: 'email',
   },
   mailgun: {
-    apiKey: '123',
+    apiKey: mailgunApiKey,
     domain: 'microservices-starter.dev',
   },
   email: {

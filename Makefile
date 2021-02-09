@@ -37,6 +37,10 @@ run:
 build:
 	yarn workspaces foreach -tvp run build
 
+.PHONY: lint
+lint:
+	yarn workspaces foreach -vp run lint
+
 # -------------------------------------
 # build targets
 # -------------------------------------
