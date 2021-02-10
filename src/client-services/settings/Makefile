@@ -27,7 +27,7 @@ lint-code:
 .PHONY: lint-style
 lint-style:
 	$(if $(NO_CACHE), rm -f .stylelintcache;) \
-	npx stylelint --cache "$(PWD)/src/client/**/*.pcss"
+	npx stylelint --cache "$(PWD)/src/**/*.pcss"
 
 .PHONY: lint
 lint: lint-code lint-style
@@ -36,12 +36,8 @@ lint: lint-code lint-style
 compile-dry-client:
 	npx tsc -p tsconfig.json --noEmit
 
-.PHONY: test
-test:
-	npx jest --config=jest.client.config.json --passWithNoTests
-
 .PHONY: validate
-validate: lint compile-dry test
+validate: lint compile-dry
 
 # -------------------------------------
 # release targets

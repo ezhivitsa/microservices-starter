@@ -37,9 +37,44 @@ run:
 build:
 	yarn workspaces foreach -tvp run build
 
+# -------------------------------------
+# validation targets
+# -------------------------------------
 .PHONY: lint
 lint:
 	yarn workspaces foreach -vp run lint
+
+.PHONY: validate-api-gateway
+validate-api-gateway:
+	cd ./src/backend-services/api-gateway && make validate
+
+.PHONY: validate-authorization
+validate-authorization:
+	cd ./src/backend-services/authorization && make validate
+
+.PHONY: validate-email
+validate-email:
+	cd ./src/backend-services/email && make validate
+
+.PHONY: validate-users
+validate-email:
+	cd ./src/backend-services/users && make validate
+
+.PHONY: validate-authorization-form
+validate-authorization-form:
+	cd ./src/client-services/authorization-form && make validate
+
+.PHONY: validate-dashboard
+validate-dashboard:
+	cd ./src/client-services/dashboard && make validate
+
+.PHONY: validate-main
+validate-main:
+	cd ./src/client-services/main && make validate
+
+.PHONY: validate-settings
+validate-settings:
+	cd ./src/client-services/settings && make validate
 
 # -------------------------------------
 # build targets

@@ -48,23 +48,8 @@ compile-dry-server:
 .PHONY: compile-dry
 compile-dry: compile-dry-client compile-dry-server
 
-.PHONY: test-common
-test-common:
-	npx jest --config=jest.common.config.json --passWithNoTests
-
-.PHONY: test-client
-test-client:
-	npx jest --config=jest.client.config.json --passWithNoTests
-
-.PHONY: test-server
-test-server:
-	npx jest --config=jest.server.config.json --passWithNoTests
-
-.PHONY: test
-test: test-common test-client test-server
-
 .PHONY: validate
-validate: lint compile-dry test
+validate: lint compile-dry
 
 # -------------------------------------
 # release targets

@@ -1,0 +1,26 @@
+"src/packages/**/*.{js,jsx,ts,tsx,pcss}":
+  - make lint
+
+"src/backend-services/api-gateway/**/*.{js,ts}":
+  - make validate-api-gateway
+
+"src/backend-services/authorization/**/*.{js,ts}":
+  - make validate-authorization
+
+"src/backend-services/email/**/*.{js,ts}":
+  - make validate-email
+
+"src/backend-services/users/**/*.{js,ts}":
+  - make validate-users
+
+"src/client-services/authorization-form/**/*.{js,jsx,ts,tsx,pcss}":
+  - make validate-authorization-form
+
+"src/client-services/dashboard/**/*.{js,jsx,ts,tsx,pcss}":
+  - make validate-dashboard
+
+"src/client-services/main/**/*.{js,jsx,ts,tsx,pcss}":
+  - make validate-main
+
+"src/client-services/settings/**/*.{js,jsx,ts,tsx,pcss}":
+  - make validate-settings
