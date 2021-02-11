@@ -7,6 +7,7 @@ export interface LoggerConfig {
 }
 
 export interface Config {
+  readonly port: number;
   readonly logger: Readonly<LoggerConfig>;
   readonly requestIdHeader: string;
   readonly kafka: KafkaConfig;

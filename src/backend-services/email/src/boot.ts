@@ -1,12 +1,13 @@
 import moduleAlias from 'module-alias';
 
-import { join } from 'path';
+import { lib } from '@packages/backend-service';
 
 moduleAlias.addPath(__dirname);
-moduleAlias.addAlias('common', join(__dirname, '../common'));
 moduleAlias();
 
 import { logger } from './lib/logger';
+import { kafka } from './lib/kafka';
+import { config } from './lib/config';
 
 import { initApp } from './app';
 
@@ -21,3 +22,4 @@ function listenCallback(): void {
 }
 
 boot();
+lib.initPing(config.port, kafka);

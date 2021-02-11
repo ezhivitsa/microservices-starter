@@ -12,5 +12,5 @@ export const development: Config = {
     ...staging.logger,
     format: 'local',
   },
-  kafkaMock: true,
+  kafkaMock: false,
 };

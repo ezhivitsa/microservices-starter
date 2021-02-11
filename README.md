@@ -1,7 +1,5 @@
 # Microservices-starter
 
 # ToDo list:
-1) add tests (for now i don't know how simulate requests from kafka)
-2) add saga on registration (if fail create user in users service, than we have to revert register in auth service)
-3) add /ping for backend services
-4) add event sourcing to one backend service
+1) add saga on registration (if fail create user in users service, than we have to revert register in auth service)
+2) add event sourcing to one backend service

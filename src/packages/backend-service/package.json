@@ -8,11 +8,16 @@
     "lint": "yarn g:lint:eslint && yarn g:lint:tsc"
   },
   "dependencies": {
+    "@packages/communication": "workspace:*",
     "@packages/koa-kafka": "workspace:*",
-    "@packages/logger": "workspace:*"
+    "@packages/logger": "workspace:*",
+    "koa": "2.13.1",
+    "koa-mount": "4.0.0"
   },
   "devDependencies": {
-    "@packages/eslint-config": "workspace:*"
+    "@packages/eslint-config": "workspace:*",
+    "@types/koa": "2.11.6",
+    "@types/koa-mount": "4.0.0"
   },
   "installConfig": {
     "hoistingLimits": "workspaces"

@@ -74,4 +74,8 @@ export class Kafka {
   listenEvent(listenEvent: ListenEventCallback): void {
     this._kafkaEventHandler.listenEvents(listenEvent);
   }
+
+  isHealthy(): Promise<boolean> {
+    return this._kafkaCommandHandler.isConsumerHealthy();
+  }
 }

@@ -50,15 +50,15 @@ validate-api-gateway:
 
 .PHONY: validate-authorization
 validate-authorization:
-	cd ./src/backend-services/authorization && make validate
+	cd ./src/backend-services/authorization && make lint compile-dry
 
 .PHONY: validate-email
 validate-email:
-	cd ./src/backend-services/email && make validate
+	cd ./src/backend-services/email && make lint compile-dry
 
 .PHONY: validate-users
-validate-email:
-	cd ./src/backend-services/users && make validate
+validate-users:
+	cd ./src/backend-services/users && make lint compile-dry
 
 .PHONY: validate-authorization-form
 validate-authorization-form:

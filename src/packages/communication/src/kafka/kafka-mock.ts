@@ -26,6 +26,10 @@ export class ConsumerMock {
   private _topics: string[] = [];
   private _callback?: (payload: EachMessagePayload) => Promise<void>;
 
+  events = {
+    HEARTBEAT: 'heartbeat',
+  };
+
   constructor(eventEmitter: EventEmitter) {
     eventEmitter.on(messageEvent, (data: ProducerRecord) => {
       this._handleMessage(data);
@@ -69,6 +73,10 @@ export class ConsumerMock {
     }
 
     this._callback = data.eachMessage;
+    return Promise.resolve();
+  }
+
+  on(): Promise<void> {
     return Promise.resolve();
   }
 }

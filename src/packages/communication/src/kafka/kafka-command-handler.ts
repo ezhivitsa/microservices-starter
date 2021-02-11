@@ -28,6 +28,7 @@ export class KafkaCommandHandler {
       { ...consumerConfig, groupId: `${consumerConfig.groupId}-command-handler` },
       this._handleMessage,
       false,
+      true,
     );
   }
 
@@ -67,5 +68,9 @@ export class KafkaCommandHandler {
   listenCommands(listenCommand: ListenCommandCallback): void {
     this._listenCommandCallback = listenCommand;
     this._consumer.subscribeToTopic(...this._channelsToHandle);
+  }
+
+  isConsumerHealthy(): Promise<boolean> {
+    return this._consumer.isHealthy();
   }
 }

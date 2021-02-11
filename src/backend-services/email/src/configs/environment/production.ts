@@ -1,10 +1,12 @@
 import { logLevel } from '@packages/communication';
 
+import { DEFAULT_PORT } from '../utils';
 import { Config } from '../types';
 
 const mailgunApiKey = process.env.MAILGUN_API_KEY || '';
 
 export const production: Config = {
+  port: DEFAULT_PORT,
   logger: {
     level: 'info',
     format: 'cloud',
