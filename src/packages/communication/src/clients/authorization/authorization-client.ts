@@ -34,6 +34,19 @@ export class AuthorizationClient extends BaseClient<AuthorizationError> {
     );
   }
 
+  cancelRegistrationCommand(
+    data: AuthorizationTypes.CancelRegistrationRequest,
+    metadata: CommandMetadata,
+  ): Promise<void> {
+    return this._sendCommand(
+      {
+        data,
+        command: AuthorizationCommand.CancelRegistration,
+      },
+      metadata,
+    );
+  }
+
   getAccessTokenCommand(
     data: AuthorizationTypes.GetAccessTokenRequest,
     metadata: CommandMetadata,

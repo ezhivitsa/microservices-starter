@@ -9,6 +9,10 @@ export const registrationResponse = root.loadProtoMessage<AuthorizationTypes.Reg
   'microservices_starter.authorization.auth.RegistrationResponse',
 );
 
+export const cancelRegistrationRequest = root.loadProtoMessage<AuthorizationTypes.CancelRegistrationRequest>(
+  'microservices_starter.authorization.auth.CancelRegistrationRequest',
+);
+
 export const getAccessTokenRequest = root.loadProtoMessage<AuthorizationTypes.GetAccessTokenRequest>(
   'microservices_starter.authorization.auth.GetAccessTokenRequest',
 );

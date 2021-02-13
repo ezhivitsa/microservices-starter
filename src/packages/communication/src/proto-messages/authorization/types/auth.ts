@@ -12,6 +12,11 @@ export interface RegistrationResponse {
   signupToken?: string;
 }
 
+// CancelRegistration
+export interface CancelRegistrationRequest {
+  id?: string;
+}
+
 export const enum Role {
   Unknown = 0,
   User = 1,

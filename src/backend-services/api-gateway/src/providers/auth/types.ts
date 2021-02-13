@@ -23,6 +23,10 @@ export interface RegisterResult {
   signupToken: string;
 }
 
+export interface CancelRegisterParams {
+  id: string;
+}
+
 export interface GetAccessTokenParams {
   accessToken: string;
 }

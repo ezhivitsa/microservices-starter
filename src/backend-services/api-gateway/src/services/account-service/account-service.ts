@@ -1,7 +1,7 @@
 import { AuthorizationError, AuthorizationTypes } from '@packages/communication';
 import { Errors } from '@packages/common';
 
-import { AuthProvider, AuthProviderTypes, UsersProvider, EmailProvider } from 'providers';
+import { AuthProvider, UsersProvider, EmailProvider } from 'providers';
 import { ApiError } from 'errors';
 
 import { ServiceMetadata } from '../types';
@@ -22,10 +22,14 @@ import {
   ResetPasswordParams,
 } from './types';
 
+import { RegisterSaga, RegisterSagaState } from './sagas';
+
 export async function register(params: RegisterParams, metadata: ServiceMetadata): Promise<string | null> {
-  let authData: AuthProviderTypes.RegisterResult | null;
+  const state = new RegisterSagaState(params);
+  const registerSaga = new RegisterSaga(state);
+
   try {
-    authData = await AuthProvider.register(params, metadata);
+    await registerSaga.start(metadata);
   } catch (err) {
     if (err instanceof AuthorizationError) {
       let type: Errors.ErrorType = Errors.CommonErrorType.General;
@@ -39,31 +43,7 @@ export async function register(params: RegisterParams, metadata: ServiceMetadata
     throw err;
   }
 
-  if (!authData) {
-    return null;
-  }
-
-  const { id: authId, signupToken } = authData;
-
-  await UsersProvider.register(
-    {
-      authId,
-      ...params,
-    },
-    metadata,
-  );
-
-  await EmailProvider.sendVerifyEmail(
-    {
-      firstName: params.firstName,
-      lastName: params.lastName,
-      email: params.email,
-      token: signupToken,
-    },
-    metadata,
-  );
-
-  return signupToken;
+  return state.token;
 }
 
 export function getAccessToken(

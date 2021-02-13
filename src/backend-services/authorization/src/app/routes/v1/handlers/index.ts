@@ -9,3 +9,4 @@ export { verifyEmailHandler } from './verify-email';
 export { getSignupTokenHandler } from './get-signup-token';
 export { getForgotPasswordTokenHandler } from './get-forgot-password-token';
 export { resetPasswordHandler } from './reset-password';
+export { cancelRegistrationHandler } from './cancel-registration';

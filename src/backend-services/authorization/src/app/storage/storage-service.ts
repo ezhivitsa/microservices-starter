@@ -50,4 +50,16 @@ export abstract class StorageService<
 
     return result[0] || null;
   }
+
+  async deleteByFilter(filter: UF): Promise<void> {
+    const where = this._buildUpdateWhere(filter);
+
+    await this._Model.destroy({ where });
+  }
+
+  async deleteById(id: string): Promise<void> {
+    await this.deleteByFilter({
+      id,
+    } as UF);
+  }
 }

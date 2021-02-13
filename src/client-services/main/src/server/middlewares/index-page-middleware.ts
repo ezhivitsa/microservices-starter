@@ -41,7 +41,6 @@ export const indexPageMiddleware: RouterAppMiddleware = async (ctx: RouterAppCon
     apiGatewayUrl,
   };
 
-  console.log('url: ', ctx.url);
   if (!ctx.url.startsWith(config.frontUpstreams.auth.rule)) {
     const user = await getUser(ctx);
 

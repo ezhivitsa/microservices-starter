@@ -4,6 +4,7 @@ import { ProviderTypes } from 'providers';
 
 import {
   RegisterParams,
+  CancelRegisterParams,
   RegisterResult,
   GetAccessTokenParams,
   AccessToken,
@@ -37,6 +38,10 @@ export async function register(
 ): Promise<RegisterResult | null> {
   const { id, signupToken } = await authorizationClient.registrationCommand(params, metadata);
   return id && signupToken ? { id, signupToken } : null;
+}
+
+export async function cancelRegister(params: CancelRegisterParams, metadata: ProviderTypes.Metadata): Promise<void> {
+  return authorizationClient.cancelRegistrationCommand(params, metadata);
 }
 
 export async function getAccessToken(

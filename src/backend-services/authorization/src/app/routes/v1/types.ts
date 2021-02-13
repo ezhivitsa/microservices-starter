@@ -22,3 +22,5 @@ export type GetForgotPasswordTokenRequest = Required<AuthorizationTypes.GetForgo
 export type GetForgotPasswordTokenResponse = Required<AuthorizationTypes.GetForgotPasswordTokenResponse>;
 
 export type ResetPasswordRequest = Required<AuthorizationTypes.ResetPasswordRequest>;
+
+export type CancelRegistrationRequest = Required<AuthorizationTypes.CancelRegistrationRequest>;

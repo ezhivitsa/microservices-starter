@@ -2,6 +2,7 @@ import { KoaKafka, AppState, AppContext, Next } from '@packages/koa-kafka';
 import { AuthorizationTypes } from '@packages/communication';
 
 import { logger } from '@root/lib/logger';
+import { config } from '@root/lib/config';
 
 import { ServiceError, ServiceErrorCode } from '@root/services/errors';
 
@@ -31,8 +32,8 @@ export function initRoutes(app: KoaKafka<AppState, AppContext>): void {
         message,
       };
 
-      if (ctx.state.config.logServiceErrors || !(err instanceof ServiceError)) {
-        logger.error(error);
+      if (config.logServiceErrors || !(err instanceof ServiceError)) {
+        logger.error({ ...error });
       }
 
       ctx.throw(error);

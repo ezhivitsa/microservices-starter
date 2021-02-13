@@ -20,13 +20,13 @@ export class KoaKafka<S extends Record<string, any> = Record<string, any>, C ext
   private _respond(ctx: Context<S>): void {
     const { body } = ctx;
 
-    if (body === undefined || !ctx.command) {
+    if (!ctx.command) {
       return;
     }
 
     this._kafka.sendReply(
       {
-        data: body,
+        data: body || null,
         channel: this._channel,
         command: ctx.command,
         correlationId: ctx.id,

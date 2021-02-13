@@ -90,3 +90,7 @@ export interface ResetPasswordParams {
 export interface GetUserByIdParams {
   id: string;
 }
+
+export interface DeleteUserParams {
+  id: string;
+}

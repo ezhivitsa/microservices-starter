@@ -5,6 +5,7 @@ import { Channel } from '../../channels';
 
 export enum AuthorizationCommand {
   Registration = 'registration',
+  CancelRegistration = 'cancel-registration',
   GetAccessToken = 'get-access-token',
   GetRefreshToken = 'get-refresh-token',
   GetUser = 'get-user',
@@ -24,6 +25,10 @@ export const authorizationCommandSchemas: Record<string, ChannelCommandSchema> =
       command: AuthorizationCommand.Registration,
       requestSchema: AuthorizationSchemas.registrationRequest,
       responseSchema: AuthorizationSchemas.registrationResponse,
+    },
+    {
+      command: AuthorizationCommand.CancelRegistration,
+      requestSchema: AuthorizationSchemas.cancelRegistrationRequest,
     },
     {
       command: AuthorizationCommand.GetAccessToken,

@@ -16,6 +16,11 @@ message RegistrationResponse {
   string signup_token = 2;
 }
 
+// CancelRegistration
+message CancelRegistrationRequest {
+  string id = 1;
+}
+
 enum Role {
   UNKNOWN = 0;
   USER = 1;

@@ -65,3 +65,7 @@ export function verifyScope(
 ): Promise<AuthorizationTypes.VerifyScopeResponse> {
   return authorizationClient.verifyScopeCommand(data, v1Metadata);
 }
+
+export function cancelRegistration(data: AuthorizationTypes.CancelRegistrationRequest): Promise<void> {
+  return authorizationClient.cancelRegistrationCommand(data, v1Metadata);
+}

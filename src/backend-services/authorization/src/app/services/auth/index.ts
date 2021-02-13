@@ -10,3 +10,4 @@ export { getUserByEmail } from './get-user-by-email';
 export { getForgotPasswordToken } from './get-forgot-password-token';
 export { resetPassword } from './reset-password';
 export { getUserById } from './get-user-by-id';
+export { deleteUser } from './delete-user';

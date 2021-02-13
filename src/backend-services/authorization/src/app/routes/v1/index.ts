@@ -13,6 +13,7 @@ import {
   getSignupTokenHandler,
   getForgotPasswordTokenHandler,
   resetPasswordHandler,
+  cancelRegistrationHandler,
 } from './handlers';
 import {
   registrationSchema,
@@ -26,6 +27,7 @@ import {
   getSignupTokenSchema,
   getForgotPasswordTokenSchema,
   resetPasswordSchema,
+  cancelRegistrationSchema,
 } from './validators';
 
 export function initV1Routes(app: KoaKafka<AppState, AppContext>): void {
@@ -36,6 +38,12 @@ export function initV1Routes(app: KoaKafka<AppState, AppContext>): void {
       schema: registrationSchema,
       handler: signUpHandler,
       validateUniq: true,
+    })
+    .handleCommand({
+      version: Version.v1,
+      command: AuthorizationCommand.CancelRegistration,
+      schema: cancelRegistrationSchema,
+      handler: cancelRegistrationHandler,
     })
     .handleCommand({
       version: Version.v1,
