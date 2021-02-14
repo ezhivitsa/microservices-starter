@@ -1,5 +1,5 @@
 import React, { ReactElement, ReactNode } from 'react';
-import { BrowserRouter, NavLink, Route, RouteComponentProps } from 'react-router-dom';
+import { BrowserRouter, NavLink, Route, RouteComponentProps, Redirect } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
 
 import { Types } from '@packages/common';
@@ -75,6 +75,9 @@ function LayoutRouter(): ReactElement {
   return (
     <CurrentUserStoreProvider value={useCreateCurrentUserStore()}>
       <BrowserRouter>
+        <Route exact path="/">
+          <Redirect to={dashboard.rule} />
+        </Route>
         <Route component={LayoutComponent} />
       </BrowserRouter>
     </CurrentUserStoreProvider>
