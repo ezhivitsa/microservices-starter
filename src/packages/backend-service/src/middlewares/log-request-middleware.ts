@@ -5,7 +5,7 @@ import { utils } from '@packages/logger';
 const LOG_DATA_LIMIT = 1024 * 6; // 8Kb
 
 export async function logRequestMiddleware(ctx: AppContext, next: Next): Promise<void> {
-  const { command, event, version, requestId } = ctx;
+  const { command, event, version, requestId, user } = ctx;
 
   ctx.onFinish((status: RequestStatus) => {
     const { startTime, logger } = ctx.state;
@@ -18,6 +18,7 @@ export async function logRequestMiddleware(ctx: AppContext, next: Next): Promise
         version,
         startTime: startTime && new Date(startTime),
         requestId,
+        user,
       },
       res: {
         time: startTime && Date.now() - startTime,

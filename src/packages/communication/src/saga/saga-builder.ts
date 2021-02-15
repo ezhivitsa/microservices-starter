@@ -1,8 +1,8 @@
 import { SagaStep, SagaAction } from './types';
 
-export class SagaStepData {
-  readonly action?: SagaAction;
-  readonly compensationAction?: SagaAction;
+export class SagaStepData<M> {
+  readonly action?: SagaAction<M>;
+  readonly compensationAction?: SagaAction<M>;
   readonly isRetriable: boolean;
 
   constructor({
@@ -10,8 +10,8 @@ export class SagaStepData {
     compensationAction,
     isRetriable,
   }: {
-    action?: SagaAction;
-    compensationAction?: SagaAction;
+    action?: SagaAction<M>;
+    compensationAction?: SagaAction<M>;
     isRetriable: boolean;
   }) {
     this.action = action;
@@ -20,18 +20,18 @@ export class SagaStepData {
   }
 }
 
-export class SagaBuilder {
-  private _steps: SagaStep[] = [];
+export class SagaBuilder<M> {
+  private _steps: SagaStep<M>[] = [];
 
   constructor() {
     this._steps.push({});
   }
 
-  get _lastStep(): SagaStep {
+  get _lastStep(): SagaStep<M> {
     return this._steps[this._steps.length - 1];
   }
 
-  get _retriableTransactions(): SagaStep[] {
+  get _retriableTransactions(): SagaStep<M>[] {
     let pivotIndex = 0;
 
     for (let i = this._steps.length - 1; i >= 0; i -= 1) {
@@ -45,12 +45,12 @@ export class SagaBuilder {
     return this._steps.slice(pivotIndex);
   }
 
-  invokeParticipant(action: SagaAction): SagaBuilder {
+  invokeParticipant(action: SagaAction<M>): SagaBuilder<M> {
     this._lastStep.action = action;
     return this;
   }
 
-  withCompensation(action: SagaAction): SagaBuilder {
+  withCompensation(action: SagaAction<M>): SagaBuilder<M> {
     this._lastStep.compensationAction = action;
     return this;
   }
@@ -59,7 +59,7 @@ export class SagaBuilder {
     this._steps.push({});
   }
 
-  build(): SagaStepData[] {
+  build(): SagaStepData<M>[] {
     const retriableTransactions = this._retriableTransactions;
 
     return this._steps.map((step) => {

@@ -1,15 +1,13 @@
-import { CommandMetadata } from '../kafka/types';
-
 import { SagaBuilder, SagaStepData } from './saga-builder';
 import { SagaAction } from './types';
 
-export abstract class Saga {
+export abstract class Saga<M> {
   private _buildEnded = false;
-  private _builder?: SagaBuilder;
+  private _builder?: SagaBuilder<M>;
 
-  protected _sagaDefinition: SagaStepData[] = [];
+  protected _sagaDefinition: SagaStepData<M>[] = [];
 
-  step(): Saga {
+  step(): Saga<M> {
     if (!this._builder) {
       this._builder = new SagaBuilder();
     } else if (!this._buildEnded) {
@@ -19,7 +17,7 @@ export abstract class Saga {
     return this;
   }
 
-  invokeParticipant(action: SagaAction): Saga {
+  invokeParticipant(action: SagaAction<M>): Saga<M> {
     if (!this._buildEnded) {
       this._builder?.invokeParticipant(action);
     }
@@ -27,7 +25,7 @@ export abstract class Saga {
     return this;
   }
 
-  withCompensation(action: SagaAction): Saga {
+  withCompensation(action: SagaAction<M>): Saga<M> {
     if (!this._buildEnded) {
       this._builder?.withCompensation(action);
     }
@@ -35,13 +33,13 @@ export abstract class Saga {
     return this;
   }
 
-  build(): SagaStepData[] {
+  build(): SagaStepData<M>[] {
     this._buildEnded = true;
     return this._builder?.build() || [];
   }
 
-  async start(meta: CommandMetadata): Promise<void> {
-    const compensateStack: SagaAction[] = [];
+  async start(meta: M): Promise<void> {
+    const compensateStack: SagaAction<M>[] = [];
 
     try {
       for (let i = 0; i < this._sagaDefinition.length; i += 1) {

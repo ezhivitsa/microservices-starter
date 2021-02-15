@@ -1,6 +1,7 @@
-import { Saga, CommandMetadata } from '@packages/communication';
+import { Saga } from '@packages/communication';
 
 import { AuthProvider, AuthProviderTypes, UsersProvider, EmailProvider } from 'providers';
+import { ServiceMetadata } from 'services/types';
 
 import { RegisterParams } from '../types';
 
@@ -13,19 +14,19 @@ export class RegisterSagaState {
     return this._authData?.signupToken || '';
   }
 
-  authRegister = async (metadata: CommandMetadata): Promise<void> => {
+  authRegister = async (metadata: ServiceMetadata): Promise<void> => {
     const authData = await AuthProvider.register(this._data, metadata);
     this._authData = authData || undefined;
   };
 
-  cancelAuthRegister = async (metadata: CommandMetadata): Promise<void> => {
+  cancelAuthRegister = async (metadata: ServiceMetadata): Promise<void> => {
     const id = this._authData?.id;
     if (id) {
       await AuthProvider.cancelRegister({ id }, metadata);
     }
   };
 
-  usersRegister = async (metadata: CommandMetadata): Promise<void> => {
+  usersRegister = async (metadata: ServiceMetadata): Promise<void> => {
     const authData = this._authData;
 
     if (!authData) {
@@ -43,7 +44,7 @@ export class RegisterSagaState {
     );
   };
 
-  sendSignupEmail = async (metadata: CommandMetadata): Promise<void> => {
+  sendSignupEmail = async (metadata: ServiceMetadata): Promise<void> => {
     const token = this._authData?.signupToken;
 
     if (!token) {
@@ -62,7 +63,7 @@ export class RegisterSagaState {
   };
 }
 
-export class RegisterSaga extends Saga {
+export class RegisterSaga extends Saga<ServiceMetadata> {
   constructor(state: RegisterSagaState) {
     super();
 

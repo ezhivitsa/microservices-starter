@@ -18,6 +18,7 @@ export const errorsTexts = {
     );
   },
   resendBtn: 'resend',
+  invalidCredentials: 'Invalid email or password',
 };
 
 export const signInFormTexts = {

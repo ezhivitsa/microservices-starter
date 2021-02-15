@@ -6,6 +6,8 @@ export {
   logLevel,
   getResponseChannel,
   CommandMetadata,
+  CommandUser,
+  CommandUserRole,
 } from './kafka';
 export * from './proto-messages';
 export * from './clients';

@@ -21,7 +21,8 @@ import { PromiseProvider } from './promise-provider';
 
 import { CHANNEL_HEADER, COMMAND_HEADER, REPLY_CORRELATION_ID_HEADER, VERSION_HEADER } from './constants';
 
-export const getResponseChannel = (groupId: string): string => `${groupId}-response`;
+const responseId = v4();
+export const getResponseChannel = (groupId: string): string => `${groupId}-response-${responseId}`;
 
 export class KafkaCommand {
   private readonly _producer: Producer;
@@ -36,11 +37,7 @@ export class KafkaCommand {
     this._responseChannel = getResponseChannel(consumerConfig.groupId);
 
     this._producer = new Producer(this._kafka, producerConfig);
-    this._consumer = new Consumer(
-      this._kafka,
-      { ...consumerConfig, groupId: `${consumerConfig.groupId}-command-${v4()}` },
-      this._handleMessage,
-    );
+    this._consumer = new Consumer(this._kafka, consumerConfig, this._handleMessage);
     this._consumer.subscribeToTopic(this._responseChannel);
   }
 

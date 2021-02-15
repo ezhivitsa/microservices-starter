@@ -9,6 +9,7 @@ type PartialRecord<K extends keyof any, T> = {
 export const mapErrorToMessage: PartialRecord<Errors.ErrorType, string> = {
   [Errors.CommonErrorType.General]: errorsTexts.general,
   [Errors.AuthorizationErrorType.DuplicateEmail]: errorsTexts.duplicateEmail,
+  [Errors.AuthorizationErrorType.InvalidCredentials]: errorsTexts.invalidCredentials,
 };
 
 export const mapVerifyErrorToMessage = errorsTexts.emailNotVerified;

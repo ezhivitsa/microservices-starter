@@ -2,10 +2,22 @@ import { Command, Event } from '../proto-messages';
 import { Version } from '../messages';
 import { Channel } from '../channels';
 
+export enum CommandUserRole {
+  User = 'user',
+  Admin = 'admin',
+  OrganizationAdmin = 'organization-admin',
+}
+
+export interface CommandUser {
+  id: string;
+  roles: CommandUserRole[];
+}
+
 export interface CommandMetadata {
   requestId: string;
   version: Version;
   responseChannel: string;
+  user?: CommandUser;
 }
 
 export interface EventMetadata {
@@ -34,6 +46,7 @@ export interface ListenCommandMessageData {
   command: Command;
   version: Version;
   responseChannel: string;
+  user?: CommandUser;
   data?: any;
 }
 

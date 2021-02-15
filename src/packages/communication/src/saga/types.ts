@@ -1,8 +1,6 @@
-import { CommandMetadata } from '../kafka/types';
+export type SagaAction<M> = (meta: M) => Promise<void>;
 
-export type SagaAction = (meta: CommandMetadata) => Promise<void>;
-
-export interface SagaStep {
-  action?: SagaAction;
-  compensationAction?: SagaAction;
+export interface SagaStep<M> {
+  action?: SagaAction<M>;
+  compensationAction?: SagaAction<M>;
 }

@@ -1,5 +1,5 @@
 import { RouterAppContext, User } from 'koa';
-import { Request, Response } from 'oauth2-server';
+import { Request, Response, Token, InvalidGrantError } from 'oauth2-server';
 
 import { ServiceTypes, Errors } from '@packages/common';
 
@@ -35,7 +35,15 @@ export async function signInHandler(ctx: RouterAppContext): Promise<void> {
   });
   const res = new Response(ctx.response);
 
-  const token = await ctx.oauth.token(req, res);
+  let token: Token;
+  try {
+    token = await ctx.oauth.token(req, res);
+  } catch (err) {
+    if (err instanceof InvalidGrantError) {
+      throw new ApiError(Errors.AuthorizationErrorType.InvalidCredentials);
+    }
+    throw err;
+  }
 
   if (res.headers) {
     ctx.set(res.headers);

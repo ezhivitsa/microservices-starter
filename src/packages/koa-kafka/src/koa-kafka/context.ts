@@ -1,4 +1,4 @@
-import { Kafka, KafkaHandlerError, Command, Event, Version, Channel } from '@packages/communication';
+import { Kafka, KafkaHandlerError, Command, Event, Version, Channel, CommandUser } from '@packages/communication';
 
 import { ListenData, RequestStatus } from './types';
 
@@ -33,6 +33,10 @@ export class Context<S extends Record<string, any> = Record<string, any>> {
 
   get version(): Version {
     return this._data.version;
+  }
+
+  get user(): CommandUser | undefined {
+    return this._data.user;
   }
 
   get responseChannel(): string | undefined {

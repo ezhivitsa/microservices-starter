@@ -10,6 +10,7 @@ import {
   COMMAND_HEADER,
   COMMAND_MESSAGE_ID_HEADER,
   COMMAND_REQUEST_ID_HEADER,
+  COMMAND_USER_HEADER,
   REPLY_CORRELATION_ID_HEADER,
   REPLY_ERROR,
   EVENT_HEADER,
@@ -39,7 +40,7 @@ export function getCommandMessage<D>(
     ];
   const messageId = uuidv4();
 
-  const message = {
+  const message: Message = {
     value: commandSchema.requestSchema?.encode(commandData.data) || null,
     headers: {
       [CHANNEL_HEADER]: commandData.channel,
@@ -50,6 +51,10 @@ export function getCommandMessage<D>(
       [RESPONSE_CHANNEL_HEADER]: responseChannel,
     },
   };
+
+  if (metadata.user && message.headers) {
+    message.headers[COMMAND_USER_HEADER] = JSON.stringify(metadata.user);
+  }
 
   return {
     id: messageId,

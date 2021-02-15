@@ -2,6 +2,8 @@ import { authorizationClient } from 'lib/clients';
 
 import { ProviderTypes } from 'providers';
 
+import { mapMetadataToProto } from '../converters';
+
 import {
   RegisterParams,
   CancelRegisterParams,
@@ -36,19 +38,19 @@ export async function register(
   params: RegisterParams,
   metadata: ProviderTypes.Metadata,
 ): Promise<RegisterResult | null> {
-  const { id, signupToken } = await authorizationClient.registrationCommand(params, metadata);
+  const { id, signupToken } = await authorizationClient.registrationCommand(params, mapMetadataToProto(metadata));
   return id && signupToken ? { id, signupToken } : null;
 }
 
 export async function cancelRegister(params: CancelRegisterParams, metadata: ProviderTypes.Metadata): Promise<void> {
-  return authorizationClient.cancelRegistrationCommand(params, metadata);
+  return authorizationClient.cancelRegistrationCommand(params, mapMetadataToProto(metadata));
 }
 
 export async function getAccessToken(
   params: GetAccessTokenParams,
   metadata: ProviderTypes.Metadata,
 ): Promise<AccessToken | null> {
-  const result = await authorizationClient.getAccessTokenCommand(params, metadata);
+  const result = await authorizationClient.getAccessTokenCommand(params, mapMetadataToProto(metadata));
   return mapAccessTokenDataToClient(result);
 }
 
@@ -56,37 +58,40 @@ export async function getRefreshToken(
   params: GetRefreshTokenParams,
   metadata: ProviderTypes.Metadata,
 ): Promise<RefreshToken | null> {
-  const result = await authorizationClient.getRefreshTokenCommand(params, metadata);
+  const result = await authorizationClient.getRefreshTokenCommand(params, mapMetadataToProto(metadata));
   return mapRefreshTokenDataToClient(result);
 }
 
 export async function getUser(params: GetUserParams, metadata: ProviderTypes.Metadata): Promise<User | null> {
-  const { user } = await authorizationClient.getUserCommand(params, metadata);
+  const { user } = await authorizationClient.getUserCommand(params, mapMetadataToProto(metadata));
   return user ? mapUserDataToClient(user) : null;
 }
 
 export async function saveToken(params: SaveTokenParams, metadata: ProviderTypes.Metadata): Promise<void> {
-  await authorizationClient.saveTokenCommand(mapSaveTokenToProto(params), metadata);
+  await authorizationClient.saveTokenCommand(mapSaveTokenToProto(params), mapMetadataToProto(metadata));
 }
 
 export async function revokeToken(params: RevokeTokenParams, metadata: ProviderTypes.Metadata): Promise<void> {
-  await authorizationClient.revokeTokenCommand(mapRevokeTokenToProto(params), metadata);
+  await authorizationClient.revokeTokenCommand(mapRevokeTokenToProto(params), mapMetadataToProto(metadata));
 }
 
 export async function verifyScope(params: VerifyScopeParams, metadata: ProviderTypes.Metadata): Promise<boolean> {
-  const result = await authorizationClient.verifyScopeCommand(mapVerifyScopeToProto(params), metadata);
+  const result = await authorizationClient.verifyScopeCommand(
+    mapVerifyScopeToProto(params),
+    mapMetadataToProto(metadata),
+  );
   return result.verified || false;
 }
 
 export function verifyEmail(params: VerifyEmailParams, metadata: ProviderTypes.Metadata): Promise<void> {
-  return authorizationClient.verifyEmailCommand(params, metadata);
+  return authorizationClient.verifyEmailCommand(params, mapMetadataToProto(metadata));
 }
 
 export async function getSignupToken(
   params: GetSignupTokenParams,
   metadata: ProviderTypes.Metadata,
 ): Promise<GetSignupTokenResult | null> {
-  const { id, token } = await authorizationClient.getSignupTokenCommand(params, metadata);
+  const { id, token } = await authorizationClient.getSignupTokenCommand(params, mapMetadataToProto(metadata));
   if (!id || !token) {
     return null;
   }
@@ -98,7 +103,7 @@ export async function getForgotPasswordToken(
   params: GetForgotPasswordTokenParams,
   metadata: ProviderTypes.Metadata,
 ): Promise<GetForgotPasswordTokenResult | null> {
-  const { id, token } = await authorizationClient.getForgotPasswordTokenCommand(params, metadata);
+  const { id, token } = await authorizationClient.getForgotPasswordTokenCommand(params, mapMetadataToProto(metadata));
   if (!id || !token) {
     return null;
   }
@@ -107,5 +112,5 @@ export async function getForgotPasswordToken(
 }
 
 export function resetPassword(params: ResetPasswordParams, metadata: ProviderTypes.Metadata): Promise<void> {
-  return authorizationClient.resetPasswordCommand(params, metadata);
+  return authorizationClient.resetPasswordCommand(params, mapMetadataToProto(metadata));
 }

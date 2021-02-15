@@ -1,4 +1,4 @@
-import { Command, Event, Version } from '@packages/communication';
+import { Command, Event, Version, CommandUser } from '@packages/communication';
 
 import { Context } from './context';
 
@@ -19,6 +19,7 @@ export interface ListenData {
   id: string;
   version: Version;
   requestId?: string;
+  user?: CommandUser;
   data?: any;
   responseChannel?: string;
 }

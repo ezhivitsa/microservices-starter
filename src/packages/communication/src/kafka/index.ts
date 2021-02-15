@@ -5,4 +5,4 @@ export { KafkaJsMock } from './kafka-mock';
 export { getResponseChannel } from './kafka-command';
 export { KafkaHandlerError } from './errors';
 
-export { CommandMetadata } from './types';
+export { CommandMetadata, CommandUser, CommandUserRole } from './types';

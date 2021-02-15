@@ -4,13 +4,14 @@ import { Command, commandSchemas } from '../proto-messages';
 import { getChannelKey, Version } from '../messages';
 import { getRequestChannel, Channel } from '../channels';
 
-import { ListenCommandCallback } from './types';
+import { ListenCommandCallback, CommandUser } from './types';
 import { Consumer } from './consumer';
 import {
   CHANNEL_HEADER,
   COMMAND_HEADER,
   COMMAND_MESSAGE_ID_HEADER,
   COMMAND_REQUEST_ID_HEADER,
+  COMMAND_USER_HEADER,
   RESPONSE_CHANNEL_HEADER,
   VERSION_HEADER,
 } from './constants';
@@ -45,12 +46,14 @@ export class KafkaCommandHandler {
     }
 
     const value = message.value ? commandSchema.requestSchema?.decode(message.value) || null : null;
+    const userHeader = headers[COMMAND_USER_HEADER];
 
     this._listenCommandCallback?.({
       command,
       id: headers[COMMAND_MESSAGE_ID_HEADER] as string,
       requestId: headers[COMMAND_REQUEST_ID_HEADER] as string,
       responseChannel: headers[RESPONSE_CHANNEL_HEADER] as string,
+      user: userHeader ? (JSON.parse(userHeader.toString()) as CommandUser) : undefined,
       version,
       data: value,
     });

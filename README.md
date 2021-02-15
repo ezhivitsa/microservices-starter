@@ -19,5 +19,3 @@ To write commands like installing npm dependencies we use `make` to write approp
 
 ## ToDo list:
 1) add event sourcing to one backend service
-2) add user information to kafka message headers
-3) add jest tests to packages/client

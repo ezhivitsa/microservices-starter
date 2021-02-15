@@ -5,7 +5,7 @@
   "typings": "dist/index.d.ts",
   "scripts": {
     "build": "yarn g:tsc",
-    "lint": "yarn g:lint:eslint && yarn g:lint:tsc"
+    "lint": "yarn g:lint:eslint && yarn g:lint:tsc && make run-test-unit"
   },
   "dependencies": {
     "@packages/common": "workspace:*",
