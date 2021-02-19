@@ -30,7 +30,7 @@ To write commands like installing npm dependencies we use `make` to write approp
 We use projects `lint-staged` and `husky` to start tests on changed files. For example if you have changed files in authorization backend service we will start unit tests and lint tests for this service before commit.
 
 ## ToDo list:
-1) add event sourcing to one backend service
+1. add event sourcing to one backend service
 
 ## License
 

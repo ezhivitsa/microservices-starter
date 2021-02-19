@@ -145,7 +145,17 @@ export class KoaKafka<S extends Record<string, any> = Record<string, any>, C ext
     return this;
   }
 
-  handleEvent({ version, event, handler }: { version: Version; event: Event; handler: Middleware<C> }): KoaKafka {
+  handleEvent({
+    version,
+    event,
+    channel,
+    handler,
+  }: {
+    version: Version;
+    event: Event;
+    channel: Channel;
+    handler: Middleware<C>;
+  }): KoaKafka {
     const middleware = async (ctx: C, next: Next): Promise<void> => {
       if (ctx.event !== event || ctx.version !== version) {
         await next();
@@ -166,7 +176,7 @@ export class KoaKafka<S extends Record<string, any> = Record<string, any>, C ext
     };
 
     this._middlewares.push(middleware as any);
-    this._kafka.handleEvent(this._channel, event, version);
+    this._kafka.handleEvent(channel, event, version);
     return this;
   }
 }
