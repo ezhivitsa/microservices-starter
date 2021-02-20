@@ -16,8 +16,13 @@ export interface CommandUser {
 export interface CommandMetadata {
   requestId: string;
   version: Version;
-  responseChannel: string;
   user?: CommandUser;
+}
+
+export interface ReplyCommandMetadata {
+  requestId: string;
+  version: Version;
+  responseChannel: string;
 }
 
 export interface EventMetadata {

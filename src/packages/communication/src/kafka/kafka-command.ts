@@ -12,7 +12,7 @@ import {
   isMessageReply,
   isMessageReplyError,
 } from './messages';
-import { CommandData, CommandMetadata, ReplyData } from './types';
+import { CommandData, CommandMetadata, ReplyCommandMetadata, ReplyData } from './types';
 import { KafkaHandlerError } from './errors';
 
 import { Producer } from './producer';
@@ -22,7 +22,8 @@ import { PromiseProvider } from './promise-provider';
 import { CHANNEL_HEADER, COMMAND_HEADER, REPLY_CORRELATION_ID_HEADER, VERSION_HEADER } from './constants';
 
 const responseId = v4();
-export const getResponseChannel = (groupId: string): string => `${groupId}-response-${responseId}`;
+export const getResponseChannel = (groupId: string, applicationId: string = responseId): string =>
+  `${groupId}-response-${applicationId}`;
 
 export class KafkaCommand {
   private readonly _producer: Producer;
@@ -33,8 +34,13 @@ export class KafkaCommand {
 
   private readonly _responseChannel: string;
 
-  constructor(private _kafka: Kafka, consumerConfig: ConsumerConfig, producerConfig?: ProducerConfig) {
-    this._responseChannel = getResponseChannel(consumerConfig.groupId);
+  constructor(
+    private _kafka: Kafka,
+    consumerConfig: ConsumerConfig,
+    producerConfig?: ProducerConfig,
+    applicationId?: string,
+  ) {
+    this._responseChannel = getResponseChannel(consumerConfig.groupId, applicationId);
 
     this._producer = new Producer(this._kafka, producerConfig);
     this._consumer = new Consumer(this._kafka, consumerConfig, this._handleMessage);
@@ -109,12 +115,12 @@ export class KafkaCommand {
     });
   }
 
-  async sendReply<D>(replyData: ReplyData<D>, metadata: CommandMetadata): Promise<void> {
+  async sendReply<D>(replyData: ReplyData<D>, metadata: ReplyCommandMetadata): Promise<void> {
     const message = getCommandReplyMessage(replyData, metadata);
     await this._sendReplyMessage(message, metadata.responseChannel);
   }
 
-  async sendReplyError(errorData: ReplyData<KafkaHandlerError>, metadata: CommandMetadata): Promise<void> {
+  async sendReplyError(errorData: ReplyData<KafkaHandlerError>, metadata: ReplyCommandMetadata): Promise<void> {
     const message = getCommandReplyErrorMessage(errorData, metadata);
     await this._sendReplyMessage(message, metadata.responseChannel);
   }

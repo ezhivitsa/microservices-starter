@@ -8,6 +8,7 @@ import {
   CommandData,
   ReplyData,
   CommandMetadata,
+  ReplyCommandMetadata,
   EventData,
   EventMetadata,
   ListenCommandCallback,
@@ -24,6 +25,7 @@ import { KafkaJsMock } from './kafka-mock';
 
 interface Config {
   mock?: boolean;
+  applicationId?: string;
 }
 
 export class Kafka {
@@ -38,7 +40,7 @@ export class Kafka {
     this._kafka = config.mock ? ((new KafkaJsMock() as unknown) as Kafkajs) : new Kafkajs(config);
 
     this._kafkaCommandHandler = new KafkaCommandHandler(this._kafka, consumerConfig);
-    this._kafkaCommand = new KafkaCommand(this._kafka, consumerConfig, producerConfig);
+    this._kafkaCommand = new KafkaCommand(this._kafka, consumerConfig, producerConfig, config.applicationId);
     this._kafkaEventHandler = new KafkaEventHandler(this._kafka, consumerConfig);
     this._kafkaEvent = new KafkaEvent(this._kafka, producerConfig);
   }
@@ -47,11 +49,11 @@ export class Kafka {
     return this._kafkaCommand.sendCommand(commandData, metadata);
   }
 
-  sendReply<D>(replyData: ReplyData<D>, metadata: CommandMetadata): Promise<void> {
+  sendReply<D>(replyData: ReplyData<D>, metadata: ReplyCommandMetadata): Promise<void> {
     return this._kafkaCommand.sendReply(replyData, metadata);
   }
 
-  sendReplyError(errorData: ReplyData<KafkaHandlerError>, metadata: CommandMetadata): Promise<void> {
+  sendReplyError(errorData: ReplyData<KafkaHandlerError>, metadata: ReplyCommandMetadata): Promise<void> {
     return this._kafkaCommand.sendReplyError(errorData, metadata);
   }
 

@@ -19,7 +19,7 @@ import {
   RESPONSE_CHANNEL_HEADER,
 } from './constants';
 
-import { CommandData, CommandMetadata, EventMetadata, ReplyData, EventData } from './types';
+import { CommandData, CommandMetadata, ReplyCommandMetadata, EventMetadata, ReplyData, EventData } from './types';
 import { KafkaHandlerError } from './errors';
 
 export function getCommandMessage<D>(
@@ -62,7 +62,7 @@ export function getCommandMessage<D>(
   };
 }
 
-export function getCommandReplyMessage<D>(replyData: ReplyData<D>, metadata: CommandMetadata): Message {
+export function getCommandReplyMessage<D>(replyData: ReplyData<D>, metadata: ReplyCommandMetadata): Message {
   const commandSchema =
     commandSchemas[
       getChannelKey({
@@ -86,7 +86,7 @@ export function getCommandReplyMessage<D>(replyData: ReplyData<D>, metadata: Com
 
 export function getCommandReplyErrorMessage(
   replyErrorData: ReplyData<KafkaHandlerError>,
-  metadata: CommandMetadata,
+  metadata: ReplyCommandMetadata,
 ): Message {
   const commandSchema =
     commandSchemas[
