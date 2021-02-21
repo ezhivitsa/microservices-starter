@@ -72,3 +72,7 @@ const registerSaga = new RegisterSaga(state);
 
 await registerSaga.start(metadata);
 ```
+
+## Channel client 
+
+For every channel we have created client which contains methods to send commands and events. This is a preferable method to send commands and events. All clients can be found in the directory [src/clients](./src/clients).
