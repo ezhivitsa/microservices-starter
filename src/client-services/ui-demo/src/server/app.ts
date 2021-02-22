@@ -1,4 +1,4 @@
-import Koa from 'koa';
+import Koa, { AppKoaState, AppKoaContext } from 'koa';
 import cors from '@koa/cors';
 import Router from '@koa/router';
 
@@ -8,11 +8,11 @@ import { configMiddleware, prepareAssetsMiddleware, indexPageMiddleware } from '
 import { apiRouter } from './routes';
 
 const router = new Router();
-const app = new Koa();
+const app = new Koa<AppKoaState, AppKoaContext>();
 
 router.use(config.apiPath, apiRouter.routes()).get(/^((?!\.).)*$/, indexPageMiddleware);
 
-export async function initApp(): Promise<Koa> {
+export async function initApp(): Promise<Koa<AppKoaState, AppKoaContext>> {
   const assetsMiddleware = await prepareAssetsMiddleware();
 
   app

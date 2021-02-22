@@ -7,9 +7,6 @@
     "outDir": "../../out",
     "module": "CommonJS",
     "declaration": true,
-    "baseUrl": "./",
-    "paths": {
-      "common/*": ["../common/*"]
-    }
+    "baseUrl": "./"
   }
 }

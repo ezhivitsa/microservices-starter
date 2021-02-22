@@ -1,10 +1,10 @@
-import { Middleware, RouterContext } from '@koa/router';
+import { RouterAppMiddleware, RouterAppContext } from 'koa';
 
 import { componentParam } from 'common/constants';
 
 import { getComponentMeta } from 'lib/prepare-components';
 
-export const getComponent: Middleware = (ctx: RouterContext): void => {
+export const getComponent: RouterAppMiddleware = (ctx: RouterAppContext): void => {
   const component = ctx.params[componentParam];
 
   const meta = getComponentMeta(component);

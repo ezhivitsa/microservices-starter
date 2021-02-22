@@ -1,4 +1,4 @@
-import { Middleware, RouterContext } from '@koa/router';
+import { RouterAppMiddleware, RouterAppContext } from 'koa';
 import { createElement } from 'react';
 import { renderToString } from 'react-dom/server';
 
@@ -9,7 +9,7 @@ import { config } from 'lib/config';
 
 import { IndexPage, IndexPageProps } from 'pages/index-page';
 
-export const indexPageMiddleware: Middleware = (ctx: RouterContext): void => {
+export const indexPageMiddleware: RouterAppMiddleware = (ctx: RouterAppContext): void => {
   const clientConfig: ClientConfig = {
     components: getComponentsWithDemo(),
     apiPath: config.apiPath,

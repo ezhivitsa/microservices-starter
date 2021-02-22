@@ -42,6 +42,10 @@ module.exports = ({
         'custom-properties': false
       }
     }),
-    cssnano()
+    cssnano({
+      preset: ['default', {
+        mergeRules: false
+      }]
+    })
   ]
 });

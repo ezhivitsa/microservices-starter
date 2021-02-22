@@ -16,10 +16,6 @@
     "strict": true,
     "outDir": "./dist",
 
-    "paths": {
-      // local aliases
-      "common/*": ["../common/*"]
-    },
     "typeRoots": [
       "./@types"
     ]
