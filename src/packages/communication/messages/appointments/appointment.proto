@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package microservices_starter.appointments.appointment;
+
+import "google/protobuf/timestamp.proto";
+import "../common/event.proto";
+
+// CreateAppointment
+message CreateAppointmentRequest {
+  string user_id = 1;
+  google.protobuf.Timestamp start = 2;
+  google.protobuf.Timestamp end = 3;
+  string description = 4;
+}
+
+// UpdateAppointment
+message UpdateAppointmentRequest {
+  string id = 1;
+  google.protobuf.Timestamp start = 2;
+  google.protobuf.Timestamp end = 3;
+  string description = 4;
+}
+
+// Delete Appointment
+message DeleteAppointmentRequest {
+  string id = 1;
+}
+
+// Events
+message AppointmentCreatedEvent {
+  string id = 1;
+  string user_id = 2;
+  google.protobuf.Timestamp start = 3;
+  google.protobuf.Timestamp end = 4;
+  string description = 5;
+
+  EventMeta metadata = 6;
+}
+
+message AppointmentUpdatedEvent {
+  string id = 1;
+  string user_id = 2;
+  google.protobuf.Timestamp start = 3;
+  google.protobuf.Timestamp end = 4;
+  string description = 5;
+
+  EventMeta metadata = 6;
+}
+
+message AppointmentDeletedEvent {
+  string id = 1;
+
+  EventMeta metadata = 2;
+}

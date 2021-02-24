@@ -2,21 +2,30 @@ import { AuthorizationCommand, authorizationCommandSchemas, AuthorizationTypes }
 import { UserCommand, UserEvent, userCommandSchemas, userEventSchemas, UserTypes } from './users';
 import { EmailCommand, emailCommandSchemas, EmailTypes } from './email';
 import { CommonTypes } from './common';
+import {
+  AppointmentCommand,
+  AppointmentEvent,
+  appointmentCommandSchemas,
+  appointmentEventSchemas,
+  AppointmentTypes,
+} from './appointments';
 
 import { ChannelCommandSchema, ChannelEventSchema } from '../messages';
 
-export type Command = AuthorizationCommand | UserCommand | EmailCommand;
+export type Command = AuthorizationCommand | UserCommand | EmailCommand | AppointmentCommand;
 
-export type Event = UserEvent;
+export type Event = UserEvent | AppointmentEvent;
 
 export const commandSchemas: Record<string, ChannelCommandSchema> = {
   ...authorizationCommandSchemas,
   ...userCommandSchemas,
   ...emailCommandSchemas,
+  ...appointmentCommandSchemas,
 };
 
 export const eventSchemas: Record<string, ChannelEventSchema> = {
   ...userEventSchemas,
+  ...appointmentEventSchemas,
 };
 
 export {
@@ -28,4 +37,7 @@ export {
   CommonTypes,
   EmailCommand,
   EmailTypes,
+  AppointmentCommand,
+  AppointmentEvent,
+  AppointmentTypes,
 };
