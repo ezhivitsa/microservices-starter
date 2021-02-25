@@ -1,0 +1,11 @@
+{
+  "moduleFileExtensions": ["js", "json", "ts"],
+  "moduleDirectories": ["@types", "node_modules"],
+  "testMatch": ["<rootDir>/src/tests/integration/**/*.(test|spec).(js|ts)?(x)"],
+  "setupFiles": ["<rootDir>/src/tests/setup.ts"],
+  "preset": "ts-jest",
+  "testEnvironment": "node",
+  "moduleNameMapper": {
+    "@root/(.*)": "<rootDir>/src/app/$1"
+  }
+}

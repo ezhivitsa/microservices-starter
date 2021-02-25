@@ -10,17 +10,13 @@ export const production: Config = {
     format: 'cloud',
   },
   kafka: {
-    clientId: 'authorization',
+    clientId: 'appointments',
     brokers: ['kafka:9092'],
     logLevel: logLevel.INFO,
   },
   kafkaConsumer: {
-    groupId: 'authorization',
+    groupId: 'appointments',
   },
   kafkaMock: false,
-  redis: {
-    host: 'localhost',
-    port: 6379,
-  },
   logServiceErrors: false,
 };
