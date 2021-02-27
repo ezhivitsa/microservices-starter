@@ -23,25 +23,37 @@ export interface DeleteAppointmentRequest {
 }
 
 // Events
-export interface AppointmentCreatedEvent {
+export interface AppointmentCreatedData {
   id?: string;
   userId?: string;
   start?: Timestamp;
   end?: Timestamp;
   description?: string;
+}
+
+export interface AppointmentCreatedEvent {
+  data?: AppointmentCreatedData;
   metadata?: CommonTypes.EventMeta;
+}
+
+export interface AppointmentUpdatedData {
+  id?: string;
+  userId?: string;
+  start?: Timestamp;
+  end?: Timestamp;
+  description?: string;
 }
 
 export interface AppointmentUpdatedEvent {
-  id?: string;
-  userId?: string;
-  start?: Timestamp;
-  end?: Timestamp;
-  description?: string;
+  data?: AppointmentUpdatedData;
   metadata?: CommonTypes.EventMeta;
 }
 
-export interface AppointmentDeletedEvent {
+export interface AppointmentDeletedData {
   id?: string;
+}
+
+export interface AppointmentDeletedEvent {
+  data?: AppointmentDeletedData;
   metadata?: CommonTypes.EventMeta;
 }

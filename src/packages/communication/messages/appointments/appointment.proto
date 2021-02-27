@@ -28,27 +28,36 @@ message DeleteAppointmentRequest {
 
 // Events
 message AppointmentCreatedEvent {
-  string id = 1;
-  string user_id = 2;
-  google.protobuf.Timestamp start = 3;
-  google.protobuf.Timestamp end = 4;
-  string description = 5;
+  message AppointmentCreatedData {
+    string id = 1;
+    string user_id = 2;
+    google.protobuf.Timestamp start = 3;
+    google.protobuf.Timestamp end = 4;
+    string description = 5;
+  }
 
-  EventMeta metadata = 6;
+  AppointmentCreatedData data = 1;
+  EventMeta metadata = 2;
 }
 
 message AppointmentUpdatedEvent {
-  string id = 1;
-  string user_id = 2;
-  google.protobuf.Timestamp start = 3;
-  google.protobuf.Timestamp end = 4;
-  string description = 5;
+  message AppointmentUpdatedData {
+    string id = 1;
+    string user_id = 2;
+    google.protobuf.Timestamp start = 3;
+    google.protobuf.Timestamp end = 4;
+    string description = 5;
+  }
 
-  EventMeta metadata = 6;
+  AppointmentUpdatedData data = 1;
+  EventMeta metadata = 2;
 }
 
 message AppointmentDeletedEvent {
-  string id = 1;
+  message AppointmentDeletedData {
+    string id = 1;
+  }
 
+  AppointmentDeletedData data = 1;
   EventMeta metadata = 2;
 }

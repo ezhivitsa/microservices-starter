@@ -1,5 +1,5 @@
 import { connect } from 'mongoose';
-import { initAppointment } from './appointment';
+import { AppointmentEvent } from './appointment-event';
 import { initCommand } from './command';
 
 import { url, options } from '../config';
@@ -7,9 +7,7 @@ import { url, options } from '../config';
 const mongo = connect(url, options);
 
 const db = {
-  sequelize,
-  Sequelize,
-  User: initAppointment(initAppointment),
+  AppointmentEvent,
   Command: initCommand(initAppointment),
 };
 

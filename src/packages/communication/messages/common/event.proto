@@ -6,4 +6,5 @@ import "google/protobuf/timestamp.proto";
 
 message EventMeta {
   google.protobuf.Timestamp created_at = 1;
+  string user_id = 2;
 }

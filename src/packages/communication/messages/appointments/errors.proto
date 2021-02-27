@@ -11,6 +11,7 @@ message Error {
     BAD_PROTO = 2;
     CONFLICT = 3;
     VALIDATION_FAILED = 4;
+    ACCESS_DENIED = 5;
   }
 
   ERROR_CODE code = 1;

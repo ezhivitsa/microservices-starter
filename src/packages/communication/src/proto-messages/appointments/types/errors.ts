@@ -6,6 +6,7 @@ export const enum ErrorCode {
   BadProto = 2,
   Conflict = 3,
   ValidationFailed = 4,
+  AccessDenied = 5,
 }
 
 export interface Error {

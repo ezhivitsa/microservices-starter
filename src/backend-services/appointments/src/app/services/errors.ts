@@ -18,11 +18,11 @@ export class ServiceError extends Error {
   }
 }
 
-export class DuplicateEmailError extends ServiceError {
+export class AccessDeniedError extends ServiceError {
   constructor() {
-    super('User with such email already exist', ServiceErrorCode.DuplicateEmail);
+    super("User don't have access to this action", ServiceErrorCode.AccessDenied);
 
-    Object.setPrototypeOf(this, DuplicateEmailError.prototype);
+    Object.setPrototypeOf(this, AccessDeniedError.prototype);
   }
 }
 
