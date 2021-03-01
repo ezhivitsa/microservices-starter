@@ -1,19 +1,18 @@
 import mongoose, { Schema, Model, Document } from 'mongoose';
 
-interface Counter {
-  id: string;
-  aggregateId: string;
+interface CounterData {
+  sequenceValue: number;
 }
 
-interface CounterDocument extends Counter, Document<string> {
+interface CounterDocument extends CounterData, Document<string> {
   id: string;
 }
 
 type CounterModel = Model<CounterDocument>;
 
 const counterSchema = new Schema<CounterDocument, CounterModel>({
-  aggregateId: {
-    type: String,
+  sequenceValue: {
+    type: Number,
     required: true,
   },
 });

@@ -1,5 +1,6 @@
 import { connect } from 'mongoose';
 import { AppointmentEvent } from './appointment-event';
+import { AppointmentSnapshot } from './appointment-snapshot';
 import { Command } from './command';
 import { Counter } from './counter';
 
@@ -9,6 +10,7 @@ const mongo = connect(url, options);
 
 const db = {
   AppointmentEvent,
+  AppointmentSnapshot,
   Command,
   Counter,
 };

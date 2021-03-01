@@ -1,6 +1,6 @@
 import mongoose, { Schema, Model, Document, SchemaDefinition } from 'mongoose';
 
-interface AppointmentSnapshotData {
+export interface AppointmentSnapshotData {
   userId: string;
   start: Date;
   end: Date;
@@ -9,16 +9,13 @@ interface AppointmentSnapshotData {
 }
 
 interface Snapshot<T> {
-  id: string;
   version: number;
   data: T;
 }
 
-export interface SnapshotDocument<T> extends Snapshot<T>, Document<string> {
-  id: string;
-}
+export interface SnapshotDocument<T> extends Snapshot<T>, Document<string> {}
 
-type AppointmentSnapshotDocument = SnapshotDocument<AppointmentSnapshotData>;
+export type AppointmentSnapshotDocument = SnapshotDocument<AppointmentSnapshotData>;
 type AppointmentSnapshotModel = Model<AppointmentSnapshotDocument>;
 
 const appointmentSnapshotDataSchema: SchemaDefinition = {
@@ -44,11 +41,7 @@ const appointmentSnapshotDataSchema: SchemaDefinition = {
   },
 };
 
-const shapshotSchema = new Schema<AppointmentSnapshotDocument, AppointmentSnapshotModel>({
-  id: {
-    type: String,
-    required: true,
-  },
+const snapshotSchema = new Schema<AppointmentSnapshotDocument, AppointmentSnapshotModel>({
   version: {
     type: Number,
     required: true,
@@ -56,4 +49,4 @@ const shapshotSchema = new Schema<AppointmentSnapshotDocument, AppointmentSnapsh
   data: appointmentSnapshotDataSchema,
 });
 
-export const AppointmentSnapshot = mongoose.model<AppointmentSnapshotDocument>('appointment-snapshots', shapshotSchema);
+export const AppointmentSnapshot = mongoose.model<AppointmentSnapshotDocument>('appointment-snapshots', snapshotSchema);

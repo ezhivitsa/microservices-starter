@@ -2,7 +2,7 @@ import mongoose, { Schema, Model, Document } from 'mongoose';
 
 import { Event } from '@packages/communication';
 
-interface EventMetadata {
+export interface EventMetadata {
   createdAt?: Date;
   userId?: string;
 }
