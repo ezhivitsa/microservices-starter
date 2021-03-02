@@ -10,6 +10,7 @@ export const url = `mongodb://${host}:${port}/${database}`;
 
 export const options: ConnectOptions = {
   useNewUrlParser: true,
+  useUnifiedTopology: true,
   auth: {
     user: username,
     password,

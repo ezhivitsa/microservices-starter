@@ -1,24 +1,16 @@
-import { connect } from 'mongoose';
-import { AppointmentEvent } from './appointment-event';
-import { AppointmentSnapshot } from './appointment-snapshot';
-import { Command } from './command';
-import { Counter } from './counter';
+import { createConnection } from 'mongoose';
+import { initAppointmentEvent } from './appointment-event';
+import { initAppointmentSnapshot } from './appointment-snapshot';
+import { initCommand } from './command';
+import { initCounter } from './counter';
 
 import { url, options } from '../config';
 
-const mongo = connect(url, options);
+const mongo = createConnection(url, options);
 
-const db = {
-  AppointmentEvent,
-  AppointmentSnapshot,
-  Command,
-  Counter,
+export const db = {
+  AppointmentEvent: initAppointmentEvent(mongo),
+  AppointmentSnapshot: initAppointmentSnapshot(mongo),
+  Command: initCommand(mongo),
+  Counter: initCounter(mongo),
 };
-
-Object.values(db).forEach((model: any) => {
-  if (model.associate) {
-    model.associate(db);
-  }
-});
-
-export default db;

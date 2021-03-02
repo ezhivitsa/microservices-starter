@@ -13,6 +13,10 @@ message CreateAppointmentRequest {
   string description = 4;
 }
 
+message CreateAppointmentResponse {
+  string id = 1;
+}
+
 // UpdateAppointment
 message UpdateAppointmentRequest {
   string id = 1;

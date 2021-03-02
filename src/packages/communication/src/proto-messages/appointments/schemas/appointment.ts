@@ -5,6 +5,10 @@ export const createAppointmentRequest = root.loadProtoMessage<AuthorizationTypes
   'microservices_starter.appointments.appointment.CreateAppointmentRequest',
 );
 
+export const createAppointmentResponse = root.loadProtoMessage<AuthorizationTypes.CreateAppointmentResponse>(
+  'microservices_starter.appointments.appointment.CreateAppointmentResponse',
+);
+
 export const updateAppointmentRequest = root.loadProtoMessage<AuthorizationTypes.UpdateAppointmentRequest>(
   'microservices_starter.appointments.appointment.UpdateAppointmentRequest',
 );

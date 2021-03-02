@@ -1,4 +1,4 @@
-import { Document, FilterQuery, UpdateQuery } from 'mongoose';
+import { Document, DocumentDefinition, FilterQuery, UpdateQuery } from 'mongoose';
 
 import { ReadOnlyStorageService } from './read-only-storage-service';
 
@@ -17,7 +17,7 @@ export abstract class StorageService<
   UD extends Record<string, any>,
   UF extends UpdateFilter
 > extends ReadOnlyStorageService<D, F> {
-  protected abstract _buildCreateValue(data: CD): D;
+  protected abstract _buildCreateValue(data: CD): D | DocumentDefinition<D>;
 
   protected abstract _buildUpdateValues(data: UD): UpdateQuery<D>;
 

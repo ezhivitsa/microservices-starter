@@ -9,6 +9,10 @@ export interface CreateAppointmentRequest {
   description?: string;
 }
 
+export interface CreateAppointmentResponse {
+  id?: string;
+}
+
 // UpdateAppointment
 export interface UpdateAppointmentRequest {
   id?: string;

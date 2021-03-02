@@ -1,11 +1,10 @@
-import mongoose, { Schema, Model, Document } from 'mongoose';
+import { Schema, Model, Document, Connection } from 'mongoose';
 
-interface CommandDocument extends Document<string> {
-  id: string;
-}
-
-type CommandModel = Model<CommandDocument>;
+export type CommandDocument = Document<string>;
+export type CommandModel = Model<CommandDocument>;
 
 const commandSchema = new Schema<CommandDocument, CommandModel>();
 
-export const Command = mongoose.model<CommandDocument>('commands', commandSchema);
+export function initCommand(mongo: Connection): CommandModel {
+  return mongo.model<CommandDocument>('commands', commandSchema);
+}

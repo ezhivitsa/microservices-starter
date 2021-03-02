@@ -1,4 +1,4 @@
-import mongoose, { Schema, Model, Document } from 'mongoose';
+import { Connection, Schema, Model, Document } from 'mongoose';
 
 interface CounterData {
   sequenceValue: number;
@@ -17,4 +17,6 @@ const counterSchema = new Schema<CounterDocument, CounterModel>({
   },
 });
 
-export const Counter = mongoose.model<CounterDocument>('counters', counterSchema);
+export function initCounter(mongo: Connection): CounterModel {
+  return mongo.model<CounterDocument>('counters', counterSchema);
+}

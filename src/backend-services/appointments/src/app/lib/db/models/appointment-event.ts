@@ -1,4 +1,4 @@
-import mongoose, { Schema, Model, Document } from 'mongoose';
+import { Schema, Model, Document, Connection } from 'mongoose';
 
 import { Event } from '@packages/communication';
 
@@ -45,4 +45,6 @@ const eventSchema = new Schema<EventDocument, EventModel>({
   },
 });
 
-export const AppointmentEvent = mongoose.model<EventDocument>('Appointment-events', eventSchema);
+export function initAppointmentEvent(mongo: Connection): EventModel {
+  return mongo.model<EventDocument>('Appointment-events', eventSchema);
+}

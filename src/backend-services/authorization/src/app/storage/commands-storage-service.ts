@@ -6,7 +6,7 @@ import {
   CommandAttributes,
   CommandCreationAttributes,
 } from '@root/lib/db/models/command';
-import db from '@root/lib/db/models';
+import { db } from '@root/lib/db/models';
 import { WhereOptions, FindOptions } from 'sequelize/types';
 
 import { StorageService } from './storage-service';

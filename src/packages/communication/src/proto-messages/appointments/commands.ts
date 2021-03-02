@@ -15,6 +15,7 @@ export const appointmentCommandSchemas: Record<string, ChannelCommandSchema> = g
     {
       command: AppointmentCommand.CreateAppointment,
       requestSchema: AppointmentSchemas.createAppointmentRequest,
+      responseSchema: AppointmentSchemas.createAppointmentResponse,
     },
     {
       command: AppointmentCommand.UpdateAppointment,
