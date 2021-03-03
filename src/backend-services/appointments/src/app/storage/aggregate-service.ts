@@ -5,7 +5,7 @@ import { Event } from '@packages/communication';
 import { EventMetadata, EventModel } from '@root/lib/db/models/appointment-event';
 import { SnapshotDocument } from '@root/lib/db/models/appointment-snapshot';
 import { generateId } from '@root/lib/db/utils';
-import db from '@root/lib/db/models';
+import { db } from '@root/lib/db/models';
 
 import { AggregateBuilder } from './aggregate-builder';
 
@@ -19,10 +19,10 @@ interface EventData {
 const SNAPSHOT_VERSION_GAP = 5;
 const SNAPSHOT_VERSION_THRESHOLD = 10;
 
-export abstract class AggregateService<D extends Record<string, any>, AB extends { new (): AggregateBuilder<D> }> {
+export abstract class AggregateService<D extends Record<string, any>> {
   protected abstract _EventModel: EventModel;
   protected abstract _SnapshotModel: Model<SnapshotDocument<D>>;
-  protected abstract _Builder: AB;
+  protected abstract _Builder: { new (): AggregateBuilder<D> };
 
   private async _getNextSequenceValue(aggregateId: string): Promise<number> {
     const sequenceDocument = await db.Counter.findByIdAndUpdate(

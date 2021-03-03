@@ -1,7 +1,6 @@
 export enum ServiceErrorCode {
   Unknown = 'unknown',
   NotFound = 'not-found',
-  AccessDenied = 'access-denied',
 }
 
 export class ServiceError extends Error {
@@ -15,14 +14,6 @@ export class ServiceError extends Error {
 
   get errorCode(): ServiceErrorCode {
     return this._errorCode;
-  }
-}
-
-export class AccessDeniedError extends ServiceError {
-  constructor() {
-    super("User don't have access to this action", ServiceErrorCode.AccessDenied);
-
-    Object.setPrototypeOf(this, AccessDeniedError.prototype);
   }
 }
 

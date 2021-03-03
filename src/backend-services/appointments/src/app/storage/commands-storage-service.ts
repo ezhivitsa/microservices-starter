@@ -45,3 +45,5 @@ export class CommandsStorageService extends StorageService<
     throw new Error('not implemented');
   }
 }
+
+export const commandsStorageService = new CommandsStorageService();

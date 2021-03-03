@@ -4,7 +4,7 @@ export interface AppointmentSnapshotData {
   userId: string;
   start: Date;
   end: Date;
-  description: string;
+  description?: string;
   deleted: boolean;
 }
 
@@ -16,7 +16,7 @@ interface Snapshot<T> {
 export interface SnapshotDocument<T> extends Snapshot<T>, Document<string> {}
 
 export type AppointmentSnapshotDocument = SnapshotDocument<AppointmentSnapshotData>;
-type AppointmentSnapshotModel = Model<AppointmentSnapshotDocument>;
+export type AppointmentSnapshotModel = Model<AppointmentSnapshotDocument>;
 
 const appointmentSnapshotDataSchema: SchemaDefinition = {
   userId: {
@@ -33,7 +33,7 @@ const appointmentSnapshotDataSchema: SchemaDefinition = {
   },
   description: {
     type: String,
-    required: true,
+    required: false,
   },
   deleted: {
     type: Boolean,
