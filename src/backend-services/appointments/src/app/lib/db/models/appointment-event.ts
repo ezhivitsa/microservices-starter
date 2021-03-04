@@ -3,7 +3,7 @@ import { Schema, Model, Document, Connection } from 'mongoose';
 import { Event } from '@packages/communication';
 
 export interface EventMetadata {
-  createdAt?: Date;
+  createdAt: Date;
   userId?: string;
 }
 
@@ -13,7 +13,7 @@ export interface DbEvent {
   aggregateId: string;
   version: number;
   metadata: EventMetadata;
-  data: Record<string, any>;
+  data?: Record<string, any>;
 }
 
 export interface EventDocument extends DbEvent, Document<string> {
@@ -38,6 +38,7 @@ const eventSchema = new Schema<EventDocument, EventModel>({
   metadata: {
     createdAt: {
       type: Date,
+      required: true,
     },
     userId: {
       type: String,

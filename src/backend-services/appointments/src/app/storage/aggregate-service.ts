@@ -13,7 +13,7 @@ interface EventData {
   type: Event;
   aggregateId: string;
   metadata: EventMetadata;
-  data: Record<string, any>;
+  data?: Record<string, any>;
 }
 
 const SNAPSHOT_VERSION_GAP = 5;

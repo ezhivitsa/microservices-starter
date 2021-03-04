@@ -1,5 +1,6 @@
-import { Kafka, KafkaHandlerError, Command, Event, Version, Channel, CommandUser } from '@packages/communication';
+import { Kafka, KafkaHandlerError, Command, Event, Version, Channel } from '@packages/communication';
 
+import { SessionUser } from './session-user';
 import { ListenData, RequestStatus } from './types';
 
 type FinishCallback = (status: RequestStatus) => void;
@@ -35,8 +36,8 @@ export class Context<S extends Record<string, any> = Record<string, any>> {
     return this._data.version;
   }
 
-  get user(): CommandUser | undefined {
-    return this._data.user;
+  get user(): SessionUser | undefined {
+    return this._data.user ? new SessionUser(this._data.user) : undefined;
   }
 
   get responseChannel(): string | undefined {
