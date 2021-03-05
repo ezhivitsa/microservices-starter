@@ -9,11 +9,10 @@ export const mapUserRoleToProto: Record<AuthProviderTypes.UserRole, CommandUserR
 };
 
 export function mapMetadataToProto(meta: ProviderTypes.Metadata): CommandMetadata {
-  const { requestId, responseChannel, version, user } = meta;
+  const { requestId, version, user } = meta;
 
   return {
     requestId,
-    responseChannel,
     version,
     user: user
       ? {

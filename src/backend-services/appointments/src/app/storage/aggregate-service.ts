@@ -22,7 +22,7 @@ const SNAPSHOT_VERSION_THRESHOLD = 10;
 export abstract class AggregateService<D extends Record<string, any>> {
   protected abstract _EventModel: EventModel;
   protected abstract _SnapshotModel: Model<SnapshotDocument<D>>;
-  protected abstract _Builder: { new (): AggregateBuilder<D> };
+  protected abstract _Builder: { new (aggregateId: string): AggregateBuilder<D> };
 
   private async _getNextSequenceValue(aggregateId: string): Promise<number> {
     const sequenceDocument = await db.Counter.findByIdAndUpdate(
@@ -81,7 +81,7 @@ export abstract class AggregateService<D extends Record<string, any>> {
     const lastEvent = events[events.length - 1];
     const lastEventVersion = lastEvent?.version || 0;
 
-    const builder = new this._Builder();
+    const builder = new this._Builder(id);
     return {
       data: builder.build(snapshot, events),
       version,

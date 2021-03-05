@@ -13,7 +13,7 @@ export abstract class AggregateBuilder<D> {
 
   protected abstract _initEvents(): void;
 
-  constructor() {
+  constructor(protected _aggregateId: string) {
     this._emitter = new EventEmitter();
     this._initEvents();
   }

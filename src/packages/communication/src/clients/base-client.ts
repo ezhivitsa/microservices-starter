@@ -2,11 +2,16 @@ import { Kafka } from '../kafka';
 import { CommandData, EventData } from '../kafka/types';
 
 import { Channel } from '../channels';
+import { Version } from '../messages';
 
-import { CommandMetadata, EventMetadata } from './types';
+import { CommandMetadata } from './types';
+
+interface ClientOptions {
+  version: Version;
+}
 
 export abstract class BaseClient<E extends Error> {
-  constructor(protected _kafka: Kafka) {}
+  constructor(protected _kafka: Kafka, protected _options: ClientOptions) {}
 
   abstract readonly _channel: Channel;
 
@@ -19,7 +24,10 @@ export abstract class BaseClient<E extends Error> {
           ...req,
           channel: this._channel,
         },
-        meta,
+        {
+          ...meta,
+          version: this._options.version,
+        },
       );
       return res;
     } catch (err) {
@@ -27,13 +35,15 @@ export abstract class BaseClient<E extends Error> {
     }
   }
 
-  protected _sendEvent<Req>(req: Omit<EventData<Req>, 'channel'>, meta: EventMetadata): void {
+  protected _sendEvent<Req>(req: Omit<EventData<Req>, 'channel'>): void {
     this._kafka.sendEvent(
       {
         ...req,
         channel: this._channel,
       },
-      meta,
+      {
+        version: this._options.version,
+      },
     );
   }
 }

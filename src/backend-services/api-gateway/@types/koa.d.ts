@@ -26,7 +26,6 @@ declare module 'koa' {
     validatedRequest: ValidateResult<any>;
     requestId: string;
     version: Version;
-    responseChannel: string;
     token?: string;
     refreshToken?: string;
     user: User;

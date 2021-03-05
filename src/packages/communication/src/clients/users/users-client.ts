@@ -1,10 +1,10 @@
-import { UserTypes, UserCommand, UserEvent } from '../../proto-messages';
+import { UserTypes, UserCommand, UserEvent, CommonTypes } from '../../proto-messages';
 
 import { KafkaHandlerError } from '../../kafka';
 import { Channel } from '../../channels';
 
 import { BaseClient } from '../base-client';
-import { CommandMetadata, EventMetadata } from '../types';
+import { CommandMetadata } from '../types';
 
 import { UsersError } from './users-error';
 
@@ -51,13 +51,13 @@ export class UsersClient extends BaseClient<UsersError> {
     return this._sendCommand({ data, command: UserCommand.UpdateUser }, metadata);
   }
 
-  userCreatedEvent(data: UserTypes.UserCreatedEvent, metadata: EventMetadata): void {
-    this._sendEvent(
-      {
+  userCreatedEvent(data: UserTypes.UserCreatedData, metadata: CommonTypes.EventMeta): void {
+    this._sendEvent<UserTypes.UserCreatedEvent>({
+      data: {
         data,
-        event: UserEvent.UserCreated,
+        metadata,
       },
-      metadata,
-    );
+      event: UserEvent.UserCreated,
+    });
   }
 }

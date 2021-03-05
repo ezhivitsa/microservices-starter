@@ -1,6 +1,7 @@
 import { Schema, Model, Document, SchemaDefinition, Connection } from 'mongoose';
 
 export interface AppointmentSnapshotData {
+  _id: string;
   userId: string;
   start: Date;
   end: Date;

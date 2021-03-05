@@ -1,3 +1,5 @@
+import { CommonTypes } from '../../common';
+
 // Registration
 export interface RegistrationRequest {
   authId?: string;
@@ -34,9 +36,14 @@ export interface UpdateUserResponse {
 }
 
 // Events
-export interface UserCreatedEvent {
+export interface UserCreatedData {
   id?: string;
   email?: string;
   firstName?: string;
   lastName?: string;
+}
+
+export interface UserCreatedEvent {
+  data?: UserCreatedData;
+  metadata?: CommonTypes.EventMeta;
 }

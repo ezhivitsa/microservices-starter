@@ -1,10 +1,10 @@
-import { AppointmentTypes, AppointmentCommand, AppointmentEvent } from '../../proto-messages';
+import { AppointmentTypes, AppointmentCommand, AppointmentEvent, CommonTypes } from '../../proto-messages';
 
 import { KafkaHandlerError } from '../../kafka';
 import { Channel } from '../../channels';
 
 import { BaseClient } from '../base-client';
-import { CommandMetadata, EventMetadata } from '../types';
+import { CommandMetadata } from '../types';
 
 import { AppointmentsError } from './appointments-error';
 
@@ -51,33 +51,33 @@ export class AppointmentsClient extends BaseClient<AppointmentsError> {
     );
   }
 
-  appointmentCreatedEvent(data: AppointmentTypes.AppointmentCreatedEvent, metadata: EventMetadata): void {
-    this._sendEvent(
-      {
+  appointmentCreatedEvent(data: AppointmentTypes.AppointmentCreatedData, metadata: CommonTypes.EventMeta): void {
+    this._sendEvent<AppointmentTypes.AppointmentCreatedEvent>({
+      data: {
         data,
-        event: AppointmentEvent.AppointmentCreated,
+        metadata,
       },
-      metadata,
-    );
+      event: AppointmentEvent.AppointmentCreated,
+    });
   }
 
-  appointmentUpdatedEvent(data: AppointmentTypes.AppointmentUpdatedEvent, metadata: EventMetadata): void {
-    this._sendEvent(
-      {
+  appointmentUpdatedEvent(data: AppointmentTypes.AppointmentUpdatedData, metadata: CommonTypes.EventMeta): void {
+    this._sendEvent<AppointmentTypes.AppointmentUpdatedEvent>({
+      data: {
         data,
-        event: AppointmentEvent.AppointmentUpdated,
+        metadata,
       },
-      metadata,
-    );
+      event: AppointmentEvent.AppointmentUpdated,
+    });
   }
 
-  appointmentDeletedEvent(data: AppointmentTypes.AppointmentDeletedEvent, metadata: EventMetadata): void {
-    this._sendEvent(
-      {
+  appointmentDeletedEvent(data: AppointmentTypes.AppointmentDeletedData, metadata: CommonTypes.EventMeta): void {
+    this._sendEvent<AppointmentTypes.AppointmentDeletedEvent>({
+      data: {
         data,
-        event: AppointmentEvent.AppointmentDeleted,
+        metadata,
       },
-      metadata,
-    );
+      event: AppointmentEvent.AppointmentDeleted,
+    });
   }
 }

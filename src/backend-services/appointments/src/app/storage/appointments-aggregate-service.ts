@@ -10,12 +10,9 @@ import { AggregateService } from './aggregate-service';
 import { AggregateBuilder } from './aggregate-builder';
 
 class AppointmentAggregateBuilder extends AggregateBuilder<AppointmentSnapshotData> {
-  constructor() {
-    super();
-  }
-
   private _handleAppointmentCreated(data: AppointmentCreatedData): void {
     this._data = {
+      _id: this._aggregateId,
       userId: data.userId,
       start: data.start,
       end: data.end,
