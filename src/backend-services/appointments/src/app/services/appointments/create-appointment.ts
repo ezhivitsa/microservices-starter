@@ -2,6 +2,7 @@ import { AppointmentEvent } from '@packages/communication';
 
 import { generateId } from '@root/lib/db/utils';
 
+import { AppointmentsProvider } from '@root/providers';
 import { appointmentsAggregateService } from '@root/storage';
 
 import { validateAccess } from './validators';
@@ -18,7 +19,9 @@ export async function createAppointment(params: CreateAppointmentParams, meta: M
     type: AppointmentEvent.AppointmentCreated,
     data: params,
   };
+
   await appointmentsAggregateService.saveEvent(event);
+  AppointmentsProvider.sendCreatedEvent(id, params, event.metadata);
 
   return id;
 }

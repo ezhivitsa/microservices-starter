@@ -5,20 +5,19 @@ import { appointmentsAggregateService } from '@root/storage';
 
 import { validateAccess, validateAppointmentActive } from './validators';
 import { getEventMetadata } from './utils';
-import { UpdateAppointmentParams, Metadata, AggregateEvent, AppointmentUpdatedData } from './types';
+import { DeleteAppointmentParams, Metadata, AggregateEvent } from './types';
 
-export async function updateAppointment(params: UpdateAppointmentParams, meta: Metadata): Promise<void> {
+export async function deleteAppointment(params: DeleteAppointmentParams, meta: Metadata): Promise<void> {
   let appointment = await appointmentsAggregateService.findById(params.id);
 
   appointment = validateAppointmentActive(appointment);
   validateAccess(meta.user, appointment.userId);
 
-  const event: AggregateEvent<AppointmentUpdatedData> = {
+  const event: AggregateEvent = {
     aggregateId: appointment._id,
     metadata: getEventMetadata(meta),
-    type: AppointmentEvent.AppointmentUpdated,
-    data: params,
+    type: AppointmentEvent.AppointmentDeleted,
   };
   await appointmentsAggregateService.saveEvent(event);
-  AppointmentsProvider.sendUpdatedEvent(appointment._id, params, event.metadata);
+  AppointmentsProvider.sendDeletedEvent(appointment._id, event.metadata);
 }

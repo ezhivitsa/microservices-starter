@@ -1,4 +1,4 @@
-import { AuthorizationClient, AuthorizationTypes, Version } from '@packages/communication';
+import { AuthorizationClient, AuthorizationTypes } from '@packages/communication';
 
 import { kafka } from '@root/lib/kafka';
 
@@ -6,8 +6,6 @@ const authorizationClient = new AuthorizationClient(kafka);
 
 const v1Metadata = {
   requestId: '1',
-  version: Version.v1,
-  responseChannel: 'response',
 };
 
 export function register(

@@ -6,7 +6,7 @@ import { initCounter } from './counter';
 
 import { url, options } from '../config';
 
-const mongo = createConnection(url, options);
+export const mongo = createConnection(url, options);
 
 export const db = {
   AppointmentEvent: initAppointmentEvent(mongo),

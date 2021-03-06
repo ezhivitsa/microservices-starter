@@ -1,4 +1,4 @@
-import { UsersClient, UserTypes, Version } from '@packages/communication';
+import { UsersClient, UserTypes } from '@packages/communication';
 
 import { kafka } from '@root/lib/kafka';
 
@@ -6,8 +6,6 @@ const usersClient = new UsersClient(kafka);
 
 const v1Metadata = {
   requestId: '1',
-  version: Version.v1,
-  responseChannel: 'response',
 };
 
 export function register(data: UserTypes.RegistrationRequest): Promise<void> {

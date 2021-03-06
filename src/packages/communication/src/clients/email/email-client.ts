@@ -2,6 +2,7 @@ import { EmailTypes, EmailCommand } from '../../proto-messages';
 
 import { KafkaHandlerError } from '../../kafka';
 import { Channel } from '../../channels';
+import { Version } from '../../messages';
 
 import { BaseClient } from '../base-client';
 import { CommandMetadata } from '../types';
@@ -10,6 +11,7 @@ import { EmailError } from './email-error';
 
 export class EmailClient extends BaseClient<EmailError> {
   _channel = Channel.EMAIL;
+  _version = Version.v1;
 
   _getClientError(err: Error): EmailError {
     const errorData =

@@ -2,6 +2,7 @@ import { UserTypes, UserCommand, UserEvent, CommonTypes } from '../../proto-mess
 
 import { KafkaHandlerError } from '../../kafka';
 import { Channel } from '../../channels';
+import { Version } from '../../messages';
 
 import { BaseClient } from '../base-client';
 import { CommandMetadata } from '../types';
@@ -10,6 +11,7 @@ import { UsersError } from './users-error';
 
 export class UsersClient extends BaseClient<UsersError> {
   _channel = Channel.USERS;
+  _version = Version.v1;
 
   _getClientError(err: Error): UsersError {
     const errorData =

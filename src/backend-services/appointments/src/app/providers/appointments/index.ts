@@ -2,20 +2,33 @@ import { appointmentsClient } from '@root/lib/clients';
 
 import { ProviderTypes } from '@root/providers';
 
-import { mapUserDataToClient } from './converters';
+import { mapEventMetadataToProto } from '../converters';
 
-import { AppointmentCreatedData, AppointmentUpdatedData, AppointmentDeletedData } from './types';
+import { mapAppointmentCreatedToProto, mapAppointmentUpdatedToProto } from './converters';
+import { AppointmentCreatedData, AppointmentUpdatedData } from './types';
 
-export function sendCreatedEvent(data: AppointmentCreatedData, metadata: ProviderTypes.EventMetadata): void {
-  appointmentsClient.appointmentCreatedEvent(data, metadata);
+export function sendCreatedEvent(
+  aggregateId: string,
+  data: AppointmentCreatedData,
+  metadata: ProviderTypes.EventMetadata,
+): void {
+  appointmentsClient.appointmentCreatedEvent(
+    mapAppointmentCreatedToProto(aggregateId, data),
+    mapEventMetadataToProto(metadata),
+  );
 }
 
-export async function sendUpdatedEvent(params: AppointmentUpdatedData, metadata: ProviderTypes.EventMetadata): Promise<void> {
-  const { user } = await usersClient.getUserByAuthIdCommand(params, mapMetadataToProto(metadata));
-  return user ? mapUserDataToClient(user) : null;
+export function sendUpdatedEvent(
+  aggregateId: string,
+  data: AppointmentUpdatedData,
+  metadata: ProviderTypes.EventMetadata,
+): void {
+  appointmentsClient.appointmentUpdatedEvent(
+    mapAppointmentUpdatedToProto(aggregateId, data),
+    mapEventMetadataToProto(metadata),
+  );
 }
 
-export async function SendDeletedEvent(params: AppointmentDeletedData, metadata: ProviderTypes.EventMetadata): void {
-  const { user } = await usersClient.updateUserCommand(params, mapMetadataToProto(metadata));
-  return user ? mapUserDataToClient(user) : null;
-}Promise<void>
+export function sendDeletedEvent(aggregateId: string, metadata: ProviderTypes.EventMetadata): void {
+  appointmentsClient.appointmentDeletedEvent({ id: aggregateId }, mapEventMetadataToProto(metadata));
+}

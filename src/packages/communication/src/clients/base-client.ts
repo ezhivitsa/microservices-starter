@@ -6,14 +6,11 @@ import { Version } from '../messages';
 
 import { CommandMetadata } from './types';
 
-interface ClientOptions {
-  version: Version;
-}
-
 export abstract class BaseClient<E extends Error> {
-  constructor(protected _kafka: Kafka, protected _options: ClientOptions) {}
+  constructor(protected _kafka: Kafka) {}
 
   abstract readonly _channel: Channel;
+  abstract readonly _version: Version;
 
   abstract _getClientError(err: Error): E;
 
@@ -26,7 +23,7 @@ export abstract class BaseClient<E extends Error> {
         },
         {
           ...meta,
-          version: this._options.version,
+          version: this._version,
         },
       );
       return res;
@@ -42,7 +39,7 @@ export abstract class BaseClient<E extends Error> {
         channel: this._channel,
       },
       {
-        version: this._options.version,
+        version: this._version,
       },
     );
   }

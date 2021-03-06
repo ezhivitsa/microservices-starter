@@ -2,6 +2,7 @@ import { AuthorizationTypes, AuthorizationCommand } from '../../proto-messages';
 
 import { KafkaHandlerError } from '../../kafka';
 import { Channel } from '../../channels';
+import { Version } from '../../messages';
 
 import { BaseClient } from '../base-client';
 import { CommandMetadata } from '../types';
@@ -10,6 +11,7 @@ import { AuthorizationError } from './authorization-error';
 
 export class AuthorizationClient extends BaseClient<AuthorizationError> {
   _channel = Channel.AUTHORIZATION;
+  _version = Version.v1;
 
   _getClientError(err: Error): AuthorizationError {
     const errorData =

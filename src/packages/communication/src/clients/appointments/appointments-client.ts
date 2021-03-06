@@ -2,6 +2,7 @@ import { AppointmentTypes, AppointmentCommand, AppointmentEvent, CommonTypes } f
 
 import { KafkaHandlerError } from '../../kafka';
 import { Channel } from '../../channels';
+import { Version } from '../../messages';
 
 import { BaseClient } from '../base-client';
 import { CommandMetadata } from '../types';
@@ -10,6 +11,7 @@ import { AppointmentsError } from './appointments-error';
 
 export class AppointmentsClient extends BaseClient<AppointmentsError> {
   _channel = Channel.APPOINTMENTS;
+  _version = Version.v1;
 
   _getClientError(err: Error): AppointmentsError {
     const errorData =
@@ -21,7 +23,10 @@ export class AppointmentsClient extends BaseClient<AppointmentsError> {
     return new AppointmentsError(errorData);
   }
 
-  createAppointmentCommand(data: AppointmentTypes.CreateAppointmentRequest, metadata: CommandMetadata): Promise<void> {
+  createAppointmentCommand(
+    data: AppointmentTypes.CreateAppointmentRequest,
+    metadata: CommandMetadata,
+  ): Promise<AppointmentTypes.CreateAppointmentResponse> {
     return this._sendCommand(
       {
         data,

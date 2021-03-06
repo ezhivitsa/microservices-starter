@@ -1,5 +1,5 @@
-import { AppointmentsClient, Version } from '@packages/communication';
+import { AppointmentsClient } from '@packages/communication';
 
 import { kafka } from './kafka';
 
-export const appointmentsClient = new AppointmentsClient(kafka, { version: Version.v1 });
+export const appointmentsClient = new AppointmentsClient(kafka);
