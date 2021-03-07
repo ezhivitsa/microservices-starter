@@ -11,7 +11,7 @@
     "@packages/server": "workspace:*",
     "joi": "17.4.0",
     "module-alias": "2.2.2",
-    "mongoose": "5.11.17"
+    "mongoose": "5.11.19"
   },
   "devDependencies": {
     "@packages/eslint-config": "workspace:*",
@@ -19,7 +19,6 @@
     "@types/joi": "17.2.3",
     "@types/long": "4.0.1",
     "@types/module-alias": "2.0.0",
-    "@types/mongoose": "5.10.3",
     "jest": "26.6.3",
     "nodemon": "2.0.7",
     "sequelize-cli": "6.2.0",

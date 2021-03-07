@@ -1,11 +1,15 @@
-import { AppointmentsClient, AppointmentTypes } from '@packages/communication';
+import { AppointmentsClient, AppointmentTypes, CommandUserRole, ClientCommandMetadata } from '@packages/communication';
 
 import { kafka } from '@root/lib/kafka';
 
 const appointmentsClient = new AppointmentsClient(kafka);
 
-const metadata = {
+const metadata: ClientCommandMetadata = {
   requestId: '1',
+  user: {
+    id: '1',
+    roles: [CommandUserRole.User, CommandUserRole.Admin, CommandUserRole.OrganizationAdmin],
+  },
 };
 
 export function createAppointment(
@@ -14,10 +18,10 @@ export function createAppointment(
   return appointmentsClient.createAppointmentCommand(data, metadata);
 }
 
-export function updateAppointment(data: UserTypes.GetUserByAuthIdRequest): Promise<UserTypes.GetUserByAuthIdResponse> {
-  return usersClient.getUserByAuthIdCommand(data, metadata);
+export function updateAppointment(data: AppointmentTypes.UpdateAppointmentRequest): Promise<void> {
+  return appointmentsClient.updateAppointmentCommand(data, metadata);
 }
 
-export function deleteAppointment(data: UserTypes.UpdateUserRequest): Promise<UserTypes.UpdateUserResponse> {
-  return usersClient.updateUserCommand(data, metadata);
+export function deleteAppointment(data: AppointmentTypes.DeleteAppointmentRequest): Promise<void> {
+  return appointmentsClient.deleteAppointmentCommand(data, metadata);
 }

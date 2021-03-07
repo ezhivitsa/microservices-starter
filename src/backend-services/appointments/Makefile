@@ -14,18 +14,23 @@ MONGO_AUTOTEST_VARS := MONGO_PORT=${MONGO_PORT_AUTOTEST} \
 	MONGO_USER=${MONGO_USER_AUTOTEST} \
 	MONGO_PASSWORD=${MONGO_PASSWORD_LOCAL} \
 
-DEV_VARS := NODE_ENV=development
-AUTOTEST_VARS := NODE_ENV=test OVERRIDE_ENV=testing
+# MONGO_AUTOTEST_VARS := MONGO_PORT=${MONGO_PORT_AUTOTEST} \
+# 	MONGO_HOST=${MONGO_HOST_LOCAL} \
+# 	MONGO_USER=${MONGO_USER_AUTOTEST} \
+# 	MONGO_PASSWORD=${MONGO_PASSWORD_LOCAL} \
+
+DEV_VARS := ${MONGO_DEV_VARS} NODE_ENV=development
+AUTOTEST_VARS := ${MONGO_AUTOTEST_VARS} NODE_ENV=test OVERRIDE_ENV=testing
 
 DOCKER_COMPOSE := docker-compose -f docker-compose.yaml $(DOCKER_COMPOSE_ADDITIONAL_FLAGS)
-DOCKER_COMPOSE_AUTOTEST := ${POSTGRES_AUTOTEST_VARS} ${DOCKER_COMPOSE}
+DOCKER_COMPOSE_AUTOTEST := ${AUTOTEST_VARS} ${DOCKER_COMPOSE}
 
 # -------------------------------------
 # dev targets
 # -------------------------------------
 .PHONY: dev
 dev:
-	${POSTGRES_DEV_VARS} npx nodemon \
+	${DEV_VARS} npx nodemon \
 		--config ./nodemon.json \
 		--legacy-watch \
 		-- \
@@ -66,14 +71,15 @@ db-test-stop:
 .PHONY: test-docker
 test-docker: db-test-stop
 test-docker: db-test-start
-test-docker: create-db-test migrate-test run-test
+test-docker: run-test
+# test-docker: create-db-test migrate-test run-test
 
 .PHONY: run-test
 run-test: run-test-integration
 
 .PHONY: run-test-integration
 run-test-integration:
-	${AUTOTEST_VARS} ${POSTGRES_AUTOTEST_VARS} \
+	${AUTOTEST_VARS} \
 	npx jest \
 		--config=jest-integration.config.json \
 		--passWithNoTests \
@@ -86,31 +92,31 @@ run-test-integration:
 # -------------------------------------
 .PHONY: migrate
 migrate:
-	$(DB_VARS) npx sequelize-cli db:migrate
+	$(ENV_VARS) npx sequelize-cli db:migrate
 
 .PHONY: create-db
 create-db:
-	$(DB_VARS) npx sequelize-cli db:create
+	$(ENV_VARS) npx sequelize-cli db:create
 
-.PHONY: migrate-local
-migrate-local: build
-migrate-local: DB_VARS=${MONGO_DEV_VARS} ${DEV_VARS}
-migrate-local: migrate
+# .PHONY: migrate-local
+# migrate-local: build
+# migrate-local: ENV_VARS=${DEV_VARS}
+# migrate-local: migrate
 
-.PHONY: migrate-test
-migrate-test: build
-migrate-test: DB_VARS=${MONGO_AUTOTEST_VARS} ${AUTOTEST_VARS}
-migrate-test: migrate
+# .PHONY: migrate-test
+# migrate-test: build
+# migrate-test: ENV_VARS=${AUTOTEST_VARS}
+# migrate-test: migrate
 
-.PHONE: create-db-local
-create-db-local: build
-create-db-local: DB_VARS=${MONGO_DEV_VARS} ${DEV_VARS}
-create-db-local: create-db
+# .PHONE: create-db-local
+# create-db-local: build
+# create-db-local: ENV_VARS=${DEV_VARS}
+# create-db-local: create-db
 
-.PHONE: create-db-test
-create-db-test: build
-create-db-test: DB_VARS=${MONGO_AUTOTEST_VARS} ${AUTOTEST_VARS}
-create-db-test: create-db
+# .PHONE: create-db-test
+# create-db-test: build
+# create-db-test: ENV_VARS=${AUTOTEST_VARS}
+# create-db-test: create-db
 
 # -------------------------------------
 # release targets

@@ -31,9 +31,8 @@ export abstract class StorageService<
     const values = this._buildUpdateValues(updateData);
     const where = this._buildUpdateWhere(filter);
 
-    const models = await this._Model.updateMany(where, values, { new: true }).exec();
-
-    return models;
+    await this._Model.updateMany(where, values, { new: true }).exec();
+    return this._Model.find(where);
   }
 
   async findByIdAndUpdate(id: string, updateData: UD, filter?: UF): Promise<D | null> {

@@ -15,7 +15,9 @@ services:
   redis-autotest:
     container_name: redis-autotest
     image: redis:6.0.9
-    command: ["redis-server", "--appendonly", "yes"]
+    command: ["redis-server", "--appendonly", "yes", "--requirepass", "$REDIS_PASSWORD"]
     hostname: redis
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
     ports:
-      - "6379:6379"
+      - ${REDIS_PORT}:6379

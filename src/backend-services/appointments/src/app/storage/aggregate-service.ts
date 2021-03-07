@@ -1,4 +1,4 @@
-import { Model, UpdateQuery } from 'mongoose';
+import { Model, UpdateQuery, FilterQuery } from 'mongoose';
 
 import { Event } from '@packages/communication';
 
@@ -34,6 +34,7 @@ export abstract class AggregateService<D extends Record<string, any>> {
         setDefaultsOnInsert: true,
       },
     ).exec();
+    console.log(sequenceDocument);
     return sequenceDocument.sequenceValue;
   }
 
@@ -55,7 +56,7 @@ export abstract class AggregateService<D extends Record<string, any>> {
             data,
           },
         } as unknown) as UpdateQuery<SnapshotDocument<D>>,
-        { upsert: true },
+        { upsert: true, new: true },
       )
       .exec();
   }
@@ -100,20 +101,27 @@ export abstract class AggregateService<D extends Record<string, any>> {
   }
 
   async saveEvent(eventData: EventData): Promise<void> {
-    const version = await this._getNextSequenceValue(eventData.aggregateId);
+    try {
+      const version = await this._getNextSequenceValue(eventData.aggregateId);
+      console.log(version);
 
-    await this._EventModel.create({
-      id: generateId(),
-      createdAt: new Date(),
-      type: eventData.type,
-      aggregateId: eventData.aggregateId,
-      version,
-      metadata: eventData.metadata,
-      data: eventData.data,
-    });
+      await this._EventModel.create({
+        id: generateId(),
+        createdAt: new Date(),
+        type: eventData.type,
+        aggregateId: eventData.aggregateId,
+        version,
+        metadata: eventData.metadata,
+        data: eventData.data,
+      });
 
-    if (version % SNAPSHOT_VERSION_GAP === 0) {
-      this._saveSnapshot(eventData.aggregateId);
+      if (version % SNAPSHOT_VERSION_GAP === 0) {
+        this._saveSnapshot(eventData.aggregateId);
+      }
+    } catch (err) {
+      console.log('---------------------');
+      console.log(err);
+      console.log('---------------------');
     }
   }
 }

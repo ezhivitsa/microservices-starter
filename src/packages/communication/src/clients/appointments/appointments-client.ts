@@ -5,7 +5,7 @@ import { Channel } from '../../channels';
 import { Version } from '../../messages';
 
 import { BaseClient } from '../base-client';
-import { CommandMetadata } from '../types';
+import { ClientCommandMetadata } from '../types';
 
 import { AppointmentsError } from './appointments-error';
 
@@ -25,7 +25,7 @@ export class AppointmentsClient extends BaseClient<AppointmentsError> {
 
   createAppointmentCommand(
     data: AppointmentTypes.CreateAppointmentRequest,
-    metadata: CommandMetadata,
+    metadata: ClientCommandMetadata,
   ): Promise<AppointmentTypes.CreateAppointmentResponse> {
     return this._sendCommand(
       {
@@ -36,7 +36,10 @@ export class AppointmentsClient extends BaseClient<AppointmentsError> {
     );
   }
 
-  updateAppointmentCommand(data: AppointmentTypes.UpdateAppointmentRequest, metadata: CommandMetadata): Promise<void> {
+  updateAppointmentCommand(
+    data: AppointmentTypes.UpdateAppointmentRequest,
+    metadata: ClientCommandMetadata,
+  ): Promise<void> {
     return this._sendCommand(
       {
         data,
@@ -46,7 +49,10 @@ export class AppointmentsClient extends BaseClient<AppointmentsError> {
     );
   }
 
-  deleteAppointmentCommand(data: AppointmentTypes.DeleteAppointmentRequest, metadata: CommandMetadata): Promise<void> {
+  deleteAppointmentCommand(
+    data: AppointmentTypes.DeleteAppointmentRequest,
+    metadata: ClientCommandMetadata,
+  ): Promise<void> {
     return this._sendCommand(
       {
         data,

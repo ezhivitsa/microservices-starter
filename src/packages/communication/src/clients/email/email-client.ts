@@ -5,7 +5,7 @@ import { Channel } from '../../channels';
 import { Version } from '../../messages';
 
 import { BaseClient } from '../base-client';
-import { CommandMetadata } from '../types';
+import { ClientCommandMetadata } from '../types';
 
 import { EmailError } from './email-error';
 
@@ -23,7 +23,7 @@ export class EmailClient extends BaseClient<EmailError> {
     return new EmailError(errorData);
   }
 
-  sendVerifyEmailCommand(data: EmailTypes.SendVerifyEmailRequest, metadata: CommandMetadata): Promise<void> {
+  sendVerifyEmailCommand(data: EmailTypes.SendVerifyEmailRequest, metadata: ClientCommandMetadata): Promise<void> {
     return this._sendCommand(
       {
         data,
@@ -35,7 +35,7 @@ export class EmailClient extends BaseClient<EmailError> {
 
   sendForgotPasswordEmailCommand(
     data: EmailTypes.SendForgotPasswordEmailRequest,
-    metadata: CommandMetadata,
+    metadata: ClientCommandMetadata,
   ): Promise<void> {
     return this._sendCommand(
       {

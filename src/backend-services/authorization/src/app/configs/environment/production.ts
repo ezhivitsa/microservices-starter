@@ -18,9 +18,5 @@ export const production: Config = {
     groupId: 'authorization',
   },
   kafkaMock: false,
-  redis: {
-    host: 'localhost',
-    port: 6379,
-  },
   logServiceErrors: false,
 };

@@ -12,7 +12,7 @@ export function initV1Routes(app: KoaKafka<AppState, AppContext>): void {
       command: AppointmentCommand.CreateAppointment,
       schema: createAppointmentSchema,
       handler: createAppointmentHandler,
-      validateUniq: true,
+      // validateUniq: true,
     })
     .handleCommand({
       version: Version.v1,

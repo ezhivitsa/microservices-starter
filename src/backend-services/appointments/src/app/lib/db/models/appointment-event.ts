@@ -1,4 +1,4 @@
-import { Schema, Model, Document, Connection } from 'mongoose';
+import mongoose, { Schema, Model, Document, Connection } from 'mongoose';
 
 import { Event } from '@packages/communication';
 
@@ -23,6 +23,10 @@ export interface EventDocument extends DbEvent, Document<string> {
 export type EventModel = Model<EventDocument>;
 
 const eventSchema = new Schema<EventDocument, EventModel>({
+  _id: {
+    type: String,
+    required: true,
+  },
   type: {
     type: String,
     required: true,
@@ -46,6 +50,10 @@ const eventSchema = new Schema<EventDocument, EventModel>({
   },
 });
 
-export function initAppointmentEvent(mongo: Connection): EventModel {
-  return mongo.model<EventDocument>('Appointment-events', eventSchema);
+// export function initAppointmentEvent(mongo: Connection): EventModel {
+//   return mongo.model<EventDocument>('Appointment-events', eventSchema);
+// }
+
+export function initAppointmentEvent(): EventModel {
+  return mongoose.model<EventDocument>('Appointment-events', eventSchema);
 }

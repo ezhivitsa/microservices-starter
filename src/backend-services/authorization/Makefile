@@ -12,20 +12,28 @@ POSTGRES_AUTOTEST_VARS := POSTGRES_PORT=${POSTGRES_PORT_AUTOTEST} \
 	POSTGRES_HOST=${POSTGRES_HOST_LOCAL} \
 	POSTGRES_DATABASE=${POSTGRES_DB_AUTOTEST} \
 	POSTGRES_USER=${POSTGRES_USER_AUTOTEST} \
-	POSTGRES_PASSWORD=${POSTGRES_PASSWORD_LOCAL} \
+	POSTGRES_PASSWORD=${POSTGRES_PASSWORD_LOCAL}
 
-DEV_VARS := NODE_ENV=development
-AUTOTEST_VARS := NODE_ENV=test OVERRIDE_ENV=testing
+REDIS_DEV_VARS := REDIS_PASSWORD=${REDIS_PASSWORD_LOCAL} \
+	REDIS_HOST=${REDIS_HOST_LOCAL} \
+	REDIS_PORT=${REDIS_PORT_DEV}
+
+REDIS_AUTOTEST_VARS := REDIS_PASSWORD=${REDIS_PASSWORD_LOCAL} \
+	REDIS_HOST=${REDIS_HOST_LOCAL} \
+	REDIS_PORT=${REDIS_PORT_AUTOTEST}
+
+DEV_VARS := ${POSTGRES_DEV_VARS} ${REDIS_DEV_VARS} NODE_ENV=development
+AUTOTEST_VARS := ${POSTGRES_AUTOTEST_VARS} ${REDIS_AUTOTEST_VARS} NODE_ENV=test OVERRIDE_ENV=testing
 
 DOCKER_COMPOSE := docker-compose -f docker-compose.yaml $(DOCKER_COMPOSE_ADDITIONAL_FLAGS)
-DOCKER_COMPOSE_AUTOTEST := ${POSTGRES_AUTOTEST_VARS} ${DOCKER_COMPOSE}
+DOCKER_COMPOSE_AUTOTEST := ${AUTOTEST_VARS} ${DOCKER_COMPOSE}
 
 # -------------------------------------
 # dev targets
 # -------------------------------------
 .PHONY: dev
 dev:
-	${POSTGRES_DEV_VARS} npx nodemon \
+	${DEV_VARS} npx nodemon \
 		--config ./nodemon.json \
 		--legacy-watch \
 		-- \
@@ -86,30 +94,30 @@ run-test-integration:
 # -------------------------------------
 .PHONY: migrate
 migrate:
-	$(DB_VARS) npx sequelize-cli db:migrate
+	$(ENV_VARS) npx sequelize-cli db:migrate
 
 .PHONY: create-db
 create-db:
-	$(DB_VARS) npx sequelize-cli db:create
+	$(ENV_VARS) npx sequelize-cli db:create
 
 .PHONY: migrate-local
 migrate-local: build
-migrate-local: DB_VARS=${POSTGRES_DEV_VARS} ${DEV_VARS}
+migrate-local: ENV_VARS=${DEV_VARS}
 migrate-local: migrate
 
 .PHONY: migrate-test
 migrate-test: build
-migrate-test: DB_VARS=${POSTGRES_AUTOTEST_VARS} ${AUTOTEST_VARS}
+migrate-test: ENV_VARS=${AUTOTEST_VARS}
 migrate-test: migrate
 
 .PHONE: create-db-local
 create-db-local: build
-create-db-local: DB_VARS=${POSTGRES_DEV_VARS} ${DEV_VARS}
+create-db-local: ENV_VARS=${DEV_VARS}
 create-db-local: create-db
 
 .PHONE: create-db-test
 create-db-test: build
-create-db-test: DB_VARS=${POSTGRES_AUTOTEST_VARS} ${AUTOTEST_VARS}
+create-db-test: ENV_VARS=${AUTOTEST_VARS}
 create-db-test: create-db
 
 # -------------------------------------

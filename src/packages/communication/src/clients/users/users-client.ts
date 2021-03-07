@@ -5,7 +5,7 @@ import { Channel } from '../../channels';
 import { Version } from '../../messages';
 
 import { BaseClient } from '../base-client';
-import { CommandMetadata } from '../types';
+import { ClientCommandMetadata } from '../types';
 
 import { UsersError } from './users-error';
 
@@ -23,7 +23,7 @@ export class UsersClient extends BaseClient<UsersError> {
     return new UsersError(errorData);
   }
 
-  registrationCommand(data: UserTypes.RegistrationRequest, metadata: CommandMetadata): Promise<void> {
+  registrationCommand(data: UserTypes.RegistrationRequest, metadata: ClientCommandMetadata): Promise<void> {
     return this._sendCommand(
       {
         data,
@@ -35,7 +35,7 @@ export class UsersClient extends BaseClient<UsersError> {
 
   getUserByAuthIdCommand(
     data: UserTypes.GetUserByAuthIdRequest,
-    metadata: CommandMetadata,
+    metadata: ClientCommandMetadata,
   ): Promise<UserTypes.GetUserByAuthIdResponse> {
     return this._sendCommand(
       {
@@ -48,7 +48,7 @@ export class UsersClient extends BaseClient<UsersError> {
 
   updateUserCommand(
     data: UserTypes.UpdateUserRequest,
-    metadata: CommandMetadata,
+    metadata: ClientCommandMetadata,
   ): Promise<UserTypes.UpdateUserResponse> {
     return this._sendCommand({ data, command: UserCommand.UpdateUser }, metadata);
   }

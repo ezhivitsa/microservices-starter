@@ -5,7 +5,7 @@ import { Channel } from '../../channels';
 import { Version } from '../../messages';
 
 import { BaseClient } from '../base-client';
-import { CommandMetadata } from '../types';
+import { ClientCommandMetadata } from '../types';
 
 import { AuthorizationError } from './authorization-error';
 
@@ -25,7 +25,7 @@ export class AuthorizationClient extends BaseClient<AuthorizationError> {
 
   registrationCommand(
     data: AuthorizationTypes.RegistrationRequest,
-    metadata: CommandMetadata,
+    metadata: ClientCommandMetadata,
   ): Promise<AuthorizationTypes.RegistrationResponse> {
     return this._sendCommand(
       {
@@ -38,7 +38,7 @@ export class AuthorizationClient extends BaseClient<AuthorizationError> {
 
   cancelRegistrationCommand(
     data: AuthorizationTypes.CancelRegistrationRequest,
-    metadata: CommandMetadata,
+    metadata: ClientCommandMetadata,
   ): Promise<void> {
     return this._sendCommand(
       {
@@ -51,7 +51,7 @@ export class AuthorizationClient extends BaseClient<AuthorizationError> {
 
   getAccessTokenCommand(
     data: AuthorizationTypes.GetAccessTokenRequest,
-    metadata: CommandMetadata,
+    metadata: ClientCommandMetadata,
   ): Promise<AuthorizationTypes.GetAccessTokenResponse> {
     return this._sendCommand(
       {
@@ -64,7 +64,7 @@ export class AuthorizationClient extends BaseClient<AuthorizationError> {
 
   getRefreshTokenCommand(
     data: AuthorizationTypes.GetRefreshTokenRequest,
-    metadata: CommandMetadata,
+    metadata: ClientCommandMetadata,
   ): Promise<AuthorizationTypes.GetRefreshTokenResponse> {
     return this._sendCommand(
       {
@@ -77,7 +77,7 @@ export class AuthorizationClient extends BaseClient<AuthorizationError> {
 
   getUserCommand(
     data: AuthorizationTypes.GetUserRequest,
-    metadata: CommandMetadata,
+    metadata: ClientCommandMetadata,
   ): Promise<AuthorizationTypes.GetUserResponse> {
     return this._sendCommand(
       {
@@ -88,7 +88,7 @@ export class AuthorizationClient extends BaseClient<AuthorizationError> {
     );
   }
 
-  saveTokenCommand(data: AuthorizationTypes.SaveTokenRequest, metadata: CommandMetadata): Promise<void> {
+  saveTokenCommand(data: AuthorizationTypes.SaveTokenRequest, metadata: ClientCommandMetadata): Promise<void> {
     return this._sendCommand(
       {
         data,
@@ -98,7 +98,7 @@ export class AuthorizationClient extends BaseClient<AuthorizationError> {
     );
   }
 
-  revokeTokenCommand(data: AuthorizationTypes.RevokeTokenRequest, metadata: CommandMetadata): Promise<void> {
+  revokeTokenCommand(data: AuthorizationTypes.RevokeTokenRequest, metadata: ClientCommandMetadata): Promise<void> {
     return this._sendCommand(
       {
         data,
@@ -110,7 +110,7 @@ export class AuthorizationClient extends BaseClient<AuthorizationError> {
 
   verifyScopeCommand(
     data: AuthorizationTypes.VerifyScopeRequest,
-    metadata: CommandMetadata,
+    metadata: ClientCommandMetadata,
   ): Promise<AuthorizationTypes.VerifyScopeResponse> {
     return this._sendCommand(
       {
@@ -121,13 +121,13 @@ export class AuthorizationClient extends BaseClient<AuthorizationError> {
     );
   }
 
-  verifyEmailCommand(data: AuthorizationTypes.VerifyEmailRequest, metadata: CommandMetadata): Promise<void> {
+  verifyEmailCommand(data: AuthorizationTypes.VerifyEmailRequest, metadata: ClientCommandMetadata): Promise<void> {
     return this._sendCommand({ data, command: AuthorizationCommand.VerifyEmail }, metadata);
   }
 
   getSignupTokenCommand(
     data: AuthorizationTypes.GetSignupTokenRequest,
-    metadata: CommandMetadata,
+    metadata: ClientCommandMetadata,
   ): Promise<AuthorizationTypes.GetSignupTokenResponse> {
     return this._sendCommand(
       {
@@ -140,12 +140,12 @@ export class AuthorizationClient extends BaseClient<AuthorizationError> {
 
   getForgotPasswordTokenCommand(
     data: AuthorizationTypes.GetForgotPasswordTokenRequest,
-    metadata: CommandMetadata,
+    metadata: ClientCommandMetadata,
   ): Promise<AuthorizationTypes.GetForgotPasswordTokenResponse> {
     return this._sendCommand({ data, command: AuthorizationCommand.GetForgotPasswordToken }, metadata);
   }
 
-  resetPasswordCommand(data: AuthorizationTypes.ResetPasswordRequest, metadata: CommandMetadata): Promise<void> {
+  resetPasswordCommand(data: AuthorizationTypes.ResetPasswordRequest, metadata: ClientCommandMetadata): Promise<void> {
     return this._sendCommand({ data, command: AuthorizationCommand.ResetPassword }, metadata);
   }
 }

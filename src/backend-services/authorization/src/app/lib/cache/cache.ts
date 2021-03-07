@@ -1,9 +1,9 @@
 import redis, { Callback } from 'redis';
 import { promisify } from 'util';
 
-import { config } from '@root/lib/config';
+import { redisConfig } from './config';
 
-const client = redis.createClient(config.redis);
+const client = redis.createClient(redisConfig);
 
 const getAsync = promisify(client.get).bind(client);
 const setAsync = promisify(client.set).bind(client);

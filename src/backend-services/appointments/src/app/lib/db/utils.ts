@@ -1,6 +1,6 @@
-import { mongo } from 'mongoose';
+import { Types } from 'mongoose';
 
 export function generateId(): string {
-  const objectId = mongo.ObjectID.generate();
-  return objectId.toString('hex');
+  const objectId = Types.ObjectId();
+  return objectId.toString();
 }

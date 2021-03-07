@@ -19,6 +19,7 @@ export function initRoutes(app: KoaKafka<AppState, AppContext>): void {
     try {
       await next();
     } catch (err) {
+      console.log(err);
       let errorCode = AppointmentTypes.ErrorCode.Unknown;
       let message: string | undefined;
 

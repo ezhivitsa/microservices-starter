@@ -4,7 +4,7 @@ import { CommandData, EventData } from '../kafka/types';
 import { Channel } from '../channels';
 import { Version } from '../messages';
 
-import { CommandMetadata } from './types';
+import { ClientCommandMetadata } from './types';
 
 export abstract class BaseClient<E extends Error> {
   constructor(protected _kafka: Kafka) {}
@@ -14,7 +14,10 @@ export abstract class BaseClient<E extends Error> {
 
   abstract _getClientError(err: Error): E;
 
-  protected async _sendCommand<Req, Res>(req: Omit<CommandData<Req>, 'channel'>, meta: CommandMetadata): Promise<Res> {
+  protected async _sendCommand<Req, Res>(
+    req: Omit<CommandData<Req>, 'channel'>,
+    meta: ClientCommandMetadata,
+  ): Promise<Res> {
     try {
       const res: Res = await this._kafka.sendCommand(
         {

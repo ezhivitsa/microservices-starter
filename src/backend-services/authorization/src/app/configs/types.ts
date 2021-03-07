@@ -1,5 +1,4 @@
 import { KafkaConfig, ConsumerConfig } from '@packages/communication';
-import { ClientOpts } from 'redis';
 
 export interface LoggerConfig {
   format: 'local' | 'cloud';
@@ -12,6 +11,5 @@ export interface Config {
   readonly kafka: KafkaConfig;
   readonly kafkaConsumer: ConsumerConfig;
   readonly kafkaMock: boolean;
-  readonly redis: ClientOpts;
   readonly logServiceErrors: boolean;
 }

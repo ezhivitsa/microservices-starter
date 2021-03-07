@@ -1,16 +1,16 @@
 version: '3.8'
 services:
-  kafdrop:
-    image: obsidiandynamics/kafdrop
-    restart: "no"
-    ports:
-      - "9000:9000"
-    environment:
-      KAFKA_BROKERCONNECT: "kafka:29092"
-    depends_on:
-      - "kafka"
-    networks:
-      - microservices
+  # kafdrop:
+  #   image: obsidiandynamics/kafdrop
+  #   restart: "no"
+  #   ports:
+  #     - "9000:9000"
+  #   environment:
+  #     KAFKA_BROKERCONNECT: "kafka:29092"
+  #   depends_on:
+  #     - "kafka"
+  #   networks:
+  #     - microservices
 
   kafka:
     image: obsidiandynamics/kafka
@@ -42,49 +42,25 @@ services:
   redis:
     command: redis
     image: redis:6.0.9
-    command: ["redis-server", "--appendonly", "yes"]
+    command: ["redis-server", "--appendonly", "yes", "--requirepass", "$REDIS_PASSWORD"]
     hostname: redis
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
     ports:
-      - "6379:6379"
+      - ${REDIS_PORT}:6379
     networks:
       - microservices
 
-  # zookeeper:
-  #   image: 'bitnami/zookeeper:3.6.2'
-  #   ports:
-  #     - 2181:2181
-  #   environment:
-  #     - ALLOW_ANONYMOUS_LOGIN=yes
-  #     - ZOO_SERVER_USERS=${ZOO_SERVER_USERS}
-  #     - ZOO_SERVER_PASSWORDS=${ZOO_SERVER_PASSWORDS}
-  #   networks:
-  #     - microservices
-
-  # kafka:
-  #   image: bitnami/kafka:2.6.0
-  #   ports:
-  #     - 9092:9092
-  #   environment:
-  #     - KAFKA_BROKER_ID=1
-  #     - KAFKA_LISTENERS=PLAINTEXT://:9092
-  #     - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://127.0.0.1:9092
-  #     - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
-  #     - ALLOW_PLAINTEXT_LISTENER=yes
-  #     - KAFKA_DEFAULT_REPLICATION_FACTOR=1
-  #     - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
-  #   depends_on:
-  #     - zookeeper
-  #   networks:
-  #     - microservices
-
-  # kafka-ui:
-  #   image: obsidiandynamics/kafdrop:latest
-  #   ports:
-  #     - 9000:9000
-  #   depends_on:
-  #     - kafka
-  #   networks:
-  #     - microservices
+  mongo:
+    image: mongo:4.4.4
+    command: mongod
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
+    ports:
+      - ${MONGO_PORT}:27017
+    networks:
+      - microservices
 
 networks:
   microservices:

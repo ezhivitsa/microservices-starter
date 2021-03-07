@@ -1,4 +1,4 @@
-import { CommandUserRole, CommandMetadata } from '@packages/communication';
+import { CommandUserRole, ClientCommandMetadata } from '@packages/communication';
 
 import { AuthProviderTypes, ProviderTypes } from 'providers';
 
@@ -8,12 +8,11 @@ export const mapUserRoleToProto: Record<AuthProviderTypes.UserRole, CommandUserR
   [AuthProviderTypes.UserRole.OrganizationAdmin]: CommandUserRole.OrganizationAdmin,
 };
 
-export function mapMetadataToProto(meta: ProviderTypes.Metadata): CommandMetadata {
-  const { requestId, version, user } = meta;
+export function mapMetadataToProto(meta: ProviderTypes.Metadata): ClientCommandMetadata {
+  const { requestId, user } = meta;
 
   return {
     requestId,
-    version,
     user: user
       ? {
           id: user.id,
