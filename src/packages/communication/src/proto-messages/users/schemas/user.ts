@@ -24,3 +24,7 @@ export const updateUserResponse = root.loadProtoMessage<UserTypes.UpdateUserResp
 export const userCreatedEvent = root.loadProtoMessage<UserTypes.UserCreatedEvent>(
   'microservices_starter.users.user.UserCreatedEvent',
 );
+
+export const userUpdatedEvent = root.loadProtoMessage<UserTypes.UserUpdatedEvent>(
+  'microservices_starter.users.user.UserUpdatedEvent',
+);

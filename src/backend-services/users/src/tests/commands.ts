@@ -1,11 +1,15 @@
-import { UsersClient, UserTypes } from '@packages/communication';
+import { UsersClient, UserTypes, CommandUserRole, ClientCommandMetadata } from '@packages/communication';
 
 import { kafka } from '@root/lib/kafka';
 
 const usersClient = new UsersClient(kafka);
 
-const v1Metadata = {
+const v1Metadata: ClientCommandMetadata = {
   requestId: '1',
+  user: {
+    id: '1',
+    roles: [CommandUserRole.User, CommandUserRole.Admin, CommandUserRole.OrganizationAdmin],
+  },
 };
 
 export function register(data: UserTypes.RegistrationRequest): Promise<void> {

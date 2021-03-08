@@ -62,4 +62,14 @@ export class UsersClient extends BaseClient<UsersError> {
       event: UserEvent.UserCreated,
     });
   }
+
+  userUpdatedEvent(data: UserTypes.UserUpdatedData, metadata: CommonTypes.EventMeta): void {
+    this._sendEvent<UserTypes.UserUpdatedEvent>({
+      data: {
+        data,
+        metadata,
+      },
+      event: UserEvent.UserUpdated,
+    });
+  }
 }

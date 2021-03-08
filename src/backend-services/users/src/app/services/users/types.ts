@@ -1,3 +1,5 @@
+import { SessionUser } from '@packages/koa-kafka';
+
 export interface RegisterParams {
   authId: string;
   email: string;
@@ -20,4 +22,8 @@ export interface UpdateUserParams {
   id: string;
   firstName?: string;
   lastName: string;
+}
+
+export interface Metadata {
+  user?: SessionUser;
 }

@@ -1,4 +1,4 @@
-import mongoose, { Schema, Model, Document, SchemaDefinition, Connection } from 'mongoose';
+import { Schema, Model, Document, SchemaDefinition, Connection } from 'mongoose';
 
 export interface AppointmentSnapshotData {
   _id: string;
@@ -54,10 +54,6 @@ const snapshotSchema = new Schema<AppointmentSnapshotDocument, AppointmentSnapsh
   data: appointmentSnapshotDataSchema,
 });
 
-// export function initAppointmentSnapshot(mongo: Connection): AppointmentSnapshotModel {
-//   return mongo.model<AppointmentSnapshotDocument>('appointment-snapshots', snapshotSchema);
-// }
-
-export function initAppointmentSnapshot(): AppointmentSnapshotModel {
-  return mongoose.model<AppointmentSnapshotDocument>('appointment-snapshots', snapshotSchema);
+export function initAppointmentSnapshot(mongo: Connection): AppointmentSnapshotModel {
+  return mongo.model<AppointmentSnapshotDocument>('appointment-snapshots', snapshotSchema);
 }

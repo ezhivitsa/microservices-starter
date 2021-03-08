@@ -3,12 +3,14 @@ import { promisify } from 'util';
 
 import { redisConfig } from './config';
 
-const client = redis.createClient(redisConfig);
+export const redisClient = redis.createClient(redisConfig);
 
-const getAsync = promisify(client.get).bind(client);
-const setAsync = promisify(client.set).bind(client);
-const setexAsync = promisify(client.setex).bind(client);
-const delAsync = promisify(client.del as (arg1: string | string[], cb?: Callback<number>) => boolean).bind(client);
+const getAsync = promisify(redisClient.get).bind(redisClient);
+const setAsync = promisify(redisClient.set).bind(redisClient);
+const setexAsync = promisify(redisClient.setex).bind(redisClient);
+const delAsync = promisify(redisClient.del as (arg1: string | string[], cb?: Callback<number>) => boolean).bind(
+  redisClient,
+);
 
 export class Cache {
   constructor(private _prefixes: string[] = [], private _defaultExpire?: number) {}

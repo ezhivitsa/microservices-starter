@@ -10,7 +10,7 @@ import { AggregateService } from './aggregate-service';
 import { AggregateBuilder } from './aggregate-builder';
 
 class AppointmentAggregateBuilder extends AggregateBuilder<AppointmentSnapshotData> {
-  private _handleAppointmentCreated(data: AppointmentCreatedData): void {
+  private _handleAppointmentCreated = (data: AppointmentCreatedData): void => {
     this._data = {
       _id: this._aggregateId,
       userId: data.userId,
@@ -19,9 +19,9 @@ class AppointmentAggregateBuilder extends AggregateBuilder<AppointmentSnapshotDa
       description: data.description,
       deleted: false,
     };
-  }
+  };
 
-  private _handleAppointmentUpdated(data: AppointmentUpdatedData): void {
+  private _handleAppointmentUpdated = (data: AppointmentUpdatedData): void => {
     if (!this._data) {
       return;
     }
@@ -29,15 +29,15 @@ class AppointmentAggregateBuilder extends AggregateBuilder<AppointmentSnapshotDa
     this._data.start = data.start;
     this._data.end = data.end;
     this._data.description = data.description;
-  }
+  };
 
-  private _handleAppointmentDeleted(): void {
+  private _handleAppointmentDeleted = (): void => {
     if (!this._data) {
       return;
     }
 
     this._data.deleted = true;
-  }
+  };
 
   protected _initEvents(): void {
     this._handle(AppointmentEvent.AppointmentCreated, this._handleAppointmentCreated);

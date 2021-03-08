@@ -3,7 +3,7 @@ import { castDateToTimestamp } from '@packages/proto';
 import { cleanDB } from '../utils/db-utils';
 import { getAppointmentData } from '../fixtures/appointments';
 
-import { createAppointment } from '../commands';
+import { createAppointmentCommand } from '../commands';
 
 describe('command /v1/create-appointment', () => {
   beforeAll(async () => {
@@ -12,7 +12,7 @@ describe('command /v1/create-appointment', () => {
 
   it('should successfully create appointment', async () => {
     const userId = '111';
-    const response = await createAppointment({
+    const response = await createAppointmentCommand({
       userId,
       start: castDateToTimestamp(new Date()),
       end: castDateToTimestamp(new Date()),

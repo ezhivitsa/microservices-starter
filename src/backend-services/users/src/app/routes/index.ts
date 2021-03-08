@@ -12,6 +12,7 @@ const mapErrorCode: Record<ServiceErrorCode, UserTypes.ErrorCode> = {
   [ServiceErrorCode.Unknown]: UserTypes.ErrorCode.Unknown,
   [ServiceErrorCode.NotFound]: UserTypes.ErrorCode.NotFound,
   [ServiceErrorCode.DuplicateAuthId]: UserTypes.ErrorCode.DuplicateAuthId,
+  [ServiceErrorCode.AccessDenied]: UserTypes.ErrorCode.AccessDenied,
 };
 
 export function initRoutes(app: KoaKafka<AppState, AppContext>): void {

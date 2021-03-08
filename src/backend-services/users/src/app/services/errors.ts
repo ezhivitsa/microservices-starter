@@ -2,6 +2,7 @@ export enum ServiceErrorCode {
   Unknown = 'unknown',
   NotFound = 'not-found',
   DuplicateAuthId = 'duplicate-auth-id',
+  AccessDenied = 'access-denied',
 }
 
 export class ServiceError extends Error {
@@ -35,5 +36,13 @@ export class NotFoundError extends ServiceError {
     super(message, ServiceErrorCode.NotFound);
 
     Object.setPrototypeOf(this, NotFoundError.prototype);
+  }
+}
+
+export class AccessDeniedError extends ServiceError {
+  constructor(message: string) {
+    super(message, ServiceErrorCode.NotFound);
+
+    Object.setPrototypeOf(this, AccessDeniedError.prototype);
   }
 }

@@ -7,6 +7,7 @@
     "@packages/communication": "workspace:*",
     "@packages/koa-kafka": "workspace:*",
     "@packages/logger": "workspace:*",
+    "@packages/proto": "workspace:*",
     "@packages/server": "workspace:*",
     "joi": "17.4.0",
     "module-alias": "2.2.2",
@@ -23,7 +24,7 @@
     "jest": "26.6.3",
     "nodemon": "2.0.7",
     "sequelize-cli": "6.2.0",
-    "ts-jest": "26.5.1",
+    "ts-jest": "26.5.3",
     "ts-node": "9.1.1",
     "typescript": "4.1.5"
   },

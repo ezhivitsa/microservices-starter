@@ -1,4 +1,4 @@
-import mongoose, { Schema, Model, Document, Connection } from 'mongoose';
+import { Schema, Model, Document, Connection } from 'mongoose';
 
 import { Event } from '@packages/communication';
 
@@ -16,15 +16,17 @@ export interface DbEvent {
   data?: Record<string, any>;
 }
 
-export interface EventDocument extends DbEvent, Document<string> {
-  id: string;
-}
+export interface EventDocument extends DbEvent, Document<string> {}
 
 export type EventModel = Model<EventDocument>;
 
 const eventSchema = new Schema<EventDocument, EventModel>({
   _id: {
     type: String,
+    required: true,
+  },
+  createdAt: {
+    type: Date,
     required: true,
   },
   type: {
@@ -48,12 +50,11 @@ const eventSchema = new Schema<EventDocument, EventModel>({
       type: String,
     },
   },
+  data: {
+    type: Schema.Types.Mixed,
+  },
 });
 
-// export function initAppointmentEvent(mongo: Connection): EventModel {
-//   return mongo.model<EventDocument>('Appointment-events', eventSchema);
-// }
-
-export function initAppointmentEvent(): EventModel {
-  return mongoose.model<EventDocument>('Appointment-events', eventSchema);
+export function initAppointmentEvent(mongo: Connection): EventModel {
+  return mongo.model<EventDocument>('Appointment-events', eventSchema);
 }

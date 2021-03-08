@@ -47,3 +47,15 @@ export interface UserCreatedEvent {
   data?: UserCreatedData;
   metadata?: CommonTypes.EventMeta;
 }
+
+export interface UserUpdatedData {
+  id?: string;
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+}
+
+export interface UserUpdatedEvent {
+  data?: UserCreatedData;
+  metadata?: CommonTypes.EventMeta;
+}

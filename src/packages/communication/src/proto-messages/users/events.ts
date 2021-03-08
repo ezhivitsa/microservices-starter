@@ -5,14 +5,19 @@ import { Channel } from '../../channels';
 
 export enum UserEvent {
   UserCreated = 'user-created',
+  UserUpdated = 'user-updated',
 }
 
 export const userEventSchemas: Record<string, ChannelEventSchema> = getChannelEvents(
-  Channel.AUTHORIZATION,
+  Channel.USERS,
   [
     {
       event: UserEvent.UserCreated,
       schema: UserSchemas.userCreatedEvent,
+    },
+    {
+      event: UserEvent.UserUpdated,
+      schema: UserSchemas.userUpdatedEvent,
     },
   ],
   Version.v1,

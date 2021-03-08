@@ -72,7 +72,6 @@ db-test-stop:
 test-docker: db-test-stop
 test-docker: db-test-start
 test-docker: run-test
-# test-docker: create-db-test migrate-test run-test
 
 .PHONY: run-test
 run-test: run-test-integration
@@ -84,8 +83,8 @@ run-test-integration:
 		--config=jest-integration.config.json \
 		--passWithNoTests \
 		--maxConcurrency=1 \
-		--runInBand \
-		--forceExit $(JEST_ADDITIONAL_FLAGS)
+		--detectOpenHandles \
+		--runInBand $(JEST_ADDITIONAL_FLAGS)
 
 # -------------------------------------
 # db targets
@@ -97,26 +96,6 @@ migrate:
 .PHONY: create-db
 create-db:
 	$(ENV_VARS) npx sequelize-cli db:create
-
-# .PHONY: migrate-local
-# migrate-local: build
-# migrate-local: ENV_VARS=${DEV_VARS}
-# migrate-local: migrate
-
-# .PHONY: migrate-test
-# migrate-test: build
-# migrate-test: ENV_VARS=${AUTOTEST_VARS}
-# migrate-test: migrate
-
-# .PHONE: create-db-local
-# create-db-local: build
-# create-db-local: ENV_VARS=${DEV_VARS}
-# create-db-local: create-db
-
-# .PHONE: create-db-test
-# create-db-test: build
-# create-db-test: ENV_VARS=${AUTOTEST_VARS}
-# create-db-test: create-db
 
 # -------------------------------------
 # release targets

@@ -7,6 +7,7 @@ export const enum ErrorCode {
   Conflict = 3,
   ValidationFailed = 4,
   DuplicateAuthId = 5,
+  AccessDenied = 6,
 }
 
 export interface Error {

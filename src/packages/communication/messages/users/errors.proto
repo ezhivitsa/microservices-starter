@@ -12,6 +12,7 @@ message Error {
     CONFLICT = 3;
     VALIDATION_FAILED = 4;
     DUPLICATE_AUTH_ID = 5;
+    ACCESS_DENIED = 6;
   }
 
   ERROR_CODE code = 1;

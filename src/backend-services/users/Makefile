@@ -78,8 +78,8 @@ run-test-integration:
 		--config=jest-integration.config.json \
 		--passWithNoTests \
 		--maxConcurrency=1 \
-		--runInBand \
-		--forceExit $(JEST_ADDITIONAL_FLAGS)
+		--detectOpenHandles \
+		--runInBand $(JEST_ADDITIONAL_FLAGS)
 
 # -------------------------------------
 # db targets

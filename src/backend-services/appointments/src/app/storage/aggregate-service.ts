@@ -1,4 +1,4 @@
-import { Model, UpdateQuery, FilterQuery } from 'mongoose';
+import { Model, UpdateQuery } from 'mongoose';
 
 import { Event } from '@packages/communication';
 
@@ -34,7 +34,6 @@ export abstract class AggregateService<D extends Record<string, any>> {
         setDefaultsOnInsert: true,
       },
     ).exec();
-    console.log(sequenceDocument);
     return sequenceDocument.sequenceValue;
   }
 
@@ -61,8 +60,8 @@ export abstract class AggregateService<D extends Record<string, any>> {
       .exec();
   }
 
-  private async _saveSnapshot(aggregateId: string): Promise<void> {
-    const { data, lastEventVersion } = await this._getAggregateData(aggregateId);
+  private async _saveSnapshot(aggregateId: string, lastVersion: number): Promise<void> {
+    const { data, lastEventVersion } = await this._getAggregateData(aggregateId, lastVersion);
 
     if (data) {
       this._saveAggregateSnapshot({
@@ -73,11 +72,18 @@ export abstract class AggregateService<D extends Record<string, any>> {
     }
   }
 
-  private async _getAggregateData(id: string): Promise<{ data: D | null; version: number; lastEventVersion: number }> {
+  private async _getAggregateData(
+    id: string,
+    lastVersion?: number,
+  ): Promise<{ data: D | null; version: number; lastEventVersion: number }> {
     const snapshot = await this._SnapshotModel.findById(id).exec();
 
     const version = snapshot?.version || 0;
-    const events = await this._EventModel.find({ version: { $gte: version } }).exec();
+    const versionCondition: Record<string, number> = { $gt: version };
+    if (lastVersion !== undefined) {
+      versionCondition.$lte = lastVersion;
+    }
+    const events = await this._EventModel.find({ aggregateId: id, version: versionCondition }).exec();
 
     const lastEvent = events[events.length - 1];
     const lastEventVersion = lastEvent?.version || 0;
@@ -101,27 +107,20 @@ export abstract class AggregateService<D extends Record<string, any>> {
   }
 
   async saveEvent(eventData: EventData): Promise<void> {
-    try {
-      const version = await this._getNextSequenceValue(eventData.aggregateId);
-      console.log(version);
+    const version = await this._getNextSequenceValue(eventData.aggregateId);
 
-      await this._EventModel.create({
-        id: generateId(),
-        createdAt: new Date(),
-        type: eventData.type,
-        aggregateId: eventData.aggregateId,
-        version,
-        metadata: eventData.metadata,
-        data: eventData.data,
-      });
+    await this._EventModel.create({
+      _id: generateId(),
+      createdAt: new Date(),
+      type: eventData.type,
+      aggregateId: eventData.aggregateId,
+      version,
+      metadata: eventData.metadata,
+      data: eventData.data,
+    });
 
-      if (version % SNAPSHOT_VERSION_GAP === 0) {
-        this._saveSnapshot(eventData.aggregateId);
-      }
-    } catch (err) {
-      console.log('---------------------');
-      console.log(err);
-      console.log('---------------------');
+    if (version % SNAPSHOT_VERSION_GAP === 0) {
+      this._saveSnapshot(eventData.aggregateId, version);
     }
   }
 }

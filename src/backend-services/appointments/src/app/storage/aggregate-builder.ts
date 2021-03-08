@@ -1,5 +1,3 @@
-import { EventEmitter } from 'events';
-
 import { Event } from '@packages/communication';
 
 import { EventDocument } from '@root/lib/db/models/appointment-event';
@@ -9,24 +7,30 @@ type EventHandler<ED extends Record<string, any>> = (data: ED) => void;
 
 export abstract class AggregateBuilder<D> {
   protected _data: D | null = null;
-  protected _emitter: EventEmitter;
+  protected _emitter: Partial<Record<Event, EventHandler<any>[]>> = {};
 
   protected abstract _initEvents(): void;
 
-  constructor(protected _aggregateId: string) {
-    this._emitter = new EventEmitter();
-    this._initEvents();
-  }
+  constructor(protected _aggregateId: string) {}
 
   private _setInitialData(snapshot: SnapshotDocument<D>): void {
-    this._data = snapshot.data;
+    this._data = {
+      _id: this._aggregateId,
+      ...snapshot.data,
+    };
   }
 
   protected _handle<ED extends Record<string, any>>(event: Event, handler: EventHandler<ED>): void {
-    this._emitter.on(event, handler);
+    this._emitter[event] = this._emitter[event] || [];
+    const handlers = this._emitter[event];
+    if (handlers) {
+      handlers.push(handler);
+    }
   }
 
   build(snapshot: SnapshotDocument<D> | null, events: EventDocument[]): D | null {
+    this._initEvents();
+
     if (!snapshot && !events.length) {
       return null;
     }
@@ -38,7 +42,11 @@ export abstract class AggregateBuilder<D> {
     const sortedEvents = events.sort((event1, event2) => event1.version - event2.version);
 
     sortedEvents.forEach((event) => {
-      this._emitter.emit(event.type, event.data);
+      const handlers = this._emitter[event.type] || [];
+
+      handlers.forEach((handler) => {
+        handler(event.data);
+      });
     });
 
     return this._data;
