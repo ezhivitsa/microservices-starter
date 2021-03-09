@@ -1,5 +1,4 @@
 import OAuth2Server, { Token, Client, RefreshToken, User } from 'oauth2-server';
-import { getResponseChannel, Version } from '@packages/communication';
 
 import { generateSecureToken } from 'lib/secure';
 import { config } from 'lib/config';
@@ -17,8 +16,6 @@ export const client: Client = {
 
 const metadata: ServiceMetadata = {
   requestId: '',
-  responseChannel: getResponseChannel(config.kafkaConsumer.groupId),
-  version: Version.v1,
 };
 
 function getAccessTokenExpiresAt(expiresAt: Date | undefined): Date {

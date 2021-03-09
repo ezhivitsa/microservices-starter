@@ -9,4 +9,4 @@ const schema = joi.object<ServiceTypes.UpdateCurrentUserRequest>({
   lastName: joi.string().trim().required(),
 });
 
-export const updateCurrentValidators = validate(schema);
+export const updateCurrentValidator = validate(schema);

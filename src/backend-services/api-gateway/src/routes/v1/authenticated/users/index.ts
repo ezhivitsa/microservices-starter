@@ -5,14 +5,14 @@ import { ServerConstants } from '@packages/common';
 
 import { validateMiddleware } from 'middlewares';
 
-import { updateCurrentValidators } from './validators';
+import { updateCurrentValidator } from './validators';
 import { getCurrentHandler, updateCurrentHandler, logOutHandler } from './handlers';
 
 const usersRouter = new Router<AppKoaState, AppKoaContext>();
 
 usersRouter
   .get(ServerConstants.currentPath, getCurrentHandler)
-  .put(ServerConstants.currentPath, validateMiddleware(updateCurrentValidators), updateCurrentHandler)
+  .put(ServerConstants.currentPath, validateMiddleware(updateCurrentValidator), updateCurrentHandler)
   .post(ServerConstants.logOutPath, logOutHandler);
 
 export { usersRouter };

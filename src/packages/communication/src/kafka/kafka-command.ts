@@ -22,7 +22,7 @@ import { PromiseProvider } from './promise-provider';
 import { CHANNEL_HEADER, COMMAND_HEADER, REPLY_CORRELATION_ID_HEADER, VERSION_HEADER } from './constants';
 
 const responseId = v4();
-export const getResponseChannel = (groupId: string, applicationId: string = responseId): string =>
+const getResponseChannel = (groupId: string, applicationId: string = responseId): string =>
   `${groupId}-response-${applicationId}`;
 
 export class KafkaCommand {

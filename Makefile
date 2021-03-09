@@ -67,6 +67,10 @@ validate-email:
 validate-users:
 	cd ./src/backend-services/users && make lint compile-dry
 
+.PHONY: validate-appointments
+validate-appointments:
+	cd ./src/backend-services/appointments && make lint compile-dry
+
 .PHONY: validate-authorization-form
 validate-authorization-form:
 	cd ./src/client-services/authorization-form && make validate

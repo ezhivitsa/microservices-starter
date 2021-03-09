@@ -1,1 +1,1 @@
-export { updateCurrentValidators } from './update-current';
+export { updateCurrentValidator } from './update-current';

@@ -4,7 +4,6 @@ export {
   ConsumerConfig,
   KafkaHandlerError,
   logLevel,
-  getResponseChannel,
   CommandMetadata,
   CommandUser,
   CommandUserRole,

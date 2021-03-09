@@ -13,6 +13,9 @@
 "src/backend-services/users/**/*.{js,ts}":
   - make validate-users
 
+"src/backend-services/appointments/**/*.{js,ts}":
+  - make validate-appointments
+
 "src/client-services/authorization-form/**/*.{js,jsx,ts,tsx,pcss}":
   - make validate-authorization-form
 
