@@ -6,6 +6,7 @@ export enum Channel {
   USERS = 'users',
   EMAIL = 'email',
   APPOINTMENTS = 'appointments',
+  SCHEDULE = 'schedule',
 }
 
 export function getRequestChannel(channel: Channel): string {

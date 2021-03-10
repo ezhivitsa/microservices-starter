@@ -12,7 +12,7 @@ POSTGRES_AUTOTEST_VARS := POSTGRES_PORT=${POSTGRES_PORT_AUTOTEST} \
 	POSTGRES_HOST=${POSTGRES_HOST_LOCAL} \
 	POSTGRES_DATABASE=${POSTGRES_DB_AUTOTEST} \
 	POSTGRES_USER=${POSTGRES_USER_AUTOTEST} \
-	POSTGRES_PASSWORD=${POSTGRES_PASSWORD_LOCAL} \
+	POSTGRES_PASSWORD=${POSTGRES_PASSWORD_LOCAL}
 
 DEV_VARS := ${POSTGRES_DEV_VARS} NODE_ENV=development
 AUTOTEST_VARS := ${POSTGRES_AUTOTEST_VARS} NODE_ENV=test OVERRIDE_ENV=testing
@@ -25,7 +25,7 @@ DOCKER_COMPOSE_AUTOTEST := ${AUTOTEST_VARS} ${DOCKER_COMPOSE}
 # -------------------------------------
 .PHONY: dev
 dev:
-	${DEV_VARS} \
+	${DEV_VARS} npx nodemon \
 		--config ./nodemon.json \
 		--legacy-watch \
 		-- \
@@ -73,7 +73,7 @@ run-test: run-test-integration
 
 .PHONY: run-test-integration
 run-test-integration:
-	${AUTOTEST_VARS} \
+	${AUTOTEST_VARS} ${POSTGRES_AUTOTEST_VARS} \
 	npx jest \
 		--config=jest-integration.config.json \
 		--passWithNoTests \
