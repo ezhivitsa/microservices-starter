@@ -7,7 +7,7 @@ import { config } from './lib/config';
 
 import { initRoutes } from './routes';
 
-const app = new KoaKafka<AppState, AppContext>(kafka, Channel.EMAIL, {
+const app = new KoaKafka<AppState, AppContext>(kafka, Channel.Email, {
   badProtoCode: UserTypes.ErrorCode.BadProto,
   validationFailedCode: UserTypes.ErrorCode.ValidationFailed,
 });

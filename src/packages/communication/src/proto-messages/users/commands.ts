@@ -1,8 +1,7 @@
-import * as UsersSchemas from './schemas';
+import * as UserSchemas from './schemas';
 
 import { getChannelCommands, ChannelCommandSchema, Version } from '../../messages';
 import { Channel } from '../../channels';
-import { UserSchemas } from '.';
 
 export enum UserCommand {
   Registration = 'registration',
@@ -11,23 +10,23 @@ export enum UserCommand {
 }
 
 export const userCommandSchemas: Record<string, ChannelCommandSchema> = getChannelCommands(
-  Channel.USERS,
+  Channel.Users,
   [
     {
       command: UserCommand.Registration,
-      requestSchema: UsersSchemas.registrationRequest,
+      requestSchema: UserSchemas.registrationRequest,
     },
     {
       command: UserCommand.GetUserByAuthId,
-      requestSchema: UsersSchemas.getUserByAuthIdRequest,
-      responseSchema: UsersSchemas.getUserByAuthIdResponse,
+      requestSchema: UserSchemas.getUserByAuthIdRequest,
+      responseSchema: UserSchemas.getUserByAuthIdResponse,
     },
     {
       command: UserCommand.UpdateUser,
       requestSchema: UserSchemas.updateUserRequest,
-      responseSchema: UsersSchemas.updateUserResponse,
+      responseSchema: UserSchemas.updateUserResponse,
     },
   ],
   Version.v1,
-  UsersSchemas.error,
+  UserSchemas.error,
 );

@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+package microservices_starter.schedule.schedule;
+
+// GetSchedule
+message GetScheduleRequest {
+  google.protobuf.Timestamp from = 1;
+  google.protobuf.Timestamp to = 2;
+}
+
+message GetScheduleResponse {
+  message Appointment {
+    string id = 1;
+    google.protobuf.Timestamp start = 2;
+    google.protobuf.Timestamp end = 3;
+    string description = 4;
+    string user_id = 5;
+    string first_name = 6;
+    string last_name = 7;
+  }
+
+  repeated Appointment appointments = 1;
+}

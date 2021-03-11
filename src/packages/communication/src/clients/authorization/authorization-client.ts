@@ -10,7 +10,7 @@ import { ClientCommandMetadata } from '../types';
 import { AuthorizationError } from './authorization-error';
 
 export class AuthorizationClient extends BaseClient<AuthorizationError> {
-  _channel = Channel.AUTHORIZATION;
+  _channel = Channel.Authorization;
   _version = Version.v1;
 
   _getClientError(err: Error): AuthorizationError {

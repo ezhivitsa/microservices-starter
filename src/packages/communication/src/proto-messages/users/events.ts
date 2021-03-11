@@ -9,7 +9,7 @@ export enum UserEvent {
 }
 
 export const userEventSchemas: Record<string, ChannelEventSchema> = getChannelEvents(
-  Channel.USERS,
+  Channel.Users,
   [
     {
       event: UserEvent.UserCreated,

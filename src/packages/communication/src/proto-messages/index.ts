@@ -9,10 +9,11 @@ import {
   appointmentEventSchemas,
   AppointmentTypes,
 } from './appointments';
+import { ScheduleCommand, ScheduleTypes, scheduleCommandSchemas } from './schedule';
 
 import { ChannelCommandSchema, ChannelEventSchema } from '../messages';
 
-export type Command = AuthorizationCommand | UserCommand | EmailCommand | AppointmentCommand;
+export type Command = AuthorizationCommand | UserCommand | EmailCommand | AppointmentCommand | ScheduleCommand;
 
 export type Event = UserEvent | AppointmentEvent;
 
@@ -21,6 +22,7 @@ export const commandSchemas: Record<string, ChannelCommandSchema> = {
   ...userCommandSchemas,
   ...emailCommandSchemas,
   ...appointmentCommandSchemas,
+  ...scheduleCommandSchemas,
 };
 
 export const eventSchemas: Record<string, ChannelEventSchema> = {
@@ -40,4 +42,6 @@ export {
   AppointmentCommand,
   AppointmentEvent,
   AppointmentTypes,
+  ScheduleCommand,
+  ScheduleTypes,
 };

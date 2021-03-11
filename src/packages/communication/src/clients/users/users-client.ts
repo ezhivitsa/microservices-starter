@@ -10,7 +10,7 @@ import { ClientCommandMetadata } from '../types';
 import { UsersError } from './users-error';
 
 export class UsersClient extends BaseClient<UsersError> {
-  _channel = Channel.USERS;
+  _channel = Channel.Users;
   _version = Version.v1;
 
   _getClientError(err: Error): UsersError {

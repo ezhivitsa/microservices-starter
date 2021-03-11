@@ -1,5 +1,5 @@
 import { KoaKafka, AppState, AppContext } from '@packages/koa-kafka';
-import { UserTypes, Channel } from '@packages/communication';
+import { ScheduleTypes, Channel } from '@packages/communication';
 import { middlewares } from '@packages/backend-service';
 
 import { kafka } from './lib/kafka';
@@ -8,9 +8,9 @@ import { uniqModel } from './lib/uniq-model';
 
 import { initRoutes } from './routes';
 
-const app = new KoaKafka<AppState, AppContext>(kafka, Channel.SCHEDULE, {
-  badProtoCode: UserTypes.ErrorCode.BadProto,
-  validationFailedCode: UserTypes.ErrorCode.ValidationFailed,
+const app = new KoaKafka<AppState, AppContext>(kafka, Channel.Schedule, {
+  badProtoCode: ScheduleTypes.ErrorCode.BadProto,
+  validationFailedCode: ScheduleTypes.ErrorCode.ValidationFailed,
   uniqModel,
 });
 

@@ -69,7 +69,7 @@ Start listening kafka messages
 ```javascript
 import { KoaKafka, Version, Context } from '@packages/koa-kafka';
 
-const app = new KoaKafka(kafka, Channel.USERS, {
+const app = new KoaKafka(kafka, Channel.Users, {
   badProtoCode: UserTypes.ErrorCode.BadProto,
   validationFailedCode: UserTypes.ErrorCode.ValidationFailed,
   uniqModel,

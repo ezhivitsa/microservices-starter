@@ -9,7 +9,7 @@ export enum EmailCommand {
 }
 
 export const emailCommandSchemas: Record<string, ChannelCommandSchema> = getChannelCommands(
-  Channel.EMAIL,
+  Channel.Email,
   [
     {
       command: EmailCommand.SendVerifyEmail,

@@ -10,7 +10,7 @@ import { ClientCommandMetadata } from '../types';
 import { EmailError } from './email-error';
 
 export class EmailClient extends BaseClient<EmailError> {
-  _channel = Channel.EMAIL;
+  _channel = Channel.Email;
   _version = Version.v1;
 
   _getClientError(err: Error): EmailError {

@@ -10,7 +10,7 @@ export enum AppointmentEvent {
 }
 
 export const appointmentEventSchemas: Record<string, ChannelEventSchema> = getChannelEvents(
-  Channel.APPOINTMENTS,
+  Channel.Appointments,
   [
     {
       event: AppointmentEvent.AppointmentCreated,

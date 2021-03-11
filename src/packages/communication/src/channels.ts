@@ -2,11 +2,11 @@ const REQUEST_CHANNEL = 'request';
 const EVENT_CHANNEL = 'event';
 
 export enum Channel {
-  AUTHORIZATION = 'authorization',
-  USERS = 'users',
-  EMAIL = 'email',
-  APPOINTMENTS = 'appointments',
-  SCHEDULE = 'schedule',
+  Authorization = 'authorization',
+  Users = 'users',
+  Email = 'email',
+  Appointments = 'appointments',
+  Schedule = 'schedule',
 }
 
 export function getRequestChannel(channel: Channel): string {

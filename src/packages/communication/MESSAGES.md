@@ -1,6 +1,6 @@
 # Messages documentation
 
-- [Authorization messages](#authorization-messages-channel.authorization)
+- [Authorization messages](#authorization-messages-Channel.Authorization)
   - [Registration command (v1)](#registration-command-v1)
   - [Cancel registration command (v1)](#cancel-registration-command-v1)
   - [Get access token command (v1)](#get-access-token-command-v1)
@@ -13,16 +13,16 @@
   - [Get signup token command (v1)](#get-signup-token-command-v1)
   - [Get forgot password token command (v1)](#get-forgot-password-token-command-v1)
   - [Reset password command (v1)](#reset-password-command-v1)
-- [Email messages](#email-messages-channel.email)
+- [Email messages](#email-messages-Channel.Email)
   - [Send verify email command (v1)](#send-verify-email-command-v1)
   - [Send forgot password email command (v1)](#send-forgot-password-email-command-v1)
-- [Users messages (Channel.USERS)](#users-messages-channel.users)
+- [Users messages (Channel.Users)](#users-messages-Channel.Users)
   - [Registration command (v1)](#registration-command-v1)
   - [Get user by auth id command (v1)](#get-user-by-auth-id-command-v1)
   - [Update user command (v1)](#update-user-command-v1)
 
 
-## Authorization messages (Channel.AUTHORIZATION)
+## Authorization messages (Channel.Authorization)
 
 ### Registration command (v1)
 
@@ -91,7 +91,7 @@
 - Command - *AuthorizationCommand.ResetPassword*
 - Request - *ResetPasswordRequest*
 
-## Email messages (Channel.EMAIL)
+## Email messages (Channel.Email)
 
 ### Send verify email command (v1)
 
@@ -103,7 +103,7 @@
 - Command - *EmailCommand.SendForgotPasswordEmail*
 - Request - *SendForgotPasswordEmailRequest*
 
-## Users messages (Channel.USERS)
+## Users messages (Channel.Users)
 
 ### Registration command (v1)
 

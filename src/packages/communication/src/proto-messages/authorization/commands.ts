@@ -19,7 +19,7 @@ export enum AuthorizationCommand {
 }
 
 export const authorizationCommandSchemas: Record<string, ChannelCommandSchema> = getChannelCommands(
-  Channel.AUTHORIZATION,
+  Channel.Authorization,
   [
     {
       command: AuthorizationCommand.Registration,

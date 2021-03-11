@@ -10,7 +10,7 @@ export enum AppointmentCommand {
 }
 
 export const appointmentCommandSchemas: Record<string, ChannelCommandSchema> = getChannelCommands(
-  Channel.APPOINTMENTS,
+  Channel.Appointments,
   [
     {
       command: AppointmentCommand.CreateAppointment,

@@ -8,7 +8,7 @@ import { uniqModel } from './lib/uniq-model';
 
 import { initRoutes } from './routes';
 
-const app = new KoaKafka<AppState, AppContext>(kafka, Channel.USERS, {
+const app = new KoaKafka<AppState, AppContext>(kafka, Channel.Users, {
   badProtoCode: UserTypes.ErrorCode.BadProto,
   validationFailedCode: UserTypes.ErrorCode.ValidationFailed,
   uniqModel,
