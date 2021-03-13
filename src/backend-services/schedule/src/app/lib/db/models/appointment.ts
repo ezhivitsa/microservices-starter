@@ -1,6 +1,6 @@
 import { Optional, Model, DataTypes, Sequelize, ModelAttributes, ModelCtor } from 'sequelize';
 
-import { UserModel } from './user';
+import { UserInstance } from './user';
 
 export interface AppointmentAttributes {
   id: string;
@@ -20,6 +20,7 @@ export class AppointmentInstance
   public start!: Date;
   public end!: Date;
   public description!: string | null;
+  public user!: UserInstance;
 }
 
 export type AppointmentModel = ModelCtor<AppointmentInstance>;

@@ -155,7 +155,7 @@ export class KoaKafka<S extends Record<string, any> = Record<string, any>, C ext
     event: Event;
     channel: Channel;
     handler: Middleware<C>;
-  }): KoaKafka {
+  }): KoaKafka<S, C> {
     const middleware = async (ctx: C, next: Next): Promise<void> => {
       if (ctx.event !== event || ctx.version !== version) {
         await next();

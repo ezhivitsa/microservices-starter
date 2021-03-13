@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { WhereOptions, FindOptions, Op } from 'sequelize';
 
 import {
   AppointmentInstance,
@@ -7,13 +8,14 @@ import {
   AppointmentCreationAttributes,
 } from '@root/lib/db/models/appointment';
 import { db } from '@root/lib/db/models';
-import { WhereOptions, FindOptions } from 'sequelize/types';
 
 import { StorageService } from './storage-service';
 
 interface Filter {
   id?: string;
   withUser?: boolean;
+  from?: Date;
+  to?: Date;
 }
 
 interface UpdateFilter {
@@ -68,9 +70,19 @@ export class AppointmentsStorageService extends StorageService<
   }
 
   _buildQuery(filter: Filter): FindOptions<AppointmentAttributes> {
-    const where = {
+    const where: WhereOptions<AppointmentAttributes> = {
       id: filter.id,
     };
+
+    if (filter.from || filter.to) {
+      where.start = _.pickBy(
+        {
+          [Op.gte]: filter.from,
+          [Op.lte]: filter.to,
+        },
+        (value) => value !== undefined,
+      );
+    }
 
     const include = [];
     if (filter.withUser) {
