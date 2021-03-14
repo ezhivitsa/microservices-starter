@@ -5,7 +5,12 @@ import { ServerConstants } from '@packages/common';
 
 import { validateMiddleware } from 'middlewares';
 
-import { createAppointmentValidator, updateAppointmentValidator, deleteAppointmentValidator } from './validators';
+import {
+  createAppointmentValidator,
+  updateAppointmentValidator,
+  deleteAppointmentValidator,
+  getAppointmentsValidator,
+} from './validators';
 import { createAppointmentHandler, updateAppointmentHandler, deleteAppointmentHandler } from './handlers';
 
 const appointmentsRouter = new Router<AppKoaState, AppKoaContext>();
@@ -13,6 +18,7 @@ const appointmentsRouter = new Router<AppKoaState, AppKoaContext>();
 const appointmentIdPlaceholder = ':appointmentId';
 
 appointmentsRouter
+  .get('/', validateMiddleware(getAppointmentsValidator))
   .post('/', validateMiddleware(createAppointmentValidator), createAppointmentHandler)
   .put(
     ServerConstants.appointmentPath(appointmentIdPlaceholder),

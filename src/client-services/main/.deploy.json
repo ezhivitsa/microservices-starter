@@ -5,6 +5,7 @@
   "upstreams": {
     "dashboard": "0.0.1",
     "auth": "0.0.1",
-    "settings": "0.0.1"
+    "settings": "0.0.1",
+    "calendar": "0.0.1"
   }
 }

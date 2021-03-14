@@ -10,4 +10,7 @@ export * as EmailProviderTypes from './email/types';
 export * as AppointmentsProvider from './appointments';
 export * as AppointmentsProviderTypes from './appointments/types';
 
+export * as ScheduleProvider from './schedule';
+export * as ScheduleProviderTypes from './schedule/types';
+
 export * as ProviderTypes from './types';

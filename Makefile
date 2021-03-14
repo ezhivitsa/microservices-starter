@@ -71,6 +71,10 @@ validate-users:
 validate-appointments:
 	cd ./src/backend-services/appointments && make lint compile-dry
 
+.PHONY: validate-schedule
+validate-schedule:
+	cd ./src/backend-services/schedule && make lint compile-dry
+
 .PHONY: validate-authorization-form
 validate-authorization-form:
 	cd ./src/client-services/authorization-form && make validate
@@ -86,6 +90,10 @@ validate-main:
 .PHONY: validate-settings
 validate-settings:
 	cd ./src/client-services/settings && make validate
+
+.PHONY: validate-calendar
+validate-calendar:
+	cd ./src/client-services/calendar && make validate
 
 # -------------------------------------
 # build targets

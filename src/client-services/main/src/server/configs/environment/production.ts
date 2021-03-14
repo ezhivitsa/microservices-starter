@@ -1,6 +1,6 @@
 import { Types, FrontPaths } from '@packages/common';
 
-import { version, dashboardVersion, authVersion, settingsVersion } from 'lib/app-version';
+import { version, dashboardVersion, authVersion, settingsVersion, calendarVersion } from 'lib/app-version';
 
 import { DEFAULT_PORT, HTTPS } from '../utils';
 
@@ -41,6 +41,13 @@ export const production: Config = {
       jsUrl: `${staticUrl}/s3/settings/${settingsVersion}/bundle.js`,
       cssUrl: `${staticUrl}/s3/settings/${settingsVersion}/style.css`,
       rule: FrontPaths.Settings.indexPath({ fullPath: true }),
+      layout: Types.ApplicationLayout.Default,
+    },
+    calendar: {
+      name: '@client-services/calendar',
+      jsUrl: `${staticUrl}/s3/calendar/${calendarVersion}/bundle.js`,
+      cssUrl: `${staticUrl}/s3/calendar/${calendarVersion}/style.css`,
+      rule: FrontPaths.Calendar.indexPath({ fullPath: true }),
       layout: Types.ApplicationLayout.Default,
     },
   },

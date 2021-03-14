@@ -16,6 +16,9 @@
 "src/backend-services/appointments/**/*.{js,ts}":
   - make validate-appointments
 
+"src/backend-services/schedule/**/*.{js,ts}":
+  - make validate-schedule
+
 "src/client-services/authorization-form/**/*.{js,jsx,ts,tsx,pcss}":
   - make validate-authorization-form
 
@@ -27,3 +30,6 @@
 
 "src/client-services/settings/**/*.{js,jsx,ts,tsx,pcss}":
   - make validate-settings
+
+"src/client-services/calendar/**/*.{js,jsx,ts,tsx,pcss}":
+  - make validate-calendar

@@ -1,13 +1,8 @@
-import { AppointmentsProviderTypes } from 'providers';
+import { AppointmentsProviderTypes, ScheduleProviderTypes } from 'providers';
 
-export interface CreateAppointmentParams
-  extends Required<Omit<AppointmentsProviderTypes.CreateAppointmentParams, 'description'>> {
-  description?: string;
-}
+export type CreateAppointmentParams = AppointmentsProviderTypes.CreateAppointmentParams;
+export type UpdateAppointmentParams = AppointmentsProviderTypes.UpdateAppointmentParams;
+export type DeleteAppointmentParams = AppointmentsProviderTypes.DeleteAppointmentParams;
 
-export interface UpdateAppointmentParams
-  extends Required<Omit<AppointmentsProviderTypes.UpdateAppointmentParams, 'description'>> {
-  description?: string;
-}
-
-export type DeleteAppointmentParams = Required<AppointmentsProviderTypes.DeleteAppointmentParams>;
+export type GetAppointmentsParams = ScheduleProviderTypes.GetScheduleParams;
+export type Appointment = ScheduleProviderTypes.ScheduleAppointment;

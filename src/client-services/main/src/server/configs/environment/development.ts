@@ -29,6 +29,11 @@ export const development: Config = {
       jsUrl: 'http://localhost:8083/bundle.js',
       cssUrl: undefined,
     },
+    calendar: {
+      ...staging.frontUpstreams.calendar,
+      jsUrl: 'http://localhost:8084/bundle.js',
+      cssUrl: undefined,
+    },
   },
   apiGatewayUrl: 'http://localhost:8090/api',
 };

@@ -4,6 +4,7 @@ export enum FrontApplication {
   Dashboard = 'dashboard',
   Auth = 'auth',
   Settings = 'settings',
+  Calendar = 'calendar',
 }
 
 export enum ApplicationLayout {
