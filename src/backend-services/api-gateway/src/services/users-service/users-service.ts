@@ -13,3 +13,7 @@ export async function getUserByAuthId(
 export async function updateUser(params: UpdateUserParams, metadata: ServiceMetadata): Promise<UserResult | null> {
   return UsersProvider.updateUser(params, metadata);
 }
+
+export async function getUsers(metadata: ServiceMetadata): Promise<UserResult[]> {
+  return UsersProvider.getUsers(metadata);
+}

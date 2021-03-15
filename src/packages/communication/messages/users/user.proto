@@ -39,6 +39,11 @@ message UpdateUserResponse {
   User user = 1;
 }
 
+// GetUsers
+message GetUsersResponse {
+  repeated User users = 1;
+}
+
 // Events
 message UserCreatedEvent {
   message UserCreatedData {

@@ -53,6 +53,10 @@ export class UsersClient extends BaseClient<UsersError> {
     return this._sendCommand({ data, command: UserCommand.UpdateUser }, metadata);
   }
 
+  getUsersCommand(metadata: ClientCommandMetadata): Promise<UserTypes.GetUsersResponse> {
+    return this._sendCommand({ data: null, command: UserCommand.GetUsers }, metadata);
+  }
+
   userCreatedEvent(data: UserTypes.UserCreatedData, metadata: CommonTypes.EventMeta): void {
     this._sendEvent<UserTypes.UserCreatedEvent>({
       data: {

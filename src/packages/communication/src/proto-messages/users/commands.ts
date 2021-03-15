@@ -7,6 +7,7 @@ export enum UserCommand {
   Registration = 'registration',
   GetUserByAuthId = 'get-user-by-auth-id',
   UpdateUser = 'update-user',
+  GetUsers = 'get-users',
 }
 
 export const userCommandSchemas: Record<string, ChannelCommandSchema> = getChannelCommands(
@@ -25,6 +26,10 @@ export const userCommandSchemas: Record<string, ChannelCommandSchema> = getChann
       command: UserCommand.UpdateUser,
       requestSchema: UserSchemas.updateUserRequest,
       responseSchema: UserSchemas.updateUserResponse,
+    },
+    {
+      command: UserCommand.GetUsers,
+      responseSchema: UserSchemas.getUsersResponse,
     },
   ],
   Version.v1,

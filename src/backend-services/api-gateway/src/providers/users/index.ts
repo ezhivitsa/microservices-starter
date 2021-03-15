@@ -23,3 +23,8 @@ export async function updateUser(params: UpdateUserParams, metadata: ProviderTyp
   const { user } = await usersClient.updateUserCommand(params, mapMetadataToProto(metadata));
   return user ? mapUserDataToClient(user) : null;
 }
+
+export async function getUsers(metadata: ProviderTypes.Metadata): Promise<User[]> {
+  const { users } = await usersClient.getUsersCommand(mapMetadataToProto(metadata));
+  return users.map(mapUserDataToClient).filter(Boolean) as User[];
+}

@@ -25,6 +25,11 @@ export interface Appointment {
   lastName: string;
 }
 
+export interface GetAppointmentsRequest {
+  from: string;
+  to: string;
+}
+
 export interface GetAppointmentsResponse {
   appointments: Appointment[];
 }

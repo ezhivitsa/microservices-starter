@@ -23,3 +23,7 @@ export function getUserByAuthId(data: UserTypes.GetUserByAuthIdRequest): Promise
 export function updateUser(data: UserTypes.UpdateUserRequest): Promise<UserTypes.UpdateUserResponse> {
   return usersClient.updateUserCommand(data, v1Metadata);
 }
+
+export function getUsers(): Promise<UserTypes.GetUsersResponse> {
+  return usersClient.getUsersCommand(v1Metadata);
+}

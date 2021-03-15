@@ -6,11 +6,12 @@ import { ServerConstants } from '@packages/common';
 import { validateMiddleware } from 'middlewares';
 
 import { updateCurrentValidator } from './validators';
-import { getCurrentHandler, updateCurrentHandler, logOutHandler } from './handlers';
+import { getCurrentHandler, updateCurrentHandler, logOutHandler, getUsersHandler } from './handlers';
 
 const usersRouter = new Router<AppKoaState, AppKoaContext>();
 
 usersRouter
+  .get('/', getUsersHandler)
   .get(ServerConstants.currentPath, getCurrentHandler)
   .put(ServerConstants.currentPath, validateMiddleware(updateCurrentValidator), updateCurrentHandler)
   .post(ServerConstants.logOutPath, logOutHandler);

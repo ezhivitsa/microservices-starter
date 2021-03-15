@@ -35,6 +35,11 @@ export interface UpdateUserResponse {
   user?: User;
 }
 
+// GetUsers
+export interface GetUsersResponse {
+  users: User[];
+}
+
 // Events
 export interface UserCreatedData {
   id?: string;

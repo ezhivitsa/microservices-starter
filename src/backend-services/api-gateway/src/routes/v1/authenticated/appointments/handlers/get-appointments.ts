@@ -4,13 +4,18 @@ import { ServiceTypes } from '@packages/common';
 
 import { AppointmentsService } from 'services';
 
-import { GetAppointmentsQueryParams } from '../types';
 import { mapAppointmentToFront } from './converters';
 
 export async function getAppointmentsHandler(ctx: RouterAppContext): Promise<void> {
-  const data: GetAppointmentsQueryParams = ctx.state.validatedRequest.value;
+  const data: ServiceTypes.GetAppointmentsRequest = ctx.state.validatedRequest.value;
 
-  const appointments = await AppointmentsService.getAppointments(data, ctx.state);
+  const appointments = await AppointmentsService.getAppointments(
+    {
+      from: new Date(data.from),
+      to: new Date(data.to),
+    },
+    ctx.state,
+  );
 
   const response: ServiceTypes.GetAppointmentsResponse = {
     appointments: appointments.map(mapAppointmentToFront),

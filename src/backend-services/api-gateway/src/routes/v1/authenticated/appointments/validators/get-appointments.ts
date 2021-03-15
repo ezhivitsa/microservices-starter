@@ -1,10 +1,10 @@
 import joi from 'joi';
 
+import { ServiceTypes } from '@packages/common';
+
 import { validate } from 'lib/joi';
 
-import { GetAppointmentsQueryParams } from '../types';
-
-const schema = joi.object<GetAppointmentsQueryParams>({
+const schema = joi.object<ServiceTypes.GetAppointmentsRequest>({
   from: joi.date().iso().required(),
   to: joi.date().iso().required(),
 });
