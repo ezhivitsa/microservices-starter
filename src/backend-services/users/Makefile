@@ -25,7 +25,7 @@ DOCKER_COMPOSE_AUTOTEST := ${AUTOTEST_VARS} ${DOCKER_COMPOSE}
 # -------------------------------------
 .PHONY: dev
 dev:
-	${DEV_VARS} \
+	${DEV_VARS} npx nodemon \
 		--config ./nodemon.json \
 		--legacy-watch \
 		-- \

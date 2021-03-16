@@ -11,12 +11,12 @@ export const production: Config = {
   },
   requestIdHeader: 'x-request-id',
   kafka: {
-    clientId: 'users',
+    clientId: 'schedule',
     brokers: ['kafka:9092'],
     logLevel: logLevel.INFO,
   },
   kafkaConsumer: {
-    groupId: 'users',
+    groupId: 'schedule',
   },
   kafkaMock: false,
   logServiceErrors: false,

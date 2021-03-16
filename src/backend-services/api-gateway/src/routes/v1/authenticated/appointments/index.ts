@@ -11,14 +11,19 @@ import {
   deleteAppointmentValidator,
   getAppointmentsValidator,
 } from './validators';
-import { createAppointmentHandler, updateAppointmentHandler, deleteAppointmentHandler } from './handlers';
+import {
+  createAppointmentHandler,
+  updateAppointmentHandler,
+  deleteAppointmentHandler,
+  getAppointmentsHandler,
+} from './handlers';
 
 const appointmentsRouter = new Router<AppKoaState, AppKoaContext>();
 
 const appointmentIdPlaceholder = ':appointmentId';
 
 appointmentsRouter
-  .get('/', validateMiddleware(getAppointmentsValidator))
+  .get('/', validateMiddleware(getAppointmentsValidator), getAppointmentsHandler)
   .post('/', validateMiddleware(createAppointmentValidator), createAppointmentHandler)
   .put(
     ServerConstants.appointmentPath(appointmentIdPlaceholder),

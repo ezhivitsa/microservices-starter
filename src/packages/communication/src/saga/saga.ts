@@ -50,7 +50,9 @@ export abstract class Saga<M> {
           await action(meta);
         }
 
-        if (step.compensationAction && !step.isRetriable) {
+        if (step.isRetriable) {
+          compensateStack.splice(0, compensateStack.length);
+        } else if (step.compensationAction) {
           compensateStack.push(step.compensationAction);
         }
       }
