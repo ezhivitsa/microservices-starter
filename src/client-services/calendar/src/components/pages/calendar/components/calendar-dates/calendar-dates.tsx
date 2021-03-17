@@ -1,30 +1,26 @@
-import React, { ReactElement, ChangeEvent } from 'react';
+import React, { ReactElement } from 'react';
 import { observer } from 'mobx-react-lite';
-import { format, parse, isValid } from 'date-fns';
 
 import { useAppointmentsStore } from 'providers';
 
-import { INPUT_DATE_FORMAT } from 'constants/app.constants';
+import { DateInput } from 'components/common/date-input';
 
 export const CalendarDates = observer(
   (): ReactElement => {
     const appointmentsStore = useAppointmentsStore();
 
-    function handleFromChange(event: ChangeEvent<HTMLInputElement>): void {
-      const date = parse(event.target.value, INPUT_DATE_FORMAT, new Date());
-      if (isValid(date)) {
-        appointmentsStore.setFrom(date);
-      }
+    function handleFromChange(value: Date): void {
+      appointmentsStore.setFrom(value);
+    }
+
+    function handleToChange(value: Date): void {
+      appointmentsStore.setTo(value);
     }
 
     return (
       <div>
-        <input
-          type="date"
-          name="from"
-          value={format(appointmentsStore.from, INPUT_DATE_FORMAT)}
-          onChange={handleFromChange}
-        />
+        <DateInput value={appointmentsStore.from} onChange={handleFromChange} />
+        <DateInput value={appointmentsStore.to} onChange={handleToChange} />
       </div>
     );
   },

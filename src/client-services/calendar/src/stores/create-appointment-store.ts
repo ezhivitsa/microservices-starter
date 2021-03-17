@@ -1,3 +1,7 @@
+import { makeObservable, observable, runInAction, computed, action } from 'mobx';
+import { Types } from '@packages/common';
+import { ApiError } from '@packages/client';
+
 import { AppointmentsService } from 'services';
 
 import { AppointmentsStore } from './appointments-store';
@@ -18,23 +22,52 @@ export interface FormikCreateAppointment {
 }
 
 export class CreateAppointmentStore {
-  constructor(private _appointmentsStore: AppointmentsStore, private _usersStore: UsersStore) {}
+  createStatus: Types.Status = Types.Status.Initial;
+  createError: ApiError | null = null;
+
+  constructor(private _appointmentsStore: AppointmentsStore, private _usersStore: UsersStore) {
+    makeObservable(this, {
+      createStatus: observable,
+      createError: observable,
+      isCreating: computed,
+      create: action,
+    });
+  }
+
+  get isCreating(): boolean {
+    return this.createStatus === Types.Status.Pending;
+  }
 
   async create(data: FormikCreateAppointment): Promise<void> {
+    this.createStatus = Types.Status.Pending;
+
     const appointmentData = {
       userId: data.userId,
       start: data.start.toISOString(),
       end: data.end.toISOString(),
       description: data.description || undefined,
     };
-    const response = await AppointmentsService.createAppointment(appointmentData);
-    const user = this._usersStore.users.find(({ id }) => id === data.userId);
 
-    this._appointmentsStore.add({
-      id: response.id,
-      firstName: user?.firstName,
-      lastName: user?.lastName || '',
-      ...appointmentData,
-    });
+    try {
+      const response = await AppointmentsService.createAppointment(appointmentData);
+      const user = this._usersStore.users.find(({ id }) => id === data.userId);
+
+      this._appointmentsStore.add({
+        id: response.id,
+        firstName: user?.firstName,
+        lastName: user?.lastName || '',
+        ...appointmentData,
+      });
+
+      runInAction(() => {
+        this.createStatus = Types.Status.Done;
+        this.createError = null;
+      });
+    } catch (err) {
+      runInAction(() => {
+        this.createStatus = Types.Status.Error;
+        this.createError = err;
+      });
+    }
   }
 }

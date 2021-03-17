@@ -7,3 +7,10 @@ export const validationTexts = {
 export const errorsTexts = {
   general: 'Something went wrong',
 };
+
+export const calendarTexts = {
+  create: 'Create',
+  staff: 'Staff member',
+  start: 'Start',
+  end: 'End',
+};
