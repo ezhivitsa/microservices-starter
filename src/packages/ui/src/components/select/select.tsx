@@ -6,7 +6,7 @@ interface Item {
 }
 
 interface Props {
-  value: string;
+  value?: string;
   items: Item[];
   onChange?: (value: string, event: ChangeEvent) => void;
 }

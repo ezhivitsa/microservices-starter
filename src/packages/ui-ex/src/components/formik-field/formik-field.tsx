@@ -81,4 +81,5 @@ export function FormikField<FieldValue, ComponentProps>({
 
 FormikField.defaultProps = {
   showErrorMessage: true,
+  componentProps: {},
 };

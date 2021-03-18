@@ -2,6 +2,7 @@ import React, { ReactElement, ChangeEvent } from 'react';
 import { format, formatISO, isValid } from 'date-fns';
 
 interface Props {
+  label?: string;
   value: Date;
   items: Date[];
   onChange?: (value: Date) => void;
@@ -29,8 +30,11 @@ export function TimeSelect(props: Props): ReactElement {
 
   const value = formatISO(props.value, { representation: 'time' });
   return (
-    <select value={value} onChange={handleChange}>
-      {props.items.map(renderOption)}
-    </select>
+    <div>
+      <label>{props.label}</label>
+      <select value={value} onChange={handleChange}>
+        {props.items.map(renderOption)}
+      </select>
+    </div>
   );
 }

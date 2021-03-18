@@ -24,6 +24,12 @@ export class AppointmentsStore {
       appointments: observable,
       from: observable,
       to: observable,
+
+      fetchStatus: observable,
+      fetchError: observable,
+      deleteStatus: observable,
+      deleteError: observable,
+
       add: action,
       setFrom: action,
       setTo: action,
@@ -32,6 +38,10 @@ export class AppointmentsStore {
 
     this.from = startOfWeek(new Date());
     this.to = endOfWeek(new Date());
+  }
+
+  get isDeleting(): boolean {
+    return this.deleteStatus === Types.Status.Pending;
   }
 
   add(data: ServiceTypes.Appointment): void {

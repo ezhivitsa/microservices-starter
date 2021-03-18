@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, { ReactElement, ReactNode, useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 
 import { Button, ButtonView } from '@packages/ui';
@@ -11,10 +11,13 @@ import {
   useNewUsersStore,
   useUsersStore,
 } from 'providers';
+import { AppointmentStore } from 'stores';
 
 import { calendarTexts } from 'texts';
 
 import { CalendarDates } from './components/calendar-dates';
+import { CreateAppointmentForm } from './components/create-appointment-form';
+import { Appointment } from './components/appointment';
 
 const Calendar = observer(
   (): ReactElement => {
@@ -32,15 +35,27 @@ const Calendar = observer(
       setShowCreateForm(true);
     }
 
+    function handleCloseForm(): void {
+      setShowCreateForm(false);
+    }
+
+    function renderAppointment(appointment: AppointmentStore): ReactNode {
+      return <Appointment appointment={appointment} />;
+    }
+
     return (
       <div>
         <CalendarDates />
 
-        <Button view={ButtonView.Action} onClick={handleCreateClick}>
-          {calendarTexts.create}
-        </Button>
+        {showCreateForm ? (
+          <CreateAppointmentForm onClose={handleCloseForm} />
+        ) : (
+          <Button view={ButtonView.Action} onClick={handleCreateClick}>
+            {calendarTexts.create}
+          </Button>
+        )}
 
-        {showCreateForm}
+        {appointmentsStore.appointments.map(renderAppointment)}
       </div>
     );
   },

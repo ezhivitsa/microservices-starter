@@ -6,6 +6,7 @@
     "@packages/client": "workspace:*",
     "@packages/common": "workspace:*",
     "@packages/ui": "workspace:*",
+    "@packages/ui-ex": "workspace:*",
     "classnames": "2.2.6",
     "date-fns": "2.19.0",
     "mobx": "6.1.6",

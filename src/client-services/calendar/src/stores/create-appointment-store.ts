@@ -31,6 +31,7 @@ export class CreateAppointmentStore {
       createError: observable,
       isCreating: computed,
       create: action,
+      dispose: action,
     });
   }
 
@@ -69,5 +70,10 @@ export class CreateAppointmentStore {
         this.createError = err;
       });
     }
+  }
+
+  dispose(): void {
+    this.createStatus = Types.Status.Initial;
+    this.createError = null;
   }
 }

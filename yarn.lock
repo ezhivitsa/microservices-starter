@@ -1919,6 +1919,7 @@ __metadata:
     "@packages/postcss-config": "workspace:*"
     "@packages/stylelint-config": "workspace:*"
     "@packages/ui": "workspace:*"
+    "@packages/ui-ex": "workspace:*"
     "@packages/webpack": "workspace:*"
     "@types/react": 17.0.0
     "@types/react-dom": 17.0.1

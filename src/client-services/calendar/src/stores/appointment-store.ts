@@ -34,8 +34,11 @@ export class AppointmentStore {
       start: observable,
       end: observable,
       description: observable,
+
       updateStatus: observable,
       updateError: observable,
+
+      userFullName: computed,
       startDate: computed,
       endDate: computed,
       update: action,
@@ -56,6 +59,10 @@ export class AppointmentStore {
 
   get endDate(): Date {
     return new Date(this.end);
+  }
+
+  get userFullName(): string {
+    return `${this.firstName || ''} ${this.lastName}`.trim();
   }
 
   async update(data: FormikUpdateAppointment): Promise<void> {

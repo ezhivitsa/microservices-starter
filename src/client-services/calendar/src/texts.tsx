@@ -10,7 +10,9 @@ export const errorsTexts = {
 
 export const calendarTexts = {
   create: 'Create',
+  cancel: 'Cancel',
   staff: 'Staff member',
   start: 'Start',
   end: 'End',
+  delete: 'Delete',
 };
