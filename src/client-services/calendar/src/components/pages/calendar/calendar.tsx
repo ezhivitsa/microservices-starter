@@ -24,6 +24,8 @@ const Calendar = observer(
     const appointmentsStore = useAppointmentsStore();
     const usersStore = useUsersStore();
 
+    const { appointments } = appointmentsStore;
+
     const [showCreateForm, setShowCreateForm] = useState(false);
 
     useEffect(() => {
@@ -40,7 +42,7 @@ const Calendar = observer(
     }
 
     function renderAppointment(appointment: AppointmentStore): ReactNode {
-      return <Appointment appointment={appointment} />;
+      return <Appointment key={appointment.id} appointment={appointment} />;
     }
 
     return (
@@ -55,7 +57,7 @@ const Calendar = observer(
           </Button>
         )}
 
-        {appointmentsStore.appointments.map(renderAppointment)}
+        {appointments.map(renderAppointment)}
       </div>
     );
   },

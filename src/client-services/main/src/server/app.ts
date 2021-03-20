@@ -31,7 +31,17 @@ export async function initApp(): Promise<Koa<AppKoaState, AppKoaContext>> {
     .use(mount('/ping', middlewares.pingMiddleware))
     .use(middlewares.requestIdMiddleware)
     .use(middlewares.startTimeMiddleware)
-    .use(helmet())
+    .use(
+      helmet({
+        contentSecurityPolicy: false,
+      }),
+    );
+
+  if (config.helmetCSP !== false) {
+    app.use(helmet.contentSecurityPolicy(config.helmetCSP));
+  }
+
+  app
     .use(assetsMiddlewares)
     .use(loggerInitMiddleware)
     .use(middlewares.logRequestMiddleware)

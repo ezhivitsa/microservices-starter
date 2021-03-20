@@ -8,6 +8,7 @@ import { DateInput } from 'components/common/date-input';
 export const CalendarDates = observer(
   (): ReactElement => {
     const appointmentsStore = useAppointmentsStore();
+    const { from, to } = appointmentsStore;
 
     function handleFromChange(value: Date): void {
       appointmentsStore.setFrom(value);
@@ -19,8 +20,8 @@ export const CalendarDates = observer(
 
     return (
       <div>
-        <DateInput value={appointmentsStore.from} onChange={handleFromChange} />
-        <DateInput value={appointmentsStore.to} onChange={handleToChange} />
+        <DateInput value={from} onChange={handleFromChange} />
+        <DateInput value={to} onChange={handleToChange} />
       </div>
     );
   },

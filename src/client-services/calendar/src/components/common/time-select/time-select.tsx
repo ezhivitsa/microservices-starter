@@ -3,7 +3,7 @@ import { format, formatISO, isValid } from 'date-fns';
 
 interface Props {
   label?: string;
-  value: Date;
+  value?: Date;
   items: Date[];
   onChange?: (value: Date) => void;
 }
@@ -11,9 +11,11 @@ interface Props {
 const TIME_FORMAT = 'hh:mm';
 
 export function TimeSelect(props: Props): ReactElement {
+  const value = props.value || new Date();
+
   function handleChange(e: ChangeEvent<HTMLSelectElement>): void {
     const updatedValue = e.target.value;
-    const date = formatISO(props.value, { representation: 'date' });
+    const date = formatISO(value, { representation: 'date' });
 
     const changeDate = new Date(`${date}T${updatedValue}`);
     if (isValid(changeDate)) {
@@ -25,14 +27,18 @@ export function TimeSelect(props: Props): ReactElement {
     const time = format(item, TIME_FORMAT);
     const itemValue = formatISO(item, { representation: 'time' });
 
-    return <option value={itemValue}>{time}</option>;
+    return (
+      <option key={itemValue} value={itemValue}>
+        {time}
+      </option>
+    );
   }
 
-  const value = formatISO(props.value, { representation: 'time' });
+  const formattedValue = formatISO(value, { representation: 'time' });
   return (
     <div>
       <label>{props.label}</label>
-      <select value={value} onChange={handleChange}>
+      <select value={formattedValue} onChange={handleChange}>
         {props.items.map(renderOption)}
       </select>
     </div>

@@ -2,6 +2,8 @@ import React, { ReactElement } from 'react';
 import { useField } from 'formik';
 import { set } from 'date-fns';
 
+import { FormikField } from '@packages/ui-ex';
+
 import { FormikCreateAppointmentFieldName } from 'stores';
 
 import { DateInput } from 'components/common/date-input';
@@ -32,8 +34,23 @@ export function DateFields(): ReactElement {
     <div>
       <DateInput value={startDate.value} onChange={handleDateChange} />
 
-      <TimeSelect label={calendarTexts.start} value={startDate.value} items={getTimes({ start: true })} />
-      <TimeSelect label={calendarTexts.end} value={endDate.value} items={getTimes({ end: true })} />
+      <FormikField
+        name={FormikCreateAppointmentFieldName.Start}
+        component={TimeSelect}
+        componentProps={{
+          label: calendarTexts.start,
+          items: getTimes({ start: true }),
+        }}
+      />
+
+      <FormikField
+        name={FormikCreateAppointmentFieldName.End}
+        component={TimeSelect}
+        componentProps={{
+          label: calendarTexts.end,
+          items: getTimes({ end: true }),
+        }}
+      />
     </div>
   );
 }

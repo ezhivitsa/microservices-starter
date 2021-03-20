@@ -5,6 +5,8 @@ interface Props {
   label?: ReactNode;
   className?: string;
   error?: ReactNode;
+  id?: string;
+  name?: string;
 
   onChange?: (value?: string, event?: ChangeEvent) => void;
   onFocus?: (event?: FocusEvent) => void;
@@ -20,7 +22,14 @@ export function Textarea(props: Props): ReactElement {
   return (
     <div>
       <label>{props.label}</label>
-      <textarea value={props.value} onChange={handleChange} onFocus={props.onFocus} onBlur={props.onBlur} />
+      <textarea
+        id={props.id}
+        name={props.name}
+        value={props.value}
+        onChange={handleChange}
+        onFocus={props.onFocus}
+        onBlur={props.onBlur}
+      />
     </div>
   );
 }

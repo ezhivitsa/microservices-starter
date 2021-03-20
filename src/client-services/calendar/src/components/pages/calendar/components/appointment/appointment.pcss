@@ -1,5 +1,23 @@
+@import 'variables.pcss';
+
 .appointment {
-  .dates {
+  padding: var(--grid2);
+  border-radius: var(--border-radius-300);
+  border: 1px solid var(--color-grey-700);
+
+  &:not(:last-of-type) {
+    margin-bottom: var(--grid3);
+  }
+
+  &__dates {
     display: flex;
+  }
+
+  &__day {
+    margin-right: var(--grid4);
+  }
+
+  &__date {
+    margin-left: var(--grid1);
   }
 }

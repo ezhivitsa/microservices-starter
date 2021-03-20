@@ -29,6 +29,14 @@ export class AppointmentStore {
   updateError: ApiError | null = null;
 
   constructor(data: ServiceTypes.Appointment) {
+    this.id = data.id;
+    this.userId = data.userId;
+    this.firstName = data.firstName;
+    this.lastName = data.lastName;
+    this.start = data.start;
+    this.end = data.end;
+    this.description = data.description;
+
     makeObservable(this, {
       userId: observable,
       start: observable,
@@ -38,19 +46,10 @@ export class AppointmentStore {
       updateStatus: observable,
       updateError: observable,
 
-      userFullName: computed,
       startDate: computed,
       endDate: computed,
       update: action,
     });
-
-    this.id = data.id;
-    this.userId = data.userId;
-    this.firstName = data.firstName;
-    this.lastName = data.lastName;
-    this.start = data.start;
-    this.end = data.end;
-    this.description = data.description;
   }
 
   get startDate(): Date {

@@ -1,5 +1,5 @@
-import { makeObservable, observable, action, runInAction } from 'mobx';
-import { startOfWeek, endOfWeek } from 'date-fns';
+import { makeObservable, observable, action, runInAction, computed } from 'mobx';
+import { startOfWeek, endOfWeek, isWithinInterval } from 'date-fns';
 
 import { Types, ServiceTypes } from '@packages/common';
 import { ApiError } from '@packages/client';
@@ -9,7 +9,7 @@ import { AppointmentsService } from 'services';
 import { AppointmentStore } from './appointment-store';
 
 export class AppointmentsStore {
-  appointments: AppointmentStore[] = [];
+  appointmentsList: AppointmentStore[] = [];
   from: Date;
   to: Date;
 
@@ -20,8 +20,11 @@ export class AppointmentsStore {
   deleteError: ApiError | null = null;
 
   constructor() {
+    this.from = startOfWeek(new Date());
+    this.to = endOfWeek(new Date());
+
     makeObservable(this, {
-      appointments: observable,
+      appointmentsList: observable,
       from: observable,
       to: observable,
 
@@ -30,22 +33,28 @@ export class AppointmentsStore {
       deleteStatus: observable,
       deleteError: observable,
 
+      isDeleting: computed,
+      appointments: computed,
+
       add: action,
       setFrom: action,
       setTo: action,
       fetch: action,
     });
-
-    this.from = startOfWeek(new Date());
-    this.to = endOfWeek(new Date());
   }
 
   get isDeleting(): boolean {
     return this.deleteStatus === Types.Status.Pending;
   }
 
+  get appointments(): AppointmentStore[] {
+    const { from, to } = this;
+
+    return this.appointmentsList.filter(({ startDate }) => isWithinInterval(startDate, { start: from, end: to }));
+  }
+
   add(data: ServiceTypes.Appointment): void {
-    this.appointments.push(new AppointmentStore(data));
+    this.appointmentsList.push(new AppointmentStore(data));
   }
 
   setFrom(date: Date): void {
@@ -66,9 +75,8 @@ export class AppointmentsStore {
         from: this.from.toISOString(),
         to: this.to.toISOString(),
       });
-
       runInAction(() => {
-        this.appointments = response.appointments.map((appointment) => new AppointmentStore(appointment));
+        this.appointmentsList = response.appointments.map((appointment) => new AppointmentStore(appointment));
         this.fetchStatus = Types.Status.Done;
         this.fetchError = null;
       });
@@ -87,7 +95,7 @@ export class AppointmentsStore {
       await AppointmentsService.deleteAppointment(id);
 
       runInAction(() => {
-        this.appointments = this.appointments.filter((appointment) => appointment.id !== id);
+        this.appointmentsList = this.appointments.filter((appointment) => appointment.id !== id);
 
         this.deleteStatus = Types.Status.Done;
         this.deleteError = null;

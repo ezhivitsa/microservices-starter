@@ -36,4 +36,5 @@ export const development: Config = {
     },
   },
   apiGatewayUrl: 'http://localhost:8090/api',
+  helmetCSP: false,
 };

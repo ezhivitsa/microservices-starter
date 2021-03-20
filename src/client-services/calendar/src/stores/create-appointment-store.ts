@@ -22,10 +22,16 @@ export interface FormikCreateAppointment {
 }
 
 export class CreateAppointmentStore {
+  private _usersStore: UsersStore;
+  private _appointmentsStore: AppointmentsStore;
+
   createStatus: Types.Status = Types.Status.Initial;
   createError: ApiError | null = null;
 
-  constructor(private _appointmentsStore: AppointmentsStore, private _usersStore: UsersStore) {
+  constructor(appointmentsStore: AppointmentsStore, usersStore: UsersStore) {
+    this._appointmentsStore = appointmentsStore;
+    this._usersStore = usersStore;
+
     makeObservable(this, {
       createStatus: observable,
       createError: observable,

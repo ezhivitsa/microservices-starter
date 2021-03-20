@@ -25,7 +25,7 @@ interface NavigationLink {
 
 const {
   frontUpstreams,
-  frontUpstreams: { dashboard },
+  frontUpstreams: { dashboard, calendar },
 } = config;
 const b = lib.block(styles, 'layout');
 
@@ -35,7 +35,7 @@ const navigationLinks: NavigationLink[] = [
     text: menu.dashboard,
   },
   {
-    to: '/',
+    to: calendar.rule,
     text: menu.calendar,
   },
 ];

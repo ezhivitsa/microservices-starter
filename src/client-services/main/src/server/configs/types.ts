@@ -1,3 +1,4 @@
+import { KoaHelmetContentSecurityPolicyConfiguration } from 'koa-helmet';
 import { Types } from '@packages/common';
 
 export interface LoggerConfig {
@@ -17,4 +18,5 @@ export interface Config {
   readonly requestIdHeader: string;
   readonly frontUpstreams: Types.FrontUpstreamsConfig;
   readonly apiGatewayUrl: string;
+  readonly helmetCSP?: KoaHelmetContentSecurityPolicyConfiguration | false;
 }

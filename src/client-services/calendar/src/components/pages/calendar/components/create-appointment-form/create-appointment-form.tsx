@@ -2,7 +2,7 @@ import React, { ReactElement, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Formik, Form } from 'formik';
 
-import { Spinner, Textarea, Button, ButtonSize, ButtonView, ButtonType } from '@packages/ui';
+import { Spinner, Textarea, Button, ButtonSize, ButtonView, ButtonType, useStyles } from '@packages/ui';
 import { FormikField } from '@packages/ui-ex';
 
 import {
@@ -23,6 +23,8 @@ import { getTimes } from './utils';
 import { SelectUserField } from './components/select-user-field';
 import { DateFields } from './components/date-fields';
 
+import styles from './create-appointment-form.pcss';
+
 interface Props {
   onClose: () => void;
 }
@@ -31,6 +33,11 @@ export const CreateForm = observer(
   (props: Props): ReactElement => {
     const usersStore = useUsersStore();
     const createAppointmentStore = useCreateAppointmentStore();
+
+    const { users } = usersStore;
+    const { isCreating } = createAppointmentStore;
+
+    const b = useStyles(styles, 'create-appointment-form');
 
     useEffect(() => {
       return () => {
@@ -45,18 +52,13 @@ export const CreateForm = observer(
 
     function createForm(): ReactElement {
       return (
-        <Form>
+        <Form className={b()}>
           <SelectUserField />
           <DateFields />
 
           <FormikField component={Textarea} name={FormikCreateAppointmentFieldName.Description} />
 
-          <Button
-            size={ButtonSize.L}
-            type={ButtonType.Submit}
-            view={ButtonView.Action}
-            disabled={createAppointmentStore.isCreating}
-          >
+          <Button size={ButtonSize.L} type={ButtonType.Submit} view={ButtonView.Action} disabled={isCreating}>
             {calendarTexts.create}
           </Button>
 
@@ -72,7 +74,7 @@ export const CreateForm = observer(
       <Formik
         validationSchema={validationSchema}
         initialValues={{
-          userId: usersStore.users[0].id,
+          userId: users[0].id,
           start: times[0],
           end: times[1],
           description: '',
@@ -85,17 +87,21 @@ export const CreateForm = observer(
   },
 );
 
-export function CreateAppointmentForm(props: Props): ReactElement {
-  const usersStore = useUsersStore();
-  const appointmentsStore = useAppointmentsStore();
+export const CreateAppointmentForm = observer(
+  (props: Props): ReactElement => {
+    const usersStore = useUsersStore();
+    const appointmentsStore = useAppointmentsStore();
 
-  if (usersStore.isLoading) {
-    return <Spinner />;
-  }
+    const { isLoading } = usersStore;
 
-  return (
-    <CreateAppointmentStoreProvider value={useNewCreateAppointmentStore(appointmentsStore, usersStore)}>
-      <CreateForm {...props} />
-    </CreateAppointmentStoreProvider>
-  );
-}
+    if (isLoading) {
+      return <Spinner />;
+    }
+
+    return (
+      <CreateAppointmentStoreProvider value={useNewCreateAppointmentStore(appointmentsStore, usersStore)}>
+        <CreateForm {...props} />
+      </CreateAppointmentStoreProvider>
+    );
+  },
+);
