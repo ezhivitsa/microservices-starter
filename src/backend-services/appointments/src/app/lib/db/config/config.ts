@@ -12,8 +12,8 @@ export const options: ConnectOptions = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
-  // auth: {
-  //   user: username,
-  //   password,
-  // },
+  auth: {
+    user: username,
+    password,
+  },
 };
