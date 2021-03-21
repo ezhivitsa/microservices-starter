@@ -1,11 +1,11 @@
 import _ from 'lodash';
+import { WhereOptions, FindOptions } from 'sequelize';
+
+import { StorageService } from '@packages/postgres-storage';
 
 import { UserInstance, UserModel, UserAttributes, UserCreationAttributes } from '@root/lib/db/models/user';
 import { UserRole } from '@root/lib/db/models/enums';
-import { db } from '@root/lib/db/models';
-import { WhereOptions, FindOptions } from 'sequelize/types';
-
-import { StorageService } from './storage-service';
+import { db } from '@root/lib/db';
 
 interface Filter {
   id?: string;

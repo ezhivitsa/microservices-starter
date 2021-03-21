@@ -1,15 +1,14 @@
-import { CacheStorageService } from './cache-storage-service';
+import { StorageService, Cache } from '@packages/redis-storage';
 
-import { AUTH_PREFIX, ACCESS_TOKEN_PREFIX } from '@root/constants/app-constants';
-import { Cache } from '@root/lib/cache';
+import { cache } from '@root/lib/cache';
 
 interface AccessTokenData {
   expiresAt: Date;
   userId: string;
 }
 
-export class AccessTokenStorageService extends CacheStorageService<AccessTokenData> {
-  protected _cache: Cache = new Cache([AUTH_PREFIX, ACCESS_TOKEN_PREFIX]);
+export class AccessTokenStorageService extends StorageService<AccessTokenData> {
+  protected _cache: Cache = cache.AccessToken;
 
   private _isAccessTokenData(data: any): data is AccessTokenData {
     return data && typeof data === 'object' && data.hasOwnProperty('expiresAt') && data.hasOwnProperty('userId');

@@ -2,7 +2,7 @@ import { AppointmentEvent } from '@packages/communication';
 
 import { AppointmentSnapshotData, AppointmentSnapshotModel } from '@root/lib/db/models/appointment-snapshot';
 import { EventModel } from '@root/lib/db/models/appointment-event';
-import { db } from '@root/lib/db/models';
+import { db } from '@root/lib/db';
 
 import { AppointmentCreatedData, AppointmentUpdatedData } from '@root/services/appointments/types';
 

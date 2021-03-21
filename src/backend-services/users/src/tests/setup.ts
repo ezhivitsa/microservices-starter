@@ -1,7 +1,7 @@
 import { lib } from '@packages/server';
 
 import { initApp } from '../app/app';
-import { db } from '../app/lib/db/models';
+import { db } from '../app/lib/db';
 
 process.env.OVERRIDE_ENV = lib.Environment.testing;
 

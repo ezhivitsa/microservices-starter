@@ -1,0 +1,19 @@
+{
+  "name": "@packages/mongo-storage",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "build": "yarn g:tsc",
+    "lint": "yarn g:lint:eslint && yarn g:lint:tsc"
+  },
+  "devDependencies": {
+    "mongoose": "^5.11.19"
+  },
+  "peerDependencies": {
+    "mongoose": "^5.11.19"
+  },
+  "installConfig": {
+    "hoistingLimits": "workspaces"
+  }
+}

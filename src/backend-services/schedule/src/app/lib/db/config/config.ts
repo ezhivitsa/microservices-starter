@@ -1,42 +1,9 @@
-import { Options } from 'sequelize';
+import { Config } from '@packages/postgres-storage';
 
-const port = Number(process.env.POSTGRES_PORT) || 5432;
-const host = process.env.POSTGRES_HOST || '127.0.0.1';
-const database = process.env.POSTGRES_DATABASE || 'users';
-const username = process.env.POSTGRES_USER || 'starter';
-const password = process.env.POSTGRES_PASSWORD || undefined;
-
-const databaseData: Options = {
-  username,
-  password,
-  database,
-  host,
-  port,
-  dialect: 'postgres',
-  dialectOptions: {
-    supportBigNumbers: true,
-    bigNumberStrings: true,
-  },
+export const config: Config = {
+  port: Number(process.env.POSTGRES_PORT) || 5432,
+  host: process.env.POSTGRES_HOST || '127.0.0.1',
+  database: process.env.POSTGRES_DATABASE || 'users',
+  username: process.env.POSTGRES_USER || 'starter',
+  password: process.env.POSTGRES_PASSWORD,
 };
-
-const configs: {
-  development: Options;
-  staging: Options;
-  test: Options;
-  production: Options;
-} = {
-  development: {
-    ...databaseData,
-  },
-  staging: {
-    ...databaseData,
-  },
-  test: {
-    ...databaseData,
-  },
-  production: {
-    ...databaseData,
-  },
-};
-
-export { configs };

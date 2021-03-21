@@ -1,4 +1,4 @@
-import { db } from '@root/lib/db/models';
+import { db } from '@root/lib/db';
 
 export async function cleanDB(): Promise<void> {
   await Promise.all([

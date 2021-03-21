@@ -1,3 +1,5 @@
-import { configs } from './config';
+import { getConfigs } from '@packages/postgres-storage';
 
-module.exports = configs;
+import { config } from './config';
+
+module.exports = getConfigs(config);

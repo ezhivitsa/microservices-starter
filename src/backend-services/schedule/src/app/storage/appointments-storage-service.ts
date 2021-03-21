@@ -1,15 +1,15 @@
 import _ from 'lodash';
 import { WhereOptions, FindOptions, Op } from 'sequelize';
 
+import { StorageService } from '@packages/postgres-storage';
+
 import {
   AppointmentInstance,
   AppointmentModel,
   AppointmentAttributes,
   AppointmentCreationAttributes,
 } from '@root/lib/db/models/appointment';
-import { db } from '@root/lib/db/models';
-
-import { StorageService } from './storage-service';
+import { db } from '@root/lib/db';
 
 interface Filter {
   id?: string;

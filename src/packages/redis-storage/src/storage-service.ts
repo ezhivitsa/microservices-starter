@@ -1,6 +1,6 @@
-import { Cache } from '@root/lib/cache';
+import { Cache } from './cache';
 
-export abstract class CacheStorageService<T> {
+export abstract class StorageService<T> {
   protected abstract _cache: Cache;
 
   abstract _stringToData(value: string): T | null;

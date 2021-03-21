@@ -1,9 +1,9 @@
 import { DocumentDefinition, FilterQuery, UpdateQuery } from 'mongoose';
 
-import { CommandDocument, CommandModel } from '@root/lib/db/models/command';
-import { db } from '@root/lib/db/models';
+import { StorageService } from '@packages/mongo-storage';
 
-import { StorageService } from './storage-service';
+import { CommandDocument, CommandModel } from '@root/lib/db/models/command';
+import { db } from '@root/lib/db';
 
 interface Filter {
   id?: string;

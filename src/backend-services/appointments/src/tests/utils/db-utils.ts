@@ -1,7 +1,7 @@
-import { mongo } from '@root/lib/db/models';
+import { db } from '@root/lib/db';
 
 export async function cleanDB(): Promise<void> {
-  const collections = mongo.collections;
+  const collections = db.mongo.collections;
   const promises = Object.values(collections).map((collection) => {
     return collection.deleteMany({});
   });

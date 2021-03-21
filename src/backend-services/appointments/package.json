@@ -7,6 +7,7 @@
     "@packages/communication": "workspace:*",
     "@packages/koa-kafka": "workspace:*",
     "@packages/logger": "workspace:*",
+    "@packages/mongo-storage": "workspace:*",
     "@packages/proto": "workspace:*",
     "@packages/server": "workspace:*",
     "joi": "17.4.0",

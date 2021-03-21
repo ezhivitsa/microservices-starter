@@ -1,4 +1,7 @@
 import _ from 'lodash';
+import { WhereOptions, FindOptions } from 'sequelize';
+
+import { StorageService } from '@packages/postgres-storage';
 
 import {
   CommandInstance,
@@ -6,10 +9,7 @@ import {
   CommandAttributes,
   CommandCreationAttributes,
 } from '@root/lib/db/models/command';
-import { db } from '@root/lib/db/models';
-import { WhereOptions, FindOptions } from 'sequelize/types';
-
-import { StorageService } from './storage-service';
+import { db } from '@root/lib/db';
 
 interface Filter {
   id?: string;

@@ -1796,6 +1796,7 @@ __metadata:
     "@packages/eslint-config": "workspace:*"
     "@packages/koa-kafka": "workspace:*"
     "@packages/logger": "workspace:*"
+    "@packages/mongo-storage": "workspace:*"
     "@packages/proto": "workspace:*"
     "@packages/server": "workspace:*"
     "@types/jest": 26.0.21
@@ -1823,7 +1824,9 @@ __metadata:
     "@packages/eslint-config": "workspace:*"
     "@packages/koa-kafka": "workspace:*"
     "@packages/logger": "workspace:*"
+    "@packages/postgres-storage": "workspace:*"
     "@packages/proto": "workspace:*"
+    "@packages/redis-storage": "workspace:*"
     "@packages/server": "workspace:*"
     "@types/bcrypt": 3.0.0
     "@types/jest": 26.0.21
@@ -1832,7 +1835,7 @@ __metadata:
     "@types/long": 4.0.1
     "@types/module-alias": 2.0.0
     "@types/redis": 2.8.28
-    "@types/sequelize": 4.28.9
+    "@types/validator": 13.1.3
     bcrypt: 5.0.0
     jest: 26.6.3
     joi: 17.4.0
@@ -1840,8 +1843,6 @@ __metadata:
     long: 4.0.0
     module-alias: 2.2.2
     nodemon: 2.0.7
-    pg: 8.5.1
-    pg-hstore: 2.3.3
     redis: 3.0.2
     sequelize: 6.5.1
     sequelize-cli: 6.2.0
@@ -1885,19 +1886,20 @@ __metadata:
     "@packages/eslint-config": "workspace:*"
     "@packages/koa-kafka": "workspace:*"
     "@packages/logger": "workspace:*"
+    "@packages/postgres-storage": "workspace:*"
     "@packages/proto": "workspace:*"
     "@packages/server": "workspace:*"
     "@types/jest": 26.0.21
     "@types/joi": 17.2.3
+    "@types/lodash": 4.14.168
     "@types/long": 4.0.1
     "@types/module-alias": 2.0.0
-    "@types/sequelize": 4.28.9
+    "@types/validator": 13.1.3
     jest: 26.6.3
     joi: 17.4.0
+    lodash: 4.17.21
     module-alias: 2.2.2
     nodemon: 2.0.7
-    pg: 8.5.1
-    pg-hstore: 2.3.3
     sequelize: 6.5.1
     sequelize-cli: 6.2.0
     ts-jest: 26.5.4
@@ -1915,18 +1917,19 @@ __metadata:
     "@packages/eslint-config": "workspace:*"
     "@packages/koa-kafka": "workspace:*"
     "@packages/logger": "workspace:*"
+    "@packages/postgres-storage": "workspace:*"
     "@packages/proto": "workspace:*"
     "@packages/server": "workspace:*"
     "@types/jest": 26.0.21
     "@types/joi": 17.2.3
+    "@types/lodash": 4.14.168
     "@types/module-alias": 2.0.0
-    "@types/sequelize": 4.28.9
+    "@types/validator": 13.1.3
     jest: 26.6.3
     joi: 17.4.0
+    lodash: 4.17.21
     module-alias: 2.2.2
     nodemon: 2.0.7
-    pg: 8.5.1
-    pg-hstore: 2.3.3
     sequelize: 6.5.1
     sequelize-cli: 6.2.0
     ts-jest: 26.5.4
@@ -2806,6 +2809,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@packages/mongo-storage@workspace:*, @packages/mongo-storage@workspace:src/packages/mongo-storage":
+  version: 0.0.0-use.local
+  resolution: "@packages/mongo-storage@workspace:src/packages/mongo-storage"
+  dependencies:
+    mongoose: ^5.11.19
+  peerDependencies:
+    mongoose: ^5.11.19
+  languageName: unknown
+  linkType: soft
+
 "@packages/postcss-config@workspace:*, @packages/postcss-config@workspace:src/packages/postcss-config":
   version: 0.0.0-use.local
   resolution: "@packages/postcss-config@workspace:src/packages/postcss-config"
@@ -2820,6 +2833,21 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@packages/postgres-storage@workspace:*, @packages/postgres-storage@workspace:src/packages/postgres-storage":
+  version: 0.0.0-use.local
+  resolution: "@packages/postgres-storage@workspace:src/packages/postgres-storage"
+  dependencies:
+    "@types/node": 14.14.35
+    "@types/validator": ^13.1.3
+    pg: 8.5.1
+    pg-hstore: 2.3.3
+    sequelize: ^6.5.1
+  peerDependencies:
+    "@types/validator": ^13.1.3
+    sequelize: ^6.5.1
+  languageName: unknown
+  linkType: soft
+
 "@packages/proto@workspace:*, @packages/proto@workspace:src/packages/proto":
   version: 0.0.0-use.local
   resolution: "@packages/proto@workspace:src/packages/proto"
@@ -2827,6 +2855,18 @@ __metadata:
     "@types/node": 14.14.35
     long: 4.0.0
     protobufjs: 6.10.2
+  languageName: unknown
+  linkType: soft
+
+"@packages/redis-storage@workspace:*, @packages/redis-storage@workspace:src/packages/redis-storage":
+  version: 0.0.0-use.local
+  resolution: "@packages/redis-storage@workspace:src/packages/redis-storage"
+  dependencies:
+    "@types/node": 14.14.35
+    "@types/redis": 2.8.28
+    redis: ^3.0.2
+  peerDependencies:
+    redis: ^3.0.2
   languageName: unknown
   linkType: soft
 
@@ -3122,13 +3162,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/bluebird@npm:*":
-  version: 3.5.33
-  resolution: "@types/bluebird@npm:3.5.33"
-  checksum: 45f7adeec6e656501f5b2127d5cc1538d3ae497d06bfa00d8d7f51eb2aa482267b3b4868ac1c75fc84acfad86d2c0d4de8af535cf725156f222d679df9694aff
-  languageName: node
-  linkType: hard
-
 "@types/body-parser@npm:*":
   version: 1.19.0
   resolution: "@types/body-parser@npm:1.19.0"
@@ -3178,15 +3211,6 @@ __metadata:
   version: 0.5.3
   resolution: "@types/content-disposition@npm:0.5.3"
   checksum: 1b7d94b19ae8564816233b74df5f662052d393d0fdb317c81d894f5e1e762010c46b1812ce01a1492a72603e182afd18a59673e25ae737efc3e470ba261697d7
-  languageName: node
-  linkType: hard
-
-"@types/continuation-local-storage@npm:*":
-  version: 3.2.2
-  resolution: "@types/continuation-local-storage@npm:3.2.2"
-  dependencies:
-    "@types/node": "*"
-  checksum: 7e1f91b5c308f9ef6b4633783d321d6b2116aa8f03e232b451b8994e9d10f8c3f4b253d172597a69f78f78af19d27e06b56d418b0b2fde62be4c8e97b0958c19
   languageName: node
   linkType: hard
 
@@ -3479,17 +3503,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:*, @types/lodash@npm:^4.14.165":
-  version: 4.14.167
-  resolution: "@types/lodash@npm:4.14.167"
-  checksum: 40778f83a86392625b3d52c15f59171a0f6a35436128b8fb1e37f89162f7950dc98570f27bc99ce1e2e04084e64da41cb45146d091d5181e12c6733bcf16fac6
-  languageName: node
-  linkType: hard
-
 "@types/lodash@npm:4.14.168":
   version: 4.14.168
   resolution: "@types/lodash@npm:4.14.168"
   checksum: 9a4e25f89fc035b9f0388f1f7be85e5eff49f9e6db0d93432c9a89fce0916f8a89db4e8290415f7ea02de6b00d3573826378dcb655b7b2d20530a6e8d6dd6fd0
+  languageName: node
+  linkType: hard
+
+"@types/lodash@npm:^4.14.165":
+  version: 4.14.167
+  resolution: "@types/lodash@npm:4.14.167"
+  checksum: 40778f83a86392625b3d52c15f59171a0f6a35436128b8fb1e37f89162f7950dc98570f27bc99ce1e2e04084e64da41cb45146d091d5181e12c6733bcf16fac6
   languageName: node
   linkType: hard
 
@@ -3719,18 +3743,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/sequelize@npm:4.28.9":
-  version: 4.28.9
-  resolution: "@types/sequelize@npm:4.28.9"
-  dependencies:
-    "@types/bluebird": "*"
-    "@types/continuation-local-storage": "*"
-    "@types/lodash": "*"
-    "@types/validator": "*"
-  checksum: 356b4cffbf5e40e25e31c3f7f7b5c0a1a0ca9d756a80727378580c8845ddf3e91c2e23ae4b9b69a7d4ef318905f5fbdd2aeb7c9c37a64ac5b11a99cf27114c64
-  languageName: node
-  linkType: hard
-
 "@types/serve-static@npm:*":
   version: 1.13.8
   resolution: "@types/serve-static@npm:1.13.8"
@@ -3799,10 +3811,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/validator@npm:*":
-  version: 13.1.2
-  resolution: "@types/validator@npm:13.1.2"
-  checksum: 890e8a31a1f3b8e749069c8910dd39b2e73c537292d62147a7ddeb75609425f8011c61309eac284e65f444c2d839b44063416defc50f53565959adc2ac9f6eef
+"@types/validator@npm:13.1.3, @types/validator@npm:^13.1.3":
+  version: 13.1.3
+  resolution: "@types/validator@npm:13.1.3"
+  checksum: 47e1de4aebd3efbf97deea2d0f72b2308c924f95833c7a18d4f5d7cbd500f875fed9afd85038022ca352e3effb82241de149e5f1cbb32957b99fd7b0484641f3
   languageName: node
   linkType: hard
 
@@ -13066,6 +13078,36 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"mongodb@npm:3.6.5":
+  version: 3.6.5
+  resolution: "mongodb@npm:3.6.5"
+  dependencies:
+    bl: ^2.2.1
+    bson: ^1.1.4
+    denque: ^1.4.1
+    require_optional: ^1.0.1
+    safe-buffer: ^5.1.2
+    saslprep: ^1.0.0
+  dependenciesMeta:
+    saslprep:
+      optional: true
+  peerDependenciesMeta:
+    aws4:
+      optional: true
+    bson-ext:
+      optional: true
+    kerberos:
+      optional: true
+    mongodb-client-encryption:
+      optional: true
+    mongodb-extjson:
+      optional: true
+    snappy:
+      optional: true
+  checksum: 6a838b79e104cee243e2ed10a5ded90490bb4db687ca1f1cabeab6c578441b1db64136fd33bad7112ca4a09e60a99a3b039d1c11e515521ffffa66ed91fb3148
+  languageName: node
+  linkType: hard
+
 "mongoose-legacy-pluralize@npm:1.0.2":
   version: 1.0.2
   resolution: "mongoose-legacy-pluralize@npm:1.0.2"
@@ -13092,6 +13134,26 @@ fsevents@~2.3.1:
     sift: 7.0.1
     sliced: 1.0.1
   checksum: 45b01cb1310ecb27d02c489f170298dc219f0225f98f10318b9d1577f62a42a0c85e0682f17e06a37ab164dcb5d9aedfc8982b30c2ac507f365754c531ca211d
+  languageName: node
+  linkType: hard
+
+"mongoose@npm:5.12.1, mongoose@npm:^5.11.19":
+  version: 5.12.1
+  resolution: "mongoose@npm:5.12.1"
+  dependencies:
+    "@types/mongodb": ^3.5.27
+    bson: ^1.1.4
+    kareem: 2.3.2
+    mongodb: 3.6.5
+    mongoose-legacy-pluralize: 1.0.2
+    mpath: 0.8.3
+    mquery: 3.2.4
+    ms: 2.1.2
+    regexp-clone: 1.0.0
+    safe-buffer: 5.2.1
+    sift: 7.0.1
+    sliced: 1.0.1
+  checksum: 0e3f24e9bb02355df50d0cba16b95b0e153ee0e497c9ceb743da47fc5ccda5c204b65511c8b45d37af1fec5c4f4ed19221feeae9700026d2664979a5fbef3f74
   languageName: node
   linkType: hard
 
@@ -16154,7 +16216,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"redis@npm:3.0.2":
+"redis@npm:3.0.2, redis@npm:^3.0.2":
   version: 3.0.2
   resolution: "redis@npm:3.0.2"
   dependencies:
@@ -16927,7 +16989,7 @@ resolve@^1.14.2:
   languageName: node
   linkType: hard
 
-"sequelize@npm:6.5.1":
+"sequelize@npm:6.5.1, sequelize@npm:^6.5.1":
   version: 6.5.1
   resolution: "sequelize@npm:6.5.1"
   dependencies:

@@ -5,7 +5,7 @@ import { Event } from '@packages/communication';
 import { EventMetadata, EventModel } from '@root/lib/db/models/appointment-event';
 import { SnapshotDocument } from '@root/lib/db/models/appointment-snapshot';
 import { generateId } from '@root/lib/db/utils';
-import { db } from '@root/lib/db/models';
+import { db } from '@root/lib/db';
 
 import { AggregateBuilder } from './aggregate-builder';
 
