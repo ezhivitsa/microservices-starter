@@ -1,7 +1,7 @@
 import { Event } from '@packages/communication';
 
-import { EventDocument } from '@root/lib/db/models/appointment-event';
-import { SnapshotDocument } from '@root/lib/db/models/appointment-snapshot';
+import { EventDocument } from './event';
+import { SnapshotDocument } from './snapshot';
 
 type EventHandler<ED extends Record<string, any>> = (data: ED) => void;
 

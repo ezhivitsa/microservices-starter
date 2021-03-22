@@ -1,4 +1,6 @@
-import { Schema, Model, Document, SchemaDefinition, Connection } from 'mongoose';
+import { Model, SchemaDefinition, Connection } from 'mongoose';
+
+import { SnapshotDocument, getSnapshotSchema } from '@packages/event-sourcing';
 
 export interface AppointmentSnapshotData {
   _id: string;
@@ -9,17 +11,14 @@ export interface AppointmentSnapshotData {
   deleted: boolean;
 }
 
-interface Snapshot<T> {
-  version: number;
-  data: T;
-}
-
-export interface SnapshotDocument<T> extends Snapshot<T>, Document<string> {}
-
 export type AppointmentSnapshotDocument = SnapshotDocument<AppointmentSnapshotData>;
 export type AppointmentSnapshotModel = Model<AppointmentSnapshotDocument>;
 
 const appointmentSnapshotDataSchema: SchemaDefinition = {
+  _id: {
+    type: String,
+    required: true,
+  },
   userId: {
     type: String,
     required: true,
@@ -42,17 +41,7 @@ const appointmentSnapshotDataSchema: SchemaDefinition = {
   },
 };
 
-const snapshotSchema = new Schema<AppointmentSnapshotDocument, AppointmentSnapshotModel>({
-  _id: {
-    type: String,
-    required: true,
-  },
-  version: {
-    type: Number,
-    required: true,
-  },
-  data: appointmentSnapshotDataSchema,
-});
+const snapshotSchema = getSnapshotSchema(appointmentSnapshotDataSchema);
 
 export function initAppointmentSnapshot(mongo: Connection): AppointmentSnapshotModel {
   return mongo.model<AppointmentSnapshotDocument>('appointment-snapshots', snapshotSchema);

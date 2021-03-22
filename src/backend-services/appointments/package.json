@@ -5,6 +5,7 @@
   "dependencies": {
     "@packages/backend-service": "workspace:*",
     "@packages/communication": "workspace:*",
+    "@packages/event-sourcing": "workspace:*",
     "@packages/koa-kafka": "workspace:*",
     "@packages/logger": "workspace:*",
     "@packages/mongo-storage": "workspace:*",

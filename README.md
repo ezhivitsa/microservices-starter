@@ -31,6 +31,7 @@ We use projects `lint-staged` and `husky` to start tests on changed files. For e
 
 ## ToDo list:
 1. add event sourcing to one backend service
+2. Add appointment, schedule and user event messages to documentation
 
 ## License
 

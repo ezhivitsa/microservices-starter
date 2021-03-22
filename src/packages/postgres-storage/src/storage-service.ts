@@ -51,7 +51,7 @@ export abstract class StorageService<
     return result[0] || null;
   }
 
-  async findAndDelete(filter: UF): Promise<void> {
+  async deleteByFilter(filter: UF): Promise<void> {
     const where = this._buildUpdateWhere(filter);
 
     await this._Model.destroy({
@@ -59,8 +59,8 @@ export abstract class StorageService<
     });
   }
 
-  async findByIdAndDelete(id: string): Promise<void> {
-    await this.findAndDelete({
+  async deleteById(id: string): Promise<void> {
+    await this.deleteByFilter({
       id,
     } as UF);
   }

@@ -1794,6 +1794,7 @@ __metadata:
     "@packages/backend-service": "workspace:*"
     "@packages/communication": "workspace:*"
     "@packages/eslint-config": "workspace:*"
+    "@packages/event-sourcing": "workspace:*"
     "@packages/koa-kafka": "workspace:*"
     "@packages/logger": "workspace:*"
     "@packages/mongo-storage": "workspace:*"
@@ -2774,6 +2775,17 @@ __metadata:
     eslint-plugin-prettier: 3.3.1
     eslint-plugin-react: 7.22.0
     prettier: 2.2.1
+  languageName: unknown
+  linkType: soft
+
+"@packages/event-sourcing@workspace:*, @packages/event-sourcing@workspace:src/packages/event-sourcing":
+  version: 0.0.0-use.local
+  resolution: "@packages/event-sourcing@workspace:src/packages/event-sourcing"
+  dependencies:
+    "@packages/communication": "workspace:*"
+    mongoose: ^5.11.19
+  peerDependencies:
+    mongoose: ^5.11.19
   languageName: unknown
   linkType: soft
 

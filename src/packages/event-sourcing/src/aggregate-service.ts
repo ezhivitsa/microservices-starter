@@ -2,10 +2,10 @@ import { Model, UpdateQuery } from 'mongoose';
 
 import { Event } from '@packages/communication';
 
-import { EventMetadata, EventModel } from '@root/lib/db/models/appointment-event';
-import { SnapshotDocument } from '@root/lib/db/models/appointment-snapshot';
-import { generateId } from '@root/lib/db/utils';
-import { db } from '@root/lib/db';
+import { EventMetadata, EventModel } from './event';
+import { SnapshotDocument } from './snapshot';
+import { generateId } from './utils';
+import { CounterModel } from './counter';
 
 import { AggregateBuilder } from './aggregate-builder';
 
@@ -20,20 +20,23 @@ const SNAPSHOT_VERSION_GAP = 5;
 const SNAPSHOT_VERSION_THRESHOLD = 10;
 
 export abstract class AggregateService<D extends Record<string, any>> {
+  protected abstract _CounterModel: CounterModel;
   protected abstract _EventModel: EventModel;
   protected abstract _SnapshotModel: Model<SnapshotDocument<D>>;
   protected abstract _Builder: { new (aggregateId: string): AggregateBuilder<D> };
 
   private async _getNextSequenceValue(aggregateId: string): Promise<number> {
-    const sequenceDocument = await db.Counter.findByIdAndUpdate(
-      aggregateId,
-      { $inc: { sequenceValue: 1 } },
-      {
-        new: true,
-        upsert: true,
-        setDefaultsOnInsert: true,
-      },
-    ).exec();
+    const sequenceDocument = await this._CounterModel
+      .findByIdAndUpdate(
+        aggregateId,
+        { $inc: { sequenceValue: 1 } },
+        {
+          new: true,
+          upsert: true,
+          setDefaultsOnInsert: true,
+        },
+      )
+      .exec();
     return sequenceDocument.sequenceValue;
   }
 
@@ -116,7 +119,10 @@ export abstract class AggregateService<D extends Record<string, any>> {
       aggregateId: eventData.aggregateId,
       version,
       metadata: eventData.metadata,
-      data: eventData.data,
+      data: {
+        _id: eventData.aggregateId,
+        ...(eventData.data || {}),
+      },
     });
 
     if (version % SNAPSHOT_VERSION_GAP === 0) {

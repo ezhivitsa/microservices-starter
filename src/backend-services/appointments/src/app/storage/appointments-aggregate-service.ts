@@ -1,13 +1,11 @@
 import { AppointmentEvent } from '@packages/communication';
 
+import { EventModel, AggregateService, AggregateBuilder, CounterModel } from '@packages/event-sourcing';
+
 import { AppointmentSnapshotData, AppointmentSnapshotModel } from '@root/lib/db/models/appointment-snapshot';
-import { EventModel } from '@root/lib/db/models/appointment-event';
 import { db } from '@root/lib/db';
 
 import { AppointmentCreatedData, AppointmentUpdatedData } from '@root/services/appointments/types';
-
-import { AggregateService } from './aggregate-service';
-import { AggregateBuilder } from './aggregate-builder';
 
 class AppointmentAggregateBuilder extends AggregateBuilder<AppointmentSnapshotData> {
   private _handleAppointmentCreated = (data: AppointmentCreatedData): void => {
@@ -48,6 +46,7 @@ class AppointmentAggregateBuilder extends AggregateBuilder<AppointmentSnapshotDa
 
 export class AppointmentsAggregateService extends AggregateService<AppointmentSnapshotData> {
   protected _EventModel: EventModel = db.AppointmentEvent;
+  protected _CounterModel: CounterModel = db.Counter;
   protected _SnapshotModel: AppointmentSnapshotModel = db.AppointmentSnapshot;
   protected _Builder: typeof AppointmentAggregateBuilder = AppointmentAggregateBuilder;
 }
