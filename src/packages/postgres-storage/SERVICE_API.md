@@ -21,7 +21,7 @@ Abstract class which provides ability to read data from mongo collection. Requir
 
 ### _buildQuery(filter)
 
-Method for transforming custom filters to mongo `FilterQuery` object.
+Method for transforming custom filters to postges `FindOptions` object.
 
 #### Arguments
 
@@ -29,7 +29,7 @@ Method for transforming custom filters to mongo `FilterQuery` object.
 
 #### Return
 
-Returns `FilterQuery` from `mongoose`.
+Returns `FindOptions` from `sequelize`.
 
 ### findByFilter(filter)
 
@@ -74,7 +74,7 @@ Abstract class which extends `ReadOnlyStorageService` class and adds methods for
 
 ### _buildCreateValue(data)
 
-Method for generating object to save to the mongoDB.
+Method for generating object to save to the postgres.
 
 #### Arguments
 
@@ -82,7 +82,7 @@ Method for generating object to save to the mongoDB.
 
 #### Return
 
-Returns `Document` or `DocumentDefinition` for `mongoose`.
+Returns `_creationAttributes` from the specified postgres model.
 
 ### _buildUpdateValues(data)
 
@@ -94,7 +94,7 @@ Method to get result values to update document.
 
 #### Return
 
-Returns `UpdateQuery` from `mongoose`.
+Returns `_attributes` from the specified postgres model.
 
 ### _buildUpdateWhere(filter)
 
@@ -106,11 +106,11 @@ Method to get filtering expressing according to which we update documents.
 
 #### Return
 
-Returns `FilterQuery` from `mongoose`.
+Returns `WhereOptions` from `sequelize`.
 
 ### create(data)
 
-Save document to collection.
+Save document to table.
 
 #### Arguments
 
@@ -118,7 +118,7 @@ Save document to collection.
 
 #### Return
 
-Returns promise with created document.
+Returns promise with model instance.
 
 ### findAndUpdate(filter, updateData)
 
@@ -131,7 +131,7 @@ Update document which match to the filter.
 
 #### Return
 
-Returns promise with updated documents.
+Returns promise with updated model instances.
 
 ### findByIdAndUpdate(id, updateData, [filter])
 
@@ -145,7 +145,7 @@ Update document which match to id and optional filters.
 
 #### Return
 
-Returns promise with updated document or null.
+Returns promise with updated model instance or null.
 
 ### deleteByFilter(filter)
 

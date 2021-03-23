@@ -7,3 +7,9 @@ Package contains configuration of the connection to mongoDB database and service
 Method to create connection to database.
 
 [Mongo API Reference](./MONGO_API.md).
+
+## Mongo services
+
+Services to work with mongo collections.
+
+[Mongo services API Reference](./SERVICE_API.md).

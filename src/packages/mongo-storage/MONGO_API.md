@@ -2,7 +2,7 @@
 
 ### getMongo(config)
 
-Create connection to mondoDB
+Create connection to mongoDB
 
 #### Arguments
 - `config` - *(Object)* connection options
