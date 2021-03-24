@@ -20,7 +20,15 @@
   - [Registration command (v1)](#registration-command-v1)
   - [Get user by auth id command (v1)](#get-user-by-auth-id-command-v1)
   - [Update user command (v1)](#update-user-command-v1)
-
+  - [User created event (v1)](#user-created-event-v1)
+  - [User updated event (v1)](#user-updated-event-v1)
+- [Appointments messages(Channel.Appointments)](#appointments-messages-Channel.Appointments)
+  - [Create appointment command (v1)](#create-appointment-command-v1)
+  - [Update appointment command (v1)](#update-appointment-command-v1)
+  - [Delete appointment command (v1)](#delete-appointment-command-v1)
+  - [Appointment created event (v1)](#appointment-created-event-v1)
+  - [Appointment updated event (v1)](#appointment-updated-event-v1)
+  - [Appointment deleted event (v1)](#appointment-deleted-event-v1)
 
 ## Authorization messages (Channel.Authorization)
 
@@ -121,3 +129,46 @@
 - Command - *UserCommand.UpdateUser*
 - Request - *UpdateUserRequest*
 - Response - *UpdateUserResponse*
+
+### User created event (v1)
+
+- Event - *UserEvent.UserCreated*
+- Schema - *UserCreatedEvent*
+
+### User updated event (v1)
+
+- Event - *UserEvent.UserUpdated*
+- Schema - *UserUpdatedEvent*
+
+## Appointments messages(Channel.Appointments)
+
+### Create appointment command (v1)
+
+- Command - *AppointmentCommand.CreateAppointment*
+- Request - *CreateAppointmentRequest*
+- Response - *CreateAppointmentResponse*
+
+### Update appointment command (v1)
+
+- Command - *AppointmentCommand.UpdateAppointment*
+- Request - *UpdateAppointmentRequest*
+
+### Delete appointment command (v1)
+
+- Command - *AppointmentCommand.DeleteAppointment*
+- Request - *DeleteAppointmentRequest*
+
+### Appointment created event (v1)
+
+- Event - *AppointmentEvent.AppointmentCreated*
+- Schema - *AppointmentCreatedEvent*
+
+### Appointment updated event (v1)
+
+- Event - *AppointmentEvent.AppointmentUpdated*
+- Schema - *AppointmentUpdatedEvent*
+
+### Appointment deleted event (v1)
+
+- Event - *AppointmentEvent.AppointmentDeleted*
+- Schema - *AppointmentDeletedEvent*
