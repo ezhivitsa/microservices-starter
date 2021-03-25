@@ -22,13 +22,15 @@
   - [Update user command (v1)](#update-user-command-v1)
   - [User created event (v1)](#user-created-event-v1)
   - [User updated event (v1)](#user-updated-event-v1)
-- [Appointments messages(Channel.Appointments)](#appointments-messages-Channel.Appointments)
+- [Appointments messages (Channel.Appointments)](#appointments-messages-Channel.Appointments)
   - [Create appointment command (v1)](#create-appointment-command-v1)
   - [Update appointment command (v1)](#update-appointment-command-v1)
   - [Delete appointment command (v1)](#delete-appointment-command-v1)
   - [Appointment created event (v1)](#appointment-created-event-v1)
   - [Appointment updated event (v1)](#appointment-updated-event-v1)
   - [Appointment deleted event (v1)](#appointment-deleted-event-v1)
+- [Schedule messages (Channel.Schedule)](#schedule-messages-Channel.Schedule)
+  - [Get schedule command (v1)](#get-schedule-command-v1)
 
 ## Authorization messages (Channel.Authorization)
 
@@ -140,7 +142,7 @@
 - Event - *UserEvent.UserUpdated*
 - Schema - *UserUpdatedEvent*
 
-## Appointments messages(Channel.Appointments)
+## Appointments messages (Channel.Appointments)
 
 ### Create appointment command (v1)
 
@@ -172,3 +174,11 @@
 
 - Event - *AppointmentEvent.AppointmentDeleted*
 - Schema - *AppointmentDeletedEvent*
+
+## Schedule messages (Channel.Schedule)
+
+### Get schedule command (v1)
+
+- Command - *ScheduleCommand.GetSchedule*
+- Request - *GetScheduleRequest*
+- Response - *GetScheduleResponse*
