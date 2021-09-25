@@ -4,7 +4,7 @@ import { Media, getMatchMedia, releaseMatchMedia } from '@packages/media';
 
 const IS_BROWSER = window !== undefined;
 const SUPPORTS_TOUCH =
-  (IS_BROWSER && 'ontouchstart' in window) || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+  (IS_BROWSER && 'ontouchstart' in window) || navigator.maxTouchPoints > 0 || (navigator as any).msMaxTouchPoints > 0;
 
 export function useMq(media: Media | string, touch?: boolean): boolean {
   const [isMatched, setIsMatched] = useState(false);
