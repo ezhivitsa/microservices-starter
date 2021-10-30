@@ -29,7 +29,8 @@ interface MenuItem {
 
 export const Profile = observer(({ className }: Props): ReactElement | null => {
   const currentUserStore = useCurrentUserStore();
-  const b = useStyles(styles, 'profile');
+  const b = useStyles(styles, 'profile', className);
+
   const [menuVisible, setMenuVisible] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const history = useHistory();
@@ -101,7 +102,7 @@ export const Profile = observer(({ className }: Props): ReactElement | null => {
   }
 
   return (
-    <div className={classnames(className, b())} ref={menuRef}>
+    <div className={b()} ref={menuRef}>
       <div className={b('name-wrap')} onClick={handleMenuToggle}>
         <span className={b('name')}>{fullName}</span>
         <FontAwesomeIcon icon={faChevronDown} className={b('icon', { expanded: menuVisible })} />

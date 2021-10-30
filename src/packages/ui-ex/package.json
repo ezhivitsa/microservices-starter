@@ -11,7 +11,10 @@
     "@packages/ui": "workspace:*"
   },
   "devDependencies": {
-    "@packages/eslint-config": "workspace:*"
+    "@packages/eslint-config": "workspace:*",
+    "@types/history": "4.7.9",
+    "@types/react": "17.0.33",
+    "@types/react-router-dom": "5.1.9"
   },
   "peerDependencies": {
     "classnames": "^2.3.1",

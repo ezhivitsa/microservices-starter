@@ -11,6 +11,7 @@ export class KafkaCommandTimeoutError extends Error {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export class KafkaHandlerError<T extends Record<string, any> = Record<string, any>> extends Error {
   constructor(private _errorData: T) {
     super(KAFKA_HANDLER_ERROR);

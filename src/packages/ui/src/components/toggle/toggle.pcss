@@ -11,22 +11,22 @@
     position: relative;
     display: inline-block;
 
-    &._size_s {
+    &_size_s {
       width: var(--grid10);
       height: var(--grid5);
     }
 
-    &._size_m {
+    &_size_m {
       width: var(--grid12);
       height: var(--grid6);
     }
 
-    &._size_l {
+    &_size_l {
       width: var(--grid16);
       height: var(--grid8);
     }
 
-    &._size_xl {
+    &_size_xl {
       width: var(--grid18);
       height: var(--grid9);
     }
@@ -57,7 +57,7 @@
       border-radius: 50%;
     }
 
-    &._size_s {
+    &_size_s {
       &::before {
         height: var(--grid3);
         width: var(--grid3);
@@ -65,12 +65,12 @@
         bottom: var(--grid1);
       }
 
-      &._checked::before {
+      &_checked::before {
         transform: translateX(var(--grid5));
       }
     }
 
-    &._size_m {
+    &_size_m {
       &::before {
         height: var(--grid4);
         width: var(--grid4);
@@ -78,12 +78,12 @@
         bottom: var(--grid1);
       }
 
-      &._checked::before {
+      &_checked::before {
         transform: translateX(var(--grid6));
       }
     }
 
-    &._size_l {
+    &_size_l {
       &::before {
         height: var(--grid6);
         width: var(--grid6);
@@ -91,12 +91,12 @@
         bottom: var(--grid1);
       }
 
-      &._checked::before {
+      &_checked::before {
         transform: translateX(var(--grid8));
       }
     }
 
-    &._size_xl {
+    &_size_xl {
       &::before {
         height: var(--grid7);
         width: var(--grid7);
@@ -104,29 +104,29 @@
         bottom: var(--grid1);
       }
 
-      &._checked::before {
+      &_checked::before {
         transform: translateX(var(--grid9));
       }
     }
   }
 
   &__label {
-    &._size_s {
+    &_size_s {
       margin-left: var(--grid1);
       font-size: var(--font-size-200);
     }
 
-    &._size_m {
+    &_size_m {
       margin-left: var(--grid1);
       font-size: var(--font-size-400);
     }
 
-    &._size_l {
+    &_size_l {
       margin-left: var(--grid2);
       font-size: var(--font-size-500);
     }
 
-    &._size_xl {
+    &_size_xl {
       margin-left: var(--grid3);
       font-size: var(--font-size-700);
     }

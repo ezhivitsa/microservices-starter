@@ -40,12 +40,7 @@ const webpackConfig: webpack.Configuration = {
       'react-dom': isDevelopment ? '@hot-loader/react-dom' : 'react-dom',
       '@packages/ui': path.resolve(__dirname, '../../packages/ui/src'),
     },
-    modules: [
-      clientPath,
-      localNodeModulesPath,
-      'node_modules',
-      path.resolve(__dirname, '../../packages'),
-    ],
+    modules: [clientPath, localNodeModulesPath, 'node_modules', path.resolve(__dirname, '../../packages')],
     extensions: ['.ts', '.tsx', '.js', 'jsx'],
   },
   optimization: {
@@ -104,14 +99,7 @@ const webpackConfig: webpack.Configuration = {
       },
       {
         test: /\.(svg|png|gif|jpeg|jpg|cur|woff|woff2)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '_/[hash].[ext]',
-            },
-          },
-        ],
+        type: 'asset/inline',
       },
     ],
   },

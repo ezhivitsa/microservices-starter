@@ -13,12 +13,13 @@ interface EventData {
   type: Event;
   aggregateId: string;
   metadata: EventMetadata;
-  data?: Record<string, any>;
+  data?: Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 
 const SNAPSHOT_VERSION_GAP = 5;
 const SNAPSHOT_VERSION_THRESHOLD = 10;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export abstract class AggregateService<D extends Record<string, any>> {
   protected abstract _CounterModel: CounterModel;
   protected abstract _EventModel: EventModel;
@@ -52,12 +53,12 @@ export abstract class AggregateService<D extends Record<string, any>> {
     await this._SnapshotModel
       .findByIdAndUpdate(
         aggregateId,
-        ({
+        {
           $set: {
             version,
             data,
           },
-        } as unknown) as UpdateQuery<SnapshotDocument<D>>,
+        } as unknown as UpdateQuery<SnapshotDocument<D>>,
         { upsert: true, new: true },
       )
       .exec();

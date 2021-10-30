@@ -1,5 +1,4 @@
 import React, { ReactElement, ReactNode } from 'react';
-import classnames from 'classnames';
 
 import { lib } from '@packages/client';
 
@@ -22,8 +21,6 @@ interface Props {
   keyIndex: number;
 }
 
-const b = lib.block(styles, 'dashboardTable');
-
 export function DashboardTable({
   className,
   color,
@@ -33,8 +30,10 @@ export function DashboardTable({
   rows,
   keyIndex,
 }: Props): ReactElement {
+  const b = lib.block(styles, 'dashboardTable', className);
+
   return (
-    <div className={classnames(b(), className)}>
+    <div className={b()}>
       <div className={b('header', { color })}>
         <span className={b('title')}>{headerTitle}</span>
         <span className={b('headerDescription')}>{headerDescription}</span>
@@ -54,17 +53,15 @@ export function DashboardTable({
           ),
         )}
 
-        {rows.map(
-          (row: string[]): ReactNode => {
-            return row.map(
-              (value: string, index: number): ReactNode => (
-                <div key={`${row[keyIndex]}_${columns[index]}`} className={b('tableColumn')}>
-                  {value}
-                </div>
-              ),
-            );
-          },
-        )}
+        {rows.map((row: string[]): ReactNode => {
+          return row.map(
+            (value: string, index: number): ReactNode => (
+              <div key={`${row[keyIndex]}_${columns[index]}`} className={b('tableColumn')}>
+                {value}
+              </div>
+            ),
+          );
+        })}
       </div>
     </div>
   );

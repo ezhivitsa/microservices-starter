@@ -1,5 +1,8 @@
 import { KafkaCommandTimeoutError, KafkaHandlerError } from './errors';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+
 interface CacheValue {
   timeoutId: NodeJS.Timeout;
   resolve: (data: any) => void;

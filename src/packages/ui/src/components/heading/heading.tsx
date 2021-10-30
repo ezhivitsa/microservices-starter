@@ -1,5 +1,4 @@
 import React, { ReactElement, ReactNode } from 'react';
-import classnames from 'classnames';
 
 import { useStyles } from '../../theme';
 
@@ -36,16 +35,13 @@ const mapSizeToLevel: Record<HeadingSize, HeadingLevel> = {
 };
 
 export function Heading({ size, view, children, className }: Props): ReactElement {
-  const b = useStyles(styles, 'heading');
+  const b = useStyles(styles, 'heading', className);
 
   const headingProps = {
-    className: classnames(
-      b({
-        size,
-        view,
-      }),
-      className,
-    ),
+    className: b({
+      size,
+      view,
+    }),
   };
 
   return React.createElement(`h${mapSizeToLevel[size]}`, headingProps, children);

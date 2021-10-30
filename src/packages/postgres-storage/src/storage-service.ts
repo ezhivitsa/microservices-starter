@@ -2,6 +2,8 @@ import { Model, WhereOptions } from 'sequelize';
 
 import { ReadOnlyStorageService } from './read-only-storage-service';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 interface Filter {
   id?: string;
 }
@@ -15,7 +17,7 @@ export abstract class StorageService<
   F extends Filter,
   CD extends Record<string, any>,
   UD extends Record<string, any>,
-  UF extends UpdateFilter
+  UF extends UpdateFilter,
 > extends ReadOnlyStorageService<M, F> {
   abstract _buildCreateValue(data: CD): M['_creationAttributes'];
 

@@ -12,7 +12,7 @@
   transition: color 100ms ease-out;
   -webkit-tap-highlight-color: var(--color-grey-200);
 
-  &._flex {
+  &_flex {
     display: inline-flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -35,12 +35,12 @@
     border-bottom-width: 1px;
     transition: border-color 100ms ease-out;
 
-    &._pseudo {
+    &_pseudo {
       border-bottom-style: dashed;
     }
 
-    &._disabled,
-    &._checked {
+    &_disabled,
+    &_checked {
       border-color: transparent;
     }
   }
@@ -50,8 +50,8 @@
     vertical-align: middle;
     line-height: 0;
 
-    &._disabled,
-    &._checked{
+    &_disabled,
+    &_checked{
       opacity: var(--opacity-200);
     }
   }
@@ -65,37 +65,37 @@
     flex: 0 0 auto;
   }
 
-  &._size_xs {
+  &_size_xs {
     font-size: var(--font-size-200);
     line-height: var(--line-height-300);
   }
 
-  &._size_s {
+  &_size_s {
     font-size: var(--font-size-300);
     line-height: var(--line-height-300);
   }
 
-  &._size_m {
+  &_size_m {
     font-size: var(--font-size-500);
     line-height: var(--line-height-300);
   }
 
-  &._size_l {
+  &_size_l {
     font-size: var(--font-size-700);
     line-height: var(--line-height-200);
   }
 
-  &._size_xl {
+  &_size_xl {
     font-size: var(--font-size-800);
     line-height: var(--line-height-200);
   }
 
-  &._disabled,
-  &._checked {
+  &_disabled,
+  &_checked {
     cursor: default;
   }
 
-  &._checked {
+  &_checked {
     font-weight: var(--font-weight-600);
   }
 }

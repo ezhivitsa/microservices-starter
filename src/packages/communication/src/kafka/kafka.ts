@@ -37,7 +37,7 @@ export class Kafka {
   private readonly _kafkaEvent: KafkaEvent;
 
   constructor(config: KafkaConfig & Config, consumerConfig: ConsumerConfig, producerConfig?: ProducerConfig) {
-    this._kafka = config.mock ? ((new KafkaJsMock() as unknown) as Kafkajs) : new Kafkajs(config);
+    this._kafka = config.mock ? (new KafkaJsMock() as unknown as Kafkajs) : new Kafkajs(config);
 
     this._kafkaCommandHandler = new KafkaCommandHandler(this._kafka, consumerConfig);
     this._kafkaCommand = new KafkaCommand(this._kafka, consumerConfig, producerConfig, config.applicationId);

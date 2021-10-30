@@ -36,9 +36,6 @@
     "react-router-dom": "5.3.0"
   },
   "devDependencies": {
-    "@types/history": "4.7.9",
-    "@types/react": "17.0.21",
-    "@types/react-router-dom": "5.1.9",
     "cpy-cli": "3.1.1",
     "del-cli": "4.0.1",
     "eslint": "7.30.0",

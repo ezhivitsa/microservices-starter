@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react';
-import classnames from 'classnames';
+
+import { useStyles } from '../../theme';
 
 import styles from './spinner.pcss';
 
@@ -13,8 +14,10 @@ interface Props {
 }
 
 export function Spinner({ size, mode }: Props): ReactElement {
+  const cn = useStyles(styles, 'spinner');
+
   return (
-    <div className={classnames(styles.spinner, styles[`_size_${size}`], styles[`_mode_${mode}`])}>
+    <div className={cn({ size, mode })}>
       <div className={styles.spinner__loader}>
         <div className={styles.spinner__loaderElement} />
         <div className={styles.spinner__loaderElement} />

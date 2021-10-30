@@ -1,5 +1,4 @@
 import React, { ReactElement, useEffect } from 'react';
-import classnames from 'classnames';
 
 import { useStyles } from '@packages/ui';
 import { FrontEvents } from '@packages/common';
@@ -16,7 +15,7 @@ interface Props {
 
 export function Header({ className }: Props): ReactElement {
   const currentUserStore = useCurrentUserStore();
-  const b = useStyles(styles, 'header');
+  const b = useStyles(styles, 'header', className);
 
   useEffect(() => {
     currentUserStore.fetch();
@@ -35,7 +34,7 @@ export function Header({ className }: Props): ReactElement {
   }
 
   return (
-    <div className={classnames(className, b())}>
+    <div className={b()}>
       <Profile className={b('profile')} />
     </div>
   );

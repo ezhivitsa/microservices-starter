@@ -1,5 +1,4 @@
 import React, { ReactElement, ReactNode } from 'react';
-import classnames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faLightbulb,
@@ -43,7 +42,7 @@ const mapMessageTypeToIcon: Record<MessageType, IconDefinition> = {
 };
 
 export function Message({ type, header, content, footer, className }: Props): ReactElement {
-  const b = useStyles(styles, 'message');
+  const b = useStyles(styles, 'message', className);
 
   function renderIcon(): ReactNode {
     const icon = mapMessageTypeToIcon[type];
@@ -56,7 +55,7 @@ export function Message({ type, header, content, footer, className }: Props): Re
   }
 
   return (
-    <div className={classnames(b({ type }), className)}>
+    <div className={b({ type })}>
       {renderIcon()}
       <div className={b('content-wrap')}>
         <Heading view={HeadingView.Condensed} size={HeadingSize.M} className={b('header', { type })}>

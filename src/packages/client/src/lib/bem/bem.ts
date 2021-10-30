@@ -1,9 +1,4 @@
-export type State = Record<string, string | boolean | void | number>;
-
-export interface ClassNameGenerator {
-  (elementName?: string, state?: State): string;
-  (state?: State): string;
-}
+import type { State, ClassNameGenerator } from './types';
 
 const hyphenRegExp = /-([a-z])/g;
 
@@ -11,57 +6,79 @@ function toCamelCase(value: string): string {
   return value.replace(hyphenRegExp, (g) => g[1].toUpperCase());
 }
 
-/**
- * Модуль для генерации имен классов.
- */
-export function block(styles: Record<string, string>, blockName: string, theme?: string): ClassNameGenerator {
-  return (elementNameOrState?: string | State, state?: State): string => {
-    let resultClassNames = '';
-    let element = blockName;
+function getModifierClasses(element: string, state: State): string[] {
+  const result: string[] = [];
 
-    const themeStyleClass = theme ? styles[`${toCamelCase(blockName)}_theme_${theme}`] : '';
+  Object.keys(state).forEach((key) => {
+    if (state[key] === true) {
+      result.push(`${toCamelCase(element)}_${toCamelCase(key)}`);
+    } else if (state[key]) {
+      const camelCaseKey = toCamelCase(key);
+      const stateValue = state[camelCaseKey] || '';
+      result.push(`${toCamelCase(element)}_${camelCaseKey}_${toCamelCase(stateValue.toString())}`);
+    }
+  });
+
+  return result;
+}
+
+function getBlockClasses(block: string, theme?: string, additionalClassName?: string): string[] {
+  const result: string[] = [];
+
+  const themeStyleClass = theme ? `${toCamelCase(block)}_theme_${theme}` : '';
+  result.push(toCamelCase(block));
+
+  if (themeStyleClass) {
+    result.push(themeStyleClass);
+  }
+
+  if (additionalClassName) {
+    result.push(additionalClassName);
+  }
+
+  return result;
+}
+
+function getElementClass(block: string, element: string): string {
+  return toCamelCase(`${block}__${element}`);
+}
+
+/**
+ * Module for generating class names.
+ */
+export function block(
+  styles: Record<string, string>,
+  blockName: string,
+  theme?: string,
+  additionalClassName?: string,
+): ClassNameGenerator {
+  return (elementNameOrState?: string | State, state?: State): string => {
+    const result: string[] = [];
+    let element = blockName;
 
     if (elementNameOrState) {
       if (typeof elementNameOrState === 'string') {
-        element += `__${elementNameOrState}`;
-
-        resultClassNames = styles[toCamelCase(element)];
+        // element
+        element = getElementClass(blockName, elementNameOrState);
+        result.push(element);
       } else if (typeof elementNameOrState === 'object') {
-        state = elementNameOrState;
-        resultClassNames = styles[toCamelCase(blockName)];
-
-        if (theme && themeStyleClass) {
-          resultClassNames += ` ${themeStyleClass}`;
-        }
+        // block with modifiers
+        result.push(...getBlockClasses(blockName, theme, additionalClassName));
+        result.push(...getModifierClasses(blockName, elementNameOrState));
       }
     } else {
-      resultClassNames = styles[toCamelCase(blockName)];
-
-      if (theme && themeStyleClass) {
-        resultClassNames += ` ${themeStyleClass}`;
-      }
+      // block
+      result.push(...getBlockClasses(blockName, theme, additionalClassName));
     }
 
     if (state) {
-      Object.keys(state).forEach((key) => {
-        if (!state) {
-          return;
-        }
-
-        let className: string | undefined;
-        if (state[key] === true) {
-          className = styles[`_${toCamelCase(key)}`];
-        } else if (state[key]) {
-          const camelCaseKey = toCamelCase(key);
-          className = styles[`_${camelCaseKey}_${state[camelCaseKey]}`];
-        }
-
-        if (className) {
-          resultClassNames += ` ${className}`;
-        }
-      });
+      // modifiers for element
+      result.push(...getModifierClasses(element, state));
     }
 
-    return resultClassNames;
+    return result
+      .map((className) => (className === additionalClassName ? className : styles[className]))
+      .filter(Boolean)
+      .join(' ');
   };
 }

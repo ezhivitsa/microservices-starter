@@ -6,6 +6,8 @@ import { Context } from './context';
 
 import { Middleware, ComposedMiddleware, Next, ListenData, RequestStatus, UniqModel } from './types';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 interface Options {
   badProtoCode: number;
   validationFailedCode: number;

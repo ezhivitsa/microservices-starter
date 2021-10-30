@@ -2,6 +2,8 @@ import { Command, Event } from '../proto-messages';
 import { Version } from '../messages';
 import { Channel } from '../channels';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 export enum CommandUserRole {
   User = 'user',
   Admin = 'admin',

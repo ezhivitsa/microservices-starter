@@ -2,6 +2,8 @@ import { Schema, Model, Document } from 'mongoose';
 
 import { Event } from '@packages/communication';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 export interface EventMetadata {
   createdAt: Date;
   userId?: string;

@@ -1,6 +1,5 @@
 import React, { ReactElement, ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
-import classnames from 'classnames';
 
 import { useStyles } from '@packages/ui';
 
@@ -15,7 +14,7 @@ interface Props {
 }
 
 export function DesktopNavigation({ className }: Props): ReactElement {
-  const b = useStyles(styles, 'desktop-navigation');
+  const b = useStyles(styles, 'desktop-navigation', className);
 
   function renderComponentItem(item: string): ReactNode {
     return (
@@ -27,5 +26,5 @@ export function DesktopNavigation({ className }: Props): ReactElement {
     );
   }
 
-  return <div className={classnames(b(), className)}>{config.components.map(renderComponentItem)}</div>;
+  return <div className={b()}>{config.components.map(renderComponentItem)}</div>;
 }

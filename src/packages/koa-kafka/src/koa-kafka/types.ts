@@ -2,6 +2,8 @@ import { Command, Event, Version, CommandUser } from '@packages/communication';
 
 import { Context } from './context';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 export interface KafkaContext {
   command?: Command;
   event?: Event;

@@ -5,33 +5,33 @@
   background: transparent;
   border: 1px solid var(--color-grey-700);
 
-  &._hovered {
+  &_hovered {
     border-color: var(--color-grey-800);
   }
 
-  &._focused {
+  &_focused {
     border-color: var(--color-grey-800);
     box-shadow: inset 0 0 0 1px var(--color-grey-100);
   }
 
-  &._pressed,
+  &_pressed,
   &:active {
     background: var(--color-grey-100);
     border-color: var(--color-grey-800);
   }
 
-  &._checked,
-  &._view_action {
+  &_checked,
+  &_view_action {
     color: var(--color-white);
     background: var(--color-blue-400);
     border-color: var(--color-blue-400);
 
-    &._hovered {
+    &_hovered {
       background: var(--color-blue-600);
       border-color: var(--color-blue-600);
     }
 
-    &._pressed,
+    &_pressed,
     &:active {
       background: var(--color-blue-700);
       border-color: var(--color-blue-700);
@@ -42,41 +42,41 @@
     }
   }
 
-  &._view_extra {
+  &_view_extra {
     color: var(--color-grey-900);
     background: var(--color-grey-400);
     border-color: var(--color-grey-600);
 
-    &._hovered {
+    &_hovered {
       background: var(--color-grey-500);
     }
 
-    &._focused {
+    &_focused {
       border-color: var(--color-grey-800);
     }
 
-    &._pressed,
+    &_pressed,
     &:active {
       background: var(--color-grey-700);
       border-color: var(--color-grey-700);
     }
 
-    &._disabled {
+    &_disabled {
       border-color: transparent;
     }
   }
 
-  &._pseudo {
+  &_pseudo {
     border-style: dashed;
 
-    &._focused {
+    &_focused {
       border-color: var(--color-grey-800);
       border-style: solid;
       box-shadow: 0 0 0 1px var(--color-grey-700);
     }
   }
 
-  &._disabled {
+  &_disabled {
     border-color: transparent;
   }
 }

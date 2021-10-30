@@ -1,5 +1,5 @@
 import path from 'path';
-import webpack from 'webpack';
+import webpack, { WebpackPluginInstance } from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
@@ -26,11 +26,9 @@ const webpackConfig: webpack.Configuration = {
 
     library: name,
     libraryTarget: 'umd',
-    jsonpFunction: `webpackJsonp_${name}`,
+    chunkLoadingGlobal: `webpackJsonp_${name}`,
   },
-  node: {
-    fs: 'empty',
-  },
+  node: false,
   devtool: isDevelopment ? 'source-map' : false,
   resolve: {
     alias: {
@@ -45,16 +43,15 @@ const webpackConfig: webpack.Configuration = {
   },
   optimization: {
     minimize: !isDevelopment,
-    namedModules: isDevelopment,
-    namedChunks: isDevelopment,
   },
   module: {
-    rules: [
-      {
-        parser: {
-          system: false,
-        },
+    parser: {
+      javascript: {
+        system: false,
       },
+    },
+
+    rules: [
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
@@ -99,14 +96,7 @@ const webpackConfig: webpack.Configuration = {
       },
       {
         test: /\.(svg|png|gif|jpeg|jpg|cur|woff|woff2)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '_/[hash].[ext]',
-            },
-          },
-        ],
+        type: 'asset/inline',
       },
     ],
   },
@@ -127,7 +117,7 @@ const webpackConfig: webpack.Configuration = {
           to: path.resolve(buildPath, 'public'),
         },
       ],
-    }),
+    }) as unknown as WebpackPluginInstance,
     ...(isDevelopment ? [] : [new MiniCssExtractPlugin({ filename: 'main.style.css' })]),
   ],
 };

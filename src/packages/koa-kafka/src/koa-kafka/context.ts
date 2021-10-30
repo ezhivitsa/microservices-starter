@@ -3,6 +3,9 @@ import { Kafka, KafkaHandlerError, Command, Event, Version, Channel } from '@pac
 import { SessionUser } from './session-user';
 import { ListenData, RequestStatus } from './types';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+
 type FinishCallback = (status: RequestStatus) => void;
 
 export class Context<S extends Record<string, any> = Record<string, any>> {

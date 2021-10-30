@@ -3,10 +3,12 @@ import { Event } from '@packages/communication';
 import { EventDocument } from './event';
 import { SnapshotDocument } from './snapshot';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type EventHandler<ED extends Record<string, any>> = (data: ED) => void;
 
 export abstract class AggregateBuilder<D> {
   protected _data: D | null = null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   protected _emitter: Partial<Record<Event, EventHandler<any>[]>> = {};
 
   protected abstract _initEvents(): void;
@@ -20,6 +22,7 @@ export abstract class AggregateBuilder<D> {
     };
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   protected _handle<ED extends Record<string, any>>(event: Event, handler: EventHandler<ED>): void {
     this._emitter[event] = this._emitter[event] || [];
     const handlers = this._emitter[event];

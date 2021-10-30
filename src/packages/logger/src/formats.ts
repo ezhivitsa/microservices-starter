@@ -2,6 +2,8 @@ import { inspect } from 'util';
 import { LEVEL, MESSAGE, SPLAT } from 'triple-beam';
 import { format } from 'winston';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 interface PrettyFormatMetaOpts {
   metaKey?: string;
   depth?: number;

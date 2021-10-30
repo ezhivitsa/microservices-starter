@@ -1,5 +1,4 @@
 import React, { ReactElement } from 'react';
-import classnames from 'classnames';
 
 import { Heading, HeadingView, Toggle, ToggleSize, Theme, useTheme } from '@packages/ui';
 import { lib } from '@packages/client';
@@ -12,9 +11,8 @@ interface Props {
   className?: string;
 }
 
-const b = lib.block(styles, 'top-navigation');
-
 export function TopNavigation({ className }: Props): ReactElement {
+  const b = lib.block(styles, 'top-navigation', className);
   const [theme, changeTheme] = useTheme();
 
   function handleChangeTheme(isDarkTheme: boolean): void {
@@ -22,7 +20,7 @@ export function TopNavigation({ className }: Props): ReactElement {
   }
 
   return (
-    <div className={classnames(b(), className)}>
+    <div className={b()}>
       <Heading className={b('heading')} view={HeadingView.Condensed}>
         {layoutTexts.title}
       </Heading>

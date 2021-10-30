@@ -1,5 +1,4 @@
 import React, { ReactElement, ReactNode, MouseEvent, FocusEvent, KeyboardEvent, useState } from 'react';
-import classnames from 'classnames';
 
 import { useStyles } from '../../theme';
 import { ENTER_KEY, SPACE_KEY } from '../../lib/keyboard';
@@ -96,7 +95,7 @@ export function Button({
   icon,
   ...props
 }: Props): ReactElement {
-  const b = useStyles(styles, 'button');
+  const b = useStyles(styles, 'button', className);
 
   const [stateFocused, setFocused] = useState(false);
   const [stateHovered, setHovered] = useState(false);
@@ -195,21 +194,18 @@ export function Button({
     tabIndex: disabled ? -1 : tabIndex,
     disabled,
     formNoValidate: isButton ? props.formNoValidate : undefined,
-    className: classnames(
-      b({
-        disabled,
-        pseudo,
-        view,
-        size,
-        width,
-        focused,
-        hovered: stateHovered,
-        pressed: statePressed,
-        togglable,
-        checked,
-      }),
-      className,
-    ),
+    className: b({
+      disabled,
+      pseudo,
+      view,
+      size,
+      width,
+      focused,
+      hovered: stateHovered,
+      pressed: statePressed,
+      togglable,
+      checked,
+    }),
     onClick: handleClick,
     onFocus: handleFocus,
     onBlur: handleBlur,
@@ -251,10 +247,3 @@ export function Button({
 
   return isButton ? <button {...buttonProps}>{buttonContent}</button> : <span {...buttonProps}>{buttonContent}</span>;
 }
-
-Button.defaultProps = {
-  type: ButtonType.Button,
-  tag: ButtonTag.Button,
-  size: ButtonSize.M,
-  formNoValidate: false,
-};

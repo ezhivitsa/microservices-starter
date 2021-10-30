@@ -36,7 +36,7 @@ export class ProtoMessage<T> {
     } catch (e) {
       return {
         data: null,
-        error: e,
+        error: e as Error,
       };
     }
   }
@@ -51,6 +51,8 @@ export class ProtoMessage<T> {
 
 export class ProtoRoot {
   private _root: Root;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private readonly _typeCache: { [key: string]: ProtoMessage<any> };
 
   constructor(protoFiles: string[]) {

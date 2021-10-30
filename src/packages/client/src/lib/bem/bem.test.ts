@@ -19,13 +19,13 @@ describe('/lib/bevis/bevis', () => {
       {
         galleryImage: 'gallery-image',
         galleryImage__removeBtn: 'gallery-image__remove-btn',
-        _active: '_active',
+        galleryImage__removeBtn_active: 'gallery-image__remove-btn_active',
       },
       'gallery-image',
     );
     const className = b('removeBtn', { active: true });
 
-    expect(className).toEqual('gallery-image__remove-btn _active');
+    expect(className).toEqual('gallery-image__remove-btn gallery-image__remove-btn_active');
   });
 
   it('should generate correct class names when using state with a string value', () => {
@@ -33,12 +33,12 @@ describe('/lib/bevis/bevis', () => {
       {
         searchBar: 'search-bar',
         searchBar__icon: 'search-bar__icon',
-        _size_large: '_size_large',
+        searchBar__icon_size_large: 'search-bar__icon_size_large',
       },
       'searchBar',
     );
     const className = b('icon', { size: 'large' });
 
-    expect(className).toEqual('search-bar__icon _size_large');
+    expect(className).toEqual('search-bar__icon search-bar__icon_size_large');
   });
 });

@@ -31,6 +31,7 @@ export enum LinkSize {
 
 type LinkTarget = '_self' | '_blank' | '_parent' | '_top';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface LinkProps<CP = any> {
   icon?: ReactNode;
   iconPosition?: LinkIconPosition;

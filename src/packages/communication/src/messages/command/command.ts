@@ -6,6 +6,8 @@ import { getChannelKey } from '../utils';
 
 import { CommandSchema, ChannelCommandSchema } from './types';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 export function getChannelCommands<T extends string>(
   channel: Channel,
   commandSchemas: CommandSchema<T>[],

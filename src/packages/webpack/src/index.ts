@@ -29,7 +29,7 @@ export const getWebpackConfig = ({
     output: {
       filename: 'bundle.js',
       libraryTarget: 'system',
-      jsonpFunction: `webpackJsonp_${pkgName}`,
+      chunkLoadingGlobal: `webpackJsonp_${name}`,
     },
     devtool: isDevelopment ? 'source-map' : false,
     resolve: {
@@ -42,17 +42,13 @@ export const getWebpackConfig = ({
     },
     optimization: {
       minimize: !isDevelopment,
-      namedModules: isDevelopment,
-      namedChunks: isDevelopment,
+      moduleIds: isDevelopment ? 'named' : undefined,
+      chunkIds: isDevelopment ? 'named' : undefined,
     },
     devServer: {
       hot: isDevelopment,
       port: portNum,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
-        'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization',
-      },
+      allowedHosts: 'all',
     },
     module: {
       rules: [
@@ -105,14 +101,7 @@ export const getWebpackConfig = ({
         },
         {
           test: /\.(svg|png|gif|jpeg|jpg|cur|woff|woff2)$/,
-          use: [
-            {
-              loader: 'file-loader',
-              options: {
-                name: '_/[hash].[ext]',
-              },
-            },
-          ],
+          type: 'asset/inline',
         },
       ],
     },

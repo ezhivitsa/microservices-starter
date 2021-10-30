@@ -1,5 +1,4 @@
 import React, { ReactElement, ReactNode } from 'react';
-import classnames from 'classnames';
 
 import { useStyles } from '../../theme';
 
@@ -20,9 +19,9 @@ interface Props {
 }
 
 export function Paragraph({ size, className, muted, children }: Props): ReactElement {
-  const b = useStyles(styles, 'paragraph');
+  const b = useStyles(styles, 'paragraph', className);
 
-  return <div className={classnames(b({ size, muted }), className)}>{children}</div>;
+  return <div className={b({ size, muted })}>{children}</div>;
 }
 
 Paragraph.defaultProps = {

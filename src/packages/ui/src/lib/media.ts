@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 
 import { Media, getMatchMedia, releaseMatchMedia } from '@packages/media';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 const IS_BROWSER = window !== undefined;
 const SUPPORTS_TOUCH =
   (IS_BROWSER && 'ontouchstart' in window) || navigator.maxTouchPoints > 0 || (navigator as any).msMaxTouchPoints > 0;

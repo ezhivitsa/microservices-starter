@@ -1,5 +1,4 @@
 import React, { ReactElement, ReactNode } from 'react';
-import classnames from 'classnames';
 
 import { useStyles } from '@packages/ui';
 
@@ -11,7 +10,7 @@ interface Props {
 }
 
 export function Form({ children, className }: Props): ReactElement {
-  const b = useStyles(styles, 'form');
+  const b = useStyles(styles, 'form', className);
 
-  return <div className={classnames(b(), className)}>{children}</div>;
+  return <div className={b()}>{children}</div>;
 }

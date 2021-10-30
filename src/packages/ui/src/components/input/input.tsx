@@ -12,7 +12,6 @@ import React, {
   ReactElement,
   ClipboardEvent,
 } from 'react';
-import classnames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
@@ -113,7 +112,7 @@ interface Props {
 }
 
 export function Input({ error, view, size, disabled, type, width, className, ...props }: Props): ReactElement {
-  const b = useStyles(styles, 'input');
+  const b = useStyles(styles, 'input', className);
 
   const [stateFocused, setFocused] = useState(false);
   const [stateError, setError] = useState(error || null);
@@ -173,7 +172,7 @@ export function Input({ error, view, size, disabled, type, width, className, ...
   }
 
   function handleClearClick(event: MouseEvent): void {
-    changeValue('', event as any);
+    changeValue('', event as any); // eslint-disable-line @typescript-eslint/no-explicit-any
 
     props.onClearClick?.(event);
 
@@ -293,24 +292,21 @@ export function Input({ error, view, size, disabled, type, width, className, ...
 
   return (
     <span
-      className={classnames(
-        b({
-          type,
-          view,
-          disabled,
-          focused,
-          size,
-          width,
-          hasAddons,
-          hasLeftAddons,
-          hasClear,
-          hasIcon,
-          hasLabel,
-          hasValue,
-          invalid,
-        }),
-        className,
-      )}
+      className={b({
+        type,
+        view,
+        disabled,
+        focused,
+        size,
+        width,
+        hasAddons,
+        hasLeftAddons,
+        hasClear,
+        hasIcon,
+        hasLabel,
+        hasValue,
+        invalid,
+      })}
       ref={rootRef}
     >
       <span className={b('inner')}>

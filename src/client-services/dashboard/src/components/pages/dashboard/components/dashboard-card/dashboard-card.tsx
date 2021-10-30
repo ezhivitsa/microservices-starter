@@ -1,5 +1,4 @@
 import React, { ReactElement } from 'react';
-import classnames from 'classnames';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
@@ -25,8 +24,6 @@ interface Props {
   iconColor: CardColor;
 }
 
-const b = lib.block(styles, 'dashboardCard');
-
 export function DashboardCard({
   className,
   icon,
@@ -36,8 +33,10 @@ export function DashboardCard({
   footerIcon,
   footerContent,
 }: Props): ReactElement {
+  const b = lib.block(styles, 'dashboardCard', className);
+
   return (
-    <div className={classnames(b({ color: iconColor }), className)}>
+    <div className={b({ color: iconColor })}>
       <div className={b('header')}>
         <div className={b('icon', { color: iconColor })}>
           <FontAwesomeIcon icon={icon} />
