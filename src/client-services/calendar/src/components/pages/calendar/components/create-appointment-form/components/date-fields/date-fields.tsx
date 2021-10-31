@@ -1,8 +1,7 @@
 import React, { ReactElement } from 'react';
-import { useField } from 'formik';
 import { set } from 'date-fns';
 
-import { FormikField } from '@packages/ui-ex';
+import { FormikField, useField } from '@packages/ui-ex';
 
 import { FormikCreateAppointmentFieldName } from 'stores';
 

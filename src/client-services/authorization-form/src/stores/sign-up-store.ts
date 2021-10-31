@@ -83,7 +83,7 @@ export class SignUpStore {
     } catch (error) {
       runInAction(() => {
         this.status = Types.Status.Error;
-        this.error = error;
+        this.error = error as ApiError | null;
       });
     }
   }

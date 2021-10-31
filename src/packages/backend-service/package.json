@@ -11,12 +11,12 @@
     "@packages/communication": "workspace:*",
     "@packages/koa-kafka": "workspace:*",
     "@packages/logger": "workspace:*",
-    "koa": "2.13.1",
+    "koa": "2.13.4",
     "koa-mount": "4.0.0"
   },
   "devDependencies": {
     "@packages/eslint-config": "workspace:*",
-    "@types/koa": "2.13.1",
+    "@types/koa": "2.13.4",
     "@types/koa-mount": "4.0.0"
   },
   "installConfig": {

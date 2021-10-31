@@ -1,5 +1,4 @@
 import React, { ReactElement, ReactNode } from 'react';
-import { Formik, FormikProps, Form as FormikForm } from 'formik';
 import { observer } from 'mobx-react-lite';
 
 import {
@@ -13,7 +12,7 @@ import {
   Paragraph,
   useStyles,
 } from '@packages/ui';
-import { FormikField, RouterLink } from '@packages/ui-ex';
+import { FormikField, RouterLink, Formik, FormikProps, Form as FormikForm } from '@packages/ui-ex';
 import { FrontPaths, Errors } from '@packages/common';
 
 import {

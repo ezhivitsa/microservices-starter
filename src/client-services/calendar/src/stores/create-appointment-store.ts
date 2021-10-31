@@ -73,7 +73,7 @@ export class CreateAppointmentStore {
     } catch (err) {
       runInAction(() => {
         this.createStatus = Types.Status.Error;
-        this.createError = err;
+        this.createError = err as ApiError;
       });
     }
   }

@@ -10,5 +10,6 @@
   },
   "emmet.syntaxProfiles": {
     "postcss": "css"
-  }
+  },
+  "stylelint.packageManager": "yarn"
 }

@@ -102,6 +102,10 @@ validate-calendar:
 build-ui:
 	cd ./src/packages/ui && npm run build
 
+.PHONY: build-ui-ex
+build-ui-ex:
+	cd ./src/packages/ui-ex && npm run build
+
 .PHONY: build-client
 build-client:
 	cd ./src/packages/client && npm run build

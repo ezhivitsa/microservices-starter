@@ -21,7 +21,6 @@
     "@types/react": "17.0.33"
   },
   "peerDependencies": {
-    "classnames": "^2.3.1",
     "react": "^17.0.2"
   },
   "installConfig": {

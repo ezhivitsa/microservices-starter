@@ -4,10 +4,10 @@
 @import './input_theme_dark.pcss';
 
 :root {
-  --top-scale-100: 0.92308;
+  --top-scale-100: 0.9231;
   --top-scale-200: 0.8125;
   --top-scale-300: 0.8889;
-  --top-scale-400: 0.81818;
+  --top-scale-400: 0.8182;
 }
 
 .input {
@@ -215,22 +215,18 @@
     background: none;
     border: none;
     border-radius: 0;
-    -webkit-appearance: none;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    appearance: none;
+    -webkit-tap-highlight-color: rgb(0 0 0 / 0%);
 
     &::-webkit-search-decoration {
-      -webkit-appearance: none;
+      appearance: none;
     }
 
     &::-webkit-search-cancel-button {
       display: none;
     }
 
-    &::-webkit-input-placeholder {
-      text-indent: 0;
-    }
-
-    &::-moz-placeholder {
+    &::placeholder {
       opacity: var(--opacity-50);
     }
 
@@ -264,12 +260,7 @@
 
     &_has-label {
       &::placeholder {
-        opacity: 0;
-      }
-
-      /* IE fix for input with label and placeholder */
-      &:-ms-input-placeholder {
-        opacity: 0;
+        opacity: 0%;
       }
 
       &_focused::placeholder {

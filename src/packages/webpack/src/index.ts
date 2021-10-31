@@ -29,7 +29,7 @@ export const getWebpackConfig = ({
     output: {
       filename: 'bundle.js',
       libraryTarget: 'system',
-      chunkLoadingGlobal: `webpackJsonp_${name}`,
+      chunkLoadingGlobal: `webpackJsonp_${pkgName}`,
     },
     devtool: isDevelopment ? 'source-map' : false,
     resolve: {

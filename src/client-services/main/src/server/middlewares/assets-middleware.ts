@@ -10,7 +10,6 @@ import { config } from 'lib/config';
 import { webpackDevMiddleware } from './webpack-dev-middleware';
 
 const publicPath = join('/', config.buildPath);
-const port = process.env.HRM_PORT ? Number(process.env.HRM_PORT) : 8180;
 
 export const prepareAssetsMiddleware = async (): Promise<RouterAppMiddleware> => {
   if (config.enableHotLoader) {

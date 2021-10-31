@@ -1,8 +1,7 @@
 import React, { ReactElement, ReactNode, useEffect } from 'react';
-import { Formik, Form as FormikForm, FormikProps } from 'formik';
 
 import { Input, InputWidth, Button, ButtonType, ButtonView, useStyles } from '@packages/ui';
-import { FormikField } from '@packages/ui-ex';
+import { FormikField, Formik, Form as FormikForm, FormikProps } from '@packages/ui-ex';
 
 import { FormikResendVerifyEmail, FormikResendVerifyEmailFieldName } from 'stores';
 import { useResendVerifyEmailStore } from 'providers';
