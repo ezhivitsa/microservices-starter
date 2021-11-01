@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
-import { lib } from '@packages/client';
+import { useStyles } from '@packages/ui';
 
 import styles from './dashboard-card.pcss';
 
@@ -33,7 +33,7 @@ export function DashboardCard({
   footerIcon,
   footerContent,
 }: Props): ReactElement {
-  const b = lib.block(styles, 'dashboardCard', className);
+  const b = useStyles(styles, 'dashboardCard', className);
 
   return (
     <div className={b({ color: iconColor })}>

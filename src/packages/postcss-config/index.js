@@ -1,5 +1,6 @@
 const postcssImport = require('postcss-import');
 const postcssPresetEnv = require('postcss-preset-env');
+const postcssNestedAncestors = require('postcss-nested-ancestors');
 const postcssNested = require('postcss-nested');
 const cssVariables = require('postcss-css-variables');
 

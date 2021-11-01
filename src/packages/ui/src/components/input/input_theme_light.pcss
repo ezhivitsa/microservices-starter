@@ -13,12 +13,12 @@
         border-bottom-color: var(--color-red-500);
         box-shadow: inset 0 -1px 0 var(--color-red-500);
 
-        &_focused {
+        &.input__box_focused {
           border-bottom-color: var(--color-red-500);
           box-shadow: inset 0 -1px 0 var(--color-red-500);
         }
 
-        &:hover {
+        &.input__box:hover {
           border-bottom-color: var(--color-red-700);
         }
       }
@@ -37,7 +37,7 @@
           border-color: var(--color-grey-400);
         }
 
-        &_disabled {
+        &.input__box_disabled {
           background-color: var(--color-grey-200);
           border-bottom-color: var(--color-grey-400);
         }
@@ -74,7 +74,7 @@
           color: var(--color-grey-800);
         }
 
-        &_disabled {
+        &.input__control_disabled {
           color: var(--color-grey-600);
 
           &::placeholder {
@@ -82,7 +82,7 @@
           }
         }
 
-        &_focused::placeholder {
+        &.input__control_focused::placeholder {
           color: var(--color-grey-800);
         }
       }

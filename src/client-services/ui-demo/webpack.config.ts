@@ -18,7 +18,7 @@ const localNodeModulesPath = path.resolve(__dirname, 'node_modules');
 const webpackConfig: webpack.Configuration = {
   mode: isDevelopment ? 'development' : 'production',
   target: 'web',
-  entry: ['construct-style-sheets-polyfill', path.resolve(clientPath, 'boot.tsx')],
+  entry: [path.resolve(clientPath, 'boot.tsx')],
   output: {
     path: path.resolve(buildPath),
     filename: 'main.bundle.js',
@@ -26,11 +26,9 @@ const webpackConfig: webpack.Configuration = {
 
     library: name,
     libraryTarget: 'umd',
-    jsonpFunction: `webpackJsonp_${name}`,
+    chunkLoadingGlobal: `webpackJsonp_${name}`,
   },
-  node: {
-    fs: 'empty',
-  },
+  node: false,
   devtool: isDevelopment ? 'source-map' : false,
   resolve: {
     alias: {
@@ -45,8 +43,8 @@ const webpackConfig: webpack.Configuration = {
   },
   optimization: {
     minimize: !isDevelopment,
-    namedModules: isDevelopment,
-    namedChunks: isDevelopment,
+    moduleIds: isDevelopment ? 'named' : undefined,
+    chunkIds: isDevelopment ? 'named' : undefined,
   },
   module: {
     rules: [

@@ -23,48 +23,48 @@
   }
 
   &_size_s {
-    &_has-label {
+    &.input_has-label {
       padding-top: var(--grid3);
     }
 
     &_view_filled {
-      &_has-label {
+      &.input_has-label {
         padding-top: 0;
       }
     }
   }
 
   &_size_m {
-    &_has-label {
+    &.input_has-label {
       padding-top: var(--grid2);
     }
 
-    &_view_filled {
-      &_has-label {
+    &.input_view_filled {
+      &.input_has-label {
         padding-top: 0;
       }
     }
   }
 
   &_size_l {
-    &_has-label {
+    &.input_has-label {
       padding-top: var(--grid2);
     }
 
-    &_view_filled {
-      &_has-label {
+    &.input_view_filled {
+      &.input_has-label {
         padding-top: var(--grid5);
       }
     }
   }
 
   &_size_xl {
-    &_has-label {
+    &.input_has-label {
       padding-top: var(--grid3);
     }
 
-    &_view_filled {
-      &_has-label {
+    &.input_view_filled {
+      &.input_has-label {
         padding-top: var(--grid4);
       }
     }
@@ -110,7 +110,7 @@
     &_view_filled {
       border-radius: var(--border-radius-200) var(--border-radius-200) 0 0;
 
-      &_disabled {
+      &.input__box_disabled {
         border-bottom-style: dashed;
         box-shadow: none;
       }
@@ -120,25 +120,25 @@
       font-size: var(--font-size-200);
       height: var(--grid7);
 
-      &_has-clear,
-      &_has-icon {
+      &.input__box_has-clear,
+      &.input__box_has-icon {
         padding-right: var(--grid7);
       }
 
-      &_view_filled {
+      &.input__box_view_filled {
         padding: 0 var(--grid2);
         font-size: var(--font-size-200);
 
-        &_has_label {
+        &.input__box_has_label {
           height: var(--grid10);
         }
 
-        &_has-clear,
-        &_has-icon {
+        &.input__box_has-clear,
+        &.input__box_has-icon {
           padding-right: var(--grid3);
         }
 
-        &_has-addons {
+        &.input__box_has-addons {
           height: var(--grid11);
         }
       }
@@ -148,25 +148,25 @@
       font-size: var(--font-size-400);
       height: var(--grid9);
 
-      &_has-clear,
-      &_has-icon {
+      &.input__box_has-clear,
+      &.input__box_has-icon {
         padding-right: var(--grid8);
       }
 
-      &_view_filled {
+      &.input__box_view_filled {
         padding: 0 var(--grid2);
         height: var(--grid8);
 
-        &_has_label {
+        &.input__box_has_label {
           height: var(--grid14);
         }
 
-        &_has-icon,
-        &_has-clear {
+        &.input__box_has-icon,
+        &.input__box_has-clear {
           padding-right: var(--grid4);
         }
 
-        &_has-addons {
+        &.input__box_has-addons {
           height: var(--grid14);
         }
       }
@@ -176,12 +176,12 @@
       font-size: var(--font-size-500);
       height: var(--grid12);
 
-      &_has-clear,
-      &_has-icon {
+      &.input__box_has-clear,
+      &.input__box_has-icon {
         padding-right: var(--grid11);
       }
 
-      &_view_filled {
+      &.input__box_view_filled {
         padding: 0 var(--grid3);
       }
     }
@@ -190,12 +190,12 @@
       font-size: var(--font-size-700);
       height: var(--grid13);
 
-      &_has-clear,
-      &_has-icon {
+      &.input__box_has-clear,
+      &.input__box_has-icon {
         padding-right: var(--grid13);
       }
 
-      &_view_filled {
+      &.input__box_view_filled {
         padding: 0 var(--grid3);
       }
     }
@@ -263,7 +263,7 @@
         opacity: 0%;
       }
 
-      &_focused::placeholder {
+      &.input__control_focused::placeholder {
         opacity: var(--opacity-50);
       }
     }
@@ -271,18 +271,18 @@
     &_view_filled {
       padding: var(--grid1) 0;
 
-      &_has-addons {
+      &.input__control_has-addons {
         padding-left: var(--grid2);
         padding-right: var(--grid2);
       }
 
-      &_has-label {
+      &.input__control_has-label {
         &::placeholder {
           color: transparent;
         }
       }
 
-      &_has-icon {
+      &.input__control_has-icon {
         padding-right: var(--grid4);
       }
     }
@@ -312,10 +312,10 @@
     &_size_s {
       padding: var(--grid2) 0;
 
-      &_view_filled {
+      &.input__control_view_filled {
         height: var(--grid10);
 
-        &_has-label {
+        &.input__control_has-label {
           padding-top: var(--grid5);
           padding-bottom: var(--grid2);
         }
@@ -325,10 +325,10 @@
     &_size_m {
       padding: var(--grid2) 0;
 
-      &_view_filled {
+      &.input__control_view_filled {
         height: var(--grid12);
 
-        &_has-label {
+        &.input__control_has-label {
           padding-top: var(--grid6);
           padding-bottom: var(--grid1);
         }
@@ -338,7 +338,7 @@
     &_size_l {
       padding: var(--grid4) 0 var(--grid2);
 
-      &_view_filled {
+      &.input__control_view_filled {
         padding: var(--grid3) 0;
       }
     }
@@ -353,7 +353,7 @@
     display: block;
 
     &_view_filled {
-      &_has-addons {
+      &.input__input-wrapper_has-addons {
         width: 100%;
         
         &:first-child {
@@ -395,8 +395,8 @@
     &_view_filled {
       transform-origin: 0 50%;
 
-      &_focused,
-      &_has-value {
+      &.input__top_focused,
+      &.input__top_has-value {
         width: auto;
       }
     }
@@ -405,17 +405,17 @@
       line-height: var(--grid7);
       font-size: var(--font-size-200);
 
-      &_focused,
-      &_has-value {
+      &.input__top_focused,
+      &.input__top_has-value {
         transform: scale(var(--top-scale-100)) translateY(calc(var(--grid5) * -1));
         width: calc((2 - var(--top-scale-100)) * 100) %;
       }
 
-      &_view_filled {
+      &.input__top_view_filled {
         line-height: var(--grid11);
 
-        &_focused,
-        &_has-value {
+        &.input__top_focused,
+        &.input__top_has-value {
           font-size: var(--font-size-100);
           transform: translateY(calc(var(--grid3) * -1));
         }
@@ -426,17 +426,17 @@
       line-height: var(--grid7);
       font-size: var(--font-size-400);
 
-      &_focused,
-      &_has-value {
+      &.input__top_focused,
+      &.input__top_has-value {
         transform: scale(var(--top-scale-200)) translateY(calc(var(--grid6) * -1));
         width: calc((2 - var(--top-scale-200)) * 100) %;
       }
 
-      &_view_filled {
+      &.input__top_view_filled {
         line-height: var(--grid12);
 
-        &_focused,
-        &_has-value {
+        &.input__top_focused,
+        &.input__top_has-value {
           font-size: var(--font-size-300);
           transform: translateY(calc(var(--grid3) * -1));
         }
@@ -447,15 +447,15 @@
       line-height: var(--grid12);
       font-size: var(--font-size-600);
 
-      &_focused,
-      &_has-value {
+      &.input__top_focused,
+      &.input__top_has-value {
         transform: scale(var(--top-scale-300)) translateY(calc(var(--grid7) * -1));
         width: calc((2 - var(--top-scale-300)) * 100) %;
       }
 
-      &_view_filled {
-        &_focused,
-        &_has-value {
+      &.input__top_view_filled {
+        &.input__top_focused,
+        &.input__top_has-value {
           font-size: var(--font-size-400);
           transform: translateY(calc(var(--grid9) * -1));
         }
@@ -466,15 +466,15 @@
       line-height: var(--grid13);
       font-size: var(--font-size-700);
 
-      &_focused,
-      &_has-value {
+      &.input__top_focused,
+      &.input__top_has-value {
         transform: scale(var(--top-scale-400)) translateY(calc(var(--grid10) * -1));
         width: calc((2 - var(--top-scale-400)) * 100) %;
       }
 
-      &_view_filled {
-        &_focused,
-        &_has-value {
+      &.input__top_view_filled {
+        &.input__top_focused,
+        &.input__top_has-value {
           font-size: var(--font-size-500);
           transform: translateY(calc(var(--grid9) * -1));
         }
@@ -534,7 +534,7 @@
     &_size_s {
       font-size: var(--font-size-200);
 
-      &_view_filled {
+      &.input__clear_view_filled {
         top: var(--grid3);
       }
     }
@@ -542,7 +542,7 @@
     &_size_m {
       font-size: var(--font-size-400);
 
-      &_view_filled {
+      &.input__clear_view_filled {
         top: var(--grid5);
       }
     }

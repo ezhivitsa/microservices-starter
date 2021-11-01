@@ -1,6 +1,6 @@
 import React, { ReactElement, ReactNode } from 'react';
 
-import { lib } from '@packages/client';
+import { useStyles } from '@packages/ui';
 
 import styles from './dashboard-table.pcss';
 
@@ -30,7 +30,7 @@ export function DashboardTable({
   rows,
   keyIndex,
 }: Props): ReactElement {
-  const b = lib.block(styles, 'dashboardTable', className);
+  const b = useStyles(styles, 'dashboardTable', className);
 
   return (
     <div className={b()}>

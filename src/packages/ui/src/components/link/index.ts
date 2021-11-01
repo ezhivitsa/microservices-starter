@@ -1,1 +1,2 @@
-export { Link, LinkSize, LinkIconPosition, LinkProps } from './link';
+export { Link, LinkSize, LinkIconPosition } from './link';
+export type { LinkProps } from './link';

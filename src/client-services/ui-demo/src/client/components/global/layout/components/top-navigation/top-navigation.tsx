@@ -12,7 +12,7 @@ interface Props {
 }
 
 export function TopNavigation({ className }: Props): ReactElement {
-  const b = lib.block(styles, 'top-navigation', className);
+  const b = lib.block(styles, 'top-navigation', undefined, className);
   const [theme, changeTheme] = useTheme();
 
   function handleChangeTheme(isDarkTheme: boolean): void {
@@ -24,6 +24,7 @@ export function TopNavigation({ className }: Props): ReactElement {
       <Heading className={b('heading')} view={HeadingView.Condensed}>
         {layoutTexts.title}
       </Heading>
+
       <Toggle
         checked={theme === Theme.Dark}
         size={ToggleSize.L}
