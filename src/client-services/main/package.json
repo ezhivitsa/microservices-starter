@@ -27,8 +27,8 @@
     "react-router-dom": "5.3.0",
     "single-spa": "5.9.3",
     "single-spa-layout": "1.6.0",
-    "single-spa-react": "4.4.0",
-    "systemjs": "6.10.3"
+    "single-spa-react": "4.6.0",
+    "systemjs": "6.11.0"
   },
   "devDependencies": {
     "@babel/core": "7.15.5",

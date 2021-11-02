@@ -109,3 +109,7 @@ build-ui-ex:
 .PHONY: build-client
 build-client:
 	cd ./src/packages/client && npm run build
+
+.PHONY: build-webpack
+build-webpack:
+	cd ./src/packages/webpack && npm run build

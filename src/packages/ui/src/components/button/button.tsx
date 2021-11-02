@@ -247,3 +247,7 @@ export function Button({
 
   return isButton ? <button {...buttonProps}>{buttonContent}</button> : <span {...buttonProps}>{buttonContent}</span>;
 }
+
+Button.defaultProps = {
+  size: ButtonSize.M,
+};

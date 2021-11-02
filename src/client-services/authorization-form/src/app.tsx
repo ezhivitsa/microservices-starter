@@ -1,4 +1,4 @@
-import React, { ReactElement, StrictMode } from 'react';
+import React, { Component, ReactElement, ReactNode, StrictMode } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
 
@@ -46,4 +46,15 @@ function AppComponent(): ReactElement {
   );
 }
 
-export const App = hot(AppComponent);
+const AppHot = hot(AppComponent);
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export class App extends Component<any> {
+  componentDidCatch(error: Error): void {
+    console.error(error);
+  }
+
+  render(): ReactNode {
+    return <AppHot />;
+  }
+}

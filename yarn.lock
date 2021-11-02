@@ -1943,7 +1943,6 @@ __metadata:
     "@types/react": 17.0.33
     "@types/react-dom": 17.0.1
     "@types/react-router-dom": 5.1.7
-    "@types/systemjs": 6.1.0
     "@types/webpack-dev-server": 3.11.1
     "@types/yup": 0.29.11
     babel-loader: 8.2.3
@@ -1960,8 +1959,8 @@ __metadata:
     react-hot-loader: 4.13.0
     react-router-dom: 5.3.0
     regenerator-runtime: 0.13.7
-    single-spa: 5.9.2
-    single-spa-react: 4.1.1
+    single-spa: 5.9.3
+    single-spa-react: 4.6.0
     style-loader: 3.3.1
     systemjs-webpack-interop: 2.3.6
     typescript: 4.3.5
@@ -2012,8 +2011,8 @@ __metadata:
     react-hot-loader: 4.13.0
     react-router-dom: 5.3.0
     regenerator-runtime: 0.13.7
-    single-spa: 5.9.2
-    single-spa-react: 4.1.1
+    single-spa: 5.9.3
+    single-spa-react: 4.6.0
     style-loader: 3.3.1
     systemjs-webpack-interop: 2.3.6
     typescript: 4.3.5
@@ -2063,8 +2062,8 @@ __metadata:
     react-hot-loader: 4.13.0
     react-router-dom: 5.3.0
     regenerator-runtime: 0.13.7
-    single-spa: 5.9.2
-    single-spa-react: 4.1.1
+    single-spa: 5.9.3
+    single-spa-react: 4.6.0
     style-loader: 3.3.1
     systemjs-webpack-interop: 2.3.6
     typescript: 4.3.5
@@ -2140,7 +2139,7 @@ __metadata:
     regenerator-runtime: 0.13.9
     single-spa: 5.9.3
     single-spa-layout: 1.6.0
-    single-spa-react: 4.4.0
+    single-spa-react: 4.6.0
     style-loader: 3.3.1
     systemjs: 6.10.3
     systemjs-webpack-interop: 2.3.7
@@ -2192,8 +2191,8 @@ __metadata:
     react-hot-loader: 4.13.0
     react-router-dom: 5.3.0
     regenerator-runtime: 0.13.7
-    single-spa: 5.9.2
-    single-spa-react: 4.1.1
+    single-spa: 5.9.3
+    single-spa-react: 4.6.0
     style-loader: 3.3.1
     systemjs-webpack-interop: 2.3.6
     typescript: 4.3.5
@@ -2897,7 +2896,6 @@ __metadata:
     postcss-css-variables: 0.17.0
     postcss-import: 14.0.0
     postcss-nested: 5.0.3
-    postcss-nested-ancestors: 2.0.0
     postcss-preset-env: 6.7.0
   languageName: unknown
   linkType: soft
@@ -14313,17 +14311,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-nested-ancestors@npm:2.0.0":
-  version: 2.0.0
-  resolution: "postcss-nested-ancestors@npm:2.0.0"
-  dependencies:
-    escape-string-regexp: ^1.0.5
-    postcss: ^6.0.0
-    postcss-resolve-nested-selector: ^0.1.1
-  checksum: 003469314864deaf55566aa14100d388bdd761fc91440ea59479505b32ddec16548e83b2a3381b4b5c34e0531f343d7c4bbac2abd6c1afba2679b8f4176edf12
-  languageName: node
-  linkType: hard
-
 "postcss-nested@npm:5.0.3":
   version: 5.0.3
   resolution: "postcss-nested@npm:5.0.3"
@@ -14707,7 +14694,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^6.0.0, postcss@npm:^6.0.8":
+"postcss@npm:^6.0.8":
   version: 6.0.23
   resolution: "postcss@npm:6.0.23"
   dependencies:
@@ -16329,32 +16316,14 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"single-spa-react@npm:4.1.1":
-  version: 4.1.1
-  resolution: "single-spa-react@npm:4.1.1"
+"single-spa-react@npm:4.6.0":
+  version: 4.6.0
+  resolution: "single-spa-react@npm:4.6.0"
   peerDependencies:
     "@types/react": "*"
     "@types/react-dom": "*"
     react: "*"
-  checksum: 9cc5bf499cb1d870f51c138d6ce1f8694f87fca7bf69ae6e8381b8263472b1a419a606c65e99531b76ddca41d32d6f627fe34f50f059083eea5abd02f9ec6f4a
-  languageName: node
-  linkType: hard
-
-"single-spa-react@npm:4.4.0":
-  version: 4.4.0
-  resolution: "single-spa-react@npm:4.4.0"
-  peerDependencies:
-    "@types/react": "*"
-    "@types/react-dom": "*"
-    react: "*"
-  checksum: e099d8f4e336a664611de53b652a348dd89ce06774937209185a6b7aba8a19ff880f409b57dbd238bdabb3c76f6ab260758dc42a4dd2d8aeaa913609c58fb5d4
-  languageName: node
-  linkType: hard
-
-"single-spa@npm:5.9.2":
-  version: 5.9.2
-  resolution: "single-spa@npm:5.9.2"
-  checksum: 3c6ab9042d1fc5ac6943b1dfa91d682d6bde4d987c6da83dc27288ff2352af27b0fa1773168bbd590deaa07476b75d4fb3348a3aa0f36a868ffa4fdc1fc8246d
+  checksum: e028824c0cd228c196ab98b279d4479beb4f283227675a772806581fab42138e8a9ab1ec0b9f0c695f4daf70a0bb92fef3fdee57fde279e0f51f798ea82ff60b
   languageName: node
   linkType: hard
 

@@ -30,6 +30,7 @@ export const getWebpackConfig = ({
       filename: 'bundle.js',
       libraryTarget: 'system',
       chunkLoadingGlobal: `webpackJsonp_${pkgName}`,
+      publicPath: '',
     },
     devtool: isDevelopment ? 'source-map' : false,
     resolve: {
@@ -49,6 +50,11 @@ export const getWebpackConfig = ({
       hot: isDevelopment,
       port: portNum,
       allowedHosts: 'all',
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+        'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization',
+      },
     },
     module: {
       rules: [
