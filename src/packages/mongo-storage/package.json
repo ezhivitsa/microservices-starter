@@ -8,10 +8,7 @@
     "lint": "yarn g:lint:eslint && yarn g:lint:tsc"
   },
   "devDependencies": {
-    "mongoose": "^5.11.19"
-  },
-  "peerDependencies": {
-    "mongoose": "^5.11.19"
+    "mongoose": "5.13.13"
   },
   "installConfig": {
     "hoistingLimits": "workspaces"

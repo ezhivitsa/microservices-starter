@@ -1,3 +1,5 @@
+export * from 'mongoose';
+
 export { ReadOnlyStorageService } from './read-only-storage-service';
 export { StorageService } from './storage-service';
 

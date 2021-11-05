@@ -1,5 +1,4 @@
-import { Model, SchemaDefinition, Connection } from 'mongoose';
-
+import { Model, SchemaDefinition, Connection } from '@packages/mongo-storage';
 import { SnapshotDocument, getSnapshotSchema } from '@packages/event-sourcing';
 
 export interface AppointmentSnapshotData {

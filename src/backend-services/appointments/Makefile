@@ -82,17 +82,6 @@ run-test-integration:
 		--runInBand $(JEST_ADDITIONAL_FLAGS)
 
 # -------------------------------------
-# db targets
-# -------------------------------------
-.PHONY: migrate
-migrate:
-	$(ENV_VARS) npx sequelize-cli db:migrate
-
-.PHONY: create-db
-create-db:
-	$(ENV_VARS) npx sequelize-cli db:create
-
-# -------------------------------------
 # release targets
 # -------------------------------------
 .PHONY: build

@@ -46,7 +46,7 @@
     "@types/webpack-dev-middleware": "5.0.2",
     "babel-loader": "8.2.3",
     "copy-webpack-plugin": "9.0.1",
-    "core-js": "3.19.0",
+    "core-js": "3.19.1",
     "css-loader": "6.5.0",
     "fork-ts-checker-webpack-plugin": "6.4.0",
     "glob": "7.2.0",

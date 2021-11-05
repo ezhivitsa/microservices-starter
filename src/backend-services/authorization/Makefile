@@ -94,11 +94,15 @@ run-test-integration:
 # -------------------------------------
 .PHONY: migrate
 migrate:
-	$(ENV_VARS) npx sequelize-cli db:migrate
+	$(ENV_VARS) npx postgres-cli db:migrate
 
 .PHONY: create-db
 create-db:
-	$(ENV_VARS) npx sequelize-cli db:create
+	$(ENV_VARS) npx postgres-cli db:create
+
+.PHONY: drop-db
+drop-db:
+	$(ENV_VARS) npx postgres-cli db:drop
 
 .PHONY: migrate-local
 migrate-local: build
@@ -119,6 +123,11 @@ create-db-local: create-db
 create-db-test: build
 create-db-test: ENV_VARS=${AUTOTEST_VARS}
 create-db-test: create-db
+
+.PHONE: drop-db-local
+drop-db-local: build
+drop-db-local: ENV_VARS=${DEV_VARS}
+drop-db-local: drop-db
 
 # -------------------------------------
 # release targets

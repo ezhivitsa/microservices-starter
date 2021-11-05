@@ -11,10 +11,7 @@
     "@packages/communication": "workspace:*"
   },
   "devDependencies": {
-    "mongoose": "^5.11.19"
-  },
-  "peerDependencies": {
-    "mongoose": "^5.11.19"
+    "mongoose": "5.13.13"
   },
   "installConfig": {
     "hoistingLimits": "workspaces"

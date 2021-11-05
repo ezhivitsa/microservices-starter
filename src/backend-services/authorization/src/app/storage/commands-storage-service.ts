@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { WhereOptions, FindOptions } from 'sequelize';
+import { WhereOptions, FindOptions } from '@packages/postgres-storage';
 
 import { StorageService } from '@packages/postgres-storage';
 

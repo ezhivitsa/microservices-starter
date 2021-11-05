@@ -67,7 +67,7 @@ export const Profile = observer((): ReactElement => {
         <Button
           view={ButtonView.Action}
           type={ButtonType.Submit}
-          onClick={handleSubmit}
+          onClick={() => handleSubmit()}
           disabled={!isValid || isUpdating}
         >
           {profileFormTexts.updateBtn}

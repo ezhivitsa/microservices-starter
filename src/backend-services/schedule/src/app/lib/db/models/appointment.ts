@@ -1,4 +1,4 @@
-import { Optional, Model, DataTypes, Sequelize, ModelAttributes, ModelCtor } from 'sequelize';
+import { Optional, Model, DataTypes, Sequelize, ModelAttributes, ModelCtor } from '@packages/postgres-storage';
 
 import { UserInstance } from './user';
 
@@ -14,7 +14,8 @@ export type AppointmentCreationAttributes = Optional<AppointmentAttributes, 'id'
 
 export class AppointmentInstance
   extends Model<AppointmentAttributes, AppointmentCreationAttributes>
-  implements AppointmentAttributes {
+  implements AppointmentAttributes
+{
   public id!: string;
   public userId!: string;
   public start!: Date;

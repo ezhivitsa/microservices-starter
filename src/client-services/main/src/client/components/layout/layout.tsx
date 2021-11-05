@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { Component, ReactElement, ReactNode } from 'react';
 import { BrowserRouter, NavLink, Route, RouteComponentProps, Redirect } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
 
@@ -84,4 +84,14 @@ function LayoutRouter(): ReactElement {
   );
 }
 
-export const Layout = hot(LayoutRouter);
+const LayoutHot = hot(LayoutRouter);
+
+export class Layout extends Component {
+  componentDidCatch(error: Error): void {
+    console.error(error);
+  }
+
+  render(): ReactNode {
+    return <LayoutHot />;
+  }
+}

@@ -1,3 +1,5 @@
+export * from 'sequelize';
+
 export { ReadOnlyStorageService } from './read-only-storage-service';
 export { StorageService } from './storage-service';
 

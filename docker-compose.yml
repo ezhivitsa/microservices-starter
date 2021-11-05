@@ -59,6 +59,8 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
     ports:
       - ${MONGO_PORT}:27017
+    volumes:
+      - ./resources/mongo/001_users.js:/docker-entrypoint-initdb.d/001_users.js:ro
     networks:
       - microservices
 

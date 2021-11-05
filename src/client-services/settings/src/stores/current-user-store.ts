@@ -57,11 +57,13 @@ export class CurrentUserStore {
   }
 
   get formikErrors(): Partial<FormikCurrentUser> {
-    return this.updateStatus === Types.Status.Error ? this.updateError?.data || {} : {};
+    return {};
+    // ToDo: fix error
+    // return this.updateStatus === Types.Status.Error ? this.updateError?.joiErrors || {} : {};
   }
 
   get generalError(): string | undefined {
-    return this.updateStatus === Types.Status.Error ? this.updateError?.globalError : undefined;
+    return this.updateStatus === Types.Status.Error ? this.updateError?.error?.message : undefined;
   }
 
   get isUpdating(): boolean {
@@ -87,7 +89,7 @@ export class CurrentUserStore {
     } catch (error) {
       runInAction(() => {
         this.fetchStatus = Types.Status.Error;
-        this.fetchError = error;
+        this.fetchError = error as ApiError;
       });
     }
   }
@@ -111,7 +113,7 @@ export class CurrentUserStore {
     } catch (error) {
       runInAction(() => {
         this.updateStatus = Types.Status.Error;
-        this.updateError = error;
+        this.updateError = error as ApiError;
       });
     }
   }

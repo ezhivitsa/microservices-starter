@@ -27,7 +27,7 @@ module.exports = {
         allowNull: false,
       },
       roles: {
-        type: DataTypes.ARRAY(DataTypes.ENUM({ values: [Role.User, Role.Admin, Role.OrganizationAdmin] })),
+        type: DataTypes.ARRAY(DataTypes.ENUM(...Object.values(Role))),
         allowNull: false,
       },
       isEmailVerified: {

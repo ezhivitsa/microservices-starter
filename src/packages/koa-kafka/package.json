@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@packages/communication": "workspace:*",
-    "joi": "17.4.0"
+    "joi": "17.4.2"
   },
   "devDependencies": {
     "@packages/eslint-config": "workspace:*",

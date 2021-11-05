@@ -1,4 +1,4 @@
-import { Optional, Model, DataTypes, Sequelize, ModelAttributes, ModelCtor } from 'sequelize';
+import { Optional, Model, DataTypes, Sequelize, ModelAttributes, ModelCtor } from '@packages/postgres-storage';
 
 export interface CommandAttributes {
   id: string;

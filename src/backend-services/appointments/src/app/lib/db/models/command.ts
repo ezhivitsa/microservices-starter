@@ -1,4 +1,4 @@
-import { Schema, Model, Document, Connection } from 'mongoose';
+import { Schema, Model, Document, Connection } from '@packages/mongo-storage';
 
 export type CommandDocument = Document<string>;
 export type CommandModel = Model<CommandDocument>;

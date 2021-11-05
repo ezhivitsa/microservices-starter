@@ -1,5 +1,4 @@
-import { DocumentDefinition, FilterQuery, UpdateQuery } from 'mongoose';
-
+import { DocumentDefinition, FilterQuery, UpdateQuery } from '@packages/mongo-storage';
 import { StorageService } from '@packages/mongo-storage';
 
 import { CommandDocument, CommandModel } from '@root/lib/db/models/command';
